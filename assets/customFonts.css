@@ -1,0 +1,63 @@
+/**
+ * @license
+ * MyFonts Webfont Build ID 3857847, 2020-01-18T21:21:51-0500
+ * 
+ * The fonts listed in this notice are subject to the End User License
+ * Agreement(s) entered into by the website owner. All other parties are 
+ * explicitly restricted from using the Licensed Webfonts(s).
+ * 
+ * You may obtain a valid license at the URLs below.
+ * 
+ * Webfont: PrayuthSlim-Thin by Typesketchbook
+ * URL: https://www.myfonts.com/fonts/typesketchbook/prayuth/slim-thin/
+ * 
+ * Webfont: PrayuthSlim-Light by Typesketchbook
+ * URL: https://www.myfonts.com/fonts/typesketchbook/prayuth/slim-light/
+ * 
+ * Webfont: PrayuthSlim-Regular by Typesketchbook
+ * URL: https://www.myfonts.com/fonts/typesketchbook/prayuth/slim-regular/
+ * 
+ * Webfont: PrayuthSlim-Medium by Typesketchbook
+ * URL: https://www.myfonts.com/fonts/typesketchbook/prayuth/slim-medium/
+ * 
+ * Webfont: PrayuthSlim-Bold by Typesketchbook
+ * URL: https://www.myfonts.com/fonts/typesketchbook/prayuth/slim-bold/
+ * 
+ * Webfont: PrayuthSlim-Black by Typesketchbook
+ * URL: https://www.myfonts.com/fonts/typesketchbook/prayuth/slim-black/
+ * 
+ * Webfont: PrayuthSlim-ExtraBlack by Typesketchbook
+ * URL: https://www.myfonts.com/fonts/typesketchbook/prayuth/slim-extrablack/
+ * 
+ * 
+ * Licensed pageviews: 10,000
+ * Webfonts copyright: Copyright (c) 2019 by Typesketchbook. All rights reserved.
+ * 
+ * © 2020 MyFonts Inc
+*/
+
+
+/* @import must be at top of file, otherwise CSS will not work */
+@import url("//hello.myfonts.net/count/3addb7");
+
+  
+@font-face {font-family: 'PrayuthSlim';font-weight: 200;src: url('webfonts/3ADDB7_0_0.eot');src: url('webfonts/3ADDB7_0_0.eot?#iefix') format('embedded-opentype'),url('webfonts/3ADDB7_0_0.woff2') format('woff2'),url('webfonts/3ADDB7_0_0.woff') format('woff'),url('webfonts/3ADDB7_0_0.ttf') format('truetype');}
+ 
+  
+@font-face {font-family: 'PrayuthSlim';font-weight: 300;src: url('webfonts/3ADDB7_1_0.eot');src: url('webfonts/3ADDB7_1_0.eot?#iefix') format('embedded-opentype'),url('webfonts/3ADDB7_1_0.woff2') format('woff2'),url('webfonts/3ADDB7_1_0.woff') format('woff'),url('webfonts/3ADDB7_1_0.ttf') format('truetype');}
+ 
+  
+@font-face {font-family: 'PrayuthSlim';font-weight: 400;src: url('webfonts/3ADDB7_2_0.eot');src: url('webfonts/3ADDB7_2_0.eot?#iefix') format('embedded-opentype'),url('webfonts/3ADDB7_2_0.woff2') format('woff2'),url('webfonts/3ADDB7_2_0.woff') format('woff'),url('webfonts/3ADDB7_2_0.ttf') format('truetype');}
+ 
+  
+@font-face {font-family: 'PrayuthSlim';font-weight: 500;src: url('webfonts/3ADDB7_3_0.eot');src: url('webfonts/3ADDB7_3_0.eot?#iefix') format('embedded-opentype'),url('webfonts/3ADDB7_3_0.woff2') format('woff2'),url('webfonts/3ADDB7_3_0.woff') format('woff'),url('webfonts/3ADDB7_3_0.ttf') format('truetype');}
+ 
+  
+@font-face {font-family: 'PrayuthSlim';font-weight: 700;src: url('webfonts/3ADDB7_4_0.eot');src: url('webfonts/3ADDB7_4_0.eot?#iefix') format('embedded-opentype'),url('webfonts/3ADDB7_4_0.woff2') format('woff2'),url('webfonts/3ADDB7_4_0.woff') format('woff'),url('webfonts/3ADDB7_4_0.ttf') format('truetype');}
+ 
+  
+@font-face {font-family: 'PrayuthSlim';font-weight: 800;src: url('webfonts/3ADDB7_5_0.eot');src: url('webfonts/3ADDB7_5_0.eot?#iefix') format('embedded-opentype'),url('webfonts/3ADDB7_5_0.woff2') format('woff2'),url('webfonts/3ADDB7_5_0.woff') format('woff'),url('webfonts/3ADDB7_5_0.ttf') format('truetype');}
+ 
+  
+@font-face {font-family: 'PrayuthSlim';font-weight: 900;src: url('webfonts/3ADDB7_6_0.eot');src: url('webfonts/3ADDB7_6_0.eot?#iefix') format('embedded-opentype'),url('webfonts/3ADDB7_6_0.woff2') format('woff2'),url('webfonts/3ADDB7_6_0.woff') format('woff'),url('webfonts/3ADDB7_6_0.ttf') format('truetype');}
+ 

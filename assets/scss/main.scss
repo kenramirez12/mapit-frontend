@@ -1,0 +1,131 @@
+$--color-primary: #37D7D7 !default;
+$--font-path: '../fonts' !default;
+$--button-border-radius: 0;
+$--button-small-border-radius: 0;
+$--input-border-radius: 0;
+
+@import url('../customFonts.css');
+@import '../../node_modules/element-ui/packages/theme-chalk/src/index.scss';
+
+:root {
+  --primary: #37D7D7;
+  --red: #FF5A5F;
+  --header-height: 80px;
+}
+
+*:focus {
+  outline: 0 !important;
+  box-shadow: 0 0;
+}
+
+body {
+  font-family: 'PrayuthSlim' !important;
+  overflow: hidden;
+  overflow-y: auto;
+}
+
+.text-primary,
+.hover\:text-primary:hover,
+.focus\:text-primary:focus {
+  color: $--color-primary;
+}
+
+.bg-primary,
+.hover\:bg-primary:hover,
+.focus\:bg-primary:focus {
+  background-color: $--color-primary;
+}
+
+.super-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.border-0 {
+  .el-input__inner {
+    border: 0;
+  }
+}
+
+.pb-super {
+  padding-bottom: 12rem !important;
+}
+
+.el-select__caret {
+  color: $--color-primary!important;
+}
+
+.w-full .el-date-editor.el-input {
+  width: 100%;
+}
+
+.container {
+  max-width: 1170px;
+}
+
+.el-input--large {
+  input {
+    height: 54px;
+  }
+}
+
+.el-button--large {
+  height: 54px;
+}
+
+.el-button--primary.is-plain {
+  background: transparent;
+}
+
+.el-menu--horizontal {
+  & > .el-menu-item {
+    border-bottom: 0!important;
+
+    &.is-active {
+      box-shadow: inset 0 3px $--color-primary;
+    } 
+  }
+}
+
+.item-with-counter {
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: .2rem;
+}
+
+.rounded-counter {
+  --size: 26px;
+  width: var(--size);
+  height: var(--size);
+  background-color: $--color-primary;
+  color: #fff;
+  font-size: 14px;
+  border-radius: 50%;
+  position: relative;
+
+  span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    line-height: 1;
+  }
+}
+
+.checkbox-list {
+  padding-left: 4rem;
+
+  &__item {
+    position: relative;
+  }
+
+  &__icon {
+    position: absolute;
+    top: calc(50% - 12px);
+    left: -4rem;
+    height: 24px;
+  }
+}
