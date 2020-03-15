@@ -9,10 +9,10 @@
           <div class="w-1/4 px-3">
             <ul>
               <li class="mb-1">
-                <a href="#">Experiences</a>
+                <a href="#">Experiencias</a>
               </li>
               <li class="mb-1">
-                <a href="#">Destinations</a>
+                <a href="#">Destinos</a>
               </li>
               <li class="mb-1">
                 <a href="#">Ayuda</a>
@@ -32,9 +32,6 @@
               </li>
               <li class="mb-1">
                 <a href="#">Políticas de Privacidad</a>
-              </li>
-              <li class="mb-1">
-                <a href="#">Blog</a>
               </li>
             </ul>
           </div>
@@ -80,9 +77,9 @@
         </ul>
       </div>
       <div class="w-2/12">
-        <h5 class="mb-2">Subscribete a nuestro Blog</h5>
+        <h5 class="mb-2">Suscríbete a nuestro Blog</h5>
         <el-form>
-          <el-input class="mb-2 border-0 shadow-lg"></el-input>
+          <el-input class="mb-5 border-0 shadow-lg"></el-input>
           <el-button size="small" type="primary">Enviar <i class="el-icon-right ml-1" /></el-button>
         </el-form>
       </div>

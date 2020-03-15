@@ -2,23 +2,23 @@
   <div>
     <AppHero />
     <main>
-      <div class="container mx-auto py-6 px-4">
-        <div class="w-full flex items-center mb-6">
+      <div class="container mx-auto py-8 px-16 inline-block">
+        <div class="w-full flex items-center mb-8 mt-6 ml-2">
           <div>
-            <h3 class="text-4xl font-light">Experiences</h3>
+            <h3 class="text-4xl font-light mb-6">Experiencias</h3>
             <p class="mb-0">Encuentra cosas para hacer en Perú, tours gastronómicos, clases de cocina peruana, talleres de arte.</p>
           </div>
           <div class="flex ml-auto">
             <el-button @click="expSliderPrev += 1" circle plain type="primary" icon="el-icon-back" class="flex"></el-button>
             <el-button @click="expSliderNext += 1" circle plain type="primary" icon="el-icon-right" class="flex"></el-button>
           </div>
-        </div>
+        </div> 
         <div class="w-100">
           <ExperiencesSlider :prev="expSliderPrev" :next="expSliderNext" />
         </div>
-        <div class="w-full flex items-center mb-6">
+        <div class="w-full flex items-center mb-6 mt-12 ml-2">
           <div>
-            <h3 class="text-4xl font-light">Destinations</h3>
+            <h3 class="text-4xl font-light mb-4">Destinos</h3>
             <p class="mb-0">Reserva experiencias auténticas y encuentra cosas para hacer en Cusco, Lima, Puno, Arequipa y más.</p>
           </div>
           <div class="flex ml-auto">

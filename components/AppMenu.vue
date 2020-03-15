@@ -1,8 +1,9 @@
 <template>
   <el-menu class="ml-auto header-menu" mode="horizontal" :router="true">
-    <el-menu-item index="/experiences" class="header-menu__item">Experiences</el-menu-item>
-    <el-menu-item index="/destinations" class="header-menu__item">Destinations</el-menu-item>
-    <el-menu-item class="header-menu__item">About Us</el-menu-item>
+    <el-menu-item index="/experiences" class="header-menu__item">Experiencias</el-menu-item>
+    <el-menu-item index="/destinations" class="header-menu__item">Destinos</el-menu-item>
+    <el-menu-item class="header-menu__item">Quiénes somos</el-menu-item>
+    <el-menu-item class="header-menu__item">Blog</el-menu-item>
     <el-menu-item class="header-menu__item">FAQs</el-menu-item>
     <el-menu-item class="header-menu__item">Iniciar sesión</el-menu-item>
     <el-menu-item class="header-menu__item">

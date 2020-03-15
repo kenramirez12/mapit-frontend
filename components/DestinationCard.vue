@@ -4,7 +4,7 @@
       <img src="~/assets/images/experience-card-iamge.jpg">
     </div>
     <div class="custom-card__content">
-      <div class="flex items-center justify-between">
+      <div class="flex items-center justify-between text-2xl">
         <h4>CUSCO</h4>
         <el-button
           type="primary"
@@ -37,12 +37,18 @@ export default {
 
 
 <style lang="scss" scoped>
-  .custom-card {
+    .custom-card {
     width: 100%;
     max-width: 20rem;
     box-shadow: 0 0 15px rgba(0, 0, 0, .15);
     position: relative;
+    transition: all 0.35s;
+    cursor: pointer;
 
+    &:hover {
+      transform: scale(.96);
+      box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+    }
     &__sale {
       position: absolute;
       top: -14px;

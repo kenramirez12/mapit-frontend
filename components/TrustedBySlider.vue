@@ -1,4 +1,5 @@
 <template>
+ <div class="flex justify-center  m-20">
   <div class="trusted-by">
     <span class="text-xl text-gray-500 font-light block mb-5">Trusted by</span>
     <el-button @click="prevSlide()" class="trusted-by__arrow-prev text-gray-500" size="mini" icon="el-icon-back" circle plain></el-button>
@@ -11,6 +12,7 @@
       </div>
     </div>
   </div>
+ </div>
 </template>
 
 <script>
@@ -38,7 +40,7 @@ export default {
 <style lang="scss" scoped>
   .trusted-by {
     background-color: #fafafa;
-    box-shadow: 0px 10px 50px rgba(0, 0, 0, .2);
+    box-shadow: -20px 60px 220px rgba(0, 0, 0, 0.44);
     width: 70%;
     padding: 3rem 4rem;
     margin: 7rem 0;
