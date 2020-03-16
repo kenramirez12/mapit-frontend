@@ -35,7 +35,6 @@ export default {
 }
 </script>
 
-
 <style lang="scss" scoped>
   .custom-card {
     width: 100%;
