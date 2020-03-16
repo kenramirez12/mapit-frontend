@@ -1,7 +1,7 @@
 <template>
- <div class="flex justify-center  m-20">
+ <div class=" m-20">
   <div class="trusted-by">
-    <span class="text-xl text-gray-500 font-light block mb-5">Trusted by</span>
+    <span class="text-2xl light-gray font-light block mb-5">Confían en nosotros</span>
     <el-button @click="prevSlide()" class="trusted-by__arrow-prev text-gray-500" size="mini" icon="el-icon-back" circle plain></el-button>
     <el-button @click="nextSlide()" class="trusted-by__arrow-next text-gray-500" size="mini" icon="el-icon-right" circle plain></el-button>
     <div v-swiper:mySwiper="swiperOption" class="trusted-by-slider">
@@ -59,5 +59,8 @@ export default {
     top: 62%;
     right: 1rem;
     transform: translateY(-50%);
+  }
+  .light-gray {
+    color: "#9F9F9F";
   }
 </style>

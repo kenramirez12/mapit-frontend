@@ -2,7 +2,7 @@
   <div>
     
     <PageHeader
-      subtitle = Cusco
+      preTitle = Cusco
       title="Prepara chocolate artesanal, chicha de jora y adornos de cerámica"
       contentClass="mr-6">
       <ExperienceReserveForm class="ml-5 " />
@@ -241,4 +241,9 @@ export default {
   .experience-container {
     background: linear-gradient(90deg, #fff 55%, var(--primary) 55%);
   }
+  
+  .experience-navbar {
+    background: #ffffff70;
+  }
+
 </style>

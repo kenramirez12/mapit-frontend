@@ -3,21 +3,20 @@
     <div class="overview py-6">
       <div class="flex flex-wrap my-10 py-10">
         <div class="w-5/12 pr-6">
-          <p class="dark-gray text-4xl ">You will learn Andean techniques used in a rural community in Cusco by participating in three fun and cultural workshops.</p>
-          <p class="my-6 py-6 font-light text-2xl">Wiser: Chichubamba community</p>
+          <p class="dark-gray text-4xl ">Aprenderás las técnicas andinas utilizadas en la comunidad Chichubamba, realizando 3 diferentes talleres divertidos y culturales.</p>
+          <p class="my-6 py-6 font-light text-2xl">Wiser: Comunidad de Chichumba</p>
           <ul class="checkbox-list">
             <li class="checkbox-list__item mb-4 text-base">
               <img src="~/assets/images/checkbox-icon.svg" class="checkbox-list__icon">
-              Authentic cultural experience where you get to learn about real Inca traditions.
+              Auténtica experiencia cultural en la cual podrás aprender sobre las verdaderas tradiciones Incas.
             </li>
             <li class="checkbox-list__item mb-4 text-base">
               <img src="~/assets/images/checkbox-icon.svg" class="checkbox-list__icon">
-              Local experts have over 15 years of experience in what they do.
+              Los expertos locales de cada taller cuentan con más de 15 años de experiencia en lo que hacen. 
             </li>
             <li class="checkbox-list__item mb-4 text-base">
               <img src="~/assets/images/checkbox-icon.svg" class="checkbox-list__icon">
-              You will be able to taste what you prepared and take your art pieces home as a souvenir of 
-            this amazing experience.</li>
+              Los expertos locales de cada taller cuentan con más de 15 años de experiencia en lo que hacen.</li>
           </ul>
         </div>
         <div class="w-6/12 ml-auto">

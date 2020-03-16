@@ -2,7 +2,8 @@
   <div class="page-header" :style="{ backgroundImage: `url(${baseBackground})` }">
     <div class="container page-header__container m-auto px-4">
       <div :class="contentClass">
-        <h1 class="page-header__title">{{ title }}</h1>
+        <p v-if="preTitle !== ''" class="mb-12 text-2xl text-white font-light page-header__pre-title">{{ preTitle }}</p>
+        <h1 class="page-header__title mb-8">{{ title }}</h1>
         <p v-if="subtitle !== ''" class="page-header__description">{{ subtitle }}</p>
       </div>
       <slot></slot>
@@ -18,6 +19,11 @@ export default {
     title: {
       type: String,
       required: true
+    },
+    preTitle: {
+      type: String,
+      required: false,
+      default: () => ''
     },
     subtitle: {
       type: String,
@@ -56,6 +62,10 @@ export default {
       font-size: 65px;
       line-height: 1.2;
       color: #fff;
+    }
+
+    &__pre-title {
+
     }
 
     &__description {

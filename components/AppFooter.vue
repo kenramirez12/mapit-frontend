@@ -77,11 +77,11 @@
          </ul>
         <div class="w-2/12 pt-4">
          <a class="inline-flex">
-          <img class="mr-3 object-fill" src="~/assets/images/social/instagram.svg" alt="" width="22" height="29">
-          <img class="mr-3" src="~/assets/images/social/facebook.svg" alt="" width="24">
-          <img class="mr-3" src="~/assets/images/social/linkedin.svg" alt="" width="24">
-          <img class="mr-3" src="~/assets/images/social/tripadvisor.svg" alt="" width="20">
-          <img class="mr-3" src="~/assets/images/social/pinterest.svg" alt="" width="30" >
+          <img class="mr-3 social" src="~/assets/images/social/instagram.svg" alt="" width="22" height="29">
+          <img class="mr-3 social" src="~/assets/images/social/facebook.svg" alt="" width="24">
+          <img class="mr-3 social" src="~/assets/images/social/linkedin.svg" alt="" width="24">
+          <img class="mr-3 social" src="~/assets/images/social/tripadvisor.svg" alt="" width="20">
+          <img class="mr-3 social" src="~/assets/images/social/pinterest.svg" alt="" width="30" >
           </a>
         </div>
       </div>
@@ -123,5 +123,8 @@ export default {
   }
   .light-gray{
     color: #9F9F9F;
+  }
+  .social:hover {
+   cursor: pointer;
   }
 </style>

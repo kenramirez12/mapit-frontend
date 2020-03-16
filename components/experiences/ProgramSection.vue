@@ -74,7 +74,7 @@
                     :class="{ 'mt-5' : n === 1 }"
                     class="flex flex-wrap mb-5">
                     <div class="w-2/12">08:00 am</div>
-                    <div class="w-10/12">Recojo del hotel y salida a Chichubamba</div>
+                    <div class="w-10/12">Llegada a la comunidad Chichubamba</div>
                   </div>
                 </el-tab-pane>
                 <el-tab-pane label="Día 3" name="third">
@@ -84,7 +84,7 @@
                     :class="{ 'mt-5' : n === 1 }"
                     class="flex flex-wrap mb-5">
                     <div class="w-2/12">08:00 am</div>
-                    <div class="w-10/12">Recojo del hotel y salida a Chichubamba</div>
+                    <div class="w-10/12">Primer taller: Moldea y pinta cerámicas</div>
                   </div>
                 </el-tab-pane>
               </el-tabs>
