@@ -39,16 +39,16 @@
             <ul>
               <h5 class="mb-2">About Us</h5>
               <li class="mb-1">
-                <a href="#" class="text-gray-500">Nuestro equipo</a>
+                <a href="#" class="light-gray">Nuestro equipo</a>
               </li>
               <li class="mb-1">
-                <a href="#" class="text-gray-500">Puntos sociales</a>
+                <a href="#" class="light-gray">Puntos sociales</a>
               </li>
               <li class="mb-1">
-                <a href="#" class="text-gray-500">Impacto social</a>
+                <a href="#" class="light-gray">Impacto social</a>
               </li>
               <li class="mb-1">
-                <a href="#" class="text-gray-500">Host</a>
+                <a href="#" class="light-gray">Host</a>
               </li>
             </ul>
           </div>
@@ -56,10 +56,10 @@
             <ul>
               <h5 class="mb-2">Cómo funciona</h5>
               <li class="mb-1">
-                <a href="#" class="text-gray-500">Travelers</a>
+                <a href="#" class="light-gray">Travelers</a>
               </li>
               <li class="mb-1">
-                <a href="#" class="text-gray-500">Host</a>
+                <a href="#" class="light-gray">Host</a>
               </li>
             </ul>
           </div>
@@ -69,12 +69,21 @@
         <ul>
           <h5 class="mb-2">Contacto</h5>
           <li class="mb-1">
-            <a href="#" class="text-gray-500">info@mapit.pe</a>
+            <a href="#" class="light-gray">info@mapit.pe</a>
           </li>
           <li class="mb-1">
-            <a href="#" class="text-gray-500">(+511) 516-9988</a>
+            <a href="#" class="light-gray">(+511) 516-9988</a>
           </li>
-        </ul>
+         </ul>
+        <div class="w-2/12 pt-4">
+         <a class="inline-flex">
+          <img class="mr-3 object-fill" src="~/assets/images/social/instagram.svg" alt="" width="22" height="29">
+          <img class="mr-3" src="~/assets/images/social/facebook.svg" alt="" width="24">
+          <img class="mr-3" src="~/assets/images/social/linkedin.svg" alt="" width="24">
+          <img class="mr-3" src="~/assets/images/social/tripadvisor.svg" alt="" width="20">
+          <img class="mr-3" src="~/assets/images/social/pinterest.svg" alt="" width="30" >
+          </a>
+        </div>
       </div>
       <div class="w-2/12">
         <h5 class="mb-2">Suscríbete a nuestro Blog</h5>
@@ -86,7 +95,7 @@
     </div>
     <hr>
     <div class="container pt-4">
-      <span class="text-gray-400">&copy; {{ currentYear }} MAP IT,Inc. All rights reserved.</span>
+      <span class="light-gray">&copy; {{ currentYear }} MAP IT,Inc. All rights reserved.</span>
     </div>
   </footer>
 </template>
@@ -111,5 +120,8 @@ export default {
       padding-top: 3rem;
       padding-bottom: 3rem;
     }
+  }
+  .light-gray{
+    color: #9F9F9F;
   }
 </style>

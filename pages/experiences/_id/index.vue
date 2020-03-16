@@ -1,10 +1,12 @@
 <template>
   <div>
+    
     <PageHeader
-      title="Cusco"
-      subtitle="Prepara chocolate artesanal, chicha de jora y adornos de cerámica"
+      subtitle = Cusco
+      title="Prepara chocolate artesanal, chicha de jora y adornos de cerámica"
       contentClass="mr-6">
-      <ExperienceReserveForm class="ml-5" />
+      <ExperienceReserveForm class="ml-5 " />
+      
     </PageHeader>
 
     <div id="experience-container" class="relative">

@@ -15,11 +15,11 @@
                   <div class="testimonial-item__content">
                     <span class="text-4xl leading-tight">Professionals in their craft! All services were super great with strong attention to details in the travel {{n}}"</span>
                     <a href="#" class="flex items-center py-6 my-6">
-                      <i class="el-icon-collection-tag text-2xl mr-2"></i> Read more testimonials on 
+                      <i class="el-icon-collection-tag text-base mr-2"></i> Read more testimonials on 
                     </a>
                     <div class="flex flex-col">
-                      <span>Polina Kuzina</span>
-                      <small>Ukrane</small>
+                      <span class="text-base">Polina Kuzina</span>
+                      <small class="text-sm tracking-widest">Ukrane</small>
                     </div>
                   </div>
                   <img src="~/assets/images/testimonial.jpg" alt="">

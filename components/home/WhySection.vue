@@ -8,25 +8,25 @@
           <div class="w-100" style="height:180px">
             <img src="~/assets/images/choose-us-02.svg" class="mx-auto" style="max-height:100%">
           </div>
-          <div class="d-block text-xl text-white font-light text-center mt-4">Experiencias únicas</div>
+          <div class="d-block text-2xl text-white font-light text-center mt-4">Experiencias únicas</div>
         </div>
         <div class="flex-1 pt-6">
           <div class="w-100" style="height:180px">
             <img src="~/assets/images/choose-us-03.svg" class="mx-auto" style="max-height:100%">
           </div>
-          <div class="d-block text-xl text-white font-light text-center mt-4">Vive como un local</div>
+          <div class="d-block text-2xl text-white font-light text-center mt-4">Vive como un local</div>
         </div>
         <div class="flex-1 pt-6">
           <div class="w-100" style="height:180px">
             <img src="~/assets/images/choose-us-04.svg" class="mx-auto" style="max-height:100%">
           </div>
-          <div class="d-block text-xl text-white font-light text-center mt-4">Impacto social</div>
+          <div class="d-block text-2xl text-white font-light text-center mt-4">Impacto social</div>
         </div>
         <div class="flex-1 pt-6">
           <div class="w-100" style="height:180px">
             <img src="~/assets/images/choose-us-01.svg" class="mx-auto" style="max-height:100%">
           </div>
-          <div class="d-block text-xl text-white font-light text-center mt-4">Experiencias seguras</div>
+          <div class="d-block text-2xl text-white font-light text-center mt-4">Experiencias seguras</div>
         </div>
       </div>
     </div>
