@@ -1,5 +1,5 @@
 <template>
- <div class=" m-20">
+ <div class=" ">
   <div class="trusted-by">
     <span class="text-2xl light-gray font-light block mb-5">Confían en nosotros</span>
     <el-button @click="prevSlide()" class="trusted-by__arrow-prev text-gray-500" size="mini" icon="el-icon-back" circle plain></el-button>
