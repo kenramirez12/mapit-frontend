@@ -1,5 +1,5 @@
 <template>
-  <div v-swiper:mySwiper="swiperOption" class="testimonials-slider">
+  <div v-swiper:mySwiper="swiperOption" class="testimonials-slider mt-20">
     <div class="testimonials-slider__arrows">
       <el-button @click="prevSlide()" type="primary" icon="el-icon-back" square class="px-3"></el-button>
       <el-button @click="nextSlide()" type="primary" icon="el-icon-right" square class="px-3"></el-button>

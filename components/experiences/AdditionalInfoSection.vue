@@ -2,20 +2,20 @@
   <div id="additional-info-section" class="experience-container py-6 pb-super">
     <div class="container mx-auto px-4">
       <div class="activities py-6 position-relative">
-        <h3 class="text-5xl font-light mb-6 pb-6">Información Adicional</h3>
+        <h3 class="text-6xl font-light mb-6 pb-6">Información Adicional</h3>
         <div class="flex flex-wrap">
           <div class="w-5/12 pr-6">
-            <div class="py-6">
+            <div class="text-light py-6">
               <img src="~/assets/images/map-marker-lg.svg" class="mb-3" alt="">
-              <span class="text-gray-500">Punto de encuentro</span>
-              <span class="block text-2xl text-gray-500">Recojo y regreso al hotel</span>
+              <span class="text-light text-base">Punto de encuentro</span>
+              <span class="block text-2xl text-light">Recojo y regreso al hotel</span>
             </div>
           </div>
         </div>
         <div class="flex flex-wrap">
           <div class="w-5/12">
-            <ul class="checkbox-list my-6 py-6">
-              <li v-for="n in 5" :key="n" class="checkbox-list__item mb-4 text-gray-500">
+            <ul class="checkbox-list my-6 py-6 text-base">
+              <li v-for="n in 5" :key="n" class="checkbox-list__item mb-4 text-light">
                 <img src="~/assets/images/checkbox-icon.svg" class="checkbox-list__icon">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore, ea, commodi iusto.
               </li>
@@ -26,7 +26,7 @@
 
           <div class="w-5/12 ml-auto">
             <div class="flex items-center">
-              <h3 class="text-3xl">Qué llevar</h3>
+              <h3 class="text-4xl">Qué llevar</h3>
               <img src="~/assets/images/sitting-01.svg" class="ml-auto" alt="">
             </div>
             <ul class="pr-6">
@@ -52,5 +52,7 @@ export default {
 </script>
 
 <style>
-
+.text-light {
+  color: #9F9F9F;
+}
 </style>

@@ -4,7 +4,7 @@
     class="reserve-form bg-white p-5 shadow-xl">
       <div class="reserve-form__price">
         <span class="font-light">Desde</span>
-        <span class="block font-light text-3xl leading-none">US$ 80.00</span>
+        <span class="block font-light text-4xl leading-none ">US$ 80.00</span>
       </div>
       <el-form>
         <div class="reserve-form__inline">
@@ -62,7 +62,7 @@
             </el-select>
           </div>
           <div class="w-full mt-2">
-            <el-button class="w-full submit-btn" type="primary">Reservar</el-button>
+            <el-button class="w-full submit-btn text-sm font-normal" type="primary">Reservar</el-button>
           </div>
           <div class="w-full mt-6 pt-4 border-t border-black flex items-center justify-between">
             <small class="font-light">Personaliza tu experiencia: día, hora, tamaño de grupo, preferencias, y más.</small>

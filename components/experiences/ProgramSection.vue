@@ -2,11 +2,11 @@
   <div id="program-section" class="experience-container py-6 pb-super">
     <div class="container mx-auto px-4">
       <div class="activities py-6 position-relative">
-        <h3 class="text-5xl font-light mb-6 pb-6">Programa</h3>
+        <h3 class="text-6xl font-light mb-6 pb-6">Programa</h3>
         <div class="flex flex-wrap">
           <div class="w-5/12">
             <div class="program mb-6 pb-6">
-              <span class="text-lg">HORARIOS DE INICIO</span>
+              <span class="text-2xl">HORARIOS DE INICIO</span>
               <div class="bg-primary rounded-lg py-2 px-4 mt-3">
                 <div class="flex flex-wrap w-full py-3 px-2 text-sm">
                   <div class="flex-1 text-center"><span>Lunes</span></div>

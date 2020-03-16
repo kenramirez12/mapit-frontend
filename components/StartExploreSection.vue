@@ -1,6 +1,6 @@
 <template>
   <div class="explore-section" :style="{ backgroundImage: 'url(' + require('@/assets/images/start-explore-bg.jpg') + ')'}">
-    <el-button type="primary" size="large" class="main-btn">Comienza a explorar</el-button>
+    <el-button type="primary" size="large" class="main-btn text-sm font-light">COMIENZA A EXPLORAR</el-button>
   </div>
 </template>
 
@@ -20,6 +20,9 @@ export default {
 }
 
 .main-btn {
+  height: 50px;
+  width: 280px;
+  letter-spacing: 0.16em;
   box-shadow: 0 0 13px rgba(0, 0, 0, .3);
   transition: all 0.3s;
 
