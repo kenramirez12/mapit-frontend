@@ -17,7 +17,7 @@
             <ul class="checkbox-list my-6 py-6 text-base">
               <li v-for="n in 5" :key="n" class="checkbox-list__item mb-4 text-light">
                 <img src="~/assets/images/checkbox-icon.svg" class="checkbox-list__icon">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore, ea, commodi iusto.
+                Vas a trabajar con arcilla y pintura: puede que te ensucies.
               </li>
             </ul>
             <img src="~/assets/images/danger-icon.svg" class="mb-3" alt="">

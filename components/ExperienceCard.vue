@@ -9,13 +9,13 @@
     </div>
     <div class="custom-card__content">
       <div class="flex items-center">
-        <div style="font-size:13px">CUSCO <span class="text-gray-500 ml-3">Half Day</span></div>
+        <div style="font-size:13px">CUSCO <span class="text-gray-500 ml-3">Medio Día</span></div>
         <a href="#" class="ml-auto" @click.prevent="favorite = !favorite">
           <img v-if="favorite" src="~/assets/images/icon-heart.svg" height="20">
           <img v-else src="~/assets/images/icon-heart-outline.svg" height="20">
         </a>
       </div>
-      <p class="my-6">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
+      <p class="my-6 text-base">Prepara chocolate artesanal, chicha de jora, y adornos de cerámica </p>
       <div class="flex items-end">
         <div class="custom-card__normal-price">
           <span style="font-size:13px">Desde</span>
