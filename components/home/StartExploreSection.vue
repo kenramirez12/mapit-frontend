@@ -1,11 +1,17 @@
 <template>
   <div class="explore-section" :style="{ backgroundImage: 'url(' + require('@/assets/images/start-explore-bg.jpg') + ')'}">
-    <el-button type="primary" size="large" class="main-btn text-sm font-light">COMIENZA A EXPLORAR</el-button>
+    <el-button type="primary" size="large" class="main-btn text-sm uppercase font-light">{{ $lang.translate(translations, 'start_explore') }}</el-button>
   </div>
 </template>
 
 <script>
 export default {
+  props: {
+    translations: {
+      type: Object,
+      required: true
+    }
+  }
 }
 </script>
 

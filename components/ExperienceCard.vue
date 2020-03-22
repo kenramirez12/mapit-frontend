@@ -56,8 +56,8 @@ export default {
     cursor: pointer;
 
     &:hover {
-      transform: scale(.96);
-      box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+      transform: scale(.99);
+      box-shadow: 0 0 5px rgba(0, 0, 0, .3);
     }
 
     &__sale {

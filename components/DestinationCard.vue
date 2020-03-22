@@ -37,7 +37,7 @@ export default {
 
 
 <style lang="scss" scoped>
-    .custom-card {
+  .custom-card {
     width: 100%;
     max-width: 20rem;
     box-shadow: 0 0 15px rgba(0, 0, 0, .15);
@@ -46,8 +46,8 @@ export default {
     cursor: pointer;
 
     &:hover {
-      transform: scale(.96);
-      box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+      transform: scale(.99);
+      box-shadow: 0 0 5px rgba(0, 0, 0, .3);
     }
     &__sale {
       position: absolute;

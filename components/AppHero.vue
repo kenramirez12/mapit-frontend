@@ -1,12 +1,12 @@
 <template>
   <div class="hero super-center flex-col" :style="{ backgroundImage: `url(${backgroundUrl})` }">
-    <h1 class="text-6xl font-light pb-4 mb-6 text-white not-italic">Lorem ipsum dorem lorum</h1>
+    <h1 class="text-6xl font-light pb-4 mb-6 text-white not-italic">{{ $lang.translate(translations, 'hero_title') }}</h1>
 
     <el-form :inline="true">
       <el-form-item >
         <el-select
           v-model="filters.experience_id"
-          placeholder="EXPERIENCIAS"
+          :placeholder="$lang.translate(translations, 'experiences').toUpperCase()"
           size="large">
           <el-option
             v-for="item in experiences"
@@ -19,7 +19,7 @@
       <el-form-item>
         <el-select
           v-model="filters.destination_id"
-          placeholder="DESTINOS"
+          :placeholder="$lang.translate(translations, 'destinations').toUpperCase()"
           size="large">
           <el-option
             v-for="item in destinations"
@@ -32,7 +32,7 @@
       <el-form-item>
         <el-button size="large" type="white">
           <span class="flex items-center font-normal">
-            BUSCAR
+            {{ $lang.translate(translations, 'search').toUpperCase() }}
             <img src="~/assets/images/search-icon.svg" height="18" class="ml-4">
           </span>
         </el-button>
@@ -48,6 +48,13 @@ import { mapState } from 'vuex'
 import backgroundUrl from '~/assets/images/main-hero.jpg'
 
 export default {
+  props: {
+    translations: {
+      type: Object,
+      required: true
+    }
+  },
+
   data () {
     return {
       backgroundUrl,
