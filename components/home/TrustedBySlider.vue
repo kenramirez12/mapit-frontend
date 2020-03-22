@@ -1,7 +1,6 @@
 <template>
- <div class=" m-20">
   <div class="trusted-by">
-    <span class="text-2xl light-gray font-light block mb-5">Confían en nosotros</span>
+    <span class="text-2xl light-gray font-light block mb-5">{{ $lang.translate(translations, 'trust_us') }}</span>
     <el-button @click="prevSlide()" class="trusted-by__arrow-prev text-gray-500" size="mini" icon="el-icon-back" circle plain></el-button>
     <el-button @click="nextSlide()" class="trusted-by__arrow-next text-gray-500" size="mini" icon="el-icon-right" circle plain></el-button>
     <div v-swiper:mySwiper="swiperOption" class="trusted-by-slider">
@@ -11,12 +10,18 @@
         </div>
       </div>
     </div>
-  </div>
  </div>
 </template>
 
 <script>
 export default {
+  props: {
+    translations: {
+      type: Object,
+      required: true
+    }
+  },
+  
   data() {
     return {
       swiperOption: {

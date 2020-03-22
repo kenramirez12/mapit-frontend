@@ -25,14 +25,18 @@ export default {
   css: [
     // 'element-ui/lib/theme-chalk/index.css',
     '@/assets/scss/main.scss',
-    'swiper/dist/css/swiper.css'
+    'swiper/dist/css/swiper.css',
+    'tailwindcss/dist/base.css',
+    'tailwindcss/dist/components.css',
+    'tailwindcss/dist/utilities.css'
   ],
   /*
   ** Plugins to load before mounting the App
   */
   plugins: [
     '@/plugins/element-ui',
-    { src: '@/plugins/swiper.js', ssr: false }
+    { src: '@/plugins/swiper.js', ssr: false },
+    '@/plugins/lang'
   ],
   /*
   ** Nuxt.js dev-modules

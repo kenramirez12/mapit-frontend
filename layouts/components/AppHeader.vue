@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import AppMenu from '~/components/AppMenu'
+import AppMenu from '~/layouts/components/AppMenu'
 
 export default {
   components: { AppMenu }
