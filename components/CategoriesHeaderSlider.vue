@@ -7,28 +7,30 @@
     <div v-swiper:mySwiper="swiperOption">
       <div class="swiper-wrapper">
         <div
-          v-for="(cat, n) in categories"
-          :key="cat.value"
-          :style="{ backgroundImage: `url(${n % 2 ? adventureBg : natureBg})` }"
-          :data-cat-value="cat.value"
+          v-for="category in categories"
+          :key="category.id"
+          :style="{ backgroundImage: `url(${$imagePath(category.image.path)})` }"
+          :data-cat-value="category.id"
           class="swiper-slide">
           <div class="container m-auto px-4">
-            <h1 class="page-header__title">{{ cat.label }}</h1>
+            <h1 class="page-header__title">{{ $lang.apiTranslate(category.translations, 'name') }}</h1>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="categories-carousel">
+    <div
+      v-if="categories && categories.length > 0"
+      class="categories-carousel">
       <div
-        v-for="(cat, n) in categories"
-        :key="'carousel_' + cat.value"
-        :data-cat-name="cat.label"
-        :class="{ current : currentCat === cat.value }"
+        v-for="(category, n) in categories"
+        :key="'carousel_' + category.id"
+        :data-cat-name="$lang.apiTranslate(category.translations, 'name')"
+        :class="{ current : currentCat === category.id }"
         @click="updateCurrentCat(n)"
         class="categories-carousel-item">
         <img
-          v-if="currentCat === cat.value"
+          v-if="currentCat === category.id"
           class="categories-carousel-item__arrow categories-carousel-item__arrow--current"
           src="~/assets/images/current-cat-arrow.svg">
         <img
@@ -41,7 +43,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapGetters } from 'vuex'
 import adventureBg from '~/assets/images/adventure-bg.jpg'
 import natureBg from '~/assets/images/nature-bg.jpg'
 
@@ -65,17 +67,19 @@ export default {
           }
         }
       },
-      currentCat: 'adv'
+      currentCat: ''
     }
   },
 
   computed: {
-    ...mapState(['categories'])
+    ...mapGetters({
+      categories: 'categories/categories'
+    })
   },
 
   methods: {
     updateCurrentCat(index) {
-      this.currentCat = this.categories[index].value
+      this.currentCat = this.categories[index].id
       this.mySwiper.slideTo(index)
     },
 

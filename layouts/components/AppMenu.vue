@@ -67,7 +67,7 @@ export default {
       line-height: var(--header-height)!important;
 
       &:hover {
-        box-shadow: inset 0 6px 0px 0px var(--primary);
+        box-shadow: inset 0 3px 0px 0px var(--primary);
       }
     }
   }

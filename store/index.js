@@ -22,18 +22,9 @@ const destinations = [
   { label: 'Lima', value: 'Lima' },
 ]
 
-const categories = [
-  { label: 'Adventure', value: 'adv' },
-  { label: 'Nature', value: 'nat' },
-  { label: 'Art & Music', value: 'art' },
-  { label: 'Andean Traditions', value: 'and' },
-  { label: 'Food&Drinks', value: 'food' }
-]
-
 export const state = () => ({
   experiences,
   destinations,
-  categories,
   langs,
   currentLangCode: 'ESP'
 })
