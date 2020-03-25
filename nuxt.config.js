@@ -15,6 +15,10 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
+  env: {
+    apiUrl: process.env.API_URL || 'http://127.0.0.1:8000/api',
+    imageUrl: process.env.IMAGE_URL || 'http://127.0.0.1:8000',
+  },
   /*
   ** Customize the progress-bar color
   */
@@ -36,8 +40,26 @@ export default {
   plugins: [
     '@/plugins/element-ui',
     { src: '@/plugins/swiper.js', ssr: false },
-    '@/plugins/lang'
+    '@/plugins/lang',
+    '@/plugins/api-image'
   ],
+  axios: {
+    baseURL: process.env.API_URL || 'http://localhost:8000/api'
+  },
+  auth: {
+    strategies: {
+      local: {
+        endpoints: {
+          login: { url: '/login', method: 'post', propertyName: 'token' },
+          logout: { url: '/logout', method: 'post' },
+          user: { url: '/user', method: 'get', propertyName: 'user' }
+        },
+        // tokenRequired: true,
+        // tokenType: 'bearer'
+        // autoFetchUser: true
+      }
+    }
+  },
   /*
   ** Nuxt.js dev-modules
   */
@@ -47,6 +69,8 @@ export default {
   ** Nuxt.js modules
   */
   modules: [
+    '@nuxtjs/axios',
+    '@nuxtjs/auth'
   ],
   /*
   ** Build configuration

@@ -5,15 +5,18 @@
     <el-form :inline="true">
       <el-form-item >
         <el-select
-          v-model="filters.experience_id"
+          :disabled="categories === null"
+          v-model="filters.category_id"
           :placeholder="$lang.translate(translations, 'experiences').toUpperCase()"
           size="large">
-          <el-option
-            v-for="item in experiences"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value">
-          </el-option>
+          <template v-if="categories && categories.length > 0">
+            <el-option
+              v-for="category in categories"
+              :key="category.id"
+              :label="$lang.apiTranslate(category.translations, 'name')"
+              :value="category.id">
+            </el-option>
+          </template>
         </el-select>
       </el-form-item>
       <el-form-item>
@@ -44,7 +47,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 import backgroundUrl from '~/assets/images/main-hero.jpg'
 
 export default {
@@ -59,7 +62,7 @@ export default {
     return {
       backgroundUrl,
       filters: {
-        experience_id: '',
+        category_id: '',
         destination_id: ''
       }
     }
@@ -67,8 +70,10 @@ export default {
 
   computed: {
     ...mapState({
-      experiences: s => s.experiences,
       destinations: s => s.destinations
+    }),
+    ...mapGetters({
+      categories: 'categories/categories'
     })
   }
 }
