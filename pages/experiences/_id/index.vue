@@ -3,7 +3,7 @@
     <PageHeader
       :preTitle="experience.destination.title"
       :title="$lang.apiTranslate(experience.translations, 'title')"
-      :image="$imagePath(experience.main_image.path)"
+      :image="$imagePath(experience.banner_image.path)"
       contentClass="mr-6">
       <ExperienceReserveForm class="ml-5 " />
     </PageHeader>

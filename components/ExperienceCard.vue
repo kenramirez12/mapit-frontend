@@ -8,7 +8,7 @@
     </div>
     <div class="custom-card__image" style="height: 240px">
       <PuSkeleton :loading="loading" height="100%">
-        <img v-if="experience" :src="$imagePath(experience.banner_image.path)">
+        <img v-if="experience" :src="$imagePath(experience.main_image.path)">
       </PuSkeleton>
     </div>
     <div class="custom-card__content">
