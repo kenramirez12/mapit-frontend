@@ -1,7 +1,7 @@
 <template>
   <div class="custom-card" @click="$router.push('/experiences/2')">
     <div
-      v-if="!loading || (experience && experience.on_sale === 1)"
+      v-if="!loading  && experience && experience.on_sale === 1"
       class="custom-card__sale">
       <div class="custom-card__sale-percentage">-{{ experience.sale_percentage }}%</div>
       <img src="~/assets/images/card-sale-bg.svg" width="32">
@@ -13,10 +13,10 @@
     </div>
     <div class="custom-card__content">
       <div class="flex items-center">
-        <PuSkeleton :loading="loading" height="20px" style="width:100%;max-width:100px">
+        <PuSkeleton :loading="loading" height="20px" style="width:100%;max-width:100px;white-space:nowrap">
           <div v-if="experience" style="font-size:13px">
             {{ experience.destination.name }} 
-            <span class="text-gray-500 ml-3">Medio Día</span>
+            <span class="text-gray-500 ml-3">{{ experienceDuration }}</span>
           </div>
         </PuSkeleton>
         <a
@@ -43,13 +43,17 @@
             <span style="font-size:13px">Desde</span>
           </PuSkeleton>
           <PuSkeleton :loading="loading" height="26px" width="110px">
-            <span class="block font-light has-sale-price">US$ 39.90</span>
+            <span
+              v-if="experience"
+              class="block font-light"
+              :class="{'has-sale-price' : experience.on_sale === 1 }">
+              US$ {{ experiencePrice }}</span>
           </PuSkeleton>
         </div>
         <div
-          v-if="!loading"
+          v-if="!loading && experience && experience.on_sale === 1"
           class="custom-card__sale-price">
-          US$ 39.90
+          US$ {{ experienceSalePrice }}
         </div>
       </div>
     </div>
@@ -69,10 +73,46 @@ export default {
       value: () => false
     }
   },
-
   data () {
     return {
       favorite: false
+    }
+  },
+  computed: {
+    experienceDuration () {
+      if(!this.experience) return null
+      const duration = this.experience.activity_features.find(item => {
+        item.label === 'duration'
+      })
+
+      return duration ? duration.value : null
+    },
+    experiencePrice () {
+      if(!this.experience) return null
+      if(this.experience.price_type === 1) {
+        return this.experience.normal_price
+      } else {
+        const minPrice = this.getMinPrice(this.experience.group_prices)
+        return minPrice
+      }
+    },
+    experienceSalePrice () {
+      if(!this.experience || this.experience.on_sale === 0) return null
+
+      let salePrice = (this.experience.price_type === 1) ? 
+      this.experience.normal_price : 
+      this.getMinPrice(this.experience.group_prices)
+
+      return salePrice * this.experience.sale_percentage * 100
+    }
+  },
+  methods: {
+    getMinPrice (prices) {
+      const nums = []
+      prices.forEach(item => {
+        nums.push(parseInt(item.price))
+      })
+      return Math.min.apply(Math, nums)
     }
   }
 }
