@@ -1,12 +1,20 @@
 <template>
   <div class="custom-card">
     <div class="custom-card__image" style="height: 380px">
-      <img src="~/assets/images/experience-card-iamge.jpg">
+      <PuSkeleton :loading="isLoading" width="100%" height="100%">
+        <img src="~/assets/images/experience-card-iamge.jpg">
+      </PuSkeleton>
     </div>
     <div class="custom-card__content">
       <div class="flex items-center justify-between text-2xl">
-        <h4>CUSCO</h4>
+        <PuSkeleton
+          :loading="isLoading"
+          width="120px"
+          height="36px">
+          <h4>CUSCO</h4>
+        </PuSkeleton>
         <el-button
+          v-if="!isLoading"
           type="primary"
           size="small"
           plain
@@ -29,7 +37,8 @@ export default {
 
   data () {
     return {
-      favorite: false
+      favorite: false,
+      isLoading: true
     }
   }
 }

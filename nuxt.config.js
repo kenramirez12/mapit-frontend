@@ -41,7 +41,8 @@ export default {
     '@/plugins/element-ui',
     { src: '@/plugins/swiper.js', ssr: false },
     '@/plugins/lang',
-    '@/plugins/api-image'
+    '@/plugins/api-image',
+    '@/plugins/skeleton'
   ],
   axios: {
     baseURL: process.env.API_URL || 'http://localhost:8000/api'
