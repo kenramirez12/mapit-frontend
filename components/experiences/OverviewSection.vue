@@ -6,7 +6,7 @@
           <p class="dark-gray text-4xl ">{{ $lang.apiTranslate(experience.translations, 'description') }}</p>
           <p class="my-6 py-6 font-light text-2xl">Wiser: Comunidad de Chichumba</p>
           <ul
-            v-for="(feature, n) in experience.translations[this.$store.getters.currentLang.iso_lang].features"
+            v-for="(feature, n) in translations.features"
             :key="'feature_' + n"
             class="checkbox-list">
             <li class="checkbox-list__item mb-4 text-base">
@@ -41,6 +41,15 @@ export default {
     experience: {
       type: Object,
       required: true
+    }
+  },
+  computed: {
+    translations () {
+      const translations = this.experience.translations.find(item => {
+        return item.iso_lang === this.$store.getters.currentLang.iso_lang
+      })
+
+      return translations
     }
   }
 }
