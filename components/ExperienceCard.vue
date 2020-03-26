@@ -1,5 +1,5 @@
 <template>
-  <div class="custom-card" @click="$router.push('/experiences/2')">
+  <div class="custom-card" @click="$router.push('/experiences/' + this.experience.id)">
     <div
       v-if="!loading  && experience && experience.on_sale === 1"
       class="custom-card__sale">
