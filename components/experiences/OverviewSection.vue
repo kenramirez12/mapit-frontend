@@ -3,20 +3,16 @@
     <div class="overview py-6">
       <div class="flex flex-wrap my-10 py-10">
         <div class="w-5/12 pr-6">
-          <p class="dark-gray text-4xl ">Aprenderás las técnicas andinas utilizadas en la comunidad Chichubamba, realizando 3 diferentes talleres divertidos y culturales.</p>
+          <p class="dark-gray text-4xl ">{{ $lang.apiTranslate(experience.translations, 'description') }}</p>
           <p class="my-6 py-6 font-light text-2xl">Wiser: Comunidad de Chichumba</p>
-          <ul class="checkbox-list">
+          <ul
+            v-for="(feature, n) in experience.translations[this.$store.getters.currentLang.iso_lang].features"
+            :key="'feature_' + n"
+            class="checkbox-list">
             <li class="checkbox-list__item mb-4 text-base">
               <img src="~/assets/images/checkbox-icon.svg" class="checkbox-list__icon">
-              Auténtica experiencia cultural en la cual podrás aprender sobre las verdaderas tradiciones Incas.
+              {{ feature }}
             </li>
-            <li class="checkbox-list__item mb-4 text-base">
-              <img src="~/assets/images/checkbox-icon.svg" class="checkbox-list__icon">
-              Los expertos locales de cada taller cuentan con más de 15 años de experiencia en lo que hacen. 
-            </li>
-            <li class="checkbox-list__item mb-4 text-base">
-              <img src="~/assets/images/checkbox-icon.svg" class="checkbox-list__icon">
-              Los expertos locales de cada taller cuentan con más de 15 años de experiencia en lo que hacen.</li>
           </ul>
         </div>
         <div class="w-6/12 ml-auto">
@@ -26,7 +22,9 @@
               <span class="dark-gray text-2xl font-light ml-8">Qué incluye</span>
               
             </div>
-            <p class="dark-gray mb-5 ml-24 text-base leading-6">Transporte privado ida y vuelta, traductor en inglés (opcional), materiales para las actividades, la cerámica que pintes, y degustación del chocolate caliente preparado y chicha de jora.</p>
+            <p class="dark-gray mb-5 ml-24 text-base leading-6">
+              {{ $lang.apiTranslate(experience.translations, 'includes') }}
+            </p>
           </div>
           <div>
           <img src="~/assets/images/overview-img.jpg" class="overview-img shadow-xl mt-16" alt="">
@@ -39,7 +37,12 @@
 
 <script>
 export default {
-
+  props: {
+    experience: {
+      type: Object,
+      required: true
+    }
+  }
 }
 </script>
 

@@ -1,12 +1,10 @@
 <template>
-  <div>
-    
+  <div v-if="experience">
     <PageHeader
-      preTitle = Cusco
-      title="Prepara chocolate artesanal, chicha de jora y adornos de cerámica"
+      :preTitle="experience.destination.title"
+      :title="$lang.apiTranslate(experience.translations, 'title')"
       contentClass="mr-6">
       <ExperienceReserveForm class="ml-5 " />
-      
     </PageHeader>
 
     <div id="experience-container" class="relative">
@@ -30,18 +28,18 @@
               :class="{ active : currentSection === section.name }"
               class="experience-navbar__item">
               <span class="experience-navbar__label">{{ section.label }}</span>
-              <img v-if="currentSection === section.name" class="experience-navbar__arrow-current" src="~/assets/images/point-small-dark.svg" alt="">
-              <img v-else class="experience-navbar__arrow" src="~/assets/images/small-dark-arrow.svg" alt="">
+              <img v-if="currentSection === section.name" class="experience-navbar__arrow-current" src="~/assets/images/point-small-dark.svg">
+              <img v-else class="experience-navbar__arrow" src="~/assets/images/small-dark-arrow.svg">
             </div>
           </div>
         </div>
       </div>
-      <OverviewSection />
-      <ActivitiesSection />
-      <ProgramSection />
-      <AdditionalInfoSection />
-      <SocialPointsSection />
-      <TestimonialSection />
+      <OverviewSection :experience="experience" />
+      <ActivitiesSection :experience="experience" />
+      <ProgramSection :experience="experience" />
+      <AdditionalInfoSection :experience="experience" />
+      <SocialPointsSection :experience="experience" />
+      <TestimonialSection :experience="experience" />
     </div>
   </div>
 </template>
@@ -73,6 +71,7 @@ export default {
       navbarFixed: false,
       showNavbar: false,
       currentSection: 'overview',
+      experience: null,
       sections: [
         {
           label: 'General',
@@ -102,6 +101,8 @@ export default {
     }
   },
   mounted() {
+    this.getExperience(this.$route.params.id)
+
     const experienceContainer = document.getElementById('experience-container')
 
     const experienceContainerIsScrolled = () => {
@@ -156,6 +157,17 @@ export default {
         this.showNavbar = false
       }
     })
+  },
+  methods: {
+    async getExperience (experienceId) {
+      try {
+        const resp = await this.$axios.$get(`/experiences/${experienceId}`)
+        this.experience = resp.experience
+        console.log(resp)
+      } catch (error) {
+        console.error(error)
+      }
+    }
   }
 }
 </script>
