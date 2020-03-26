@@ -1,27 +1,54 @@
 <template>
   <div class="custom-card" @click="$router.push('/experiences/2')">
-    <div class="custom-card__sale">
-      <div class="custom-card__sale-percentage">-30%</div>
+    <div
+      v-if="!loading || (experience && experience.on_sale === 1)"
+      class="custom-card__sale">
+      <div class="custom-card__sale-percentage">-{{ experience.sale_percentage }}%</div>
       <img src="~/assets/images/card-sale-bg.svg" width="32">
     </div>
     <div class="custom-card__image" style="height: 240px">
-      <img src="~/assets/images/experience-card-iamge.jpg">
+      <PuSkeleton :loading="loading" height="100%">
+        <img v-if="experience" :src="$imagePath(experience.banner_image.path)">
+      </PuSkeleton>
     </div>
     <div class="custom-card__content">
       <div class="flex items-center">
-        <div style="font-size:13px">CUSCO <span class="text-gray-500 ml-3">Medio Día</span></div>
-        <a href="#" class="ml-auto" @click.prevent="favorite = !favorite">
+        <PuSkeleton :loading="loading" height="20px" style="width:100%;max-width:100px">
+          <div v-if="experience" style="font-size:13px">
+            {{ experience.destination.name }} 
+            <span class="text-gray-500 ml-3">Medio Día</span>
+          </div>
+        </PuSkeleton>
+        <a
+          v-if="!loading"
+          href="#"
+          class="ml-auto"
+          @click.prevent="favorite = !favorite">
           <img v-if="favorite" src="~/assets/images/icon-heart.svg" height="20">
           <img v-else src="~/assets/images/icon-heart-outline.svg" height="20">
         </a>
       </div>
-      <p class="my-6 text-base">Prepara chocolate artesanal, chicha de jora, y adornos de cerámica </p>
+      <div
+        v-if="loading"
+        class="my-6">
+        <PuSkeleton :loading="loading" height="22px" width="100%" class="block mb-1" />
+        <PuSkeleton :loading="loading" height="22px" width="70%" class="block mb-1" />
+      </div>
+      <p v-else class="my-6 text-base">
+        {{ $lang.apiTranslate(experience.translations, 'title') }}
+      </p>
       <div class="flex items-end">
         <div class="custom-card__normal-price">
-          <span style="font-size:13px">Desde</span>
-          <span class="block font-light has-sale-price">US$ 39.90</span>
+          <PuSkeleton :loading="loading" height="13px" width="38px" class="block mb-1">
+            <span style="font-size:13px">Desde</span>
+          </PuSkeleton>
+          <PuSkeleton :loading="loading" height="26px" width="110px">
+            <span class="block font-light has-sale-price">US$ 39.90</span>
+          </PuSkeleton>
         </div>
-        <div class="custom-card__sale-price">
+        <div
+          v-if="!loading"
+          class="custom-card__sale-price">
           US$ 39.90
         </div>
       </div>
@@ -32,9 +59,14 @@
 <script>
 export default {
   props: {
-    item: {
+    experience: {
       type: Object,
       required: false
+    },
+    loading: {
+      type: Boolean,
+      required: false,
+      value: () => false
     }
   },
 

@@ -45,7 +45,7 @@ export default {
 <style lang="scss" scoped>
   .trusted-by {
     background-color: #fafafa;
-    box-shadow: -20px 60px 220px rgba(0, 0, 0, 0.44);
+    box-shadow: -20px 40px 150px rgba(0, 0, 0, 0.35);
     width: 70%;
     padding: 3rem 4rem;
     margin: 7rem 0;
