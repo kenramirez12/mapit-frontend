@@ -8,20 +8,23 @@
             <div class="text-light py-6">
               <img src="~/assets/images/map-marker-lg.svg" class="mb-3" alt="">
               <span class="text-light text-base">Punto de encuentro</span>
-              <span class="block text-2xl text-light">Recojo y regreso al hotel</span>
+              <span class="block text-2xl text-light">{{ translations.meeting_place }}</span>
             </div>
           </div>
         </div>
         <div class="flex flex-wrap">
           <div class="w-5/12">
             <ul class="checkbox-list my-6 py-6 text-base">
-              <li v-for="n in 5" :key="n" class="checkbox-list__item mb-4 text-light">
+              <li
+                v-for="(additional, n) in translations.additional_info"
+                :key="'additional_' + n"
+                class="checkbox-list__item mb-4 text-light">
                 <img src="~/assets/images/checkbox-icon.svg" class="checkbox-list__icon">
-                Vas a trabajar con arcilla y pintura: puede que te ensucies.
+                {{ additional }}
               </li>
             </ul>
             <img src="~/assets/images/danger-icon.svg" class="mb-3" alt="">
-            <p>Las cancelaciones solo pueden ser realizadas máximo 24 horas después de haberse realizado el pago para poder ser reembolsadas en su totalidad (100%). Pasadas las 24 horas no habrá reembolso alguno. Todas las cancelaciones se deberán realizar a través del correo de la empresa (info@mapit.com.pe) o a través de los teléfonos indicados en la página web.</p>
+            <p>{{ translations.legal_info }}</p>
           </div>
 
           <div class="w-5/12 ml-auto">
@@ -30,13 +33,13 @@
               <img src="~/assets/images/sitting-01.svg" class="ml-auto" alt="">
             </div>
             <ul class="pr-6">
-              <li class="flex mb-3"><img src="~/assets/images/dark-arrow-sm.svg" class="mr-5"> Cámara</li>
-              <li class="flex mb-3"><img src="~/assets/images/dark-arrow-sm.svg" class="mr-5"> Paraguas o poncho de lluvia (especialmente entre Noviembre y Abril)</li>
-              <li class="flex mb-3"><img src="~/assets/images/dark-arrow-sm.svg" class="mr-5"> Capas de ropa, ya que la temperatura suele variar en el transcurso del día</li>
-              <li class="flex mb-3"><img src="~/assets/images/dark-arrow-sm.svg" class="mr-5"> Snacks y agua</li>
-              <li class="flex mb-3"><img src="~/assets/images/dark-arrow-sm.svg" class="mr-5"> Bloqueador solar, gorra, o lentes de sol </li>
-              <li class="flex mb-3"><img src="~/assets/images/dark-arrow-sm.svg" class="mr-5"> Mochila pequeña para guardar las obras de arte</li>
-              <li class="flex mb-3"><img src="~/assets/images/dark-arrow-sm.svg" class="mr-5"> Zapatos cómodos</li>
+              <li
+                v-for="(carry, n) in translations.carry"
+                :key="'carry_' + n"
+                class="flex mb-3">
+                <img src="~/assets/images/dark-arrow-sm.svg" class="mr-5"> 
+                {{ carry }}
+              </li>
             </ul>
           </div>
         </div>
@@ -47,7 +50,21 @@
 
 <script>
 export default {
-
+  props: {
+    experience: {
+      type: Object,
+      required: true
+    }
+  },
+  computed: {
+    translations () {
+      const translations = this.experience.translations.find(item => {
+        return item.iso_lang === this.$store.getters.currentLang.iso_lang
+      })
+  
+      return translations
+    }
+  }
 }
 </script>
 

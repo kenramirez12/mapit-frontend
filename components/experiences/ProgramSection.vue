@@ -17,32 +17,16 @@
                   <div class="flex-1 text-center"><span>Sábado</span></div>
                   <div class="flex-1 text-center"><span>Domingo</span></div>
                 </div>
-                <div class="flex flex-wrap w-full bg-white py-1 px-2 rounded-lg shadow mb-3 text-gray-600 font-light text-sm">
-                  <div class="flex-1 text-center"><span>8am</span></div>
-                  <div class="flex-1 text-center"><span></span></div>
-                  <div class="flex-1 text-center"><span>8am</span></div>
-                  <div class="flex-1 text-center"><span>8am</span></div>
-                  <div class="flex-1 text-center"><span>8am</span></div>
-                  <div class="flex-1 text-center"><span>8am</span></div>
-                  <div class="flex-1 text-center"><span>8am</span></div>
-                </div>
-                <div class="flex flex-wrap w-full bg-white py-1 px-2 rounded-lg shadow mb-3 text-gray-600 font-light text-sm">
-                  <div class="flex-1 text-center"><span>8am</span></div>
-                  <div class="flex-1 text-center"><span></span></div>
-                  <div class="flex-1 text-center"><span>8am</span></div>
-                  <div class="flex-1 text-center"><span>8am</span></div>
-                  <div class="flex-1 text-center"><span>8am</span></div>
-                  <div class="flex-1 text-center"><span>8am</span></div>
-                  <div class="flex-1 text-center"><span>8am</span></div>
-                </div>
-                <div class="flex flex-wrap w-full bg-white py-1 px-2 rounded-lg shadow mb-3 text-gray-600 font-light text-sm">
-                  <div class="flex-1 text-center"><span>8am</span></div>
-                  <div class="flex-1 text-center"><span></span></div>
-                  <div class="flex-1 text-center"><span>8am</span></div>
-                  <div class="flex-1 text-center"><span>8am</span></div>
-                  <div class="flex-1 text-center"><span>8am</span></div>
-                  <div class="flex-1 text-center"><span>8am</span></div>
-                  <div class="flex-1 text-center"><span>8am</span></div>
+                <div
+                  v-for="(schedule, n) in experience.schedules"
+                  :key="'schedule_' + n"
+                  class="flex flex-wrap w-full bg-white py-1 px-2 rounded-lg shadow mb-3 text-gray-600 font-light text-sm">
+                  <div
+                    v-for="n in 7"
+                    :key="'day_' + n"
+                    class="flex-1 text-center">
+                    <span v-if="schedule.days.includes(n)">{{ schedule.start_time }}</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -51,47 +35,31 @@
 
         <div class="flex flex-wrap">
           <div class="w-6/12">
-            <div class="itinerary">
+            <div class="itinerary pr-4">
               <span class="text-lg">ITINERARIO</span>
               <el-tabs
                 v-model="activeDay"
                 class="mt-4"
                 >
-                <el-tab-pane label="Día 1" name="first">
+                <el-tab-pane
+                  v-for="(day, n) in itinerary"
+                  :key="'day_' + n"
+                  :label="'Día ' + n"
+                  :name="'day_' + n">
                   <div
-                    v-for="n in 7"
-                    :key="n"
+                    v-for="(activity, x) in day"
+                    :key="'activity_' + x"
                     :class="{ 'mt-5' : n === 1 }"
                     class="flex flex-wrap mb-5">
-                    <div class="w-2/12">08:00 am</div>
-                    <div class="w-10/12">Recojo del hotel y salida a Chichubamba</div>
-                  </div>
-                </el-tab-pane>
-                <el-tab-pane label="Día 2" name="second">
-                  <div
-                    v-for="n in 7"
-                    :key="n"
-                    :class="{ 'mt-5' : n === 1 }"
-                    class="flex flex-wrap mb-5">
-                    <div class="w-2/12">08:00 am</div>
-                    <div class="w-10/12">Llegada a la comunidad Chichubamba</div>
-                  </div>
-                </el-tab-pane>
-                <el-tab-pane label="Día 3" name="third">
-                  <div
-                    v-for="n in 7"
-                    :key="n"
-                    :class="{ 'mt-5' : n === 1 }"
-                    class="flex flex-wrap mb-5">
-                    <div class="w-2/12">08:00 am</div>
-                    <div class="w-10/12">Primer taller: Moldea y pinta cerámicas</div>
+                    <div class="w-2/12">{{ activity.time }}</div>
+                    <div class="w-10/12">{{ activity.description }}</div>
                   </div>
                 </el-tab-pane>
               </el-tabs>
             </div>
           </div>
           <div class="w-6/12">
-            <img src="~/assets/images/itinerary-img.jpg" class="s" alt="">
+            <img :src="$imagePath(experience.itinerary_image.path)" class="s" alt="">
           </div>
         </div>
       </div>
@@ -101,9 +69,39 @@
 
 <script>
 export default {
+  props: {
+    experience: {
+      type: Object,
+      required: true
+    }
+  },
   data() {
     return {
-      activeDay: 'first'
+      activeDay: 'day_1'
+    }
+  },
+  computed: {
+    itinerary () {
+      return this.groupBy(this.translations.itinerary, 'day')
+    },
+    translations () {
+      const translations = this.experience.translations.find(item => {
+        return item.iso_lang === this.$store.getters.currentLang.iso_lang
+      })
+
+      return translations
+    }
+  },
+  methods: {
+    groupBy (array, key) {
+      const result = {}
+      array.forEach(item => {
+        if (!result[item[key]]){
+          result[item[key]] = []
+        }
+        result[item[key]].push(item)
+      })
+      return result
     }
   }
 }

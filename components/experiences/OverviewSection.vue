@@ -4,7 +4,7 @@
       <div class="flex flex-wrap my-10 py-10">
         <div class="w-5/12 pr-6">
           <p class="dark-gray text-4xl ">{{ $lang.apiTranslate(experience.translations, 'description') }}</p>
-          <p class="my-6 py-6 font-light text-2xl">Wiser: Comunidad de Chichumba</p>
+          <p class="my-6 py-6 font-light text-2xl">Wiser: {{ $lang.apiTranslate(experience.host.translations, 'fullname') }}</p>
           <ul
             v-for="(feature, n) in translations.features"
             :key="'feature_' + n"
@@ -27,7 +27,10 @@
             </p>
           </div>
           <div>
-          <img src="~/assets/images/overview-img.jpg" class="overview-img shadow-xl mt-16" alt="">
+          <img
+            :src="$imagePath(experience.slider_images[0].path)"
+            class="overview-img shadow-xl mt-16"
+            alt="">
           </div>
         </div>
       </div>

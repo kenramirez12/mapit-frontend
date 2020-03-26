@@ -3,6 +3,7 @@
     <PageHeader
       :preTitle="experience.destination.title"
       :title="$lang.apiTranslate(experience.translations, 'title')"
+      :image="$imagePath(experience.main_image.path)"
       contentClass="mr-6">
       <ExperienceReserveForm class="ml-5 " />
     </PageHeader>
@@ -55,6 +56,11 @@ import TestimonialSection from '~/components/experiences/TestimonialSection'
 import ExperienceReserveForm from '~/components/experiences/reserveForm'
 
 export default {
+  head () {
+    return {
+      title: this.pageTitle
+    }
+  },
   components: {
     PageHeader,
     OverviewSection,
@@ -100,63 +106,84 @@ export default {
       ]
     }
   },
-  mounted() {
-    this.getExperience(this.$route.params.id)
+  computed: {
+    pageTitle () {
+      let title = 'Map It'
+      if(this.experience) {
+        title += ` - ${this.translations.title}`
+      }
 
-    const experienceContainer = document.getElementById('experience-container')
-
-    const experienceContainerIsScrolled = () => {
-      const bounding = experienceContainer.getBoundingClientRect()
-      return (bounding.height + bounding.y - window.innerHeight) <= 0
+      return title
+    },
+    translations () {
+      if(!this.experience) return null
+      const translations = this.experience.translations.find(item => {
+        return item.iso_lang === this.$store.getters.currentLang.iso_lang
+      })
+  
+      return translations
     }
+  },
+  async mounted() {
+    await this.getExperience(this.$route.params.id)
 
-    const overviewSection = document.getElementById('overview-section')
-    const activitiesSection = document.getElementById('activities-section')
-    const programSection = document.getElementById('program-section')
-    const additionalInfoSection = document.getElementById('additional-info-section')
-    const socialPointsSection = document.getElementById('social-points-section')
-    const testimonialSection = document.getElementById('testimonials-section')
-
-    const getActiveSection = () => {
-      if(testimonialSection.getBoundingClientRect().top < 100) {
-        return 'testimonials'
-      } else if(socialPointsSection.getBoundingClientRect().top < 100) {
-        return 'social-points'
-      } else if(additionalInfoSection.getBoundingClientRect().top < 100) {
-        return 'additional-info'
-      } else if(programSection.getBoundingClientRect().top < 100) {
-        return 'program'
-      } else if(activitiesSection.getBoundingClientRect().top < 100) {
-        return 'activities'
-      } else if(overviewSection.getBoundingClientRect().top < 100) {
-        return 'overview'
-      } else {
-        return null
+    if(this.experience) {
+      console.log('holaas')
+      const experienceContainer = document.getElementById('experience-container')
+  
+      const experienceContainerIsScrolled = () => {
+        const bounding = experienceContainer.getBoundingClientRect()
+        return (bounding.height + bounding.y - window.innerHeight) <= 0
       }
+
+      const overviewSection = document.getElementById('overview-section')
+      const activitiesSection = document.getElementById('activities-section')
+      const programSection = document.getElementById('program-section')
+      const additionalInfoSection = document.getElementById('additional-info-section')
+      const socialPointsSection = document.getElementById('social-points-section')
+      const testimonialSection = document.getElementById('testimonials-section')
+
+      const getActiveSection = () => {
+        if(testimonialSection.getBoundingClientRect().top < 200) {
+          return 'testimonials'
+        } else if(socialPointsSection.getBoundingClientRect().top < 200) {
+          return 'social-points'
+        } else if(additionalInfoSection.getBoundingClientRect().top < 200) {
+          return 'additional-info'
+        } else if(programSection.getBoundingClientRect().top < 200) {
+          return 'program'
+        } else if(activitiesSection.getBoundingClientRect().top < 200) {
+          return 'activities'
+        } else if(overviewSection.getBoundingClientRect().top < 200) {
+          return 'overview'
+        } else {
+          return null
+        }
+      }
+
+      window.addEventListener('scroll', () => {
+        const pageTop = window.window.pageYOffset
+
+        if(pageTop > 600 && !this.showReserveFormSticky) {
+          this.showReserveFormSticky = true
+        } else if(pageTop <= 600 && this.showReserveFormSticky) {
+          this.showReserveFormSticky = false
+        }
+
+        const currentSection = getActiveSection()
+        if(currentSection) {
+          if(this.currentSection !== currentSection) this.currentSection = currentSection
+        }
+
+        if(pageTop > 600) {
+          this.navbarFixed = !experienceContainerIsScrolled()
+          this.showNavbar = true
+        } else {
+          this.navbarFixed = false
+          this.showNavbar = false
+        }
+      })
     }
-
-    window.addEventListener('scroll', () => {
-      const pageTop = window.window.pageYOffset
-
-      if(pageTop > 600 && !this.showReserveFormSticky) {
-        this.showReserveFormSticky = true
-      } else if(pageTop <= 600 && this.showReserveFormSticky) {
-        this.showReserveFormSticky = false
-      }
-
-      const currentSection = getActiveSection()
-      if(currentSection) {
-        if(this.currentSection !== currentSection) this.currentSection = currentSection
-      }
-
-      if(pageTop > 600) {
-        this.navbarFixed = !experienceContainerIsScrolled()
-        this.showNavbar = true
-      } else {
-        this.navbarFixed = false
-        this.showNavbar = false
-      }
-    })
   },
   methods: {
     async getExperience (experienceId) {
@@ -175,13 +202,26 @@ export default {
 <style lang="scss" scoped>
   .experience-navbar {
     position: absolute;
-    bottom: 2.5rem;
+    bottom: 0;
     left: 0;
+    padding-bottom: 2.5rem;
     width: 100%;
-    border-bottom: 1px solid #000;
     z-index: 2;
     opacity: 0;
+    background: linear-gradient(to top, var(--primary), transparent);
     transition: all 0.3s;
+
+    &::before {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 1px;
+      background-color: #000;
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: calc(2.5rem - 1px);
+    }
 
     &.show {
       opacity: 1;
@@ -253,9 +293,4 @@ export default {
   .experience-container {
     background: linear-gradient(90deg, #fff 55%, var(--primary) 55%);
   }
-  
-  .experience-navbar {
-    background: #ffffff70;
-  }
-
 </style>

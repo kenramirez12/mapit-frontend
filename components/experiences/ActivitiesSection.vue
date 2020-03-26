@@ -6,81 +6,48 @@
         <div class="flex flex-wrap">
           <div class="w-6/12 pr-6">
             <div class="flex flex-wrap pb-12">
-              <div class="flex-1 pr-4">
-                <img src="~/assets/images/features/clock-icon.svg" alt="">
+              <div v-if="getFeature('duration')" class="flex-1 pr-4">
+                <img src="~/assets/images/features/clock-icon.svg" style="height:20px">
                 <div class="block text-xl font-normal mt-6 mb-4">Duración</div>
-                <p class="text-base">06 horas</p>
+                <p class="text-base">{{ getFeature('duration') }}</p>
               </div>
-              <div class="flex-1 pr-4">
-                <img src="~/assets/images/features/map-icon.svg" alt="">
+              <div v-if="getFeature('ubication')" class="flex-1 pr-4">
+                <img src="~/assets/images/features/map-icon.svg" style="height:20px">
                 <div class="block text-xl font-normal mt-6 mb-4">Ubicación</div>
-                <p class="text-base">Chichubamba</p>
+                <p class="text-base">{{ getFeature('ubication') }}</p>
               </div>
-              <div class="flex-1 pr-4">
-                <img src="~/assets/images/features/trip-icon.svg" alt="">
+              <div v-if="getFeature('latitude')" class="flex-1 pr-4">
+                <img src="~/assets/images/features/trip-icon.svg" style="height:20px">
                 <div class="block text-xl font-normal mt-6 mb-4">Altitud</div>
-                <p class="text-base">2895 msnm.</p>
+                <p class="text-base">{{ getFeature('altitude') }}</p>
               </div>
               <div class="flex-1 pr-4">
-                <img src="~/assets/images/features/group-icon.svg" alt="">
+                <img src="~/assets/images/features/group-icon.svg" style="height:20px">
                 <div class="block text-xl font-normal mt-6 mb-4">Capacidad</div>
-                <p class="text-base">2-6 personas</p>
+                <p class="text-base">{{experience.min_quota}}-{{ experience.max_quota }} personas</p>
               </div>
-              <div class="flex-1 pr-4">
-                <img src="~/assets/images/features/thumb-icon.svg" alt="">
+              <div v-if="getFeature('lang')" class="flex-1 pr-4">
+                <img src="~/assets/images/features/thumb-icon.svg" style="height:20px">
                 <div class="block text-xl font-normal mt-6 mb-4">Idioma</div>
-                <p class="text-base">Español, Inglés(opcional)</p>
+                <p class="text-base">{{ getFeature('lang') }}</p>
               </div>
             </div>
           </div>
         </div>
         <div class="flex flex-wrap py-6 my-6 .text-base">
           <div class="w-5/12">
-            <ul class="checkbox-list">
+            <ul
+              v-for="(consideration, n) in translations.considerations"
+              :key="'consideration_' + n"
+              class="checkbox-list">
               <li class="checkbox-list__item mb-4">
                 <img src="~/assets/images/checkbox-icon.svg" class="checkbox-list__icon">
-                A la hora del recojo, preguntarán por tí en la recepción del hotel y te llevarán al transporte privado.
-              </li>
-              <li class="checkbox-list__item mb-4">
-                <img src="~/assets/images/checkbox-icon.svg" class="checkbox-list__icon">
-                Una vez que estén en el transporte, saldrán rumbo a Chichubamba. Irán por una ruta con verdes paisajes y montañas nevadas.
-              </li>
-              <li class="checkbox-list__item mb-4">
-                <img src="~/assets/images/checkbox-icon.svg" class="checkbox-list__icon">
-                Al llegar a la comunidad, irás de frente al primer taller, donde las personas locales te recibirán con una cálida bienvenida, que te hará sentir como en casa.
-              </li>
-              <li class="checkbox-list__item mb-4">
-                <img src="~/assets/images/checkbox-icon.svg" class="checkbox-list__icon">
-                En este taller, aprenderás los pasos para hacer arcilla, y crearás piezas de cerámica utilizando un torno rural, al cual le darás vuelta con tu pie! 
-              </li>
-              <li class="checkbox-list__item mb-4">
-                <img src="~/assets/images/checkbox-icon.svg" class="checkbox-list__icon">
-                Luego, pintarás un adorno de cerámica ya horneado, y te lo podrás llevar a casa.
-              </li>
-              <li class="checkbox-list__item mb-4">
-                <img src="~/assets/images/checkbox-icon.svg" class="checkbox-list__icon">
-                En el segundo taller, aprenderás paso a paso a preparar  un delicioso chocolate artesanal.
-              </li>
-              <li class="checkbox-list__item mb-4">
-                <img src="~/assets/images/checkbox-icon.svg" class="checkbox-list__icon">
-                Un experto local con más de 15 años de experiencia, te ayudará en todo el proceso. Podrás degustarlo una vez terminado.
-              </li>
-              <li class="checkbox-list__item mb-4">
-                <img src="~/assets/images/checkbox-icon.svg" class="checkbox-list__icon">
-                Por último, visitarás la famosa chichería local, donde te enseñarán a preparar chicha de jora; la cerveza de los Incas, utilizando técnicas ancestrales!
-              </li>
-              <li class="checkbox-list__item mb-4">
-                <img src="~/assets/images/checkbox-icon.svg" class="checkbox-list__icon">
-                Podrás degustar tu creación al final de la experiencia.
-              </li>
-              <li class="checkbox-list__item mb-4">
-                <img src="~/assets/images/checkbox-icon.svg" class="checkbox-list__icon">
-                Una vez terminada la experiencia con la comunidad, retornarán al hotel.
+                {{ consideration }}
               </li>
             </ul>
           </div>
           <div class="w-6/12 ml-auto">
-            <img src="~/assets/images/activity-img.jpg" class="activity-img" alt="">
+            <img :src="$imagePath(experience.activity_image.path)" class="activity-img">
           </div>
         </div>
       </div>
@@ -90,7 +57,30 @@
  
  <script>
  export default {
- 
+  props: {
+    experience: {
+      type: Object,
+      required: true
+    }
+  },
+  computed: {
+    translations () {
+      const translations = this.experience.translations.find(item => {
+        return item.iso_lang === this.$store.getters.currentLang.iso_lang
+      })
+
+      return translations
+    }
+  },
+  methods: {
+    getFeature (label) {
+      if(!this.experience) return null
+      const feature = this.experience.activity_features.find(item => {
+        return item.label === label
+      })
+      return feature ? feature.value : null
+    }
+  }
  }
  </script>
  

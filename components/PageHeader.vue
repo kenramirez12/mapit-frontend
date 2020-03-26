@@ -1,9 +1,9 @@
 <template>
-  <div class="page-header" :style="{ backgroundImage: `url(${baseBackground})` }">
+  <div class="page-header" :style="{ backgroundImage: `url(${image ? image : baseBackground})` }">
     <div class="container page-header__container m-auto px-4">
       <div :class="contentClass">
         <p v-if="preTitle !== ''" class="mb-12 text-2xl text-white font-light page-header__pre-title">{{ preTitle }}</p>
-        <h1 class="page-header__title mb-8">{{ title }}</h1>
+        <h1 class="page-header__title pr-4 mb-8">{{ title }}</h1>
         <p v-if="subtitle !== ''" class="page-header__description">{{ subtitle }}</p>
       </div>
       <slot></slot>
@@ -29,6 +29,10 @@ export default {
       type: String,
       required: false,
       default: () => ''
+    },
+    image: {
+      type: String,
+      required: false
     },
     contentClass: {
       type: String,

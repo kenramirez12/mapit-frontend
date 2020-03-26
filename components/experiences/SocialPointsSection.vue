@@ -5,7 +5,7 @@
         <h3 class="text-5xl font-light mb-6 pb-6">Puntos Sociales</h3>
         <div class="flex flex-wrap">
           <div class="w-5/12 pr-6 pb-6">
-            <p class="mb-6">Al elegir esta actividad estás apoyando a lograr un cambio en el turismo tradicional en Perú. MAP IT colabora de forma directa a la economía local, al desarrollo sostenible, a la mejora de la calidad de vida, generación de oportunidades laborales de nuestros wisers y a la preservación de la cultura local.</p>
+            <p class="mb-6">{{ translations.social_impact }}</p>
           </div>
         </div>
         <div class="flex flex-wrap mt-6" style="position:relative">
@@ -32,7 +32,21 @@
 
 <script>
 export default {
-
+  props: {
+    experience: {
+      type: Object,
+      required: true
+    }
+  },
+  computed: {
+    translations () {
+      const translations = this.experience.translations.find(item => {
+        return item.iso_lang === this.$store.getters.currentLang.iso_lang
+      })
+  
+      return translations
+    }
+  }
 }
 </script>
 
