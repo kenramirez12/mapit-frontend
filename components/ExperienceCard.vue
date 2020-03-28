@@ -16,7 +16,7 @@
         <PuSkeleton :loading="loading" height="20px" style="width:100%;max-width:100px;white-space:nowrap">
           <div v-if="experience" style="font-size:13px">
             {{ experience.destination.name }} 
-            <span class="text-gray-500 ml-3">{{ experienceDuration }}</span>
+            <span class="text-gray-500 ml-3">{{ $lang.apiTranslate(experience.translations, 'duration') }}</span>
           </div>
         </PuSkeleton>
         <a

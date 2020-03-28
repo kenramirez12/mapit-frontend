@@ -1,7 +1,7 @@
 <template>
   <div v-if="experience">
     <PageHeader
-      :preTitle="experience.destination.title"
+      :preTitle="experience.destination.name"
       :title="$lang.apiTranslate(experience.translations, 'title')"
       :image="$imagePath(experience.banner_image.path)"
       contentClass="mr-6">
@@ -190,7 +190,6 @@ export default {
       try {
         const resp = await this.$axios.$get(`/experiences/${experienceId}`)
         this.experience = resp.experience
-        console.log(resp)
       } catch (error) {
         console.error(error)
       }
@@ -206,9 +205,9 @@ export default {
     left: 0;
     padding-bottom: 2.5rem;
     width: 100%;
-    z-index: 2;
+    z-index: 3;
     opacity: 0;
-    background: linear-gradient(to top, var(--primary), transparent);
+    background: linear-gradient(to top, #fff, transparent);
     transition: all 0.3s;
 
     &::before {

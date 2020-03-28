@@ -6,30 +6,30 @@
         <div class="flex flex-wrap">
           <div class="w-6/12 pr-6">
             <div class="flex flex-wrap pb-12">
-              <div v-if="getFeature('duration')" class="flex-1 pr-4">
+              <div v-if="duration !== ''" class="flex-1 pr-4">
                 <img src="~/assets/images/features/clock-icon.svg" style="height:20px">
                 <div class="block text-xl font-normal mt-6 mb-4">Duración</div>
-                <p class="text-base">{{ getFeature('duration') }}</p>
+                <p class="text-base">{{ duration }}</p>
               </div>
-              <div v-if="getFeature('ubication')" class="flex-1 pr-4">
+              <div v-if="location !== ''" class="flex-1 pr-4">
                 <img src="~/assets/images/features/map-icon.svg" style="height:20px">
                 <div class="block text-xl font-normal mt-6 mb-4">Ubicación</div>
-                <p class="text-base">{{ getFeature('ubication') }}</p>
+                <p class="text-base">{{ location }}</p>
               </div>
-              <div v-if="getFeature('latitude')" class="flex-1 pr-4">
+              <div v-if="altitude !== ''" class="flex-1 pr-4">
                 <img src="~/assets/images/features/trip-icon.svg" style="height:20px">
                 <div class="block text-xl font-normal mt-6 mb-4">Altitud</div>
-                <p class="text-base">{{ getFeature('altitude') }}</p>
+                <p class="text-base">{{ altitude }}</p>
               </div>
               <div class="flex-1 pr-4">
                 <img src="~/assets/images/features/group-icon.svg" style="height:20px">
                 <div class="block text-xl font-normal mt-6 mb-4">Capacidad</div>
                 <p class="text-base">{{experience.min_quota}}-{{ experience.max_quota }} personas</p>
               </div>
-              <div v-if="getFeature('lang')" class="flex-1 pr-4">
+              <div v-if="languages !== ''" class="flex-1 pr-4">
                 <img src="~/assets/images/features/thumb-icon.svg" style="height:20px">
                 <div class="block text-xl font-normal mt-6 mb-4">Idioma</div>
-                <p class="text-base">{{ getFeature('lang') }}</p>
+                <p class="text-base">{{ languages }}</p>
               </div>
             </div>
           </div>
@@ -70,15 +70,18 @@
       })
 
       return translations
-    }
-  },
-  methods: {
-    getFeature (label) {
-      if(!this.experience) return null
-      const feature = this.experience.activity_features.find(item => {
-        return item.label === label
-      })
-      return feature ? feature.value : null
+    },
+    duration () {
+      return this.$lang.apiTranslate(this.experience.translations, 'duration')
+    },
+    location () {
+      return this.$lang.apiTranslate(this.experience.translations, 'location')
+    },
+    altitude () {
+      return this.$lang.apiTranslate(this.experience.translations, 'altitude')
+    },
+    languages () {
+      return this.$lang.apiTranslate(this.experience.translations, 'languages')
     }
   }
  }

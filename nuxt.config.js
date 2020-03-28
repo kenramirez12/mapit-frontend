@@ -43,7 +43,7 @@ export default {
     { src: '@/plugins/swiper.js', ssr: false },
     '@/plugins/lang',
     '@/plugins/api-image',
-    '@/plugins/skeleton'
+    '@/plugins/skeleton',
   ],
   axios: {
     baseURL: process.env.API_URL || 'http://localhost:8000/api'
@@ -65,15 +65,16 @@ export default {
   /*
   ** Nuxt.js dev-modules
   */
-  buildModules: [
-  ],
-  /*
-  ** Nuxt.js modules
-  */
-  modules: [
-    '@nuxtjs/axios',
-    '@nuxtjs/auth',
-    '@nuxtjs/dotenv'
+ buildModules: [
+],
+/*
+** Nuxt.js modules
+*/
+modules: [
+  '@nuxtjs/axios',
+  '@nuxtjs/auth',
+  '@nuxtjs/dotenv',
+  'fullpage-nuxt'
   ],
   /*
   ** Build configuration

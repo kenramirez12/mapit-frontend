@@ -1,5 +1,5 @@
 <template>
-  <div class="experiences-slider -ml-3">
+  <div>
     <p
       v-if="Array.isArray(lastExperiences) && lastExperiences.length === 0"
       class="pl-5 font-light">
@@ -7,27 +7,30 @@
     </p>
     <div
       v-else
-      v-swiper:mySwiper="swiperOption"
-      class="w-full">
-      <div class="swiper-wrapper py-5 pl-3">
-        <template v-if="lastExperiences === null">
-          <div
-            v-for="n in 4"
-            :key="n"
-            class="swiper-slide">
-            <ExperienceCard :loading="true" />
-          </div>
-        </template>
-        <template v-else>
-          <div
-            v-for="experience in lastExperiences"
-            :key="experience.id"
-            class="swiper-slide">
-            <ExperienceCard :experience="experience" />
-          </div>
-        </template>
+      class="experiences-slider -ml-3">
+      <div
+        v-swiper:mySwiper="swiperOption"
+        class="w-full">
+        <div class="swiper-wrapper py-5 pl-3">
+          <template v-if="lastExperiences === null">
+            <div
+              v-for="n in 4"
+              :key="n"
+              class="swiper-slide">
+              <ExperienceCard :loading="true" />
+            </div>
+          </template>
+          <template v-else>
+            <div
+              v-for="experience in lastExperiences"
+              :key="experience.id"
+              class="swiper-slide">
+              <ExperienceCard :experience="experience" />
+            </div>
+          </template>
+        </div>
+        <div class="swiper-pagination swiper-pagination-bullets"></div>
       </div>
-      <div class="swiper-pagination swiper-pagination-bullets"></div>
     </div>
   </div>
 </template>

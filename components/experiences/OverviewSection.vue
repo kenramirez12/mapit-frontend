@@ -4,7 +4,12 @@
       <div class="flex flex-wrap my-10 py-10">
         <div class="w-5/12 pr-6">
           <p class="dark-gray text-4xl ">{{ $lang.apiTranslate(experience.translations, 'description') }}</p>
-          <p class="my-6 py-6 font-light text-2xl">Wiser: {{ $lang.apiTranslate(experience.host.translations, 'fullname') }}</p>
+          <p
+            v-if="'host' in experience && experience.host.constructor === Object"
+            class="my-6 py-6 font-light text-2xl">
+            Wiser: {{ $lang.apiTranslate(experience.host.translations, 'fullname') }}
+          </p>
+          <div v-else class="my-6 py-6" />
           <ul
             v-for="(feature, n) in translations.features"
             :key="'feature_' + n"
