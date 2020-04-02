@@ -55,7 +55,7 @@ export default {
 
     &:hover {
       transform: scale(.99);
-      box-shadow: 0 0 5px rgba(0, 0, 0, .3);
+      box-shadow: 0 0 8px rgba(0, 0, 0, .2);
     }
     &__sale {
       position: absolute;

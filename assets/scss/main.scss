@@ -137,3 +137,69 @@ body {
 .pu-skeleton {
   display: block !important;
 }
+
+.el-tabs:has(.full) {
+  &--border-card {
+    box-shadow: 0 0 0!important;
+  }
+
+  &__header {
+    border-bottom: 0!important;
+  }
+
+  &__nav {
+    display: flex;
+    width: 100%;
+  }
+
+  &__item {
+    flex: 1;
+    text-align: center;
+    border: 0!important;
+    height: 50px;
+    line-height: 50px;
+
+    &:hover,
+    &.is-active {
+      color: #000 !important;
+      font-weight: 400;
+    }
+  }
+}
+
+.el-tabs--border-card {
+  border: 0;
+  
+  & > .el-tabs__content {
+    padding: 1.5rem;
+  }
+}
+
+.el-dialog {
+  &__header,
+  &__body {
+    padding: 0!important;
+  }
+}
+
+.el-loading-spinner {
+  left: calc(50% - 25px);
+}
+
+.submit-btn {
+  transition: all 0.3s;
+  box-shadow: 0px 0px 20px #37d7d7;
+
+  &:hover {
+    box-shadow: 0px 0px 10px #37d7d7;
+  }
+}
+
+.input-shadow {
+  transition: all 0.3s;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+  &:hover {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+  }
+}

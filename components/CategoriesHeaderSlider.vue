@@ -4,33 +4,40 @@
       <el-button @click="prevSlide()" class="text-white hover:text-white bg-transparent hover:bg-primary" icon="el-icon-back" circle></el-button>
       <el-button @click="nextSlide()" class="text-white hover:text-white bg-transparent hover:bg-primary" icon="el-icon-right" circle></el-button>
     </div>
-    <div v-swiper:mySwiper="swiperOption">
+    <div
+      v-swiper:mySwiper="swiperOption">
       <div class="swiper-wrapper">
         <div
-          v-for="category in categories"
+          v-for="category in sanitizedCategories"
           :key="category.id"
-          :style="{ backgroundImage: `url(${$imagePath(category.image.path)})` }"
+          :style="{ backgroundImage: `url(${category.id === '' ? category.image : $imagePath(category.image.path)})` }"
           :data-cat-value="category.id"
           class="swiper-slide">
           <div class="container m-auto px-4">
-            <h1 class="page-header__title">{{ $lang.apiTranslate(category.translations, 'name') }}</h1>
+            <h1 v-if="category.id === ''" class="page-header__title">
+              Tours gastronómicos, talleres de arte, experiencias con comunidades, cosas para hacer de noche, y mucho más.
+            </h1>
+            <h1 v-else class="page-header__title">
+              {{ $lang.apiTranslate(category.translations, 'name') }}
+              <i v-if="isLoading" class="el-icon-loading ml-4" />
+            </h1>
           </div>
         </div>
       </div>
     </div>
 
     <div
-      v-if="categories && categories.length > 0"
+      v-if="categories && sanitizedCategories.length > 0"
       class="categories-carousel">
       <div
-        v-for="(category, n) in categories"
+        v-for="(category, n) in sanitizedCategories"
         :key="'carousel_' + category.id"
-        :data-cat-name="$lang.apiTranslate(category.translations, 'name')"
-        :class="{ current : currentCat === category.id }"
+        :data-cat-name="category.id === '' ? category.name : $lang.apiTranslate(category.translations, 'name')"
+        :class="{ current : currentCategory === category.id }"
         @click="updateCurrentCat(n)"
         class="categories-carousel-item">
         <img
-          v-if="currentCat === category.id"
+          v-if="currentCategory === category.id"
           class="categories-carousel-item__arrow categories-carousel-item__arrow--current"
           src="~/assets/images/current-cat-arrow.svg">
         <img
@@ -43,11 +50,18 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 import adventureBg from '~/assets/images/adventure-bg.jpg'
 import natureBg from '~/assets/images/nature-bg.jpg'
 
 export default {
+  props: {
+    selected: {
+      prop: [Number, String],
+      required: true,
+      default: () => ''
+    }
+  },
   data() {
     return {
       adventureBg,
@@ -67,19 +81,50 @@ export default {
           }
         }
       },
-      currentCat: ''
+      currentCat: '',
+      isLoading: false
     }
   },
 
   computed: {
     ...mapGetters({
-      categories: 'categories/categories'
-    })
+      categories: 'categories/categories',
+      currentCategory: 'categories/currentCategory'
+    }),
+    sanitizedCategories () {
+      if(this.categories) {
+        const generalCategory = {
+          id: '',
+          name: 'General',
+          image: '/images/experience-default.jpg'
+        }
+
+        const sanitizedCategories = JSON.parse(JSON.stringify(this.categories))
+        sanitizedCategories.unshift(generalCategory)
+        return sanitizedCategories
+      }
+    }
+  },
+
+  watch: {
+    currentCategory () {
+      const mainHeader = document.querySelector('.header').clientHeight
+      const pageHeader = document.querySelector('.page-header').clientHeight
+
+      this.isLoading = true
+      setTimeout(() => {
+        this.isLoading = false
+        return window.scrollTo({ top: mainHeader + pageHeader, behavior: 'smooth' })
+      }, 500)
+    }
   },
 
   methods: {
+    ...mapMutations({
+      setCurrentCategory: 'categories/SET_CURRENT_CATEGORY'
+    }),
     updateCurrentCat(index) {
-      this.currentCat = this.categories[index].id
+      this.setCurrentCategory(this.sanitizedCategories[index].id)
       this.mySwiper.slideTo(index)
     },
 
@@ -101,15 +146,19 @@ export default {
 
     &__title {
       font-weight: 300;
-      font-size: 65px;
+      font-size: 60px;
+      line-height: 1.2;
+      max-width: 60rem;
       color: #fff;
+      display: flex;
+      align-items: center;
     }
   }
 
   .categories-slider {
     &__arrows {
       position: absolute;
-      top: 30%;
+      top: 10rem;
       left: 50%;
       transform: translateX(-50%);
       padding-right: 1rem;
@@ -119,7 +168,8 @@ export default {
   }
 
   .swiper-slide {
-    padding-top: 10rem;
+    padding-top: 8rem;
+    background-size: cover;
   }
 
   .categories-carousel {

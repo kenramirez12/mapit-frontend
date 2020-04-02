@@ -2,7 +2,7 @@
   <div id="testimonials-section" class="experience-container py-6 pb-super">
     <div class="container mx-auto px-4">
       <div class="activities py-6 position-relative">
-        <h3 class="text-5xl font-light mb-6 pb-super">Opiniones</h3>
+        <h3 class="text-5xl font-light mb-6 pb-super">{{ $lang.translate(pageTranslations, 'reviews') }}</h3>
         <div class="flex flex-wrap mt-6" style="position:relative">
           <div class="w-full pr-6">
             <div v-swiper:mySwiper="swiperOption" class="testimonials-slider">
@@ -11,12 +11,18 @@
                 <el-button @click="nextSlide()" type="primary" icon="el-icon-right" square class="px-3"></el-button>
               </div>
               <div class="swiper-wrapper">
-                <div v-for="n in 6" :key="n" class="testimonial-item swiper-slide">
+                <TestimonialItem
+                  v-for="n in 6"
+                  :key="n"
+                  :testimonial="testimonial"
+                  class="swiper-slide"
+                />
+                <!-- <div v-for="n in 6" :key="n" class="testimonial-item swiper-slide">
                   <div class="testimonial-item__content">
                     <span class="text-4xl leading-tight">Professionals in their craft! All services were super great with strong attention to details in the travel {{n}}"</span>
                     <a href="#" class="flex items-center py-6 my-6">
-                      <i class="el-icon-collection-tag text-base mr-2"></i> Lee más testimonios en 
-                      <img class="ml-8 " src="~/assets/images/social/tripadvisorlight.svg" alt="" width="30">
+                      <i class="el-icon-collection-tag text-base mr-2"></i> {{ $lang.translate(pageTranslations, 'read_more') }} 
+                      <img class="ml-6 " src="~/assets/images/social/tripadvisorlight.svg" alt="" width="30">
                     </a>
                     <div class="flex flex-col">
                       <span class="text-base">Polina Kuzina</span>
@@ -24,7 +30,7 @@
                     </div>
                   </div>
                   <img src="~/assets/images/testimonial.jpg" alt="">
-                </div>
+                </div> -->
               </div>
               <div class="swiper-pagination swiper-pagination-bullets"></div>
             </div>
@@ -36,11 +42,31 @@
 </template>
 
 <script>
+import TestimonialItem from '~/components/TestimonialItem'
+
 export default {
+  components: {
+    TestimonialItem
+  },
   data() {
     return {
+      testimonial: {
+        review: 'Professionals in their craft! All services were super great with strong attention to details in the travel',
+        fullname: 'Polina Kuzina',
+        country: 'Ukranie'
+      },
       swiperOption: {
         slidesPerView: 'auto'
+      },
+      pageTranslations: {
+        'es_ES': {
+          reviews: 'Opiniones',
+          read_more: 'Leer más testimonios en'
+        },
+        'en_EN': {
+          reviews: 'Reviews',
+          read_more: 'Read more reviews on'
+        }
       }
     }
   },

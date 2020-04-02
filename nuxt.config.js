@@ -13,7 +13,7 @@ export default {
       { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/png', href: '/images/favicon.png' }
     ]
   },
   env: {
@@ -23,7 +23,7 @@ export default {
   /*
   ** Customize the progress-bar color
   */
-  loading: { color: '#fff' },
+  loading: { color: '#37D7D7' },
   /*
   ** Global CSS
   */
@@ -43,7 +43,7 @@ export default {
     { src: '@/plugins/swiper.js', ssr: false },
     '@/plugins/lang',
     '@/plugins/api-image',
-    '@/plugins/skeleton',
+    '@/plugins/skeleton'
   ],
   axios: {
     baseURL: process.env.API_URL || 'http://localhost:8000/api'
@@ -52,13 +52,19 @@ export default {
     strategies: {
       local: {
         endpoints: {
-          login: { url: '/login', method: 'post', propertyName: 'token' },
+          login: { url: '/login', method: 'post', propertyName: 'access_token' },
           logout: { url: '/logout', method: 'post' },
           user: { url: '/user', method: 'get', propertyName: 'user' }
         },
         // tokenRequired: true,
         // tokenType: 'bearer'
         // autoFetchUser: true
+      },
+      facebook: {
+        client_id: '562460637810420',
+        userinfo_endpoint: 'https://graph.facebook.com/v2.12/me?fields=about,name,picture{url},email',
+        scope: ['public_profile', 'email'],
+        redirect_uri:'http://localhost:3000/callback'
       }
     }
   },

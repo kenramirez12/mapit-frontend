@@ -2,7 +2,7 @@
   <div class="page-header" :style="{ backgroundImage: `url(${image ? image : baseBackground})` }">
     <div class="container page-header__container m-auto px-4">
       <div :class="contentClass">
-        <p v-if="preTitle !== ''" class="mb-12 text-2xl text-white font-light page-header__pre-title">{{ preTitle }}</p>
+        <p v-if="preTitle !== ''" class="mb-8 text-2xl text-white font-light page-header__pre-title">{{ preTitle }}</p>
         <h1 class="page-header__title pr-4 mb-8">{{ title }}</h1>
         <p v-if="subtitle !== ''" class="page-header__description">{{ subtitle }}</p>
       </div>
@@ -52,8 +52,9 @@ export default {
   .page-header {
     display: flex;
     height: 640px;
-    background-attachment: fixed;
+    // background-attachment: fixed;
     background-size: cover;
+    background-position: center;
 
     &__container {
       height: 100%;

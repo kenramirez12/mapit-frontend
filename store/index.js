@@ -1,42 +1,44 @@
 const langs = [
   {
     iso_lang: 'es_ES',
+    slug: 'es',
     code: 'ESP',
     label: 'Español'
   },
   {
     iso_lang: 'en_EN',
+    slug: 'en',
     code: 'ENG',
     label: 'English'
   }
 ]
 
-const experiences = [
-  { label: 'Adventure', value: 'Adventure' },
-  { label: 'Nature', value: 'Nature' },
-  { label: 'Art & Music', value: 'Art & Music' },
-]
-
-const destinations = [
-  { label: 'Cusco', value: 'Cusco' },
-  { label: 'Lima', value: 'Lima' },
-]
-
 export const state = () => ({
-  experiences,
-  destinations,
   langs,
-  currentLangCode: 'ESP'
+  currentLangCode: 'ESP',
+  authDialogVisible: false
 })
 
 export const getters = {
   currentLang: (state) => {
     return state.langs.find(lang => lang.code === state.currentLangCode)
+  },
+  authDialogVisible: (state) => {
+    return state.authDialogVisible
   }
 }
 
 export const mutations = {
-  setLang(state, langCode) {
+  SET_AUTH_DIALOG_VISIBLE(state, value) {
+    state.authDialogVisible = value
+  },
+  SET_LANG(state, langCode) {
     state.currentLangCode = langCode
+  },
+  SET_LANG_BY_SLUG(state, langSlug) {
+    const code = state.langs.find(item => item.slug === langSlug)
+    if(code) {
+      state.currentLangCode = code.code
+    }
   }
 }

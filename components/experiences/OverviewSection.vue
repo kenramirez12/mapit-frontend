@@ -24,7 +24,7 @@
           <div class="">
             <div class="flex items-center mb-3">
               <img src="~/assets/images/include-icon.svg" style="height:64px" class="ml-0 ">
-              <span class="dark-gray text-2xl font-light ml-8">Qué incluye</span>
+              <span class="dark-gray text-2xl font-light ml-8">{{ $lang.translate(pageTranslations, 'included') }}</span>
               
             </div>
             <p class="dark-gray mb-5 ml-24 text-base leading-6">
@@ -32,10 +32,21 @@
             </p>
           </div>
           <div>
-          <img
-            :src="$imagePath(experience.slider_images[0].path)"
-            class="overview-img shadow-xl mt-16"
-            alt="">
+          <el-carousel
+            trigger="click"
+            arrow="never"
+            class="overview-slider shadow-xl mt-16"
+            :style="`-sliderLength:'${experience.slider_images > 9 ? experience.slider_images : '0' + experience.slider_images}'`"
+            >
+            <el-carousel-item
+              v-for="(slide, n) in experience.slider_images"
+              :key="'slide_' + n"
+            >
+              <img
+                :src="$imagePath(slide.path)"
+                alt="">
+            </el-carousel-item>
+          </el-carousel>
           </div>
         </div>
       </div>
@@ -51,6 +62,18 @@ export default {
       required: true
     }
   },
+  data () {
+    return {
+      pageTranslations: {
+        'es_ES': {
+          included: 'Qué incluye'
+        },
+        'en_EN': {
+          included: 'What\'s included'
+        }
+      }
+    }
+  },
   computed: {
     translations () {
       const translations = this.experience.translations.find(item => {
@@ -63,12 +86,48 @@ export default {
 }
 </script>
 
-<style>
-.overview-img {
+<style lang="scss">
+.dark-gray{
+   color: #484848;
+}
+
+.el-carousel__button {
+  opacity: 1;
+}
+
+.overview-slider {
   box-shadow: 0px 0px 100px rgba(0, 0, 0, 0.33);
 }
 
-.dark-gray{
-   color: #484848;
+.el-carousel__indicators {
+  &::before,
+  &::after {
+    position: absolute;
+    display: block;
+    color: #fff;
+    line-height: 1;
+    top: .4rem;
+  }
+
+  &::before {
+    content: '01';
+    left: -1.7rem;
+  }
+
+  &::after {
+    content: var(--sliderLength);
+    right: -2rem;
+  }
+}
+
+.el-carousel__indicator--horizontal {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.el-carousel__indicator.is-active {
+  .el-carousel__button {
+    background-color: var(--primary);
+  }
 }
 </style>

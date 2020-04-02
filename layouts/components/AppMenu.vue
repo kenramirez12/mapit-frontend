@@ -1,16 +1,20 @@
 <template>
-  <el-menu class="ml-auto header-menu" mode="horizontal" :router="true">
-    <el-menu-item index="/experiences" class="header-menu__item">{{ $lang.translate(translations, 'experiences') }}</el-menu-item>
-    <el-menu-item index="/destinations" class="header-menu__item">{{ $lang.translate(translations, 'destinations') }}</el-menu-item>
-    <el-menu-item index="/about" class="header-menu__item">{{ $lang.translate(translations, 'about') }}</el-menu-item>
-    <el-menu-item index="/blog" class="header-menu__item">{{ $lang.translate(translations, 'blog') }}</el-menu-item>
-    <el-menu-item index="/faq" class="header-menu__item">{{ $lang.translate(translations, 'faqs') }}</el-menu-item>
-    <el-menu-item index="/login" class="header-menu__item">{{ $lang.translate(translations, 'login') }}</el-menu-item>
+  <el-menu
+    class="ml-auto header-menu"
+    mode="horizontal"
+    :router="true"
+    :unique-opened="true">
+    <el-menu-item :index="`/${$lang.current().slug}/experiences`" class="header-menu__item">{{ $lang.translate(translations, 'experiences') }}</el-menu-item>
+    <el-menu-item :index="`/${$lang.current().slug}/destinations`" class="header-menu__item">{{ $lang.translate(translations, 'destinations') }}</el-menu-item>
+    <el-menu-item :index="`/${$lang.current().slug}/about`" class="header-menu__item">{{ $lang.translate(translations, 'about') }}</el-menu-item>
+    <el-menu-item :index="`/${$lang.current().slug}/blog`" class="header-menu__item">{{ $lang.translate(translations, 'blog') }}</el-menu-item>
+    <el-menu-item :index="`/${$lang.current().slug}/faq`" class="header-menu__item">{{ $lang.translate(translations, 'faqs') }}</el-menu-item>
+    <UserDropdown :translations="translations" />
     <template v-for="(lang, n) in langs">
       <el-menu-item
+        v-if="$lang.current().iso_lang !== lang.iso_lang"
         :key="'lang_' + n"
-        v-if="currentLang.iso_lang !== lang.iso_lang"
-        @click.native="setLang(lang.code)"
+        @click.native="updateLang(lang)"
         class="header-menu__item">
         {{ lang.code }}
       </el-menu-item>
@@ -19,9 +23,13 @@
 </template>
 
 <script>
-import { mapState, mapGetters, mapMutations } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
+import UserDropdown from '~/layouts/components/UserDropdown'
 
 export default {
+  components: {
+    UserDropdown
+  },
   data () {
     return {
       translations: {
@@ -47,12 +55,19 @@ export default {
   computed: {
     ...mapState({
       langs: s => s.langs
-    }),
-
-    ...mapGetters(['currentLang'])
+    })
   },
   methods: {
-    ...mapMutations(['setLang'])
+    ...mapMutations({
+      setLang: 'SET_LANG'
+    }),
+    updateLang (lang) {
+      this.setLang(lang.code)
+
+      const dest = this.$route
+      dest.params.lang = lang.slug
+      this.$router.push(dest)
+    }
   }
 }
 </script>

@@ -2,11 +2,11 @@
   <div id="program-section" class="experience-container py-6 pb-super">
     <div class="container mx-auto px-4">
       <div class="activities py-6 position-relative">
-        <h3 class="text-6xl font-light mb-6 pb-6">Programa</h3>
+        <h3 class="text-6xl font-light mb-6 pb-6">{{ $lang.translate(pageTranslations, 'program') }}</h3>
         <div class="flex flex-wrap">
           <div class="w-5/12">
             <div class="program mb-6 pb-6">
-              <span class="text-2xl">HORARIOS DE INICIO</span>
+              <span class="text-2xl uppercase">{{ $lang.translate(pageTranslations, 'departures') }}</span>
               <div class="bg-primary rounded-lg py-2 px-4 mt-3">
                 <div class="flex flex-wrap w-full py-3 px-2 text-sm">
                   <div class="flex-1 text-center"><span>Lunes</span></div>
@@ -36,7 +36,7 @@
         <div class="flex flex-wrap">
           <div class="w-6/12">
             <div class="itinerary pr-4">
-              <span class="text-lg">ITINERARIO</span>
+              <span class="text-lg uppercase">{{ $lang.translate(pageTranslations, 'itinerary') }}</span>
               <el-tabs
                 v-model="activeDay"
                 class="mt-4"
@@ -44,7 +44,7 @@
                 <el-tab-pane
                   v-for="(day, n) in itinerary"
                   :key="'day_' + n"
-                  :label="'Día ' + n"
+                  :label="`${$lang.translate(pageTranslations, 'day')} ${n}`"
                   :name="'day_' + n">
                   <div
                     v-for="(activity, x) in day"
@@ -77,7 +77,21 @@ export default {
   },
   data() {
     return {
-      activeDay: 'day_1'
+      activeDay: 'day_1',
+      pageTranslations: {
+        'es_ES': {
+          program: 'Programa',
+          departures: 'Horarios de inico',
+          itinerary: 'Itinerario',
+          day: 'Día'
+        },
+        'en_EN': {
+          program: 'Program',
+          departures: 'Departures',
+          itinerary: 'Itinerary',
+          day: 'Day'
+        },
+      }
     }
   },
   computed: {

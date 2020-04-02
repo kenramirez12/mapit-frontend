@@ -1,14 +1,21 @@
 export const state = () => ({
-  categories: null
+  categories: null,
+  currentCategory: ''
 })
 
 export const getters = {
   categories: (state) => {
     return state.categories
+  },
+  currentCategory: (state) => {
+    return state.currentCategory
   }
 }
 
 export const mutations = {
+  SET_CURRENT_CATEGORY(state, categoryId) {
+    state.currentCategory = categoryId
+  },
   SET_CATEGORIES_LIST(state, payload) {
     state.categories = payload
   }

@@ -1,15 +1,20 @@
 <template>
-  <div class="testimonial-item">
-    <span class="testimonial-item__number">0{{ testimonialNumber }}</span>
-    <div class="testimonial-item__content" style="background-color:#fff">
-      <span class="text-4xl leading-tight">"{{ testimonial.review }}"</span>
-      <a href="#" class="flex items-center py-6 my-6">
-        <i class="el-icon-collection-tag text-2xl mr-2"></i> Lee más opiniones en
-        <img class="ml-8 " src="~/assets/images/social/tripadvisorlight.svg" alt="" width="30">
-      </a>
-      <div class="flex flex-col">
-        <span>{{ testimonial.fullname }}</span>
-        <small>{{ testimonial.country }}</small>
+  <div
+    class="testimonial-item"
+    :class="{ 'testimonial-item--white' : testimonialNumber !== null }"  
+  >
+    <span v-if="testimonialNumber" class="testimonial-item__number">0{{ testimonialNumber }}</span>
+    <div class="testimonial-item__content">
+      <span class="text-3xl font-light leading-tight">"{{ testimonial.review }}"</span>
+      <div class="my-auto">
+        <a href="#" class="flex items-center py-6 my-6">
+          <i class="el-icon-collection-tag text-2xl mr-2"></i> Lee más opiniones en
+          <img class="ml-4" src="~/assets/images/social/tripadvisorlight.svg" alt="Trip Advisor Logo" width="30">
+        </a>
+        <div class="flex flex-col">
+          <span>{{ testimonial.fullname }}</span>
+          <small>{{ testimonial.country }}</small>
+        </div>
       </div>
     </div>
     <img src="~/assets/images/testimonial.jpg" alt="">
@@ -25,7 +30,8 @@ export default {
     },
     testimonialNumber: {
       type: Number,
-      required: true
+      required: false,
+      default: () => null
     }
   }
 }
@@ -35,6 +41,10 @@ export default {
   .testimonial-item {
     display: flex;
 
+    &--white {
+      background-color: #fff;
+    }
+
     &:not(.swiper-slide-active) {
       .testimonial-item__number {
         opacity: 0;
@@ -42,6 +52,8 @@ export default {
     }
 
     &__content {
+      display: flex;
+      flex-direction: column;
       padding-right: 4.5rem;
     }
 

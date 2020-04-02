@@ -1,5 +1,8 @@
 export default ({ app, store }, inject) => {
   inject('lang', {
+    current () {
+      return store.getters.currentLang
+    },
     translate (translations, translationProp) {
       const currentLang = store.getters.currentLang.iso_lang
       return translations[currentLang][translationProp]

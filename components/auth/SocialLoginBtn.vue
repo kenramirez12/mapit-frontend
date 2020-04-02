@@ -1,0 +1,74 @@
+<template>
+  <button
+    @click="socialLogin(social)"
+    :class="{
+      'social-login-btn--facebook' : social === 'facebook',
+      'social-login-btn--google' : social === 'google'
+    }"
+    class="social-login-btn shadow-input mb-4">
+    <template v-if="social === 'facebook'">
+      <img src="~/assets/images/facebook-logo.svg" style="height:20px">
+      <span class="text-left">Continúa con Facebook</span>
+    </template>
+    <template v-else-if="social === 'google'">
+      <img src="~/assets/images/google-logo.svg" style="height:20px">
+      <span class="text-left">Continúa con Google</span>
+    </template>
+    <span v-else />
+  </button>
+</template>
+
+<script>
+export default {
+  props: {
+    social: {
+      type: String,
+      required: true
+    }
+  },
+  methods: {
+    socialLogin(service) {
+      if (process.browser) {
+        localStorage.setItem('loginRedirectPath', this.$route.fullPath);
+      }
+      window.location.href = `${process.env.apiUrl}/login/${service}`;
+    }
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+  .social-login-btn {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    font-size: 90%;
+    letter-spacing: .05rem;
+
+    img {
+      flex: 1;
+    }
+
+    span {
+      flex: 2;
+    }
+
+    &--facebook {
+      background-color: #3B5998;
+      color: #fff;
+
+      &:hover {
+        background-color: darken(#3B5998, 5);
+      }
+    }
+
+    &--google {
+      background-color: #fff;
+
+      &:hover {
+        background-color: darken(#fff, 5);
+      }
+    }
+  }
+</style>

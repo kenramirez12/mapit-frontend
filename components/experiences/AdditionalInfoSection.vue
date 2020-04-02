@@ -2,13 +2,13 @@
   <div id="additional-info-section" class="experience-container py-6 pb-super">
     <div class="container mx-auto px-4">
       <div class="activities py-6 position-relative">
-        <h3 class="text-6xl font-light mb-6 pb-6">Información Adicional</h3>
+        <h3 class="text-6xl font-light mb-6 pb-6">{{ $lang.translate(pageTranslations, 'additional_info') }}</h3>
         <div class="flex flex-wrap">
           <div class="w-5/12 pr-6">
-            <div class="text-light py-6">
+            <div class="py-6">
               <img src="~/assets/images/map-marker-lg.svg" class="mb-3" alt="">
-              <span class="text-light text-base">Punto de encuentro</span>
-              <span class="block text-2xl text-light">{{ translations.meeting_place }}</span>
+              <span class="text-base">{{ $lang.translate(pageTranslations, 'meeting_point') }}</span>
+              <span class="block text-2xl">{{ translations.meeting_place }}</span>
             </div>
           </div>
         </div>
@@ -18,7 +18,7 @@
               <li
                 v-for="(additional, n) in translations.additional_info"
                 :key="'additional_' + n"
-                class="checkbox-list__item mb-4 text-light">
+                class="checkbox-list__item mb-4">
                 <img src="~/assets/images/checkbox-icon.svg" class="checkbox-list__icon">
                 {{ additional }}
               </li>
@@ -29,7 +29,7 @@
 
           <div class="w-5/12 ml-auto">
             <div class="flex items-center">
-              <h3 class="text-4xl">Qué llevar</h3>
+              <h3 class="text-4xl">{{ $lang.translate(pageTranslations, 'bring') }}</h3>
               <img src="~/assets/images/sitting-01.svg" class="ml-auto" alt="">
             </div>
             <ul class="pr-6">
@@ -56,6 +56,22 @@ export default {
       required: true
     }
   },
+  data () {
+    return {
+      pageTranslations: {
+        'es_ES': {
+          additional_info: 'Información Adicional',
+          meeting_point: 'Punto de encuentro',
+          bring: 'Qué llevar'
+        },
+        'en_EN': {
+          additional_info: 'Additional Information',
+          meeting_point: 'Meeting Point',
+          bring: 'What to bring'
+        },
+      },
+    }
+  },
   computed: {
     translations () {
       const translations = this.experience.translations.find(item => {
@@ -69,7 +85,7 @@ export default {
 </script>
 
 <style>
-.text-light {
+. {
   color: #9F9F9F;
 }
 </style>

@@ -1,6 +1,8 @@
 <template>
   <div>
-    <PageHeader title="Destinos" subtitle="Reserva experiencias auténticas y encuentra cosas para hacer en Cusco, Lima, Puno, Arequipa y más." />
+    <PageHeader
+      title="Destinos"
+      subtitle="Reserva experiencias auténticas y encuentra cosas para hacer en Cusco, Lima, Puno, Arequipa y más." />
     <div class="container py-6 px-4 my-6 mx-auto">
       <div class="flex flex-wrap">
         <div class="w-3/12 pr-6">
@@ -39,7 +41,7 @@
           </div>
         </div>
         <div class="w-9/12">
-          <ExperiencesGrid :cols="3" :experiences="9" />
+          <!-- <ExperiencesGrid :cols="3" :experiences="9" /> -->
         </div>
       </div>
     </div>

@@ -5,7 +5,7 @@
       :title="$lang.apiTranslate(experience.translations, 'title')"
       :image="$imagePath(experience.banner_image.path)"
       contentClass="mr-6">
-      <ExperienceReserveForm class="ml-5 " />
+      <ExperienceReserveForm :experience="experience" class="ml-5" />
     </PageHeader>
 
     <div id="experience-container" class="relative">
@@ -13,7 +13,7 @@
         :class="{ show : showReserveFormSticky }"
         class="container reserve-container-fixed px-3">
           <div class="reserve-form-floating mt-3">
-            <ExperienceReserveForm :sticky="true" />
+            <ExperienceReserveForm :experience="experience" :sticky="true" />
           </div>
       </div>
 
@@ -25,10 +25,10 @@
             <div
               v-for="(section,n) in sections"
               :key="n"
-              @click="currentSection = section.name"
+              @click="navigateSection(section.name)"
               :class="{ active : currentSection === section.name }"
               class="experience-navbar__item">
-              <span class="experience-navbar__label">{{ section.label }}</span>
+              <span class="experience-navbar__label">{{ section.translations[$lang.current().iso_lang].label }}</span>
               <img v-if="currentSection === section.name" class="experience-navbar__arrow-current" src="~/assets/images/point-small-dark.svg">
               <img v-else class="experience-navbar__arrow" src="~/assets/images/small-dark-arrow.svg">
             </div>
@@ -56,6 +56,20 @@ import TestimonialSection from '~/components/experiences/TestimonialSection'
 import ExperienceReserveForm from '~/components/experiences/reserveForm'
 
 export default {
+  async asyncData({ app, params, error }) {
+    try {
+      const currentLang = app.$lang.current().iso_lang
+      const resp = await app.$axios.$get(`/experiences/${params.id}`)
+      const experience = resp.experience
+      const translations = experience.translations.find(item => item.iso_lang === currentLang)
+      return {
+        experience,
+        pageTitle: 'MAP IT - ' + translations.title
+      }
+    } catch (error) {
+      console.error(error)
+    }
+  },
   head () {
     return {
       title: this.pageTitle
@@ -80,41 +94,51 @@ export default {
       experience: null,
       sections: [
         {
-          label: 'General',
+          translations: {
+            es_ES: { label: 'General' },
+            en_EN: { label: 'Overview' }
+          },
           name: 'overview',
         },
         {
-          label: 'Actividades',
+          translations: {
+            es_ES: { label: 'Actividades' },
+            en_EN: { label: 'Activities' }
+          },
           name: 'activities',
         },
         {
-          label: 'Programa',
+          translations: {
+            es_ES: { label: 'Programa' },
+            en_EN: { label: 'Program' }
+          },
           name: 'program',
         },
         {
-          label: 'Información Adicional',
+          translations: {
+            es_ES: { label: 'Información Adicional' },
+            en_EN: { label: 'Additional Information' }
+          },
           name: 'additional-info',
         },
         {
-          label: 'Puntos Sociales',
+          translations: {
+            es_ES: { label: 'Puntos Sociales' },
+            en_EN: { label: 'Social Points' }
+          },
           name: 'social-points',
         },
         {
-          label: 'Opiniones',
+          translations: {
+            es_ES: { label: 'Opiniones' },
+            en_EN: { label: 'Reviews' }
+          },
           name: 'testimonials',
         }
       ]
     }
   },
   computed: {
-    pageTitle () {
-      let title = 'Map It'
-      if(this.experience) {
-        title += ` - ${this.translations.title}`
-      }
-
-      return title
-    },
     translations () {
       if(!this.experience) return null
       const translations = this.experience.translations.find(item => {
@@ -125,10 +149,7 @@ export default {
     }
   },
   async mounted() {
-    await this.getExperience(this.$route.params.id)
-
     if(this.experience) {
-      console.log('holaas')
       const experienceContainer = document.getElementById('experience-container')
   
       const experienceContainerIsScrolled = () => {
@@ -186,13 +207,14 @@ export default {
     }
   },
   methods: {
-    async getExperience (experienceId) {
-      try {
-        const resp = await this.$axios.$get(`/experiences/${experienceId}`)
-        this.experience = resp.experience
-      } catch (error) {
-        console.error(error)
-      }
+    navigateSection (sectionName) {
+      this.currentSection = sectionName
+      const sectionId = `${sectionName}-section`
+      this.$router.push({
+        hash: sectionId
+      })
+      // const sectionContainer = document.getElementById(`${sectionName}-section`).offsetTop
+      // window.scrollTo({ top: sectionContainer, behavior: 'smooth' });
     }
   }
 }
@@ -277,7 +299,7 @@ export default {
     top: 0;
     transform: translateX(100%);
     transition: all 0.3s;
-    z-index: 2;
+    z-index: 9;
 
     &.show {
       transform: translateX(0);

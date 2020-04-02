@@ -36,6 +36,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import ExperienceCard from '~/components/ExperienceCard'
 
 export default {
@@ -73,19 +74,14 @@ export default {
       this.mySwiper.slideNext()
     }
   },
-  mounted () {
-    this.getExperiences(this.lastExperiencesOptions)
+  async mounted () {
+    const experiences = await this.getExperiences(this.lastExperiencesOptions)
+    this.lastExperiences = experiences ? experiences : []
   },
   methods: {
-    async getExperiences (params) {
-      try {
-        const resp = await this.$axios.$get('/experiences', { params })
-        this.lastExperiences = resp.data.data
-        console.log(resp)
-      } catch (error) {
-        console.error(error)
-      }
-    }
+    ...mapActions({
+      getExperiences: 'experiences/getExperiences'
+    })
   }
 }
 </script>

@@ -77,7 +77,7 @@
          </ul>
         <div class="w-2/12 pt-4">
          <a class="inline-flex">
-          <img class="mr-3 social" src="~/assets/images/social/instagram.svg" alt="" width="22" height="29">
+          <img class="mr-3 social" src="~/assets/images/social/instagram.svg" alt="" width="19">
           <img class="mr-3 social" src="~/assets/images/social/facebook.svg" alt="" width="24">
           <img class="mr-3 social" src="~/assets/images/social/linkedin.svg" alt="" width="24">
           <img class="mr-3 social" src="~/assets/images/social/tripadvisor.svg" alt="" width="20">
@@ -88,7 +88,7 @@
       <div class="w-2/12">
         <h5 class="mb-2">Suscríbete a nuestro Blog</h5>
         <el-form>
-          <el-input class="mb-5 border-0 shadow-lg"></el-input>
+          <el-input class="mb-5 border-0 shadow-input" />
           <el-button size="small" type="primary">Enviar <i class="el-icon-right ml-1" /></el-button>
         </el-form>
       </div>
