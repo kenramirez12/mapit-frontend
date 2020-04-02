@@ -1,8 +1,9 @@
 export const actions = {
-  async getExperiences (params) {
+  async getExperiences ({}, params) {
+    console.log('params', params)
     try {
       const resp = await this.$axios.$get('/experiences', { params })
-      return resp.data.data
+      return resp.data
     } catch (error) {
       console.error(error)
       return null

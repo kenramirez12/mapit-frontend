@@ -24,7 +24,9 @@
             <div
               v-for="experience in lastExperiences"
               :key="experience.id"
-              class="swiper-slide">
+              class="swiper-slide"
+              style="height:auto"
+            >
               <ExperienceCard :experience="experience" />
             </div>
           </template>
@@ -61,7 +63,7 @@ export default {
         loop: false
       },
       lastExperiences: null,
-      lastExperiencesOptions: {
+      experiencesOptions: {
         per_page: 10
       }
     }
@@ -75,8 +77,8 @@ export default {
     }
   },
   async mounted () {
-    const experiences = await this.getExperiences(this.lastExperiencesOptions)
-    this.lastExperiences = experiences ? experiences : []
+    const experiences = await this.getExperiences(this.experiencesOptions)
+    this.lastExperiences = experiences ? experiences.data : []
   },
   methods: {
     ...mapActions({

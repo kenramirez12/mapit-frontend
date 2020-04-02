@@ -30,7 +30,8 @@ export default {
   },
   methods: {
     ...mapActions({
-      getCategories: 'categories/getCategories'
+      getCategories: 'categories/getCategories',
+      getDestinations: 'destinations/getDestinations'
     }),
     ...mapMutations({
       setLang: 'SET_LANG_BY_SLUG'
@@ -55,6 +56,7 @@ export default {
   },
   mounted () {
     this.getCategories()
+    this.getDestinations()
 
     if('access_token' in this.$route.query) {
       this.isLoading = true

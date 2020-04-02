@@ -21,22 +21,36 @@
               <el-dropdown-item>Action 5</el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
-          <ul class="text-sm pb-6 border-black border-b">
+          <div
+            v-if="currentDestination"
+            class="flex items-center font-light small mb-5">
+            <el-tag
+              closable
+              :disable-transitions="false"
+              @close="handleClose(tag)">
+              {{currentDestination.name}}
+            </el-tag>
+          </div>
+          <ul
+            v-if="destinations"
+            class="text-sm pb-2 border-black border-b">
             <div class="flex items-center justify-between pb-2 mb-3 border-black border-b">
-              <span>ALL</span>
-              <span>22</span>
+              <span>TODOS</span>
+              <span>{{totalDestinationExpCount}}</span>
             </div>
             <li
               v-for="destination in destinations"
               :key="destination.id"
               class="item-with-counter">
               <a
-                @click.prevent="selectedDestination = destination.id"
-                :class="{ 'text-primary font-bold' : selectedDestination === destination.id }"
+                @click.prevent="currentDestinationId = destination.id"
+                :class="{ 'text-primary font-bold' : currentDestinationId === destination.id }"
                 href="#">
                 {{ destination.name }}
               </a>
-              <div class="rounded-counter"><span>08</span></div>
+              <div class="rounded-counter">
+                <span>{{ destination.experiences_count }}</span>
+              </div>
             </li>
           </ul>
         </div>
@@ -45,6 +59,16 @@
             :cols="3"
             :experiences.sync="experiences"
             :is-loading.sync="loadingExperiences" />
+          
+          <div class="block mt-6">
+            <el-pagination
+              v-if="filters.lastPage"
+              layout="prev, pager, next"
+              :current-page.sync="filters.currentPage"
+              :page-count="filters.lastPage"
+              @current-change="handleCurrentPage"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -52,7 +76,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import CategoriesHeaderSlider from '@/components/CategoriesHeaderSlider'
 import ExperiencesGrid from '@/components/ExperiencesGrid'
 
@@ -61,42 +85,88 @@ export default {
     CategoriesHeaderSlider,
     ExperiencesGrid
   },
-
   data() {
     return {
+      flag: 0,
+      currentDestinationId: '',
       experiences: [],
       loadingExperiences: false,
       selectedDestination: '',
-      destinations: [
-        { id: 1, name: 'Lima' },
-        { id: 2, name: 'Cusco' },
-        { id: 3, name: 'Arequipa' }
-      ],
       filters: {
-        experience_id: []
+        currentPage: 1,
+        lastPage: 1
       }
     }
   },
+  computed: {
+    ...mapGetters({
+      destinations: 'destinations/destinations'
+    }),
+    totalDestinationExpCount() {
+      if(!this.destinations) return 0
+      let total = 0
+      this.destinations.forEach(item => {
+        total += parseInt(item.experiences_count)
+      })
 
+      return total
+    },
+    currentDestination() {
+      if(this.currentDestinationId === '') return null
+      const current = this.destinations.find(item => item.id === this.currentDestinationId)
+      return current
+    }
+  },
+  watch: {
+    async currentDestinationId(value) {
+      const params = {
+        page: 1,
+        destination_id: value
+      }
+
+      try {
+        const experiences = await this.retrieveExperiences(params)
+        this.experiences = experiences.data
+        this.filters.lastPage = experiences.last_page
+        this.filters.currentPage = 1
+      } catch (error) {
+        console.error(error)
+      }
+    }
+  },
   async mounted () {
     this.retrieveExperiences()
   },
-
   methods: {
     ...mapActions({
       getExperiences: 'experiences/getExperiences'
     }),
+
+    handleClose () {
+      this.currentDestinationId = ''
+    },
+
+    handleCurrentPage (page) {
+      const params = {
+        page,
+        destination_id: this.currentDestinationId
+      }
+
+      this.retrieveExperiences(params)
+    },
     
-    async retrieveExperiences() {
+    async retrieveExperiences(params = null) {
       this.loadingExperiences = true
-      const experiences = await this.getExperiences()
-      this.experiences = experiences ? experiences : []
-      this.loadingExperiences = false
+
+      try {
+        const experiences = await this.getExperiences(params)
+        this.experiences = experiences.data
+        this.filters.lastPage = experiences.last_page 
+        this.loadingExperiences = false
+      } catch (error) {
+        this.loadingExperiences = false
+      }
     }
   }
 }
 </script>
-
-<style>
-
-</style>

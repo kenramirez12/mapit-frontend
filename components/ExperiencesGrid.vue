@@ -2,12 +2,14 @@
   <div class="flex flex-wrap .-m-2">
     <template v-if="isLoading">
       <div
-        v-for="n in cols"
+        v-for="n in cols*3"
         :key="n"
         :class="{
           'w-1/3 px-2' : cols === 3,
           'w-1/4' : cols === 4
-        }">
+        }"
+        class="mb-6"
+      >
         <ExperienceCard :loading="true" />
       </div>
     </template>
@@ -18,8 +20,10 @@
         :class="{
           'w-1/3 px-2' : cols === 3,
           'w-1/4' : cols === 4
-        }">
-        <ExperienceCard :experience="experience" class="mb-6" />
+        }"
+        class="mb-6"
+      >
+        <ExperienceCard :experience="experience" />
       </div>
     </template>
   </div>

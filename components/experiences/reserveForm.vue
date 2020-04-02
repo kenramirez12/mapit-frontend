@@ -235,15 +235,15 @@ export default {
     formSubmit (formName) {
       this.$refs[formName].validate(valid => {
         if(valid) {
-          if(!this.$auth.loggedIn) {
-            this.isLoading = true
-            setTimeout(() => {
-              this.isLoading = false
-            }, 2000);
-            // this.setAuthDialogVisible(true)
-          } else {
-            alert('Procede compra')
-          }
+          this.isLoading = true
+          setTimeout(() => {
+            this.isLoading = false
+            if(!this.$auth.loggedIn) {
+              this.setAuthDialogVisible(true)
+            } else {
+              alert('Procede a checkout')
+            }
+          }, 2000);
         }
       })
     }

@@ -138,6 +138,7 @@ export default {
   .custom-card {
     width: 100%;
     max-width: 20rem;
+    height: 100%;
     box-shadow: 0 0 15px rgba(0, 0, 0, .15);
     position: relative;
     transition: all 0.2s;
