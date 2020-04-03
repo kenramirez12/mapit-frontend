@@ -79,7 +79,7 @@
           
           <div class="block mt-6">
             <el-pagination
-              v-if="filters.lastPage"
+              v-if="lastPage"
               layout="prev, pager, next"
               :current-page.sync="currentPage"
               :page-count="lastPage"
