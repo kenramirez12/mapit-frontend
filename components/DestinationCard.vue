@@ -2,7 +2,7 @@
   <div class="custom-card">
     <div class="custom-card__image" style="height: 380px">
       <PuSkeleton :loading="isLoading" width="100%" height="100%">
-        <img src="~/assets/images/experience-card-iamge.jpg">
+        <img v-if="destination && destination.image" :src="$imagePath(destination.image.path)">
       </PuSkeleton>
     </div>
     <div class="custom-card__content">
@@ -11,7 +11,7 @@
           :loading="isLoading"
           width="120px"
           height="36px">
-          <h4>CUSCO</h4>
+          <h4 v-if="destination">{{ destination.name }}</h4>
         </PuSkeleton>
         <el-button
           v-if="!isLoading"
@@ -29,16 +29,14 @@
 <script>
 export default {
   props: {
-    item: {
+    destination: {
       type: Object,
       required: false
-    }
-  },
-
-  data () {
-    return {
-      favorite: false,
-      isLoading: true
+    },
+    isLoading: {
+      type: Boolean,
+      required: false,
+      default: () => false
     }
   }
 }

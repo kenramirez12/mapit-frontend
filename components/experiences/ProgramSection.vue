@@ -9,13 +9,13 @@
               <span class="text-2xl uppercase">{{ $lang.translate(pageTranslations, 'departures') }}</span>
               <div class="bg-primary rounded-lg py-2 px-4 mt-3">
                 <div class="flex flex-wrap w-full py-3 px-2 text-sm">
-                  <div class="flex-1 text-center"><span>Lunes</span></div>
-                  <div class="flex-1 text-center"><span>Martes</span></div>
-                  <div class="flex-1 text-center"><span>Miércoles</span></div>
-                  <div class="flex-1 text-center"><span>Jueves</span></div>
-                  <div class="flex-1 text-center"><span>Viernes</span></div>
-                  <div class="flex-1 text-center"><span>Sábado</span></div>
-                  <div class="flex-1 text-center"><span>Domingo</span></div>
+                  <div class="flex-1 text-center"><span>{{ $lang.translate(pageTranslations, 'monday') }}</span></div>
+                  <div class="flex-1 text-center"><span>{{ $lang.translate(pageTranslations, 'tuesday') }}</span></div>
+                  <div class="flex-1 text-center"><span>{{ $lang.translate(pageTranslations, 'wednesday') }}</span></div>
+                  <div class="flex-1 text-center"><span>{{ $lang.translate(pageTranslations, 'thursday') }}</span></div>
+                  <div class="flex-1 text-center"><span>{{ $lang.translate(pageTranslations, 'friday') }}</span></div>
+                  <div class="flex-1 text-center"><span>{{ $lang.translate(pageTranslations, 'saturday') }}</span></div>
+                  <div class="flex-1 text-center"><span>{{ $lang.translate(pageTranslations, 'sunday') }}</span></div>
                 </div>
                 <div
                   v-for="(schedule, n) in experience.schedules"
@@ -83,13 +83,27 @@ export default {
           program: 'Programa',
           departures: 'Horarios de inico',
           itinerary: 'Itinerario',
-          day: 'Día'
+          day: 'Día',
+          monday: 'Lunes',
+          tuesday: 'Martes',
+          wednesday: 'Miércoles',
+          thursday: 'Jueves',
+          friday: 'Viernes',
+          saturday: 'Sábado',
+          sunday: 'Domingo'
         },
         'en_EN': {
           program: 'Program',
           departures: 'Departures',
           itinerary: 'Itinerary',
-          day: 'Day'
+          day: 'Day',
+          monday: 'Mon',
+          tuesday: 'Tue',
+          wednesday: 'Wed',
+          thursday: 'Thu',
+          friday: 'Fri',
+          saturday: 'Sat',
+          sunday: 'Sun'
         },
       }
     }

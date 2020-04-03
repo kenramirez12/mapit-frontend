@@ -1,8 +1,8 @@
 <template>
   <div class="page-header">
     <div class="categories-slider__arrows container">
-      <el-button @click="prevSlide()" class="text-white hover:text-white bg-transparent hover:bg-primary" icon="el-icon-back" circle></el-button>
-      <el-button @click="nextSlide()" class="text-white hover:text-white bg-transparent hover:bg-primary" icon="el-icon-right" circle></el-button>
+      <el-button @click="prevSlide()" class="text-white hover:text-white bg-transparent hover:bg-primary" icon="el-icon-back" circle />
+      <el-button @click="nextSlide()" class="text-white hover:text-white bg-transparent hover:bg-primary" icon="el-icon-right" circle />
     </div>
     <div
       v-swiper:mySwiper="swiperOption">
@@ -10,13 +10,17 @@
         <div
           v-for="category in sanitizedCategories"
           :key="category.id"
-          :style="{ backgroundImage: `url(${category.id === '' ? category.image : $imagePath(category.image.path)})` }"
+          :style="{
+            backgroundImage: `url(${category.id === '' ? category.image : $imagePath(category.image.path)})`,
+            backgroundPosition: category.id === '' ? 'right center' : 'center'
+          }"
           :data-cat-value="category.id"
           class="swiper-slide">
           <div class="container m-auto px-4">
-            <h1 v-if="category.id === ''" class="page-header__title">
-              Tours gastronómicos, talleres de arte, experiencias con comunidades, cosas para hacer de noche, y mucho más.
-            </h1>
+            <h1
+              v-if="category.id === ''"
+              class="page-header__title"
+              v-html="$lang.translate(translations, 'copy')" />
             <h1 v-else class="page-header__title">
               {{ $lang.apiTranslate(category.translations, 'name') }}
               <i v-if="isLoading" class="el-icon-loading ml-4" />
@@ -51,30 +55,28 @@
 
 <script>
 import { mapGetters, mapMutations } from 'vuex'
-import adventureBg from '~/assets/images/adventure-bg.jpg'
-import natureBg from '~/assets/images/nature-bg.jpg'
 
 export default {
   props: {
     selected: {
-      prop: [Number, String],
+      type: [Number, String],
       required: true,
       default: () => ''
+    },
+    translations: {
+      type: Object,
+      required: true,
+      default: () => {}
     }
   },
   data() {
     return {
-      adventureBg,
-      natureBg,
       swiperOption: {
         speed: 500,
         slidesPerView: 'auto',
         loop: false,
         allowTouchMove: false,
         effect: 'fade',
-        // fadeEffect: {
-        //   crossFade: true
-        // },
         on: {
           slideChange: (that) => {
             this.updateCurrentCat(this.mySwiper.activeIndex)
@@ -96,7 +98,7 @@ export default {
         const generalCategory = {
           id: '',
           name: 'General',
-          image: '/images/experience-default.jpg'
+          image: '/images/general-cat-bg.jpg'
         }
 
         const sanitizedCategories = JSON.parse(JSON.stringify(this.categories))
@@ -107,7 +109,11 @@ export default {
   },
 
   watch: {
-    currentCategory () {
+    currentCategory (value) {
+      if(value === '') {
+        return this.mySwiper.slideTo(0)
+      }
+
       const mainHeader = document.querySelector('.header').clientHeight
       const pageHeader = document.querySelector('.page-header').clientHeight
 
@@ -126,6 +132,7 @@ export default {
     updateCurrentCat(index) {
       this.setCurrentCategory(this.sanitizedCategories[index].id)
       this.mySwiper.slideTo(index)
+      this.$emit('handlerCategory', this.sanitizedCategories[index].id)
     },
 
     prevSlide() {

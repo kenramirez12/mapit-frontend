@@ -46,7 +46,7 @@
       <div class="flex items-end">
         <div class="custom-card__normal-price">
           <PuSkeleton :loading="loading" height="13px" width="38px" class="block mb-1">
-            <span style="font-size:13px">Desde</span>
+            <span style="font-size:13px">{{ $lang.translate(translations, 'from') }}</span>
           </PuSkeleton>
           <PuSkeleton :loading="loading" height="26px" width="110px">
             <span
@@ -81,7 +81,15 @@ export default {
   },
   data () {
     return {
-      favorite: false
+      favorite: false,
+      translations: {
+        'es_ES': {
+          from: 'Desde'
+        },
+        'en_EN': {
+          from: 'From'
+        }
+      }
     }
   },
   computed: {

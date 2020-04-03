@@ -3,11 +3,15 @@
     <div class="overview py-6">
       <div class="flex flex-wrap my-10 py-10">
         <div class="w-5/12 pr-6">
-          <p class="dark-gray text-4xl ">{{ $lang.apiTranslate(experience.translations, 'description') }}</p>
+          <p class="dark-gray text-3xl ">{{ $lang.apiTranslate(experience.translations, 'description') }}</p>
           <p
             v-if="'host' in experience && experience.host.constructor === Object"
-            class="my-6 py-6 font-light text-2xl">
-            Wiser: {{ $lang.apiTranslate(experience.host.translations, 'fullname') }}
+            class="flex items-center my-6 py-6 font-light text-xl">
+            <img
+              v-if="'path' in experience.host.avatar"
+              class="wiser-avatar mr-3"
+              :src="$imagePath(experience.host.avatar.path)" />
+            <span>Wiser: {{ $lang.apiTranslate(experience.host.translations, 'fullname') }}</span>
           </p>
           <div v-else class="my-6 py-6" />
           <ul
@@ -34,7 +38,7 @@
           <div>
           <el-carousel
             trigger="click"
-            arrow="never"
+            arrow="always"
             class="overview-slider shadow-xl mt-16"
             :style="`-sliderLength:'${experience.slider_images > 9 ? experience.slider_images : '0' + experience.slider_images}'`"
             >
@@ -87,6 +91,13 @@ export default {
 </script>
 
 <style lang="scss">
+.wiser-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
 .dark-gray{
    color: #484848;
 }
@@ -110,7 +121,7 @@ export default {
   }
 
   &::before {
-    content: '01';
+    // content: '01';
     left: -1.7rem;
   }
 

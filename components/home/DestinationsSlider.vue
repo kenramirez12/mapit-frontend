@@ -2,9 +2,19 @@
   <div class="experiences-slider -ml-3">
     <div v-swiper:mySwiper="swiperOption">
       <div class="swiper-wrapper py-5 pl-3">
-        <div v-for="n in 10" :key="n" class="swiper-slide">
-          <DestinationCard />
-        </div>
+        <template v-if="destinations === null">
+          <div v-for="n in 5" :key="n" class="swiper-slide">
+            <DestinationCard :is-loading="true" />
+          </div>
+        </template>
+        <template v-else>
+          <div
+            v-for="destination in destinations"
+            :key="destination.id"
+            class="swiper-slide">
+            <DestinationCard :destination="destination"  />
+          </div>
+        </template>
       </div>
       <div class="swiper-pagination swiper-pagination-bullets"></div>
     </div>
@@ -12,6 +22,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import DestinationCard from '~/components/DestinationCard'
 
 export default {
@@ -38,6 +49,12 @@ export default {
         loop: false
       }
     }
+  },
+
+  computed: {
+    ...mapGetters({
+      destinations: 'destinations/destinations'
+    })
   },
 
   watch: {

@@ -19,16 +19,16 @@
           </template>
         </el-select>
       </el-form-item>
-      <el-form-item>
+      <el-form-item v-if="destinations">
         <el-select
           v-model="filters.destination_id"
           :placeholder="$lang.translate(translations, 'destinations').toUpperCase()"
           size="large">
           <el-option
             v-for="item in destinations"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value">
+            :key="item.id"
+            :label="item.name"
+            :value="item.id">
           </el-option>
         </el-select>
       </el-form-item>
@@ -69,10 +69,8 @@ export default {
   },
 
   computed: {
-    ...mapState({
-      destinations: s => s.destinations
-    }),
     ...mapGetters({
+      destinations: 'destinations/destinations',
       categories: 'categories/categories'
     })
   }
@@ -86,6 +84,4 @@ export default {
     background-size: cover;
     background-position: center;
   }
-  
-  
 </style>

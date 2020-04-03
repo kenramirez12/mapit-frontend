@@ -1,41 +1,58 @@
 <template>
   <div>
-    <CategoriesHeaderSlider :selected.sync="selectedDestination" />
+    <CategoriesHeaderSlider
+      :selected.sync="selectedDestination"
+      :translations="pageTranslations"
+      @handlerCategory="handlerUpdateCategory" />
     <div class="container py-6 px-4 my-6 mx-auto">
       <div class="flex flex-wrap">
         <div class="w-3/12 pr-6">
-          <el-dropdown trigger="click" placement="bottom" class="w-full mb-6 pb-6">
-            <el-button
-              type="primary"
-              plain
-              class="w-full uppercase font-light"
-              style="border-width:2px"
-            >
-              Ordenar por <i class="el-icon-arrow-down el-icon--right"></i>
-            </el-button>
-            <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item>Action 1</el-dropdown-item>
-              <el-dropdown-item>Action 2</el-dropdown-item>
-              <el-dropdown-item>Action 3</el-dropdown-item>
-              <el-dropdown-item>Action 4</el-dropdown-item>
-              <el-dropdown-item>Action 5</el-dropdown-item>
-            </el-dropdown-menu>
-          </el-dropdown>
-          <div
-            v-if="currentDestination"
-            class="flex items-center font-light small mb-5">
+          <el-select
+            v-model="filters.sort_by"
+            class="w-full text-center mb-6 pn-6 border-0"
+            style="border:1px solid var(--primary)"
+            :placeholder="$lang.translate(pageTranslations, 'sortBy')">
+            <el-option
+              v-for="item in sortFilters"
+              :key="item.value"
+              :label="$lang.translate(item.translations, 'label')"
+              :value="item.value">
+            </el-option>
+          </el-select>
+          <div class="flex flex-wrap items-center font-light small mb-5">
             <el-tag
+              v-if="currentCategoryObject"
               closable
+              size="medium"
               :disable-transitions="false"
-              @close="handleClose(tag)">
-              {{currentDestination.name}}
+              @close="handleClose('category_id')"
+              class="mr-2 mb-2">
+              {{ $lang.apiTranslate(currentCategoryObject.translations, 'name') }}
+            </el-tag>
+            <el-tag
+              v-if="currentDestination"
+              closable
+              size="medium"
+              :disable-transitions="false"
+              @close="handleClose('destination_id')"
+              class="mr-2 mb-2">
+              {{ currentDestination.name }}
+            </el-tag>
+            <el-tag
+              v-if="currentSortFilter"
+              closable
+              size="medium"
+              :disable-transitions="false"
+              @close="handleClose('sort_by')"
+              class="mb-2">
+              {{ $lang.translate(currentSortFilter.translations, 'label') }}
             </el-tag>
           </div>
           <ul
             v-if="destinations"
             class="text-sm pb-2 border-black border-b">
             <div class="flex items-center justify-between pb-2 mb-3 border-black border-b">
-              <span>TODOS</span>
+              <span>{{ $lang.translate(pageTranslations, 'all') }}</span>
               <span>{{totalDestinationExpCount}}</span>
             </div>
             <li
@@ -43,8 +60,8 @@
               :key="destination.id"
               class="item-with-counter">
               <a
-                @click.prevent="currentDestinationId = destination.id"
-                :class="{ 'text-primary font-bold' : currentDestinationId === destination.id }"
+                @click.prevent="filters.destination_id = destination.id"
+                :class="{ 'text-primary font-bold' : filters.destination_id === destination.id }"
                 href="#">
                 {{ destination.name }}
               </a>
@@ -64,8 +81,8 @@
             <el-pagination
               v-if="filters.lastPage"
               layout="prev, pager, next"
-              :current-page.sync="filters.currentPage"
-              :page-count="filters.lastPage"
+              :current-page.sync="currentPage"
+              :page-count="lastPage"
               @current-change="handleCurrentPage"
             />
           </div>
@@ -76,7 +93,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapMutations, mapActions } from 'vuex'
 import CategoriesHeaderSlider from '@/components/CategoriesHeaderSlider'
 import ExperiencesGrid from '@/components/ExperiencesGrid'
 
@@ -88,19 +105,74 @@ export default {
   data() {
     return {
       flag: 0,
-      currentDestinationId: '',
       experiences: [],
       loadingExperiences: false,
       selectedDestination: '',
+      pageTranslations: {
+        'es_ES': {
+          copy: `¡Conoce nuestras<br>categorías!`,
+          sortBy: 'ORDENAR POR',
+          all: 'TODOS'
+        },
+        'en_EN': {
+          copy: '¡Check out<br>our categories!',
+          sortBy: 'SORT BY',
+          all: 'ALL'
+        }
+      },
+      sortFilters: [
+        {
+          value: 'min_price',
+          sort: 'ASC',
+          translations: {
+            'es_ES': {
+              label: 'Precio - menor a mayor'
+            },
+            'en_EN': {
+              label: 'Price - lowest first'
+            }
+          }
+        },
+        {
+          value: 'max_price',
+          sort: 'DESC',
+          translations: {
+            'es_ES': {
+              label: 'Precio - mayor a menor'
+            },
+            'en_EN': {
+              label: 'Price - highest first'
+            }
+          }
+        },
+        {
+          value: 'on_sale',
+          sort: 'DESC',
+          translations: {
+            'es_ES': {
+              label: 'En oferta'
+            },
+            'en_EN': {
+              label: 'On sale'
+            }
+          }
+        }
+      ],
+      currentPage: 1,
+      lastPage: 1,
       filters: {
-        currentPage: 1,
-        lastPage: 1
+        destination_id: '',
+        category_id: '',
+        sort_by: '',
+        sort: ''
       }
     }
   },
   computed: {
     ...mapGetters({
-      destinations: 'destinations/destinations'
+      destinations: 'destinations/destinations',
+      categories: 'categories/categories',
+      currentCategory: 'categories/currentCategory'
     }),
     totalDestinationExpCount() {
       if(!this.destinations) return 0
@@ -112,26 +184,32 @@ export default {
       return total
     },
     currentDestination() {
-      if(this.currentDestinationId === '') return null
-      const current = this.destinations.find(item => item.id === this.currentDestinationId)
+      if(this.filters.destination_id === '') return null
+      const current = this.destinations.find(item => item.id === this.filters.destination_id)
+      return current
+    },
+    currentSortFilter() {
+      if(this.filters.sort_by === '') return null
+      const current = this.sortFilters.find(item => item.value === this.filters.sort_by)
+      return current
+    },
+    currentCategoryObject() {
+      if(this.filters.category_id === '') return null
+      const current = this.categories.find(item => item.id === this.filters.category_id)
       return current
     }
   },
   watch: {
-    async currentDestinationId(value) {
-      const params = {
-        page: 1,
-        destination_id: value
+    filters: {
+      deep: true,
+      handler (value) {
+        let sanitizedFilters = this.filters
+        sanitizedFilters.sort = this.currentSortFilter ? this.currentSortFilter.sort : ''
+        this.retrieveExperiences(sanitizedFilters)
       }
-
-      try {
-        const experiences = await this.retrieveExperiences(params)
-        this.experiences = experiences.data
-        this.filters.lastPage = experiences.last_page
-        this.filters.currentPage = 1
-      } catch (error) {
-        console.error(error)
-      }
+    },
+    currentCategory(value) {
+      this.filters.category_id = value
     }
   },
   async mounted () {
@@ -141,17 +219,28 @@ export default {
     ...mapActions({
       getExperiences: 'experiences/getExperiences'
     }),
+    ...mapMutations({
+      setCurrentCategory: 'categories/SET_CURRENT_CATEGORY'
+    }),
 
-    handleClose () {
-      this.currentDestinationId = ''
+    handlerUpdateCategory (catId) {
+      this.filters.category_id = catId
+    },
+
+    handleClose (tag) {
+      this.filters[tag] = ''
+
+      if(tag === 'sort_by') {
+        this.filters.sort = ''
+      }
+
+      if(tag === 'category_id') {
+        this.setCurrentCategory('')
+      }
     },
 
     handleCurrentPage (page) {
-      const params = {
-        page,
-        destination_id: this.currentDestinationId
-      }
-
+      const params = {page, ...this.filters }
       this.retrieveExperiences(params)
     },
     
@@ -161,7 +250,7 @@ export default {
       try {
         const experiences = await this.getExperiences(params)
         this.experiences = experiences.data
-        this.filters.lastPage = experiences.last_page 
+        this.lastPage = experiences.last_page 
         this.loadingExperiences = false
       } catch (error) {
         this.loadingExperiences = false
