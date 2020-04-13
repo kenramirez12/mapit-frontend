@@ -20,7 +20,7 @@ export default {
   ],
   data() {
     return {
-      apiUrl: process.env.API_URL
+      apiUrl: process.env.apiUrl
     }
   },
   mounted() {
