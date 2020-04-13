@@ -1,42 +1,43 @@
 <template>
   <div>
     <AppHero :translations="translations" />
-    <main>
-      <div class="container mx-auto py-8 px-16 inline-block">
-        <div class="w-full flex items-center mb-8 mt-6 ml-2">
-          <div>
+    <main class="flex flex-col">
+      <div class="container mx-auto pt-8 inline-block">
+        <div class="w-full flex items-center mb-4 md:mb-8 mt-6 pl-2 md:pl-0">
+          <div class="pr-6 md:pr-0">
             <h3 class="text-4xl font-light mb-6">{{ $lang.translate(translations, 'experiences') }}</h3>
             <p class="mb-0">{{ $lang.translate(translations, 'experiences_label') }}</p>
           </div>
-          <div class="flex ml-auto">
+          <div class="hidden md:flex ml-auto">
             <el-button @click="expSliderPrev += 1" circle plain type="primary" icon="el-icon-back" class="flex"></el-button>
             <el-button @click="expSliderNext += 1" circle plain type="primary" icon="el-icon-right" class="flex"></el-button>
           </div>
-        </div> 
-        <div class="w-100">
-          <ExperiencesSlider :prev="expSliderPrev" :next="expSliderNext" />
         </div>
-        <div class="w-full flex items-center mb-6 mt-12 ml-2">
-          <div>
+      </div>
+      <div class="sliders-container">
+        <ExperiencesSlider :prev="expSliderPrev" :next="expSliderNext" />
+      </div>
+      <div class="container mx-auto pt-8 inline-block">
+        <div class="w-full flex items-center mb-4 md:mb-8 mt-6 pl-2 md:pl-0">
+          <div class="pr-6 md:pr-0">
             <h3 class="text-4xl font-light mb-4">{{ $lang.translate(translations, 'destinations') }}</h3>
             <p class="mb-0">{{ $lang.translate(translations, 'destinations_label') }}</p>
           </div>
-          <div class="flex ml-auto">
+          <div class="hidden md:flex ml-auto">
             <el-button @click="destSliderPrev += 1" circle plain type="primary" icon="el-icon-back" class="flex"></el-button>
             <el-button @click="destSliderNext += 1" circle plain type="primary" icon="el-icon-right" class="flex"></el-button>
           </div>
         </div>
-        <div class="w-100">
-          <DestinationsSlider :prev="destSliderPrev" :next="destSliderNext" />
-        </div>
       </div>
-
+      <div class="sliders-container">
+        <DestinationsSlider :prev="destSliderPrev" :next="destSliderNext" />
+      </div>
       <WhySection :translations="translations" />
 
       <TrustedBySlider :translations="translations" />
 
       <div class="container mx-auto py-6 my-6 px-4">
-        <div class="ml-auto py-6 my-6 w-3/4">
+        <div class="ml-auto py-6 my-6 md:w-11/12 lg:w-3/4">
           <TestimonialsSlider />
         </div>
       </div>
@@ -77,13 +78,14 @@ export default {
 
   data() {
     return {
+      yourNumber: '',
       expSliderNext: 0,
       expSliderPrev: 0,
       destSliderNext: 0,
       destSliderPrev: 0,
       translations: {
         'es_ES': {
-          hero_title: 'Lorem ipsum dorem lorum',
+          hero_title: 'Descubre el Perú como un local',
           search: 'Buscar',
           experiences: 'Experiencias',
           experiences_label: 'Encuentra qué hacer en Perú: tours gastronómicos, talleres de arte, experiencias con comunidades, cosas para hacer de noche, y mucho más.',
@@ -100,7 +102,7 @@ export default {
           pageDescription: 'Encuentra qué hacer en Perú: tours gastronómicos, talleres de arte, experiencias con comunidades, cosas para hacer de noche, y mucho más.'
         },
         'en_EN': {
-          hero_title: 'Lorem ipsum dorem lorum',
+          hero_title: 'Experience it, live it',
           search: 'Search',
           experiences: 'Experiences',
           experiences_label: 'Find things to do in Peru: food tours, art tours, experiences with local communities, what to do at night, and much more.',
@@ -124,6 +126,70 @@ export default {
     lang () {
       return this.$lang.current().iso_lang
     }
-  }
+  },
+
+  // mounted() {
+  //   const whySection = document.getElementById('why-us')
+
+  //   window.addEventListener('scroll', () => {
+  //     const currentScrollTop = document.documentElement.scrollTop
+  //     const whySectionInit = whySection.offsetTop
+  //     const whySectionEnd = whySectionInit + whySection.clientHeight 
+  //     const currentWindowHeight = document.documentElement.clientHeight
+  //     this.getBgColor(whySectionInit, whySectionEnd, currentWindowHeight, currentScrollTop)
+
+  //     // if(currentScrollTop >= whySectionEnd) {
+  //       // document.body.style.backgroundColor = `rgba(${primary[0]}, ${primary[1]}, ${primary[2]})`
+  //       // console.log('ya deberia empezar a cambiarse')
+  //     // } else if(currentScrollTop >= (whySectionInit - currentWindowHeight/2)) {
+  //       // document.body.style.backgroundColor = 'rgba(255, 255 ,255)'
+  //       // console.log('se deberia haber pintado media pantalla atras')
+  //     // }
+  //   })
+  // },
+
+  // methods: {
+  //   getBgColor (init, end, windowHeight, scrollPosition) {
+  //     const windowPosStart = windowHeight / 2
+  //     const changeInitStart = init - windowPosStart
+  //     const changeInitEnd = init
+  //     const changeEndStart = end
+  //     const changeEndEnd = end - windowPosStart
+
+  //     if(scrollPosition >= changeInitStart && scrollPosition <= changeEndEnd) {
+  //       document.body.classList.add('primary')
+  //       // return document.body.style.backgroundColor = 'rgba(55, 215, 215)'
+  //     } else {
+  //       document.body.classList.remove('primary')
+  //       // return document.body.style.backgroundColor = 'rgba(255, 255, 255)'
+  //     }
+
+  //     // if(scrollPosition < changeInitStart || scrollPosition > changeEndEnd) {
+  //     //   console.log('primera validacion')
+  //     //   return document.body.style.backgroundColor = 'rgba(255, 255, 255)'
+  //     // }
+
+  //     // const white = { r: 255, g: 255, b: 255 }
+  //     // const primary = { r: 55, g: 215, b: 215 }
+
+  //     // const valuePerPixel = {
+  //     //   r: (white.r - primary.r) / windowPosStart,
+  //     //   g: (white.g - primary.g) / windowPosStart,
+  //     //   b: (white.b - primary.b) / windowPosStart
+  //     // }
+
+  //     // if(scrollPosition > changeInitStart) {
+  //     //   const difference = scrollPosition - changeInitStart
+  //     //   if(difference >= windowPosStart) return
+  //     //   // console.log('entramos difference', difference)
+  //     //   document.body.style.backgroundColor = `
+  //     //     rgba(
+  //     //       ${white.r - (valuePerPixel.r * difference)},
+  //     //       ${white.g - (valuePerPixel.g * difference)},
+  //     //       ${white.b - (valuePerPixel.b * difference)})
+  //     //     `
+  //     // }
+  //   }
+  // }
 }
 </script>

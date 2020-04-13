@@ -1,6 +1,12 @@
 <template>
   <div class="explore-section" :style="{ backgroundImage: 'url(' + require('@/assets/images/start-explore-bg.jpg') + ')'}">
-    <el-button type="primary" size="large" class="main-btn text-sm uppercase font-light">{{ $lang.translate(translations, 'start_explore') }}</el-button>
+    <el-button
+      @click="$router.push(`/${$lang.current().slug}/experiences`)"
+      type="primary"
+      size="large"
+      class="main-btn text-sm uppercase font-light">
+      {{ $lang.translate(translations, 'start_explore') }}
+    </el-button>
   </div>
 </template>
 

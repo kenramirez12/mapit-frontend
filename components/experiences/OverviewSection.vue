@@ -35,22 +35,27 @@
               {{ $lang.apiTranslate(experience.translations, 'includes') }}
             </p>
           </div>
-          <div>
-          <el-carousel
-            trigger="click"
-            arrow="always"
-            class="overview-slider shadow-xl mt-16"
-            :style="`-sliderLength:'${experience.slider_images > 9 ? experience.slider_images : '0' + experience.slider_images}'`"
-            >
-            <el-carousel-item
-              v-for="(slide, n) in experience.slider_images"
-              :key="'slide_' + n"
-            >
-              <img
-                :src="$imagePath(slide.path)"
-                alt="">
-            </el-carousel-item>
-          </el-carousel>
+          <div class="mt-16">
+            <div v-swiper:mySwiper="swiperOption" class="shadow-xl">
+              <div class="swiper-wrapper overview-slider">
+                <div
+                  v-for="(slide, n) in experience.slider_images"
+                  :key="'slide_' + n"
+                  class="swiper-slide"
+                >
+                  <img
+                    :src="$imagePath(slide.path)"
+                    class="w-full">
+                </div>
+              </div>
+              <div class="swiper-pagination" />
+              <div class="swiper-button-prev">
+                <img src="~/assets/images/arrow-prev.svg">
+              </div>
+              <div class="swiper-button-next">
+                <img src="~/assets/images/arrow-right.svg">
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -68,6 +73,18 @@ export default {
   },
   data () {
     return {
+      swiperOption: {
+        slidesPerView: 'auto',
+        loop: false,
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true
+        },
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        }
+      },
       pageTranslations: {
         'es_ES': {
           included: 'Qué incluye'
@@ -91,9 +108,52 @@ export default {
 </script>
 
 <style lang="scss">
+.swiper-pagination {
+  bottom: 20px!important;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  top: auto;
+  bottom: 0;
+  background-image: none;
+  color: #fff;
+  font-size: 2rem;
+  line-height: 1;
+  height: 32px!important;
+}
+.swiper-button-prev {
+  left: 2rem;
+}
+.swiper-button-next {
+  right: 2rem;
+}
+.swiper-pagination-bullet {
+  width: 20px;
+  height: 2px;
+  border-radius: 0!important;
+  background: #fff;
+  opacity: .8;
+  margin: 0 2px!important;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.swiper-pagination-bullet-active,
+.swiper-pagination-bullet-active:hover {
+  background: var(--primary);
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  height: 20px;
+}
+
 .wiser-avatar {
-  width: 38px;
-  height: 38px;
+  width: 45px;
+  height: 45px;
   border-radius: 50%;
   object-fit: cover;
 }

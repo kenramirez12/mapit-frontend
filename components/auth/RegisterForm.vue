@@ -85,24 +85,3 @@ export default {
   }
 }
 </script>
-<style lang="scss" scoped>
-  $--color-primary: #37D7D7 !default;
-
-  .shadow-input {
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s;
-
-    &:hover, &:focus {
-      box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-    }
-  }
-
-  .shadow-primary {
-    box-shadow: 0 0 10px rgba($--color-primary, 0.7);
-    transition: all 0.3s;
-
-    &:hover, &:focus {
-      box-shadow: 0 0 5px rgba($--color-primary, 0.9);
-    }
-  }
-</style>

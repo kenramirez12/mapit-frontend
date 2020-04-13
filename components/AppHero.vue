@@ -1,7 +1,8 @@
 <template>
-  <div class="hero super-center flex-col" :style="{ backgroundImage: `url(${backgroundUrl})` }">
-    <h1 class="text-6xl font-light pb-4 mb-6 text-white not-italic">{{ $lang.translate(translations, 'hero_title') }}</h1>
-
+  <div class="hero super-center flex-col px-4" :style="{ backgroundImage: `url(${backgroundUrl})` }">
+    <h1 class="text-4xl md:text-6xl font-light px-8 pb-4 mb-6 text-white not-italic text-center leading-tight">
+      {{ $lang.translate(translations, 'hero_title') }}
+    </h1>
     <el-form :inline="true">
       <el-form-item >
         <el-select
@@ -19,17 +20,20 @@
           </template>
         </el-select>
       </el-form-item>
-      <el-form-item v-if="destinations">
+      <el-form-item>
         <el-select
+          :disabled="destinations === null"
           v-model="filters.destination_id"
           :placeholder="$lang.translate(translations, 'destinations').toUpperCase()"
           size="large">
-          <el-option
-            v-for="item in destinations"
-            :key="item.id"
-            :label="item.name"
-            :value="item.id">
-          </el-option>
+          <template v-if="destinations && destinations.length > 0">
+            <el-option
+              v-for="item in destinations"
+              :key="item.id"
+              :label="item.name"
+              :value="item.id">
+            </el-option>
+          </template>
         </el-select>
       </el-form-item>
       <el-form-item>

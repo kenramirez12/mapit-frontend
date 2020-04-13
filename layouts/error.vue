@@ -1,9 +1,10 @@
 <template>
   <div class="error-page">
-    <img class="error-page__image" src="~/assets/images/404-main.svg">
+    <img class="error-page__image" src="/images/404-animation.gif">
     <div class="error-page__content">
       <el-button
         type="primary"
+        size="small"
         icon="el-icon-right"
         class="error-page__btn"
         circle
@@ -34,34 +35,38 @@ export default {
     min-height: calc(100vh - 80px);
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
 
     &__image {
-      max-width: 460px;
+      max-width: 420px;
       width: calc(100% - 30px);
-      margin: auto;
+      margin: 0 auto;
     }
 
     &__content {
       position: relative;
       display: inline-block;
-      margin: 1rem auto;
+      margin: 1rem auto 0;
+      padding-top: 1rem;
+      padding-bottom: 1rem;
     }
 
     &__btn {
       transform: scale(1.5);
       position: absolute;
       right: -3rem;
-      top: -1.5rem;
+      top: 0;
     }
 
     &__title {
-      font-size: 72px;
+      font-size: 64px;
       line-height: 1;
       font-weight: 300;
     }
 
     &__subtitle {
-      font-size: 1.3rem;
+      font-size: 1rem;
       font-weight: 300;
       line-height: 1;
     }

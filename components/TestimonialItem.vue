@@ -17,7 +17,7 @@
         </div>
       </div>
     </div>
-    <img src="~/assets/images/testimonial.jpg" alt="">
+    <img src="~/assets/images/testimonial.jpg" class="testimonial-item__image" alt="">
   </div>
 </template>
 
@@ -40,9 +40,16 @@ export default {
 <style lang="scss" scoped>
   .testimonial-item {
     display: flex;
+    flex-direction: column;
+
+    @media screen and (min-width: 768px) {
+      flex-direction: row;
+    }
 
     &--white {
-      background-color: #fff;
+      @media screen and (min-width: 768px) {
+        background-color: #fff;
+      }
     }
 
     &:not(.swiper-slide-active) {
@@ -52,19 +59,61 @@ export default {
     }
 
     &__content {
+      position: relative;
       display: flex;
       flex-direction: column;
-      padding-right: 4.5rem;
+      padding-right: 1.5rem;
+      max-width: 30rem;
+      order: 1;
+
+      @media screen and (min-width: 768px) {
+        padding-right: 3rem;
+        position: unset;
+        order: 0;
+      }
+    }
+
+    &__image {
+      width: calc(100% + 4rem);
+      max-width: initial;
+      margin-left: -2rem;
+      height: 300px;
+      object-fit: cover;
+      margin-bottom: 5rem;
+      order: 0;
+
+      @media screen and (min-width: 768px) {
+        width: 300px;
+        height: auto;
+        margin-left: 0;
+        margin-bottom: 0;
+        order: 1;
+      }
+
+      @media screen and (min-width: 920px) {
+        width: 400px;
+      }
     }
 
     &__number {
       position: absolute;
-      left: -45%;
       line-height: 1;
-      font-size: 20rem;
       font-weight: 200;
+      font-size: 14rem;
+      left: -20%;
       color: #D8D8D8;
       transition: opacity .3s;
+      top: 280px;
+
+      @media screen and (min-width: 1024px) {
+        font-size: 8rem;
+        top: auto;
+      }
+
+      @media screen and (min-width: 1024px) {
+        font-size: 16rem;
+        left: -45%;
+      }
     }
   }
 </style>

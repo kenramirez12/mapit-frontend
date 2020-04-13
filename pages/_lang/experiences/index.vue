@@ -4,9 +4,9 @@
       :selected.sync="selectedDestination"
       :translations="pageTranslations"
       @handlerCategory="handlerUpdateCategory" />
-    <div class="container py-6 px-4 my-6 mx-auto">
+    <div class="container max-width-container py-6 lg:px-4 my-6 mx-auto">
       <div class="flex flex-wrap">
-        <div class="w-3/12 pr-6">
+        <div class="hidden md:block md:w-4/12 lg:w-3/12 pr-6">
           <el-select
             v-model="filters.sort_by"
             class="w-full text-center mb-6 pn-6 border-0"
@@ -58,26 +58,26 @@
             <li
               v-for="destination in destinations"
               :key="destination.id"
-              class="item-with-counter">
-              <a
-                @click.prevent="filters.destination_id = destination.id"
-                :class="{ 'text-primary font-bold' : filters.destination_id === destination.id }"
-                href="#">
+              @click.prevent="filters.destination_id = destination.id"
+              class="item-with-counter cursor-pointer">
+              <span :class="{ 'text-primary font-bold' : filters.destination_id === destination.id }">
                 {{ destination.name }}
-              </a>
+              </span>
               <div class="rounded-counter">
                 <span>{{ destination.experiences_count }}</span>
               </div>
             </li>
           </ul>
         </div>
-        <div class="w-9/12 pl-6 ml-auto">
+        <div class="w-full md:w-8/12 lg:w-9/12 xl:pl-6 lg:ml-auto">
           <ExperiencesGrid
             :cols="3"
             :experiences.sync="experiences"
             :is-loading.sync="loadingExperiences" />
           
-          <div class="block mt-6">
+          <div
+            v-if="experiences && experiences.length > 0 && lastPage > 1"
+            class="block mt-6">
             <el-pagination
               v-if="lastPage"
               layout="prev, pager, next"
@@ -259,3 +259,9 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.max-width-container {
+  max-width: 1400px!important;
+}
+</style>

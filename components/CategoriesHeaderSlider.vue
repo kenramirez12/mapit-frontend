@@ -98,7 +98,7 @@ export default {
         const generalCategory = {
           id: '',
           name: 'General',
-          image: '/images/general-cat-bg.jpg'
+          image: '/images/default-category-bg.jpg'
         }
 
         const sanitizedCategories = JSON.parse(JSON.stringify(this.categories))
@@ -148,17 +148,25 @@ export default {
 <style lang="scss" scoped>
   .page-header {
     display: flex;
-    height: 640px;
     position: relative;
+    height: 100vh;
+
+    @media screen and (min-width: 768px) {
+      height: 640px;
+    }
 
     &__title {
       font-weight: 300;
-      font-size: 60px;
+      font-size: 40px;
       line-height: 1.2;
       max-width: 60rem;
       color: #fff;
       display: flex;
       align-items: center;
+
+      @media screen and (min-width: 768px) {
+        font-size: 60px;
+      }
     }
   }
 

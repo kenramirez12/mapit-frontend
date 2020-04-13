@@ -45,11 +45,16 @@ export default {
 <style lang="scss" scoped>
   .custom-card {
     width: 100%;
-    max-width: 20rem;
+    max-width: 17rem;
     box-shadow: 0 0 15px rgba(0, 0, 0, .15);
     position: relative;
     transition: all 0.35s;
     cursor: pointer;
+    margin: auto;
+
+    @media screen and (min-width: 768px) {
+      max-width: 18rem;
+    }
 
     &:hover {
       transform: scale(.99);

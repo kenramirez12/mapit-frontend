@@ -1,12 +1,12 @@
 <template>
   <div id="activities-section" class="experience-container py-6 pb-super">
-    <div class="container mx-auto px-4">
+    <div class="container mx-auto">
       <div class="activities py-6 position-relative">
         <h3 class="text-6xl font-light mb-6 pb-24">{{ $lang.translate(pageTranslations, 'activities') }}</h3>
         <div class="flex flex-wrap">
           <div class="w-6/12 pr-6">
             <div class="flex flex-wrap pb-12">
-              <div v-if="duration !== ''" class="flex-1 pr-4">
+              <div v-if="duration" class="flex-1 pr-4">
                 <img
                   src="~/assets/images/features/clock-icon.svg"
                   style="height:20px"
@@ -14,7 +14,7 @@
                 <div class="block text-lg font-light mt-6 mb-4">{{ $lang.translate(pageTranslations, 'duration') }}</div>
                 <p class="text-sm">{{ duration }}</p>
               </div>
-              <div v-if="location !== ''" class="flex-1 pr-4">
+              <div v-if="location" class="flex-1 pr-4">
                 <img
                   src="~/assets/images/features/map-icon.svg"
                   style="height:20px"
@@ -22,7 +22,7 @@
                 <div class="block text-lg font-light mt-6 mb-4">{{ $lang.translate(pageTranslations, 'location') }}</div>
                 <p class="text-sm">{{ location }}</p>
               </div>
-              <div v-if="altitude !== ''" class="flex-1 pr-4">
+              <div v-if="altitude" class="flex-1 pr-4">
                 <img
                   src="~/assets/images/features/trip-icon.svg"
                   style="height:20px"
@@ -37,10 +37,10 @@
                 />
                 <div class="block text-lg font-light mt-6 mb-4">{{ $lang.translate(pageTranslations, 'capacity') }}</div>
                 <p class="text-sm">
-                  {{ experience.min_quota }}-{{ experience.max_quota }} {{ $lang.translate(pageTranslations, 'persons') }}
+                  {{ experience.min_quota }}-{{ experience.max_quota }} {{ $lang.translate(pageTranslations, 'people') }}
                 </p>
               </div>
-              <div v-if="languages !== ''" class="flex-1 pr-4">
+              <div v-if="languages" class="flex-1 pr-4">
                 <img
                   src="~/assets/images/features/thumb-icon.svg"
                   style="height:20px"
@@ -96,7 +96,7 @@ export default {
           location: 'Ubicación',
           altitude: 'Altitud',
           capacity: 'Capacidad',
-          persons: 'personas',
+          people: 'personas',
           language: 'Idioma'
         },
         'en_EN': {
@@ -105,7 +105,7 @@ export default {
           location: 'Location',
           altitude: 'Altitude',
           capacity: 'Capacity',
-          persons: 'persons',
+          people: 'people',
           language: 'Language',
           program: 'Program'
         },

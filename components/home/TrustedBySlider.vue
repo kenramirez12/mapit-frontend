@@ -1,12 +1,12 @@
 <template>
   <div class="trusted-by">
-    <span class="text-2xl light-gray font-light block mb-5">{{ $lang.translate(translations, 'trust_us') }}</span>
+    <span class="text-2xl light-gray font-light block mb-12 sm:mb-5">{{ $lang.translate(translations, 'trust_us') }}</span>
     <el-button @click="prevSlide()" class="trusted-by__arrow-prev text-gray-500" size="mini" icon="el-icon-back" circle plain></el-button>
     <el-button @click="nextSlide()" class="trusted-by__arrow-next text-gray-500" size="mini" icon="el-icon-right" circle plain></el-button>
     <div v-swiper:mySwiper="swiperOption" class="trusted-by-slider">
       <div class="swiper-wrapper">
         <div v-for="n in 6" :key="n" class="swiper-slide">
-          <img src="~/assets/images/startup-peru.png" alt="">
+          <img src="~/assets/images/startup-peru.png" class="client-logo" alt="">
         </div>
       </div>
     </div>
@@ -27,7 +27,25 @@ export default {
       swiperOption: {
         loop: true,
         slidesPerView: 4,
-        spaceBetween: 40
+        spaceBetween: 20,
+        breakpoints: {
+          460: {
+            slidesPerView: 1,
+            spaceBetween: 0,
+          },
+          640: {
+            slidesPerView: 2,
+            spaceBetween: 20,
+          },
+          768: {
+            slidesPerView: 3,
+            spaceBetween: 40,
+          },
+          1024: {
+            slidesPerView: 4,
+            spaceBetween: 40
+          }
+        }
       }
     }
   },
@@ -46,17 +64,26 @@ export default {
   .trusted-by {
     background-color: #fafafa;
     box-shadow: -20px 40px 150px rgba(0, 0, 0, 0.35);
-    width: 70%;
-    padding: 3rem 4rem;
+    width: calc(100% - 2rem);
+    max-width: 1000px;
+    padding: 2rem 4rem 3rem;
     margin: 7rem 0;
     position: relative;
+
+    @media screen and (min-width: 640px) {
+      padding: 3rem 4rem;
+    }
   }
 
   .trusted-by__arrow-prev {
     position: absolute;
-    top: 62%;
+    top: 67%;
     left: 1rem;
     transform: translateY(-50%);
+
+    @media screen and (min-width: 768px) { 
+      top: 62%;
+    }
   }
 
   .trusted-by__arrow-next {
@@ -67,5 +94,11 @@ export default {
   }
   .light-gray {
     color: "#9F9F9F";
+  }
+
+  .client-logo {
+    margin: 0 auto;
+    max-width: 170px;
+    width: 100%;
   }
 </style>

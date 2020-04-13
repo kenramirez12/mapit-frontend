@@ -52,12 +52,21 @@ export default {
 <style lang="scss" scoped>
   .testimonials-slider {
     position: relative;
+    margin-bottom: 5rem;
+
+    @media screen and (min-width: 768px) {
+      margin-bottom: 0;
+    }
 
     &__arrows {
       position: absolute;
-      bottom: 0;
       left: 0;
       z-index: 2;
+      bottom: -5rem;
+
+      @media screen and (min-width: 768px) {
+        bottom: 0;
+      }
     }
   }
 

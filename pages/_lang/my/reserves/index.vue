@@ -1,0 +1,127 @@
+<template>
+  <div class="container pt-12 pb-4 px-4 mx-auto">
+    <h1 class="mb-6 text-3xl reserves-container__title">
+      Historial de reservas
+    </h1>
+    <div class="pb-6">
+      <ReservesTableList :reserves="reserves" />
+    </div>
+    <div
+      v-if="reserves && pagination.lastPage > 1"
+      class="block mb-6 pb-6">
+      <el-pagination
+        layout="prev, pager, next"
+        :current-page.sync="pagination.page"
+        :page-count="pagination.lastPage">
+      </el-pagination>
+    </div>
+  </div>
+</template>
+
+<script>
+import ReservesTableList from '~/components/reserves/ReservesTableList'
+
+export default {
+  async asyncData({ app, params, store, error }) {  
+    try {
+      const resp = await app.$axios.$get('/reserves')
+      const reserves = resp.reserves.data
+      const pagination = {
+        page: resp.reserves.current_page,
+        lastPage: resp.reserves.last_page
+      }
+      return {
+        reserves,
+        pagination
+      }
+    } catch (error) {
+      console.error('error', error.response)
+    }
+  },
+  components: {
+    ReservesTableList
+  },
+  data () {
+    return {
+      tableData: [
+        {
+          reserveDate: '12/06/2020',
+          title: 'Experiencia en Cusco',
+          destination: 'Cusco',
+          status: ''
+        },
+        {
+          reserveDate: '12/06/2020',
+          title: 'Experiencia en Cusco',
+          destination: 'Cusco'
+        },
+        {
+          reserveDate: '12/06/2020',
+          title: 'Experiencia en Cusco',
+          destination: 'Cusco'
+        },
+        {
+          reserveDate: '12/06/2020',
+          title: 'Experiencia en Cusco',
+          destination: 'Cusco'
+        },
+        {
+          reserveDate: '12/06/2020',
+          title: 'Experiencia en Cusco',
+          destination: 'Cusco'
+        },
+        {
+          reserveDate: '12/06/2020',
+          title: 'Experiencia en Cusco',
+          destination: 'Cusco'
+        },
+        {
+          reserveDate: '12/06/2020',
+          title: 'Experiencia en Cusco',
+          destination: 'Cusco'
+        }
+      ]
+    }
+  },
+  watch: {
+    'pagination.page': {
+      deep: true,
+      handler (value) {
+        this.getReserves(value)
+      }
+    }
+  },
+  methods: {
+    async getReserves(page) {
+      this.reserves = null
+      try {
+        const resp = await this.$axios.$get('/reserves?page=' + page)
+        this.reserves = resp.reserves.data
+        this.pagination.lastPage = resp.reserves.last_page
+      } catch (error) {
+        this.reserves = []
+        this.lastPage = 1
+        console.error('error', error.response)
+      }
+    }
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+  .reserves-container {
+    &__title {
+      margin-bottom: 3rem;
+    }
+  }
+
+  .requires-additional {
+    &__icon {
+      margin-left: .5rem;
+  
+      &::after {
+        border-bottom: 0 !important;
+      }
+    }
+  }
+</style>

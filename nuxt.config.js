@@ -6,7 +6,7 @@ export default {
   ** Headers of the page
   */
   head: {
-    title: process.env.npm_package_name || '',
+    title: 'MAP IT',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -17,8 +17,10 @@ export default {
     ]
   },
   env: {
+    baseUrl: process.env.BASE_URL,
     apiUrl: process.env.API_URL || 'http://127.0.0.1:8000/api',
     imageUrl: process.env.IMAGE_URL || 'http://127.0.0.1:8000',
+    visanetMerchantId: process.env.VISANET_MERCHANT_ID
   },
   /*
   ** Customize the progress-bar color
@@ -41,6 +43,7 @@ export default {
   plugins: [
     '@/plugins/element-ui',
     { src: '@/plugins/swiper.js', ssr: false },
+    { src: '@/plugins/phone-code.js', ssr: false },
     '@/plugins/lang',
     '@/plugins/api-image',
     '@/plugins/skeleton'
@@ -49,6 +52,9 @@ export default {
     baseURL: process.env.API_URL || 'http://localhost:8000/api'
   },
   auth: {
+    redirect: {
+      home: false
+    },
     strategies: {
       local: {
         endpoints: {

@@ -7,11 +7,9 @@
     </p>
     <div
       v-else
-      class="experiences-slider -ml-3">
-      <div
-        v-swiper:mySwiper="swiperOption"
-        class="w-full">
-        <div class="swiper-wrapper py-5 pl-3">
+      class="experiences-slider">
+      <div v-swiper:mySwiper="swiperOption">
+        <div class="swiper-wrapper py-5">
           <template v-if="lastExperiences === null">
             <div
               v-for="n in 4"
@@ -31,7 +29,6 @@
             </div>
           </template>
         </div>
-        <div class="swiper-pagination swiper-pagination-bullets"></div>
       </div>
     </div>
   </div>
@@ -88,17 +85,24 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
   .experiences-slider {
+    width: 100%;
     height: 550px;
+    padding-left: 1.5rem;
   }
 
   .swiper-container {
-    position: absolute;
+    padding-left: .5rem;
+    width: calc(100% - .5rem);
   }
 
   .swiper-slide {
     width:100%;
-    max-width: 20rem;
+    max-width: 17rem;
+
+    @media screen and (min-width: 768px) {
+      max-width: 18rem;
+    }
   }
 </style>

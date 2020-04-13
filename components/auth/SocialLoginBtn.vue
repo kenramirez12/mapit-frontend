@@ -19,6 +19,8 @@
 </template>
 
 <script>
+import { mapState, mapGetters } from 'vuex'
+
 export default {
   props: {
     social: {
@@ -26,11 +28,31 @@ export default {
       required: true
     }
   },
+  computed: {
+    ...mapState({
+      reserveDate: s => s.reserves.form.date,
+      groupSize: s => s.reserves.form.groupSize
+    }),
+    ...mapGetters({
+      willCheckout: 'reserves/willCheckout',
+      currentExperience: 'reserves/currentExperience',
+      availableHours: 'reserves/availableHours'
+    })
+  },
   methods: {
     socialLogin(service) {
       if (process.browser) {
-        localStorage.setItem('loginRedirectPath', this.$route.fullPath);
+        if(this.willCheckout) {
+          localStorage.setItem('willCheckout', this.willCheckout)
+          localStorage.setItem('currentExperience', JSON.stringify(this.currentExperience))
+          localStorage.setItem('availableHours', JSON.stringify(this.availableHours))
+          localStorage.setItem('reserveDate', this.reserveDate)
+          localStorage.setItem('groupSize', this.groupSize)
+        } else {
+          localStorage.setItem('loginRedirectPath', this.$route.fullPath);
+        }
       }
+
       window.location.href = `${process.env.apiUrl}/login/${service}`;
     }
   }

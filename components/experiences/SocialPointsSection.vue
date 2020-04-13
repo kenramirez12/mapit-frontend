@@ -1,16 +1,16 @@
 <template>
   <div id="social-points-section" class="experience-container py-6 pb-super">
-    <div class="container mx-auto px-4">
+    <div class="container mx-auto">
       <div class="activities py-6 position-relative">
         <h3 class="text-5xl font-light mb-6 pb-6">{{ $lang.translate(pageTranslations, 'social_points') }}</h3>
         <div class="flex flex-wrap">
-          <div class="w-5/12 pr-6 pb-6">
+          <div class="w-5/12 pl-6 pb-6">
             <p class="mb-6">{{ translations.social_impact }}</p>
           </div>
         </div>
         <div class="flex flex-wrap mt-6" style="position:relative">
-          <img src="~/assets/images/sitting-05.svg" style="position:absolute;top:0;left:-8rem;height:20rem">
-          <div class="w-3/12 pr-6" style="margin-left:9rem">
+          <img src="~/assets/images/sitting-05.svg" style="position:absolute;top:0;left:-6rem;height:20rem">
+          <div class="w-3/12 pr-6" style="margin-left:10rem">
             <img src="~/assets/images/brujula-icon.svg" class="mb-4" style="width:60px" alt="">
             <p class="mb-6">{{ $lang.translate(pageTranslations, 'social_copy') }}</p>
             <p class="text-2xl">{{ $lang.translate(pageTranslations, 'social_values') }}</p>
@@ -49,7 +49,7 @@ export default {
         },
         'en_EN': {
           social_points: 'Social Points',
-          social_copy: 'By choosing this activity you are supporting to achieve a change in traditional tourism in Peru. MAP IT collaborates directly with the local economy, sustainable development, improvement of quality of life, generation of job opportunities for our wisers and preservation of the local culture.',
+          social_copy: 'For every experience you book with us, you are earning social points:',
           social_copy_2: 'With your contribution, we can support  social projects in communities throughout the country such as trainings, infrastructure improvement, reforestation, education programs, and many others. Join our cause and help us turn our projects into reality!',
           social_values: '1USD = 1 Social Point'
         }

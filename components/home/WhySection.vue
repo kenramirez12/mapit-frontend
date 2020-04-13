@@ -1,32 +1,32 @@
 <template>
-  <div class="bg-primary py-6">
+  <div id="why-us" class="why-us-section py-6">
     <div class="container mx-auto my-6 py-6 px-4">
-      <h2 class="text-4xl font-light text-center text-white mb-6">{{ $lang.translate(translations, 'why_mapit') }}</h2>
+      <h2 class="text-4xl font-light text-center text-white mb-6 pb-6">{{ $lang.translate(translations, 'why_mapit') }}</h2>
 
-      <div class="w-full flex flex-wrap">
-        <div class="flex-1 pt-6">
-          <div class="w-100" style="height:180px">
-            <img src="~/assets/images/choose-us-02.svg" class="mx-auto" style="max-height:100%">
+      <div class="why-container pt-6">
+        <div class="flex-1 pt-6 why-item">
+          <div class="w-100 why-item__icon">
+            <img src="/images/home/why-01.svg" class="mx-auto" style="width:90%">
           </div>
-          <div class="d-block text-2xl text-white font-light text-center mt-4">{{ $lang.translate(translations, 'why_mapit_1') }}</div>
+          <div class="d-block mt-4 why-item__label">{{ $lang.translate(translations, 'why_mapit_1') }}</div>
         </div>
-        <div class="flex-1 pt-6">
-          <div class="w-100" style="height:180px">
-            <img src="~/assets/images/choose-us-03.svg" class="mx-auto" style="max-height:100%">
+        <div class="flex-1 pt-6 why-item">
+          <div class="w-100 why-item__icon">
+            <img src="/images/home/why-02.svg" class="mx-auto" style="width:90%">
           </div>
-          <div class="d-block text-2xl text-white font-light text-center mt-4">{{ $lang.translate(translations, 'why_mapit_2') }}</div>
+          <div class="d-block mt-4 why-item__label">{{ $lang.translate(translations, 'why_mapit_2') }}</div>
         </div>
-        <div class="flex-1 pt-6">
-          <div class="w-100" style="height:180px">
-            <img src="~/assets/images/choose-us-04.svg" class="mx-auto" style="max-height:100%">
+        <div class="flex-1 pt-6 why-item">
+          <div class="w-100 why-item__icon">
+            <img src="/images/home/why-03.svg" class="mx-auto" style="width:90%">
           </div>
-          <div class="d-block text-2xl text-white font-light text-center mt-4">{{ $lang.translate(translations, 'why_mapit_3') }}</div>
+          <div class="d-block mt-4 why-item__label">{{ $lang.translate(translations, 'why_mapit_3') }}</div>
         </div>
-        <div class="flex-1 pt-6">
-          <div class="w-100" style="height:180px">
-            <img src="~/assets/images/choose-us-01.svg" class="mx-auto" style="max-height:100%">
+        <div class="flex-1 pt-6 why-item">
+          <div class="w-100 why-item__icon">
+            <img src="/images/home/why-04.svg" class="mx-auto" style="width:90%">
           </div>
-          <div class="d-block text-2xl text-white font-light text-center mt-4">{{ $lang.translate(translations, 'why_mapit_4') }}</div>
+          <div class="d-block mt-4 why-item__label">{{ $lang.translate(translations, 'why_mapit_4') }}</div>
         </div>
       </div>
     </div>
@@ -40,6 +40,160 @@ export default {
       type: Object,
       required: true
     }
+  },
+  created() {
+    if(process.client) {
+      window.addEventListener('scroll', this.handleScroll)
+    }
+  },
+  destroyed() {
+    if(process.client) {
+      window.removeEventListener('scroll', this.handleScroll)
+    }
+  },
+  mounted() {
+    // if(currentScrollTop >= whySectionEnd) {
+      // document.body.style.backgroundColor = `rgba(${primary[0]}, ${primary[1]}, ${primary[2]})`
+      // console.log('ya deberia empezar a cambiarse')
+    // } else if(currentScrollTop >= (whySectionInit - currentWindowHeight/2)) {
+      // document.body.style.backgroundColor = 'rgba(255, 255 ,255)'
+      // console.log('se deberia haber pintado media pantalla atras')
+    // }
+  },
+  methods: {
+    handleScroll() {
+      const whySection = document.getElementById('why-us')
+      const currentScrollTop = document.documentElement.scrollTop
+      const whySectionInit = whySection.offsetTop 
+      const whySectionEnd = whySectionInit + whySection.clientHeight 
+      const currentWindowHeight = document.documentElement.clientHeight
+      this.getBgColor(whySectionInit, whySectionEnd, currentWindowHeight, currentScrollTop)
+    },
+    getBgColor (init, end, windowHeight, scrollPosition) {
+      const windowPosStart = windowHeight / 2
+      const changeInitStart = init - windowPosStart
+      const changeInitEnd = init
+      const changeEndStart = end
+      const changeEndEnd = end - windowPosStart
+
+      if(scrollPosition >= changeInitStart && scrollPosition <= changeEndEnd) {
+        document.body.classList.add('primary')
+        // return document.body.style.backgroundColor = 'rgba(55, 215, 215)'
+      } else {
+        document.body.classList.remove('primary')
+        // return document.body.style.backgroundColor = 'rgba(255, 255, 255)'
+      }
+
+      // if(scrollPosition < changeInitStart || scrollPosition > changeEndEnd) {
+      //   console.log('primera validacion')
+      //   return document.body.style.backgroundColor = 'rgba(255, 255, 255)'
+      // }
+
+      // const white = { r: 255, g: 255, b: 255 }
+      // const primary = { r: 55, g: 215, b: 215 }
+
+      // const valuePerPixel = {
+      //   r: (white.r - primary.r) / windowPosStart,
+      //   g: (white.g - primary.g) / windowPosStart,
+      //   b: (white.b - primary.b) / windowPosStart
+      // }
+
+      // if(scrollPosition > changeInitStart) {
+      //   const difference = scrollPosition - changeInitStart
+      //   if(difference >= windowPosStart) return
+      //   // console.log('entramos difference', difference)
+      //   document.body.style.backgroundColor = `
+      //     rgba(
+      //       ${white.r - (valuePerPixel.r * difference)},
+      //       ${white.g - (valuePerPixel.g * difference)},
+      //       ${white.b - (valuePerPixel.b * difference)})
+      //     `
+      // }
+    }
   }
 }
 </script>
+
+<style lang="scss" scoped>
+  .why-us-section {
+    /* height: 100vh; */
+    height: 768px;
+    display: flex;
+    align-items: center;
+  }
+
+  .why-container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 1280px;
+    margin-right: auto;
+    margin-left: auto;
+
+    @media screen and (min-width: 768px) {
+      width: calc(100% - 4rem);
+    }
+  }
+
+  .why-item {
+    transition: all 0.25s;
+
+    &__label {
+      font-size: 1.1rem;
+      color: #fff;
+      line-height: 1.2;
+      font-weight: 300;
+      text-align: center;
+      padding: 0 1rem;
+
+      @media screen and (min-width: 768px) {
+        font-size: 1.25rem;
+      }
+    }
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+  .why-item__icon {
+    margin-bottom: 3rem;
+    transform: scale(.1);
+    transition: all 0.3s cubic-bezier(.17,1.01,.69,1.19);
+  }
+
+  body.primary {
+    .why-item {
+      .why-item__icon {
+        transform: scale(1);
+      }
+
+      &:nth-child(2) {
+        .why-item__icon {
+          transition-delay: .15s;
+        }
+      }
+
+      &:nth-child(3) {
+        .why-item__icon {
+          transition-delay: .25s;
+        }
+      }
+
+      &:nth-child(4) {
+        .why-item__icon {
+          transition-delay: .35s;
+        }
+      }
+    }
+  }
+</style>
+
+<style>
+  body {
+    transition: all 0.3s;
+  }
+
+  body.primary {
+    background-color: rgba(55, 215, 215)!important;
+  }
+</style>

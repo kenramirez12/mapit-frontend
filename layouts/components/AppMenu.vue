@@ -1,33 +1,43 @@
 <template>
-  <el-menu
-    class="ml-auto header-menu"
-    mode="horizontal"
-    :router="true"
-    :unique-opened="true">
-    <el-menu-item :index="`/${$lang.current().slug}/experiences`" class="header-menu__item">{{ $lang.translate(translations, 'experiences') }}</el-menu-item>
-    <el-menu-item :index="`/${$lang.current().slug}/destinations`" class="header-menu__item">{{ $lang.translate(translations, 'destinations') }}</el-menu-item>
-    <el-menu-item :index="`/${$lang.current().slug}/about`" class="header-menu__item">{{ $lang.translate(translations, 'about') }}</el-menu-item>
-    <el-menu-item :index="`/${$lang.current().slug}/blog`" class="header-menu__item">{{ $lang.translate(translations, 'blog') }}</el-menu-item>
-    <el-menu-item :index="`/${$lang.current().slug}/faq`" class="header-menu__item">{{ $lang.translate(translations, 'faqs') }}</el-menu-item>
+  <ul class="header-menu ml-auto">
+    <li
+      v-for="(link, n) in links"
+      :key="'link_' + n"
+      :class="{ active : $route.name === `lang-${link}` }"
+      class="header-menu__item">
+      <a
+        href="#"
+        @click.prevent="$router.push(`/${$lang.current().slug}/${link}`)"
+        class="header-menu__link">
+        {{ $lang.translate(translations, link) }}
+      </a>
+    </li> 
+    <li :class="{ active : $route.name === 'lang-blog' }" class="header-menu__item">
+      <a href="#" @click.prevent="$router.push(`/${$lang.current().slug}/blog`)" class="header-menu__link">
+        {{ $lang.translate(translations, 'blog') }}
+      </a>
+    </li>
+    <FaqsDropdown />
     <UserDropdown :translations="translations" />
     <template v-for="(lang, n) in langs">
-      <el-menu-item
+      <li
         v-if="$lang.current().iso_lang !== lang.iso_lang"
         :key="'lang_' + n"
-        @click.native="updateLang(lang)"
         class="header-menu__item">
-        {{ lang.code }}
-      </el-menu-item>
+        <a href="#" @click.prevent="updateLang(lang)" class="header-menu__link">{{ lang.code }}</a>
+      </li>
     </template>
-  </el-menu>
+  </ul>
 </template>
 
 <script>
 import { mapState, mapMutations } from 'vuex'
+import FaqsDropdown from '~/layouts/components/FaqsDropdown'
 import UserDropdown from '~/layouts/components/UserDropdown'
 
 export default {
   components: {
+    FaqsDropdown,
     UserDropdown
   },
   data () {
@@ -49,7 +59,8 @@ export default {
           faqs: 'FAQs',
           login: 'Log In'
         }
-      }
+      },
+      links: ['experiences', 'destinations', 'about']
     }
   },
   computed: {
@@ -74,15 +85,35 @@ export default {
 
 <style lang="scss">
   .header-menu {
+    display: flex;
     border-bottom: 0!important;
 
     &__item {
+      cursor: pointer;
+      user-select: none;
+      
+      &.active {
+        .header-menu__link {
+          color: #303133;
+          box-shadow: inset 0 2px 0px 0px var(--primary);
+        }
+      }
+    }
+
+    &__link {
+      position: relative;
+      display: flex;
+      padding: 0 20px;
+      font-size: 14px;
+      color: #909399;
       border: 0;
       height: var(--header-height)!important;
       line-height: var(--header-height)!important;
+      transition: all 0.25s;
 
       &:hover {
-        box-shadow: inset 0 3px 0px 0px var(--primary);
+        color: #303133;
+        box-shadow: inset 0 2px 0px 0px var(--primary);
       }
     }
   }

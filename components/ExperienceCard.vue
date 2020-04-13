@@ -6,14 +6,15 @@
       <div class="custom-card__sale-percentage">-{{ experience.sale_percentage }}%</div>
       <img src="~/assets/images/card-sale-bg.svg" width="32">
     </div>
-    <div
-      @click="experience ? $router.push(`/${$lang.current().slug}/experiences/${$lang.apiTranslate(experience.translations, 'slug')}`) : ''"
+    <a
+      :href="experienceLink"
+      @click.prevent="experienceLink !== '' ? $router.push(experienceLink) : ''"
       class="custom-card__image cursor-pointer"
       style="height: 240px">
       <PuSkeleton :loading="loading" height="100%">
         <img v-if="experience" :src="$imagePath(experience.main_image.path)">
       </PuSkeleton>
-    </div>
+    </a>
     <div class="custom-card__content">
       <div class="flex items-center">
         <PuSkeleton :loading="loading" height="20px" style="width:100%;max-width:100px;white-space:nowrap">
@@ -26,7 +27,7 @@
           v-if="!loading"
           href="#"
           class="ml-auto"
-          @click.prevent="favorite = !favorite">
+          @click.prevent="updateFavorite(favorite, experience.id)">
           <img v-if="favorite" src="~/assets/images/icon-heart.svg" height="20">
           <img v-else src="~/assets/images/icon-heart-outline.svg" height="20">
         </a>
@@ -37,13 +38,14 @@
         <PuSkeleton :loading="loading" height="22px" width="100%" class="block mb-1" />
         <PuSkeleton :loading="loading" height="22px" width="70%" class="block mb-1" />
       </div>
-      <p
+      <a
         v-else
-        @click="experience ? $router.push(`/${$lang.current().slug}/experiences/${$lang.apiTranslate(experience.translations, 'slug')}`) : ''"
-        class="my-6 text-base cursor-pointer">
+        :href="experienceLink"
+        @click.prevent="experienceLink !== '' ? $router.push(experienceLink) : ''"
+        class="my-6 text-base cursor-pointer block">
         {{ $lang.apiTranslate(experience.translations, 'title') }}
-      </p>
-      <div class="flex items-end">
+      </a>
+      <div class="flex items-end mt-auto">
         <div class="custom-card__normal-price">
           <PuSkeleton :loading="loading" height="13px" width="38px" class="block mb-1">
             <span style="font-size:13px">{{ $lang.translate(translations, 'from') }}</span>
@@ -67,6 +69,8 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
+
 export default {
   props: {
     experience: {
@@ -99,15 +103,29 @@ export default {
       const discount = this.experience.min_price * parseInt(this.experience.sale_percentage) / 100
       const salePrice = this.experience.min_price - discount
       return salePrice.toFixed(2)
+    },
+    experienceLink () {
+      if(!this.experience) return ''
+      return `/${this.$lang.current().slug}/experiences/${this.$lang.apiTranslate(this.experience.translations, 'slug')}`
     }
   },
-  watch: {
-    favorite (value) {
+  methods: {
+    ...mapMutations({
+      setAuthDialogVisible: 'SET_AUTH_DIALOG_VISIBLE'
+    }),
+    updateFavorite(favorite, experienceId) {
+      if(!this.$auth.loggedIn) {
+        return this.setAuthDialogVisible(true)
+      }
+      
+      const newFavorite = !favorite
+      this.favorite = newFavorite
+
       let message = ''
-        message = value ?
-        `La experencia ha sido <strong>agregada</strong> a tu lista de favoritos` :
-        `La experencia ha sido <strong>eliminada</strong> de tu lista de favoritos`
-      const iconClass = value ?
+        message = newFavorite ?
+        `Experiencia agregada a tu lista de favoritos` :
+        `Experiencia eliminada de tu lista de favoritos`
+      const iconClass = newFavorite ?
         'el-icon-circle-plus text-white mr-2' :
         'el-icon-remove text-white mr-2'
 
@@ -132,7 +150,8 @@ export default {
   }
 
   .message-dark {
-    background-color: #323232;
+    // background-color: #323232;
+    background-color: rgba(0, 0, 0, 0.8);
     border: 0;
 
     .el-message {
@@ -145,11 +164,16 @@ export default {
 <style lang="scss" scoped>
   .custom-card {
     width: 100%;
-    max-width: 20rem;
+    max-width: 17rem;
     height: 100%;
     box-shadow: 0 0 15px rgba(0, 0, 0, .15);
     position: relative;
     transition: all 0.2s;
+    margin: auto;
+
+    @media screen and (min-width: 768px) {
+      max-width: 18rem;
+    }
 
     &:hover {
       transform: scale(.99);
@@ -175,6 +199,7 @@ export default {
 
     &__image {
       width: 100%;
+      display: block;
 
       img {
         width: 100%;
@@ -184,6 +209,8 @@ export default {
     }
 
     &__content {
+      display: flex;
+      flex-direction: column;
       background-color: #fff;
       padding: 1.5rem;
     }

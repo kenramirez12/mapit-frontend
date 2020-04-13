@@ -1,6 +1,6 @@
 <template>
   <div id="additional-info-section" class="experience-container py-6 pb-super">
-    <div class="container mx-auto px-4">
+    <div class="container mx-auto">
       <div class="activities py-6 position-relative">
         <h3 class="text-6xl font-light mb-6 pb-6">{{ $lang.translate(pageTranslations, 'additional_info') }}</h3>
         <div class="flex flex-wrap">

@@ -1,0 +1,43 @@
+<template>
+  <div class="success-container p-4">
+    <div class="success-card m-auto p-6">
+      <img src="/images/checkout-fail.svg" class="mx-auto" width="100">
+      <h3 class="success-card__title mt-6">Error de<br>compra</h3>
+      <p class="success-card__copy my-5 mb-8">¡ Dolor velit reprehenderit voluptate magna. Et quis aute ut elit. Consequat eiusmod pariatur sint voluptate laborum sunt cupidatat consectetur deserunt cillum sint fugiat.</p>
+      <el-button
+        type="primary"
+        class="px-6"
+        @click="$router.push(`/${$lang.current().slug}/experiences/${$lang.apiTranslate(reserve.experience.translations, 'slug')}`)">
+        Entendido
+      </el-button>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  props: {
+    reserve: {
+      type: Object,
+      required: true,
+      default: () => {}
+    }
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+  .character {
+    &--01 {
+      width: 18rem;
+      top: 10%;
+      left: 3rem;
+    }
+
+    &--02 {
+      width: 16rem;
+      bottom: 0;
+      right: 0;
+    }
+  }
+</style>

@@ -1,27 +1,31 @@
 <template>
-  <el-menu-item class="header-menu__item">
+  <li class="header-menu__item">
     <el-dropdown
+      v-loading="isLoggingOut"
+      :disabled="isLoggingOut"
       v-if="loggedIn"
       @command="onCommandDropdown"
       trigger="click"
-      placement="bottom"
-      :hide-on-click="false">
-      <div class="flex items-center">
-        <img
-          v-if="user.from_social === 1 && user.avatar_url !== ''"
-          :src="user.avatar_url"
-          class="user-dropdown__avatar mr-3">
+      placement="bottom">
+      <div class="header-menu__link flex items-center">
+        <el-badge :value="1">
+          <img
+            v-if="user.from_social === 1 && user.avatar_url !== ''"
+            :src="user.avatar_url"
+            class="user-dropdown__avatar">
+        </el-badge>
         <span class="block h-full user-dropdown__btn">{{ user.fullname }}</span>
       </div>
       <el-dropdown-menu
         slot="dropdown"
         class="user-dropdown py-0">
-        <el-dropdown-item>Perfil</el-dropdown-item>
-        <el-dropdown-item>Historial de reservas</el-dropdown-item>
-        <el-dropdown-item>Favoritos</el-dropdown-item>
+        <el-dropdown-item command="profile">Perfil</el-dropdown-item>
+        <el-dropdown-item command="reserves">
+          <el-badge is-dot class="badge__item">Historial de reservas</el-badge>
+        </el-dropdown-item>
+        <el-dropdown-item command="favorites">Favoritos</el-dropdown-item>
         <hr class="mt-4">
         <el-dropdown-item
-          :disabled="isLoggingOut"
           command="logout"
           class="flex items-center">
           Cerrar sesión
@@ -30,13 +34,14 @@
         </el-dropdown-item>
       </el-dropdown-menu>
     </el-dropdown>
-    <span
+    <a
       v-else
-      @click="setAuthDialogVisible(true)"
-      class="block h-full">
+      href="#"
+      @click.prevent="setAuthDialogVisible(true)"
+      class="header-menu__link">
       {{ $lang.translate(translations, 'login') }}
-    </span>
-  </el-menu-item>
+    </a>
+  </li>
 </template>
 
 <script>
@@ -70,6 +75,8 @@ export default {
     onCommandDropdown(command) {
       if (command === 'logout') {
         this.logout()
+      } else {
+        this.$router.push(`/${this.$lang.current().slug}/my/${command}`)
       }
     },
     async logout () {
@@ -91,6 +98,15 @@ export default {
 </script>
 
 <style lang="scss">
+  .badge {
+    &__item {
+      .el-badge__content {
+        top: 10px;
+        right: 0!important;
+      }
+    }
+  }
+
   .user-dropdown {
     box-shadow: 0 0;
     border-radius: 0;
@@ -99,6 +115,13 @@ export default {
     &__btn {
       color: #909399;
       transition: color 0.3s;
+      display: none;
+      margin-right: 0;
+
+      @media screen and (min-width: 920px) {
+        margin-left: .75rem;
+        display: block;
+      }
 
       &:hover {
         color: #000;

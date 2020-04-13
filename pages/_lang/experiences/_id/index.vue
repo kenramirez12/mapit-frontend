@@ -18,6 +18,7 @@
       </div>
 
       <div
+        v-if="experience"
         :class="{ fixed: navbarFixed, show: showNavbar }"
         class="experience-navbar">
         <div class="container px-3 mx-auto">
@@ -46,6 +47,7 @@
 </template>
 
 <script>
+import { mapGetters, mapMutations } from 'vuex'
 import PageHeader from '~/components/PageHeader'
 import OverviewSection from '~/components/experiences/OverviewSection'
 import ActivitiesSection from '~/components/experiences/ActivitiesSection'
@@ -56,14 +58,17 @@ import TestimonialSection from '~/components/experiences/TestimonialSection'
 import ExperienceReserveForm from '~/components/experiences/reserveForm'
 
 export default {
-  async asyncData({ app, params, error }) {
+  async asyncData({ app, params, store, error }) {
+    store.commit('reserves/RESET_FORM')
+
     try {
       const currentLang = app.$lang.current().iso_lang
       const resp = await app.$axios.$get(`/experiences/${params.id}`)
       const experience = resp.experience
+      store.commit('reserves/SET_EXPERIENCE', experience)
       const translations = experience.translations.find(item => item.iso_lang === currentLang)
+
       return {
-        experience,
         pageTitle: 'MAP IT - ' + translations.title
       }
     } catch (error) {
@@ -87,11 +92,11 @@ export default {
   },
   data() {
     return {
+      scrollWatching: false,
       showReserveFormSticky: false,
       navbarFixed: false,
       showNavbar: false,
       currentSection: 'overview',
-      experience: null,
       sections: [
         {
           translations: {
@@ -139,6 +144,9 @@ export default {
     }
   },
   computed: {
+    ...mapGetters({
+      experience: 'reserves/currentExperience'
+    }),
     translations () {
       if(!this.experience) return null
       const translations = this.experience.translations.find(item => {
@@ -148,15 +156,56 @@ export default {
       return translations
     }
   },
-  async mounted() {
-    if(this.experience) {
-      const experienceContainer = document.getElementById('experience-container')
-  
-      const experienceContainerIsScrolled = () => {
-        const bounding = experienceContainer.getBoundingClientRect()
-        return (bounding.height + bounding.y - window.innerHeight) <= 0
+  created() {
+    if (process.client) {
+      window.addEventListener('scroll', this.watchReserveAndNavbar)
+    }
+  },
+  destroyed() {
+    if (process.client) {
+      window.removeEventListener('scroll', this.watchReserveAndNavbar)
+    }
+  },
+  methods: {
+    ...mapMutations({
+      resetReserveForm: 'reserves/RESET_FORM',
+      setExperience: 'reserves/SET_EXPERIENCE'
+    }),
+    watchReserveAndNavbar () {
+      const pageTop = window.window.pageYOffset
+
+      if(pageTop > 600 && !this.showReserveFormSticky) {
+        this.showReserveFormSticky = true
+      } else if(pageTop <= 600 && this.showReserveFormSticky) {
+        this.showReserveFormSticky = false
       }
 
+      const currentSection = this.getActiveSection()
+      if(currentSection) {
+        if(this.currentSection !== currentSection) this.currentSection = currentSection
+      }
+
+      if(pageTop > 600) {
+        this.navbarFixed = !this.experienceContainerIsScrolled()
+        this.showNavbar = true
+      } else {
+        this.navbarFixed = false
+        this.showNavbar = false
+      }
+    },
+    navigateSection (sectionName) {
+      const sectionContainer = document.getElementById(`${sectionName}-section`)
+      const offsetParent = sectionContainer.offsetParent
+
+      window.scrollTo({ top: sectionContainer.offsetTop + offsetParent.offsetTop, behavior: 'smooth' });
+    },
+    experienceContainerIsScrolled () {
+      const experienceContainer = document.getElementById('experience-container')
+      const bounding = experienceContainer.getBoundingClientRect()
+
+      return (bounding.height + bounding.y - window.innerHeight) <= 0
+    },
+    getActiveSection () {
       const overviewSection = document.getElementById('overview-section')
       const activitiesSection = document.getElementById('activities-section')
       const programSection = document.getElementById('program-section')
@@ -164,57 +213,21 @@ export default {
       const socialPointsSection = document.getElementById('social-points-section')
       const testimonialSection = document.getElementById('testimonials-section')
 
-      const getActiveSection = () => {
-        if(testimonialSection.getBoundingClientRect().top < 200) {
-          return 'testimonials'
-        } else if(socialPointsSection.getBoundingClientRect().top < 200) {
-          return 'social-points'
-        } else if(additionalInfoSection.getBoundingClientRect().top < 200) {
-          return 'additional-info'
-        } else if(programSection.getBoundingClientRect().top < 200) {
-          return 'program'
-        } else if(activitiesSection.getBoundingClientRect().top < 200) {
-          return 'activities'
-        } else if(overviewSection.getBoundingClientRect().top < 200) {
-          return 'overview'
-        } else {
-          return null
-        }
+      if(testimonialSection.getBoundingClientRect().top < 200) {
+        return 'testimonials'
+      } else if(socialPointsSection.getBoundingClientRect().top < 200) {
+        return 'social-points'
+      } else if(additionalInfoSection.getBoundingClientRect().top < 200) {
+        return 'additional-info'
+      } else if(programSection.getBoundingClientRect().top < 200) {
+        return 'program'
+      } else if(activitiesSection.getBoundingClientRect().top < 200) {
+        return 'activities'
+      } else if(overviewSection.getBoundingClientRect().top < 200) {
+        return 'overview'
+      } else {
+        return null
       }
-
-      window.addEventListener('scroll', () => {
-        const pageTop = window.window.pageYOffset
-
-        if(pageTop > 600 && !this.showReserveFormSticky) {
-          this.showReserveFormSticky = true
-        } else if(pageTop <= 600 && this.showReserveFormSticky) {
-          this.showReserveFormSticky = false
-        }
-
-        const currentSection = getActiveSection()
-        if(currentSection) {
-          if(this.currentSection !== currentSection) this.currentSection = currentSection
-        }
-
-        if(pageTop > 600) {
-          this.navbarFixed = !experienceContainerIsScrolled()
-          this.showNavbar = true
-        } else {
-          this.navbarFixed = false
-          this.showNavbar = false
-        }
-      })
-    }
-  },
-  methods: {
-    navigateSection (sectionName) {
-      this.currentSection = sectionName
-      const sectionId = `${sectionName}-section`
-      this.$router.push({
-        hash: sectionId
-      })
-      // const sectionContainer = document.getElementById(`${sectionName}-section`).offsetTop
-      // window.scrollTo({ top: sectionContainer, behavior: 'smooth' });
     }
   }
 }
