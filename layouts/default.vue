@@ -61,10 +61,8 @@ export default {
       localStorage.removeItem('groupSize')
     },
     socialAuth(token) {
-      this.$auth.setToken('local', 'Bearer ' + token)
       this.$auth.setStrategy('local')
-
-      this.$auth.fetchUser().then( () => {
+      this.$auth.setUserToken(token).then( () => {
         this.isLoading = false
 
         if (localStorage.getItem('loginRedirectPath')) {
@@ -92,7 +90,7 @@ export default {
     /** Login */
     if('access_token' in this.$route.query) { // Just logged in
       this.isLoading = true
-      this.socialAuth(this.$route.query.access_token)
+      return this.socialAuth(this.$route.query.access_token)
     }
 
     if('error' in this.$route.query && 'provider' in this.$route.query) { // Error on social login

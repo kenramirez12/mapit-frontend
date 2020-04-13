@@ -123,34 +123,25 @@
     <div class="mt-auto">
       <el-button @click="handleSubmit('clientDetailsForm')" type="primary">Continuar</el-button>
     </div>
-    <no-ssr>
-      <form
-        v-if="sessionKey"
-        :action="`${apiUrl}/payments/${paymentId}/callback`"
-        method="post"
-        style="display:none">
-        <script src="https://static-content-qas.vnforapps.com/v2/js/checkout.js?qa=true"
-        :data-sessiontoken="sessionKey"
-        data-channel="web"
-        :data-merchantid="merchantId"
-        data-merchantlogo="img/comercio.png"
-        data-formbuttoncolor="#D80000"
-        :data-cardholdername="visanetFirstame"
-        :data-cardholderlastname="visanetLastname"
-        :data-purchasenumber="reserveId"
-        :data-amount="form.amount"
-        :data-cardholderemail="form.email"
-        data-expirationminutes="10"
-        data-timeouturl="timeout.html" />
-      </form>
-    </no-ssr>
+    <visanetForm
+      v-if="sessionKey"
+      :payment-id="paymentId"
+      :session-token="sessionKey"
+      :merchant-id="merchantId"
+      :firstname="visanetFirstname"
+      :lastname="visanetLastname"
+      :purchase-number="reserveId"
+      :amount="form.amount"
+      :email="form.email" />
   </div>
 </template>
 
 <script>
 import { mapState, mapMutations } from 'vuex'
+import visanetForm from '~/components/checkout/visanetForm'
 
 export default {
+  components: { visanetForm },
   data() {
     const validateFullname = (rule, value, callback) => {
       if (value === '') {
@@ -198,8 +189,8 @@ export default {
       },
       phoneData: '',
       form: {
-        fullname: '',
-        email: '',
+        fullname: this.$auth.loggedIn ? this.$auth.$state.user.fullname : '',
+        email: this.$auth.loggedIn ? this.$auth.$state.user.email : '',
         phone: '',
         birthdate: null,
         country: '',
@@ -245,7 +236,7 @@ export default {
     ...mapState({
       countries: s => s.countries
     }),
-    visanetFirstame() {
+    visanetFirstname() {
       return this.form.fullname.split(' ')[0]
     },
     visanetLastname() {
