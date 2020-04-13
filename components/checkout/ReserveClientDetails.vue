@@ -278,7 +278,7 @@ export default {
         this.sessionKey = resp.payment_session.sessionKey
         this.expirationTime = resp.payment_session.expirationTime
         this.paymentId = resp.payment_uuid
-        this.reserveId = resp.reserve_id + 100
+        this.reserveId = resp.reserve_id + 200
         this.loadingMessage = 'La ventana de pago aparecerá en unos segundos...'
         this.triggerClickVisanet()
         // this.isLoading = false
