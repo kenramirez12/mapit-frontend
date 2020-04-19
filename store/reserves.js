@@ -6,6 +6,7 @@ export const state = () => ({
     groupSize: '',
     time: '',
     extras: [],
+    message: '',
     fullname: '',
     docNumber: '',
     email: '',
@@ -29,6 +30,12 @@ export const getters = {
   currentExperience: (state) => {
     return state.experience
   },
+  igv: (state, getters) => {
+    if(!state.experience) return null
+    if(state.form.country === 'PE') {
+      return getters.subpricePerPerson * 0.18
+    } else return 0
+  },
   reservePrice: (state) => {
     if(!state.experience) return null
     if(state.experience.price_type === 1) return state.experience.normal_price
@@ -44,7 +51,7 @@ export const getters = {
     
     return parseInt(possiblePrices[0].price).toFixed(2)
   },
-  pricePerPerson: (state, getters) => {
+  subpricePerPerson: (state, getters) => {
     if(!state.experience) return null
     let price = parseFloat(getters.reservePrice)
 
@@ -57,6 +64,10 @@ export const getters = {
     }
 
     return price
+  },
+  pricePerPerson: (state, getters) => {
+    if(!state.experience) return null
+    return getters.subpricePerPerson + getters.igv
   },
   totalPrice: (state, getters) => {
     return getters.pricePerPerson * state.form.groupSize

@@ -1,9 +1,29 @@
 <template>
   <div class="success-container p-4">
     <div class="success-card m-auto p-6">
-      <img src="/images/checkout-fail.svg" class="mx-auto" width="100">
+      <img src="/images/checkout-fail.svg" class="mx-auto" width="70">
       <h3 class="success-card__title mt-6">Error de<br>compra</h3>
-      <p class="success-card__copy my-5 mb-8">¡ Dolor velit reprehenderit voluptate magna. Et quis aute ut elit. Consequat eiusmod pariatur sint voluptate laborum sunt cupidatat consectetur deserunt cillum sint fugiat.</p>
+      <p class="success-card__copy mt-5">¡ Dolor velit reprehenderit voluptate magna. Et quis aute ut elit. Consequat eiusmod pariatur sint voluptate laborum sunt cupidatat consectetur deserunt cillum sint fugiat.</p>
+      <div class="py-6 font-light">
+        <div v-if="!reserve.payment.details" class="w-full text-sm">
+          {{ $lang.translate(translations, 'denial_reason') }}:<br>
+          {{ $lang.translate(translations, 'api_error') }}
+        </div>
+        <div v-else class="flex flex-wrap text-sm">
+          <div class="w-1/2 py-2">
+            {{ $lang.translate(translations, 'order_number') }}:<br>
+            {{ reserve.payment.details.data.TRACE_NUMBER }}
+          </div>
+          <div class="w-1/2 py-2">
+            {{ $lang.translate(translations, 'order_date') }}:<br>
+            {{ reserve.payment.details.data.TRANSACTION_DATE }}
+          </div>
+          <div class="w-full py-2">
+            {{ $lang.translate(translations, 'denial_reason') }}:<br>
+            {{ reserve.payment.details.data.ACTION_DESCRIPTION }}
+          </div>
+        </div>
+      </div>
       <el-button
         type="primary"
         class="px-6"
@@ -21,6 +41,10 @@ export default {
       type: Object,
       required: true,
       default: () => {}
+    },
+    translations: {
+      type: Object,
+      required: true
     }
   }
 }

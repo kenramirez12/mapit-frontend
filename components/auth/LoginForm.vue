@@ -13,7 +13,7 @@
           type="email"
           :class="{ 'shadow-input' : !isLoading }"
           class="border-0"
-          placeholder="Correo electrónico" />
+          :placeholder="$lang.translate(translations, 'email')" />
       </el-form-item>
       <el-form-item prop="password">
         <el-input
@@ -22,17 +22,19 @@
           type="password"
           :class="{ 'shadow-input' : !isLoading }"
           class="border-0"
-          placeholder="Contraseña" />
+          :placeholder="$lang.translate(translations, 'password')" />
       </el-form-item>
       <el-button
         @click="onSubmit('loginForm')"
         :class="{ 'shadow-primary' : !isLoading }"
         class="w-full"
         type="primary">
-        Ingresar
+        {{ $lang.translate(translations, 'login') }}
       </el-button>
       <div class="mt-4 text-center">
-        <a href="#" class="text-xs">¿Olvidaste tu contraseña?</a>
+        <a href="#" class="text-xs">
+          {{ $lang.translate(translations, 'forgot_password') }}
+        </a>
       </div>
     </el-form>
   </div>
@@ -49,16 +51,40 @@ export default {
   data () {
     return {
       isLoading: false,
+      translations: {
+        'es_ES': {
+          email: 'Correo electrónico',
+          password: 'Contraseña',
+          login: 'Ingresar',
+          forgot_password: '¿Olvidaste tu contraseña?',
+          valid_email: 'Ingrese un email válido',
+          valid_password: 'Ingrese su contraseña',
+          incorrect_data: 'El correo y/o la contraseña son incorrectos.'
+        },
+        'en_EN': {
+          email: 'Email',
+          password: 'Password',
+          login: 'Login',
+          forgot_password: 'Forgot Password?',
+          valid_email: 'Enter a valid email',
+          valid_password: 'Enter your password',
+          incorrect_data: 'Email or password does not match.'
+        }
+      },
       loginData: {
         email: '',
         password: ''
-      },
-      loginFormRules: {
+      }
+    }
+  },
+  computed: {
+    loginFormRules() {
+      return {
         email: [
-          { type: 'email', required: true, message: 'Ingrese un email válido' }
+          { type: 'email', required: true, message: this.$lang.translate(this.translations, 'valid_email') }
         ],
         password: [
-          { required: true, message: 'Ingrese su contraseña' }
+          { required: true, message: this.$lang.translate(this.translations, 'valid_password') }
         ]
       }
     }
@@ -85,7 +111,7 @@ export default {
           console.error('LoginForm.tryLogin()', e)
         }
         this.isLoading = false
-        this.$message.error('El correo y/o la contraseña son incorrectos.');
+        this.$message.error(this.$lang.translate(this.translations, 'incorrect_data'));
       }
     }
   }

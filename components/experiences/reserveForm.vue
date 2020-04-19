@@ -16,7 +16,7 @@
           >
         </div>
         <div v-if="sticky" class="flex items-center ml-auto">
-          <span class="text-sm">{{isExpanded ? 'MENOS' : 'VER MÁS' }}</span>
+          <span class="text-sm">{{isExpanded ? $lang.translate(translations, 'show_less') : $lang.translate(translations, 'see_more') }}</span>
           <el-button
             :icon="`el-icon-${isExpanded ? 'minus' : 'plus'}`"
             type="primary"
@@ -129,7 +129,13 @@ export default {
           persons: 'Personas',
           book: 'Reservar',
           reserve_copy: 'Personaliza tu experiencia: día, hora, tamaño de grupo, preferencias, y más.',
-          inquiry: 'Consulta'
+          inquiry: 'Consulta',
+          missing_date: 'Seleccione una fecha',
+          missing_group_size: 'Seleccione la cantidad de personas',
+          not_enough_places: 'No hay cupos suficientes para la fecha seleccionada',
+          validation_error: 'No pudimos completar el proceso, por favor inténtelo nuevamente',
+          see_more: 'VER MÁS',
+          show_less: 'MENOS'
         },
         'en_EN': {
           from: 'From',
@@ -138,7 +144,13 @@ export default {
           persons: 'Group Size',
           book: 'Book',
           reserve_copy: 'Customize your experience: day, time, group size, preferences, and more.',
-          inquiry: 'Inquire'
+          inquiry: 'Inquire',
+          missing_date: 'Choose a date',
+          missing_group_size: 'Choose a group size',
+          not_enough_places: 'There are no available places for this day',
+          validation_error: 'The process could not be completed. Please try again.',
+          see_more: 'SEE MORE',
+          show_less: 'SHOW LESS'
         }
       }
     };
@@ -240,13 +252,13 @@ export default {
     },
     validateForm() {
       if(this.reserveDate === '') {
-        this.$message.warning('Seleccione una fecha')
+        this.$message.warning(this.$lang.translate(this.translations, 'missing_date'))
         this.$refs.reserveDate.focus()
         return false
       }
 
       if(this.groupSize === '') {
-        this.$message.warning('Seleccione la cantidad de personas')
+        this.$message.warning(this.$lang.translate(this.translations, 'missing_group_size'))
         this.$refs.reserveGroupSize.focus()
         return false
       }
@@ -270,12 +282,12 @@ export default {
             }
           } else {
             this.isLoading = false
-            return this.$message.error('No hay cupos suficientes para la fecha seleccionada')
+            return this.$message.error(this.$lang.translate(this.translations, 'not_enough_places'))
           }
         } catch (error) {
           console.error(error)
           this.isLoading = false
-          return this.$message.error('No pudimos completar el proceso, por favor inténtelo nuevamente')
+          return this.$message.error(this.$lang.translate(this.translations, 'validation_error'))
         }
       }
     }
@@ -290,10 +302,14 @@ export default {
 
 .reserve-form {
   width: 100%;
-  max-width: 23.5rem;
+  max-width: 20rem;
   margin-left: auto;
   display: flex;
   flex-wrap: wrap;
+
+  @media screen and (min-width: 768px) {
+    max-width: 23.5rem;
+  }
 
   &--sticky {
     width: 380px;

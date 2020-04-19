@@ -53,12 +53,11 @@ export default {
     margin: auto;
 
     @media screen and (min-width: 768px) {
-      max-width: 18rem;
+      max-width: 19rem;
     }
 
     &:hover {
-      transform: scale(.99);
-      box-shadow: 0 0 8px rgba(0, 0, 0, .2);
+      box-shadow: 0 0 8px rgba(0, 0, 0, .3);
     }
     &__sale {
       position: absolute;

@@ -71,7 +71,7 @@ body {
   max-width: none!important;
   
   @media screen and (min-width: 768px) {
-    width: calc(100% - 4rem)!important;
+    width: calc(100% - 5rem)!important;
   }
 }
 
@@ -195,6 +195,26 @@ body {
   .circular {
     margin-right: auto;
     margin-left: auto;
+  }
+}
+
+.link-underline {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+
+  &--error {
+    color: #FF5A5F;
+  }
+  
+  span {
+    line-height: 1;
+  }
+
+  &:hover {
+    span {
+      text-decoration: underline;
+    }
   }
 }
 
@@ -345,7 +365,8 @@ body {
     content: attr(data-placeholder);
     position: absolute;
     left: 0;
-    line-height: 25px;
+    bottom: 5px;
+    line-height: 1;
     font-weight: 300;
     color: #999;
     white-space: nowrap;
@@ -368,7 +389,7 @@ body {
     &::before {
       font-size: 70%;
       line-height: 1;
-      top: -1rem;
+      top: -.8rem;
     }
   }
 

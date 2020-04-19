@@ -2,13 +2,9 @@
   <div class="flex flex-wrap .-m-2">
     <template v-if="isLoading">
       <div
-        v-for="n in cols*3"
+        v-for="n in 3*3"
         :key="n"
-        :class="{
-          'lg:w-1/3 px-2' : cols === 3,
-          'lg:w-1/4' : cols === 4
-        }"
-        class="w-full sm:w-1/2 mb-6"
+        class="experience-grid__item px-2 mb-6"
       >
         <ExperienceCard :loading="true" />
       </div>
@@ -17,11 +13,7 @@
       <div
         v-for="experience in experiences"
         :key="experience.id"
-        :class="{
-          'lg:w-1/3 px-2' : cols === 3,
-          'lg:w-1/4' : cols === 4
-        }"
-        class="w-full sm:w-1/2 mb-6"
+        class="experience-grid__item px-2 mb-6"
       >
         <ExperienceCard :experience="experience" />
       </div>
@@ -47,10 +39,6 @@ export default {
   },
 
   props: {
-    cols: {
-      type: Number,
-      required: true
-    },
     experiences: {
       type: Array,
       required: true
@@ -78,3 +66,19 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+  .experience-grid {
+    &__item {
+      width: 100%;
+
+      @media screen and (min-width: 610px) {
+        width: 50%;
+      }
+
+      @media screen and (min-width: 1270px) {
+        width: 33.333%;
+      }
+    }
+  }
+</style>

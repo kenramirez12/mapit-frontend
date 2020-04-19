@@ -3,20 +3,20 @@
     :visible.sync="isVisible"
     custom-class="auth-dialog">
     <div class="flex">
-      <div class="w-1/2">
+      <div class="auth-dialog__left">
         <div class="auth-hero">
           <div class="auth-hero__content">
-            <h3 class="auth-hero__title">Únete<br>hoy</h3>
-            <p class="auth-hero__copy">Sé parte de la nueva<br>generación de viajeros.</p>
+            <h3 class="auth-hero__title" v-html="$lang.translate(translations, 'hero_title')" />
+            <p class="auth-hero__copy" v-html="$lang.translate(translations, 'hero_copy')" />
           </div>
         </div>
       </div>
-      <div class="w-1/2">
+      <div class="auth-dialog__right">
         <el-tabs type="border-card" class="full">
-          <el-tab-pane label="Ingresar">
+          <el-tab-pane :label="$lang.translate(translations, 'login')">
             <LoginForm />
           </el-tab-pane>
-          <el-tab-pane label="Regístrate">
+          <el-tab-pane :label="$lang.translate(translations, 'register')">
             <RegisterForm />
           </el-tab-pane>
         </el-tabs>
@@ -37,7 +37,21 @@ export default {
   },
   data () {
     return {
-      isVisible: this.authDialogVisible
+      isVisible: this.authDialogVisible,
+      translations: {
+        'es_ES': {
+          hero_title: `Únete<br>hoy`,
+          hero_copy: `Sé parte de la nueva<br>generación de viajeros`,
+          login: 'Ingresar',
+          register: 'Registrate'
+        },
+        'en_EN': {
+          hero_title: `Join Us!`,
+          hero_copy: `Be part of the next<br>generation of travelers`,
+          login: 'Login',
+          register: 'Register'
+        }
+      }
     }
   },
   computed: {
@@ -92,8 +106,25 @@ export default {
   }
 
   .auth-dialog {
-    max-width: 960px;
-    width: calc(100% - 60px);  
+    max-width: 480px;
+    width: calc(100% - 60px);
+
+    @media screen and (min-width: 830px) {
+      max-width: unset;
+      width: 960px;
+    }
+
+    &__left, &__right {
+      flex: 1;
+    }
+    
+    &__left {
+      display: none;
+
+      @media screen and (min-width: 830px) {
+        display: block;
+      }
+    }
   }
 
   .auth-hero {

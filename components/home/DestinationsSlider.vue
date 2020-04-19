@@ -45,7 +45,7 @@ export default {
     return {
       swiperOption: {
         slidesPerView: 'auto',
-        spaceBetween: 30,
+        spaceBetween: 20,
         loop: false
       }
     }
@@ -71,13 +71,17 @@ export default {
 <style lang="scss" scoped>
   .experiences-slider {
     width: 100%;
-    height: 550px;
-    padding-left: 1.5rem;
+    height: 480px;
+    padding-left: .5rem;
+
+    @media screen and (min-width: 768px) {
+      padding-left: 1.5rem;
+    }
   }
 
   .swiper-container {
-    padding-left: .5rem;
-    width: calc(100% - .5rem);
+    padding-left: .75rem;
+    width: calc(100% - .75rem);
   }
 
   .swiper-slide {
@@ -85,7 +89,7 @@ export default {
     max-width: 17rem;
 
     @media screen and (min-width: 768px) {
-      max-width: 18rem;
+      max-width: 19rem;
     }
   }
 </style>

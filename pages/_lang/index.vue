@@ -15,7 +15,11 @@
         </div>
       </div>
       <div class="sliders-container">
-        <ExperiencesSlider :prev="expSliderPrev" :next="expSliderNext" />
+        <ExperiencesSlider
+          :prev="expSliderPrev"
+          :next="expSliderNext"
+          :experiences="lastExperiences"
+          :translations="experiencesTranslations" />
       </div>
       <div class="container mx-auto pt-8 inline-block">
         <div class="w-full flex items-center mb-4 md:mb-8 mt-6 pl-2 md:pl-0">
@@ -36,9 +40,11 @@
 
       <TrustedBySlider :translations="translations" />
 
-      <div class="container mx-auto py-6 my-6 px-4">
+      <div
+        v-if="testimonials && testimonials.length > 0"
+        class="container mx-auto py-6 my-6 px-4">
         <div class="ml-auto py-6 my-6 md:w-11/12 lg:w-3/4">
-          <TestimonialsSlider />
+          <TestimonialsSlider :testimonials="testimonials" />
         </div>
       </div>
 
@@ -48,6 +54,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import AppHero from '~/components/AppHero'
 import ExperiencesSlider from '~/components/home/ExperiencesSlider'
 import DestinationsSlider from '~/components/home/DestinationsSlider'
@@ -78,6 +85,16 @@ export default {
 
   data() {
     return {
+      lastExperiences: null,
+      testimonials: null,
+      experiencesTranslations: {
+        es_ES: {
+          noResultsCopy: 'No encontramos lo que buscas'
+        },
+        en_EN: {
+          noResultsCopy: 'We couldn’t find what you’re searching for'
+        }
+      },
       yourNumber: '',
       expSliderNext: 0,
       expSliderPrev: 0,
@@ -127,6 +144,26 @@ export default {
       return this.$lang.current().iso_lang
     }
   },
+
+  async mounted () {
+    this.getFeaturedTestimonials()
+    const resp = await this.getExperiences({ per_page: 10 })
+    this.lastExperiences = resp ? resp.data : []
+  },
+
+  methods: {
+    ...mapActions({
+      getExperiences: 'experiences/getExperiences'
+    }),
+    async getFeaturedTestimonials() {
+      try {
+        const resp = await this.$axios.get('/testimonials/featured')
+        this.testimonials = resp.data.testimonials
+      } catch (error) {
+        console.error('getFeaturedTestimonials', error.response)
+      }
+    }
+  }
 
   // mounted() {
   //   const whySection = document.getElementById('why-us')

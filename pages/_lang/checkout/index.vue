@@ -7,14 +7,14 @@
           success : currentStep === 2
         }"
         class="steps__item">
-        <a href="#" class="steps__link">1. Detalles de la experiencia</a>
+        <a href="#" class="steps__link">1. {{ $lang.translate(translations, 'experience_details') }}</a>
       </li>
       <li
         :class="{
           active : currentStep === 2
         }"
         class="steps__item">
-        <a href="#" class="steps__link">2. Datos del viajero</a>
+        <a href="#" class="steps__link">2. {{ $lang.translate(translations, 'traveler_details') }}</a>
       </li>
     </ul>
     <div class="container flex m-auto py-6">
@@ -40,6 +40,20 @@ export default {
     ReserveDetails,
     ReserveClientDetails,
     ReserveResume
+  },
+  data() {
+    return {
+      translations: {
+        'es_ES': {
+          experience_details: 'Detalles de la experiencia',
+          traveler_details: 'Datos del viajero'
+        },
+        'en_EN': {
+          experience_details: 'Experience details',
+          traveler_details: 'Traveler details'
+        }
+      }
+    }
   },
   computed: {
     ...mapGetters({

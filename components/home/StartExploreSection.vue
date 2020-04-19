@@ -1,5 +1,7 @@
 <template>
-  <div class="explore-section" :style="{ backgroundImage: 'url(' + require('@/assets/images/start-explore-bg.jpg') + ')'}">
+  <div
+    class="explore-section"
+    style="background-image: url('/images/home/bg_final.jpg')">
     <el-button
       @click="$router.push(`/${$lang.current().slug}/experiences`)"
       type="primary"

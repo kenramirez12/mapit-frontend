@@ -8,11 +8,11 @@
     class="social-login-btn shadow-input mb-4">
     <template v-if="social === 'facebook'">
       <img src="~/assets/images/facebook-logo.svg" style="height:20px">
-      <span class="text-left">Continúa con Facebook</span>
+      <span class="text-left">{{ $lang.translate(translations, 'continue_with') }} Facebook</span>
     </template>
     <template v-else-if="social === 'google'">
       <img src="~/assets/images/google-logo.svg" style="height:20px">
-      <span class="text-left">Continúa con Google</span>
+      <span class="text-left">{{ $lang.translate(translations, 'continue_with') }} Google</span>
     </template>
     <span v-else />
   </button>
@@ -26,6 +26,18 @@ export default {
     social: {
       type: String,
       required: true
+    }
+  },
+  data() {
+    return {
+      translations: {
+        'es_ES': {
+          continue_with: 'Continúa con'
+        },
+        'en_EN': {
+          continue_with: 'Continue with'
+        }
+      }
     }
   },
   computed: {
@@ -73,7 +85,11 @@ export default {
     }
 
     span {
-      flex: 2;
+      flex: 3;
+
+      @media screen and (min-width: 830px) {
+        flex: 2;
+      }
     }
 
     &--facebook {

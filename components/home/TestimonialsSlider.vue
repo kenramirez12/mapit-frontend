@@ -6,9 +6,9 @@
     </div>
     <div class="swiper-wrapper">
       <TestimonialItem
-        v-for="n in 6"
-        :key="n"
-        :testimonial-number="n"
+        v-for="(testimonial, n) in testimonials"
+        :key="testimonial.id"
+        :testimonial-number="n + 1"
         :testimonial="testimonial"
         class="swiper-slide" />
     </div>
@@ -21,20 +21,21 @@ import TestimonialItem from '~/components/TestimonialItem'
 
 export default {
   components: { TestimonialItem },
+  props: {
+    testimonials: {
+      type: Array,
+      required: true
+    }
+  },
   data() {
     return {
       swiperOption: {
-        loop: true,
+        loop: false,
         slidesPerView: 'auto',
         effect: 'fade',
         fadeEffect: {
           crossFade: true
         }
-      },
-      testimonial: {
-        review: 'Professionals in their craft! All services were super great with strong attention to details in the travel',
-        fullname: 'Polina Kuzina',
-        country: 'Ukrane'
       }
     }
   },

@@ -1,16 +1,28 @@
 <template>
   <div>
-    <p
-      v-if="Array.isArray(lastExperiences) && lastExperiences.length === 0"
-      class="pl-5 font-light">
-      No se encontraron experiencias.
-    </p>
+    <div
+      v-if="experiences && experiences.length === 0"
+      class="flex">
+      <div class="container mx-auto pb-4 inline-block">
+        <el-alert
+          class="pt-4 pb-6"
+          type="error"
+          :closable="false">
+          <h4 class="text-3xl text-black">
+            ¡Whoops!
+          </h4>
+          <p class="text-base font-light text-black">
+            {{ $lang.translate(translations, 'noResultsCopy') }}
+          </p>
+        </el-alert>
+      </div>
+    </div>
     <div
       v-else
       class="experiences-slider">
       <div v-swiper:mySwiper="swiperOption">
         <div class="swiper-wrapper py-5">
-          <template v-if="lastExperiences === null">
+          <template v-if="experiences === null">
             <div
               v-for="n in 4"
               :key="n"
@@ -20,7 +32,7 @@
           </template>
           <template v-else>
             <div
-              v-for="experience in lastExperiences"
+              v-for="experience in experiences"
               :key="experience.id"
               class="swiper-slide"
               style="height:auto"
@@ -40,14 +52,21 @@ import ExperienceCard from '~/components/ExperienceCard'
 
 export default {
   props: {
+    experiences: {
+      required: true
+    },
     prev: {
       type: Number,
-      required: true
+      required: false
     },
     next: {
       type: Number,
-      required: true
+      required: false
     },
+    translations: {
+      type: Object,
+      required: true
+    }
   },
   components: {
     ExperienceCard
@@ -56,12 +75,8 @@ export default {
     return {
       swiperOption: {
         slidesPerView: 'auto',
-        spaceBetween: 30,
+        spaceBetween: 20,
         loop: false
-      },
-      lastExperiences: null,
-      experiencesOptions: {
-        per_page: 10
       }
     }
   },
@@ -72,15 +87,6 @@ export default {
     next() {
       this.mySwiper.slideNext()
     }
-  },
-  async mounted () {
-    const experiences = await this.getExperiences(this.experiencesOptions)
-    this.lastExperiences = experiences ? experiences.data : []
-  },
-  methods: {
-    ...mapActions({
-      getExperiences: 'experiences/getExperiences'
-    })
   }
 }
 </script>
@@ -88,13 +94,17 @@ export default {
 <style lang="scss" scoped>
   .experiences-slider {
     width: 100%;
-    height: 550px;
-    padding-left: 1.5rem;
+    height: 480px;
+    padding-left: .5rem;
+
+    @media screen and (min-width: 768px) {
+      padding-left: 1.5rem;
+    }
   }
 
   .swiper-container {
-    padding-left: .5rem;
-    width: calc(100% - .5rem);
+    padding-left: .75rem;
+    width: calc(100% - .75rem);
   }
 
   .swiper-slide {
@@ -102,7 +112,7 @@ export default {
     max-width: 17rem;
 
     @media screen and (min-width: 768px) {
-      max-width: 18rem;
+      max-width: 19rem;
     }
   }
 </style>

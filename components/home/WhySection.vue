@@ -2,7 +2,45 @@
   <div id="why-us" class="why-us-section py-6">
     <div class="container mx-auto my-6 py-6 px-4">
       <h2 class="text-4xl font-light text-center text-white mb-6 pb-6">{{ $lang.translate(translations, 'why_mapit') }}</h2>
-
+      
+      <div class="why-container--responsive pt-6">
+        <div class="relative">
+          <div v-swiper:WhySwiper="swiperOption" class="pb-6">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide">
+                <div class="w-100 why-item__icon">
+                  <img src="/images/home/why-01.svg" class="mx-auto">
+                </div>
+                <div class="d-block mt-4 why-item__label">{{ $lang.translate(translations, 'why_mapit_1') }}</div>
+              </div>
+              <div class="swiper-slide">
+                <div class="w-100 why-item__icon">
+                  <img src="/images/home/why-02.svg" class="mx-auto">
+                </div>
+                <div class="d-block mt-4 why-item__label">{{ $lang.translate(translations, 'why_mapit_2') }}</div>
+              </div>
+              <div class="swiper-slide">
+                <div class="w-100 why-item__icon">
+                  <img src="/images/home/why-03.svg" class="mx-auto">
+                </div>
+                <div class="d-block mt-4 why-item__label">{{ $lang.translate(translations, 'why_mapit_3') }}</div>
+              </div>
+              <div class="swiper-slide">
+                <div class="w-100 why-item__icon">
+                  <img src="/images/home/why-04.svg" class="mx-auto">
+                </div>
+                <div class="d-block mt-4 why-item__label">{{ $lang.translate(translations, 'why_mapit_4') }}</div>
+              </div>
+            </div>
+            <div class="why-swiper-button-prev">
+              <img src="/images/home/left-arrow-white.svg">
+            </div>
+            <div class="why-swiper-button-next">
+              <img src="/images/home/right-arrow-white.svg">
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="why-container pt-6">
         <div class="flex-1 pt-6 why-item">
           <div class="w-100 why-item__icon">
@@ -39,6 +77,18 @@ export default {
     translations: {
       type: Object,
       required: true
+    }
+  },
+  data() {
+    return {
+      swiperOption: {
+        slidesPerView: 'auto',
+        loop: false,
+        navigation: {
+          nextEl: '.why-swiper-button-next',
+          prevEl: '.why-swiper-button-prev',
+        }
+      }
     }
   },
   created() {
@@ -116,14 +166,25 @@ export default {
 
 <style lang="scss" scoped>
   .why-us-section {
-    /* height: 100vh; */
     height: 768px;
     display: flex;
     align-items: center;
   }
+  .why-swiper-button-prev,
+  .why-swiper-button-next {
+    position: absolute;
+    bottom: 1rem;
+    z-index: 2;
+  }
+  .why-swiper-button-prev {
+    left: calc(50% - 150px);
+  }
+  .why-swiper-button-next {
+    right: calc(50% - 150px);
+  }
 
-  .why-container {
-    display: flex;
+  .why-container,
+  .why-container--responsive {
     flex-wrap: wrap;
     width: 100%;
     max-width: 1280px;
@@ -132,6 +193,20 @@ export default {
 
     @media screen and (min-width: 768px) {
       width: calc(100% - 4rem);
+    }
+  }
+
+  .why-container {
+    display: none;
+
+    @media screen and (min-width: 700px) {
+      display: flex;
+    }
+  }
+
+  .why-container--responsive {
+    @media screen and (min-width: 700px) {
+      display: none;
     }
   }
 
@@ -157,8 +232,21 @@ export default {
   }
   .why-item__icon {
     margin-bottom: 3rem;
-    transform: scale(.1);
     transition: all 0.3s cubic-bezier(.17,1.01,.69,1.19);
+
+    @media screen and (min-width: 700px) {
+      transform: scale(.1);
+    }
+
+    img {
+      width: 60%;
+      max-width: 230px;
+
+      @media screen and (min-width: 700px) {
+        width: 90%;
+        max-width: unset;
+      }
+    }
   }
 
   body.primary {

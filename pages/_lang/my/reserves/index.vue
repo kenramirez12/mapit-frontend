@@ -1,7 +1,7 @@
 <template>
   <div class="container pt-12 pb-4 px-4 mx-auto">
     <h1 class="mb-6 text-3xl reserves-container__title">
-      Historial de reservas
+      {{ $lang.translate(translations, 'booking_history') }}
     </h1>
     <div class="pb-6">
       <ReservesTableList :reserves="reserves" />
@@ -43,44 +43,14 @@ export default {
   },
   data () {
     return {
-      tableData: [
-        {
-          reserveDate: '12/06/2020',
-          title: 'Experiencia en Cusco',
-          destination: 'Cusco',
-          status: ''
+      translations: {
+        'es_ES': {
+          booking_history: 'Historial de reservas'
         },
-        {
-          reserveDate: '12/06/2020',
-          title: 'Experiencia en Cusco',
-          destination: 'Cusco'
-        },
-        {
-          reserveDate: '12/06/2020',
-          title: 'Experiencia en Cusco',
-          destination: 'Cusco'
-        },
-        {
-          reserveDate: '12/06/2020',
-          title: 'Experiencia en Cusco',
-          destination: 'Cusco'
-        },
-        {
-          reserveDate: '12/06/2020',
-          title: 'Experiencia en Cusco',
-          destination: 'Cusco'
-        },
-        {
-          reserveDate: '12/06/2020',
-          title: 'Experiencia en Cusco',
-          destination: 'Cusco'
-        },
-        {
-          reserveDate: '12/06/2020',
-          title: 'Experiencia en Cusco',
-          destination: 'Cusco'
+        'en_EN': {
+          booking_history: 'Booking History'
         }
-      ]
+      }
     }
   },
   watch: {

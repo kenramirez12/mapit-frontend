@@ -1,47 +1,30 @@
 <template>
   <div>
     <PageHeader
-      title="Destinos"
-      subtitle="Reserva experiencias auténticas y encuentra cosas para hacer en Cusco, Lima, Puno, Arequipa y más." />
-    <div class="container py-6 px-4 my-6 mx-auto">
-      <div class="flex flex-wrap">
-        <div class="w-3/12 pr-6">
-          <ul class="mr-6 text-sm pb-6 border-black border-b">
-            <div class="flex items-center justify-between pb-2 mb-3 border-black border-b">
-              <span>ALL</span>
-              <span>22</span>
-            </div>
-            <li
-              v-for="destination in destinations"
-              :key="destination.id"
-              class="item-with-counter">
-              <a
-                @click.prevent="selectedDestination = destination.id"
-                :class="{ 'text-primary font-bold' : selectedDestination === destination.id }"
-                href="#">
-                {{ destination.name }}
-              </a>
-              <div class="rounded-counter"><span>08</span></div>
-            </li>
-          </ul>
+      :translations="pageTranslations"
+      image="/images/destinations/banner.jpg" />
+    <div class="container max-width-container py-6 lg:px-4 my-6 mx-auto">
+      <div class="flex">
+        <FiltersSidebar
+          :show-categories="true"
+          @refresh="retrieveExperiences" />
 
-          <div class="mr-6 mt-6">
-            <el-select
-              v-model="filters.experience_id"
-              placeholder="EXPERIENCES"
-              size="large"
-              class="w-full bg-white shadow-lg border-0">
-              <el-option
-                v-for="item in experiences"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value">
-              </el-option>
-            </el-select>
+        <div class="experiences-container">
+          <ExperiencesGrid
+            :experiences.sync="experiences"
+            :is-loading.sync="loadingExperiences" />
+          
+          <div
+            v-if="experiences && experiences.length > 0 && lastPage > 1"
+            class="block mt-6">
+            <el-pagination
+              v-if="lastPage"
+              layout="prev, pager, next"
+              :current-page.sync="currentPage"
+              :page-count="lastPage"
+              @current-change="handleCurrentPage"
+            />
           </div>
-        </div>
-        <div class="w-9/12">
-          <!-- <ExperiencesGrid :cols="3" :experiences="9" /> -->
         </div>
       </div>
     </div>
@@ -49,38 +32,83 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapActions } from 'vuex'
 import PageHeader from '@/components/PageHeader'
 import ExperiencesGrid from '@/components/ExperiencesGrid'
+import FiltersSidebar from '@/components/experiences/FiltersSidebar'
 
 export default {
   components: {
     PageHeader,
-    ExperiencesGrid
+    ExperiencesGrid,
+    FiltersSidebar
   },
-
   data() {
     return {
-      selectedDestination: null,
-      destinations: [
-        { id: 1, name: 'Lima' },
-        { id: 2, name: 'Cusco' },
-        { id: 3, name: 'Arequipa' }
-      ],
-      filters: {
-        experience_id: []
-      }
+      flag: 0,
+      experiences: [],
+      loadingExperiences: false,
+      selectedDestination: '',
+      pageTranslations: {
+        'es_ES': {
+          title: 'Destinos',
+          subtitle: `Reserva experiencias auténticas y encuentra cosas para hacer en Cusco, Lima, Puno, Arequipa y más.`
+        },
+        'en_EN': {
+          title: 'Destinations',
+          subtitle: 'Book authentic experiences in Cusco, Lima, Puno, Arequipa and beyond.'
+        }
+      },
+      currentPage: 1,
+      lastPage: 1
     }
   },
+  mounted () {
+    this.retrieveExperiences()
+  },
+  methods: {
+    ...mapActions({
+      getExperiences: 'experiences/getExperiences'
+    }),
+    handleCurrentPage (page) {
+      const params = {page, ...this.filters }
+      this.retrieveExperiences(params)
+    },
+    async retrieveExperiences(params = null) {
+      this.loadingExperiences = true
 
-  computed: {
-    ...mapState({
-      experiences: s => s.experiences
-    })
+      try {
+        const experiences = await this.getExperiences(params)
+        this.experiences = experiences.data
+        this.lastPage = experiences.last_page 
+        this.loadingExperiences = false
+      } catch (error) {
+        this.loadingExperiences = false
+      }
+    }
   }
 }
 </script>
 
-<style>
+<style lang="scss">
+.max-width-container {
+  max-width: 980px!important;
 
+  @media screen and (min-width: 1270px) {
+    max-width: 1300px!important;
+  }
+}
+
+.experiences-container {
+  width: 100%;
+  max-width: calc(20rem*2);
+  margin-right: auto;
+  margin-left: auto;
+
+  @media screen and (min-width: 1270px) {
+    margin-right: 0;
+    padding-left: 1rem;
+    max-width: calc(20rem*3);
+  }
+}
 </style>

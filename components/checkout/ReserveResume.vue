@@ -4,16 +4,22 @@
       {{ $lang.apiTranslate(experience.translations, 'title') }}
     </h3>
     <div class="flex font-light">
-      <div class="w-2/3">Cantidad de viajeros</div>
+      <div class="w-2/3">
+        {{ $lang.translate(translations, 'group_size') }}
+      </div>
       <div class="w-1/3 text-right">{{ groupSize }}</div>
     </div>
     <div class="flex font-light">
-      <div class="w-2/3">Fecha</div>
+      <div class="w-2/3">
+        {{ $lang.translate(translations, 'date') }}
+      </div>
       <div class="w-1/3 text-right">{{ reserveDate }}</div>
     </div>
     <hr class="my-3">
     <div class="flex font-light">
-      <div class="w-2/3">Precio por persona</div>
+      <div class="w-2/3">
+        {{ $lang.translate(translations, 'per_person') }}
+      </div>
       <div class="w-1/3 text-right">${{ reservePrice }}</div>
     </div>
 
@@ -32,20 +38,26 @@
     </template>
 
     <div class="flex font-light">
-      <div class="w-2/3">Subtotal por persona</div>
-      <div class="w-1/3 text-right">${{ pricePerPerson.toFixed(2) }}</div>
+      <div class="w-2/3">
+        {{ $lang.translate(translations, 'subtotal') }}
+      </div>
+      <div class="w-1/3 text-right">${{ subpricePerPerson.toFixed(2) }}</div>
     </div>
     <div class="flex pb-3 font-light">
-      <div class="w-2/3">IGV (18%)</div>
-      <div class="w-1/3 text-right">$0.00</div>
+      <div class="w-2/3">{{ $lang.translate(translations, 'igv') }} (18%)</div>
+      <div class="w-1/3 text-right">${{ igv.toFixed(2) }}</div>
     </div>
     <div class="flex pt-3 font-light">
-      <div class="w-2/3">TOTAL POR PERSONA</div>
+      <div class="w-2/3">
+        {{ $lang.translate(translations, 'total_per_person') }}
+      </div>
       <div class="w-1/3 text-right">${{ pricePerPerson.toFixed(2) }}</div>
     </div>
     <hr class="my-4">
     <div class="flex pt-3 mb-3 text-xl font-bold">
-      <div class="w-2/3">TOTAL (x4)</div>
+      <div class="w-2/3">
+        {{ $lang.translate(translations, 'total') }} (x{{ groupSize }})
+      </div>
       <div class="w-1/3 text-right">${{ totalPrice.toFixed(2) }}</div>
     </div>
   </div>
@@ -55,14 +67,38 @@
 import { mapState, mapGetters } from 'vuex'
 
 export default {
+  data() {
+    return {
+      translations: {
+        'es_ES': {
+          group_size: 'Cantidad de viajeros',
+          per_person: 'Precio por persona',
+          subtotal: 'Subtotal por persona',
+          igv: 'IGV',
+          total_per_person: 'TOTAL POR PERSONA',
+          total: 'TOTAL'
+        },
+        'en_EN': {
+          group_size: 'Group size',
+          per_person: 'Price per person',
+          subtotal: 'Subtotal per person',
+          igv: 'VAT',
+          total_per_person: 'TOTAL PER PERSON',
+          total: 'TOTAL'
+        }
+      }
+    }
+  },
   computed: {
     ...mapState({
       experience: s => s.reserves.experience
     }),
     ...mapGetters({
       reservePrice: 'reserves/reservePrice',
+      subpricePerPerson: 'reserves/subpricePerPerson',
       pricePerPerson: 'reserves/pricePerPerson',
-      totalPrice: 'reserves/totalPrice'
+      totalPrice: 'reserves/totalPrice',
+      igv: 'reserves/igv'
     }),
     groupSize() {
       return this.$store.state.reserves.form.groupSize

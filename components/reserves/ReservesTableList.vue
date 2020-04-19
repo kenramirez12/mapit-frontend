@@ -9,7 +9,9 @@
       </el-table-column>
     </el-table>
     <template v-else>
-      <p v-if="reserves.length === 0" class="font-light">Aún no haz reservado ninguna experiencia.</p>
+      <p v-if="reserves.length === 0" class="font-light">
+        {{ $lang.translate(translations, 'no_reserves_found') }}
+      </p>
       <el-table
         v-else
         :data="reserves"
@@ -22,38 +24,48 @@
             {{ scope.row.date }}
           </template>
         </el-table-column>
-        <el-table-column
-          label="Nombre"
-          width="250">
+        <el-table-column label="Nombre">
           <template slot-scope="scope">
-            {{ $lang.apiTranslate(scope.row.experience.translations, 'title') }}
-            <el-tooltip
-            v-if="scope.row.status === 1"
-            effect="dark"
-            content="Completa los datos de tus acompañantes para confirmar tu reserva"
-            class="requires-additional__tooltip"
-            placement="top">
-              <el-link
-                type="warning"
-                @click.prevent="$router.push(`/${$lang.current().slug}/my/reserves/${scope.row.code}/travelers-info`)"
-                class="requires-additional__icon"
-                icon="el-icon-warning" />
-            </el-tooltip>
+            {{ $lang.apiTranslate(scope.row.experience.translations, 'title') }} {{ scope.row.code }}
           </template>
         </el-table-column>
         <el-table-column
           prop="experience.destination.name"
-          label="Dirección">
-        </el-table-column>
-        <el-table-column align="right">
+          label="Dirección"
+          width="130" />
+        <el-table-column width="230">
           <template slot-scope="scope">
-            <el-button
-              class="font-normal border-0"
-              size="small"
-              @click="$router.push(`/${$lang.current().slug}/my/reserves/${scope.row.code}`)"
+            <el-popover
+              v-if="scope.row.status === 1"
+              popper-class="text-sm"
+              placement="top-start"
+              width="240"
+              trigger="hover"
+              content="Lorem ipsum dolor amet brooklyn commodo laborum laboris air plant in chartreuse ut nulla normcore">
+              <a
+                slot="reference"
+                href="#"
+                @click.prevent="$router.push(`/${$lang.current().slug}/my/reserves/${scope.row.code}/travelers-info`)"
+                class="link-underline link-underline--error">
+                <img src="/images/warning-icon-sm.svg" class="mr-4">
+                <span>{{ $lang.translate(translations, 'pending_info') }}</span>
+              </a>
+            </el-popover>
+            <div v-if="scope.row.status === 2" class="flex items-end">
+              <img src="/images/success-icon-sm.svg" class="mr-4">
+              <span class="leading-none" style="color:var(--primary)">{{ $lang.translate(translations, 'completed_info') }}</span>
+            </div>
+          </template>
+        </el-table-column>
+        <el-table-column width="120" align="right">
+          <template slot-scope="scope">
+            <a
+              class="link-underline"
+              href="#"
+              @click.prevent="$router.push(`/${$lang.current().slug}/my/reserves/${scope.row.code}`)"
               >
-              VER DETALLE
-            </el-button>
+              <span>{{ $lang.translate(translations, 'details') }}</span>
+            </a>
           </template>
         </el-table-column>
       </el-table>
@@ -66,6 +78,24 @@ export default {
   props: {
     reserves: {
       required: true
+    }
+  },
+  data() {
+    return {
+      translations: {
+        'es_ES': {
+          details: 'VER DETALLE',
+          pending_info: 'Información pendiente',
+          completed_info: 'Información completa',
+          no_reserves_found: 'Aún no haz reservado ninguna experiencia!'
+        },
+        'en_EN': {
+          details: 'SEE DETAILS',
+          pending_info: 'Pending information',
+          completed_info: 'Information completed',
+          no_reserves_found: 'You haven’t booked any experiences yet!'
+        }
+      }
     }
   }
 }

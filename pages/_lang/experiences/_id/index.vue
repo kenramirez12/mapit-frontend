@@ -41,7 +41,9 @@
       <ProgramSection :experience="experience" />
       <AdditionalInfoSection :experience="experience" />
       <SocialPointsSection :experience="experience" />
-      <TestimonialSection :experience="experience" />
+      <TestimonialSection
+        v-if="hasTestimonials"
+        :testimonials="experience.testimonials" />
     </div>
   </div>
 </template>
@@ -91,62 +93,61 @@ export default {
     ExperienceReserveForm
   },
   data() {
+    const pageSections = [
+      {
+        translations: {
+          es_ES: { label: 'General' },
+          en_EN: { label: 'Overview' }
+        },
+        name: 'overview',
+      },
+      {
+        translations: {
+          es_ES: { label: 'Actividades' },
+          en_EN: { label: 'Activities' }
+        },
+        name: 'activities',
+      },
+      {
+        translations: {
+          es_ES: { label: 'Programa' },
+          en_EN: { label: 'Program' }
+        },
+        name: 'program',
+      },
+      {
+        translations: {
+          es_ES: { label: 'Información Adicional' },
+          en_EN: { label: 'Additional Information' }
+        },
+        name: 'additional-info',
+      },
+      {
+        translations: {
+          es_ES: { label: 'Puntos Sociales' },
+          en_EN: { label: 'Social Points' }
+        },
+        name: 'social-points',
+      }
+    ]
+
     return {
+      pageSections,
       scrollWatching: false,
       showReserveFormSticky: false,
       navbarFixed: false,
       showNavbar: false,
-      currentSection: 'overview',
-      sections: [
-        {
-          translations: {
-            es_ES: { label: 'General' },
-            en_EN: { label: 'Overview' }
-          },
-          name: 'overview',
-        },
-        {
-          translations: {
-            es_ES: { label: 'Actividades' },
-            en_EN: { label: 'Activities' }
-          },
-          name: 'activities',
-        },
-        {
-          translations: {
-            es_ES: { label: 'Programa' },
-            en_EN: { label: 'Program' }
-          },
-          name: 'program',
-        },
-        {
-          translations: {
-            es_ES: { label: 'Información Adicional' },
-            en_EN: { label: 'Additional Information' }
-          },
-          name: 'additional-info',
-        },
-        {
-          translations: {
-            es_ES: { label: 'Puntos Sociales' },
-            en_EN: { label: 'Social Points' }
-          },
-          name: 'social-points',
-        },
-        {
-          translations: {
-            es_ES: { label: 'Opiniones' },
-            en_EN: { label: 'Reviews' }
-          },
-          name: 'testimonials',
-        }
-      ]
+      currentSection: 'overview'
     }
   },
   computed: {
     ...mapGetters({
       experience: 'reserves/currentExperience'
     }),
+    hasTestimonials () {
+      if(!this.experience) return null
+      return ('testimonials' in this.experience && this.experience.testimonials.length > 0)
+    },
     translations () {
       if(!this.experience) return null
       const translations = this.experience.translations.find(item => {
@@ -154,6 +155,21 @@ export default {
       })
   
       return translations
+    },
+    sections () {
+      const sections = this.pageSections
+
+      if(this.hasTestimonials) {
+        sections.push({
+          translations: {
+            es_ES: { label: 'Opiniones' },
+            en_EN: { label: 'Reviews' }
+          },
+          name: 'testimonials'
+        })
+      }
+
+      return sections
     }
   },
   created() {
@@ -213,7 +229,7 @@ export default {
       const socialPointsSection = document.getElementById('social-points-section')
       const testimonialSection = document.getElementById('testimonials-section')
 
-      if(testimonialSection.getBoundingClientRect().top < 200) {
+      if(testimonialSection && testimonialSection.getBoundingClientRect().top < 200) {
         return 'testimonials'
       } else if(socialPointsSection.getBoundingClientRect().top < 200) {
         return 'social-points'
@@ -235,6 +251,7 @@ export default {
 
 <style lang="scss" scoped>
   .experience-navbar {
+    display: none;
     position: absolute;
     bottom: 0;
     left: 0;
@@ -242,8 +259,12 @@ export default {
     width: 100%;
     z-index: 3;
     opacity: 0;
-    background: linear-gradient(to top, #fff, transparent);
     transition: all 0.3s;
+    background: linear-gradient(to top, #fff, transparent);
+
+    @media screen and (min-width: 768px) {
+      display: block;
+    }
 
     &::before {
       content: '';
@@ -325,6 +346,8 @@ export default {
   }
 
   .experience-container {
-    background: linear-gradient(90deg, #fff 55%, var(--primary) 55%);
+    @media screen and (min-width: 768px) {
+      background: linear-gradient(90deg, #fff 55%, var(--primary) 55%);
+    }
   }
 </style>

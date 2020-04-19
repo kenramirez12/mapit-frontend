@@ -8,27 +8,36 @@
       trigger="click"
       placement="bottom">
       <div class="header-menu__link flex items-center">
-        <el-badge :value="1">
+        <el-badge
+          :hidden="user.incomplete_reserves === 0"
+          :value="user.incomplete_reserves">
           <img
-            v-if="user.from_social === 1 && user.avatar_url !== ''"
-            :src="user.avatar_url"
+            :src="userAvatar"
             class="user-dropdown__avatar">
         </el-badge>
-        <span class="block h-full user-dropdown__btn">{{ user.fullname }}</span>
+        <span class="block h-full user-dropdown__btn">
+          {{ user.fullname }}
+        </span>
       </div>
       <el-dropdown-menu
         slot="dropdown"
         class="user-dropdown py-0">
-        <el-dropdown-item command="profile">Perfil</el-dropdown-item>
-        <el-dropdown-item command="reserves">
-          <el-badge is-dot class="badge__item">Historial de reservas</el-badge>
+        <el-dropdown-item command="profile">
+          {{ this.$lang.translate(translations, 'profile') }}
         </el-dropdown-item>
-        <el-dropdown-item command="favorites">Favoritos</el-dropdown-item>
+        <el-dropdown-item command="reserves">
+          <el-badge :hidden="user.incomplete_reserves === 0" is-dot class="badge__item">
+            {{ this.$lang.translate(translations, 'booking_history') }}
+          </el-badge>
+        </el-dropdown-item>
+        <el-dropdown-item command="favorites">
+          {{ this.$lang.translate(translations, 'favorites') }}
+        </el-dropdown-item>
         <hr class="mt-4">
         <el-dropdown-item
           command="logout"
           class="flex items-center">
-          Cerrar sesión
+          {{ this.$lang.translate(translations, 'logout') }}
           <i v-if="isLoggingOut" class="el-icon-loading ml-3" />
           <img v-else src="~/assets/images/logout-icon.svg" class="ml-3" style="height:16px">
         </el-dropdown-item>
@@ -48,16 +57,25 @@
 import { mapMutations } from 'vuex'
 
 export default {
-  props: {
-    translations: {
-      type: Object,
-      required: true,
-      default: () => {}
-    }
-  },
   data () {
     return {
-      isLoggingOut: false
+      isLoggingOut: false,
+      translations: {
+        'es_ES': {
+          profile: 'Perfil',
+          booking_history: 'Historial de reservas',
+          favorites: 'Favoritos',
+          login: 'Iniciar sesión',
+          logout: 'Cerrar sesión'
+        },
+        'en_EN': {
+          profile: 'Profile',
+          booking_history: 'Booking history',
+          favorites: 'Favorites',
+          login: 'Sign in',
+          logout: 'Sign out'
+        }
+      }
     }
   },
   computed: {
@@ -66,6 +84,15 @@ export default {
     },
     user () {
       return this.$auth.$state.user
+    },
+    userAvatar() {
+      if(this.user.avatar !== null) {
+        return this.$imagePath(this.user.avatar.path)
+      } else if(this.user.avatar_url) {
+        return this.user.avatar_url
+      } else {
+        return '/images/default-avatar.png'
+      }
     }
   },
   methods: {

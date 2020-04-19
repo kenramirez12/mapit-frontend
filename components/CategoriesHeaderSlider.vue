@@ -58,11 +58,6 @@ import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   props: {
-    selected: {
-      type: [Number, String],
-      required: true,
-      default: () => ''
-    },
     translations: {
       type: Object,
       required: true,
@@ -83,7 +78,6 @@ export default {
           }
         }
       },
-      currentCat: '',
       isLoading: false
     }
   },
@@ -109,6 +103,13 @@ export default {
   },
 
   watch: {
+    categories (value) {
+      if(value) {
+        if('category' in this.$route.query) {
+          this.updateCurrentSlide(this.$route.query.category)
+        }
+      }
+    },
     currentCategory (value) {
       if(value === '') {
         return this.mySwiper.slideTo(0)
@@ -125,10 +126,33 @@ export default {
     }
   },
 
+  created() {
+    this.setCurrentCategory('')
+  },
+
+  mounted() {
+    if(Object.keys(this.$route.query).length > 0 &&
+      'category' in this.$route.query &&
+      this.categories) {
+      this.updateCurrentSlide(this.$route.query.category)
+    }
+  },
+
   methods: {
     ...mapMutations({
       setCurrentCategory: 'categories/SET_CURRENT_CATEGORY'
     }),
+
+    updateCurrentSlide(catId) {
+      const catIndex = this.sanitizedCategories.findIndex(item => {
+        return item.id === parseInt(catId)
+      })
+      
+      if(catIndex > -1) {
+        this.mySwiper.slideTo(catIndex)
+      }
+    },
+
     updateCurrentCat(index) {
       this.setCurrentCategory(this.sanitizedCategories[index].id)
       this.mySwiper.slideTo(index)

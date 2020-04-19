@@ -20,16 +20,18 @@ export default {
   ],
   data() {
     return {
-      apiUrl: process.env.apiUrl
+      apiUrl: process.env.apiUrl,
+      baseUrl: process.env.baseUrl
     }
   },
   mounted() {
     const visanet = document.createElement('script')
     visanet.src="https://static-content-qas.vnforapps.com/v2/js/checkout.js?qa=true"
+    // visanet.src="https://static-content.vnforapps.com/v2/js/checkout.js"
     visanet.setAttribute('data-sessiontoken', this.sessionToken)
     visanet.setAttribute('data-channel', 'web')
     visanet.setAttribute('data-merchantid', this.merchantId)
-    visanet.setAttribute('data-merchantlogo', 'http://localhost:3000/images/logo-checkout.png')
+    visanet.setAttribute('data-merchantlogo', this.baseUrl + '/images/logo-checkout.png')
     visanet.setAttribute('data-formbuttoncolor', '#37d7d7')
     visanet.setAttribute('data-cardholdername', this.firstname)
     visanet.setAttribute('data-cardholderlastname', this.lastname)

@@ -2,23 +2,31 @@
   <footer class="main-footer w-full px-4">
     <div class="container main-footer__container mx-auto flex flex-wrap">
       <div class="w-full lg:w-1/12 px-3 lg:px-0 pb-8 lg:pb-0">
-        <a href="#"><img src="~/assets/images/mapit-iso.svg" alt="" width="35"></a>
+        <a href="#" @click.prevent="$router.push(`/${$lang.current().slug}/`)">
+          <img src="~/assets/images/mapit-iso.svg" alt="Map it" width="35">
+        </a>
       </div>
       <div class="w-full lg:w-7/12 mx-auto">
         <div class="flex flex-wrap">
           <div class="w-full sm:w-1/2 lg:w-1/4 px-3">
             <ul>
               <li class="mb-1">
-                <a href="#">Experiencias</a>
+                <a href="#" @click.prevent="$router.push(`/${$lang.current().slug}/experiences`)">
+                  {{ $lang.translate(translations, 'experiences') }}
+                </a>
               </li>
               <li class="mb-1">
-                <a href="#">Destinos</a>
+                <a href="#" @click.prevent="$router.push(`/${$lang.current().slug}/destinations`)">
+                  {{ $lang.translate(translations, 'destinations') }}
+                </a>
               </li>
               <li class="mb-1">
-                <a href="#">Ayuda</a>
+                <a href="#">
+                  {{ $lang.translate(translations, 'help') }}
+                </a>
               </li>
               <li class="mb-1">
-                <a href="#">Blog</a>
+                <a href="https://mapit.medium.com" target="_blank">Blog</a>
               </li>
             </ul>
           </div>
@@ -28,10 +36,14 @@
                 <a href="#">FAQs</a>
               </li>
               <li class="mb-1">
-                <a href="#">Términos y condiciones</a>
+                <a href="#">
+                  {{ $lang.translate(translations, 'terms') }}
+                </a>
               </li>
               <li class="mb-1">
-                <a href="#">Políticas de Privacidad</a>
+                <a href="#">
+                  {{ $lang.translate(translations, 'policies') }}
+                </a>
               </li>
             </ul>
           </div>
@@ -40,15 +52,23 @@
           </div>
           <div class="w-1/2 lg:w-1/4 px-3">
             <ul>
-              <h5 class="mb-2">About Us</h5>
+              <h5 class="mb-2">
+                {{ $lang.translate(translations, 'about') }}
+              </h5>
               <li class="mb-1">
-                <a href="#" class="light-gray">Nuestro equipo</a>
+                <a href="#" class="light-gray">
+                  {{ $lang.translate(translations, 'team') }}
+                </a>
               </li>
               <li class="mb-1">
-                <a href="#" class="light-gray">Puntos sociales</a>
+                <a href="#" class="light-gray">
+                  {{ $lang.translate(translations, 'social_points') }}
+                </a>
               </li>
               <li class="mb-1">
-                <a href="#" class="light-gray">Impacto social</a>
+                <a href="#" class="light-gray">
+                  {{ $lang.translate(translations, 'impact') }}
+                </a>
               </li>
               <li class="mb-1">
                 <a href="#" class="light-gray">Host</a>
@@ -57,7 +77,9 @@
           </div>
           <div class="w-1/2 lg:w-1/4 px-3">
             <ul>
-              <h5 class="mb-2">Cómo funciona</h5>
+              <h5 class="mb-2">
+                {{ $lang.translate(translations, 'how_it_works') }}
+              </h5>
               <li class="mb-1">
                 <a href="#" class="light-gray">Travelers</a>
               </li>
@@ -70,7 +92,9 @@
       </div>
       <div class="w-full lg:w-2/12 px-3">
         <ul>
-          <h5 class="mb-2">Contacto</h5>
+          <h5 class="mb-2">
+            {{ $lang.translate(translations, 'contact') }}
+          </h5>
           <li class="mb-1">
             <a href="#" class="light-gray">info@mapit.pe</a>
           </li>
@@ -92,12 +116,15 @@
         </div>
       </div>
       <div class="w-full lg:w-2/12 px-3 lg:px-0 mt-6 lg:mt-0">
-        <h5 class="mb-2">Suscríbete a nuestro Blog</h5>
+        <h5 class="mb-2">
+          {{ $lang.translate(translations, 'subscribe') }}
+        </h5>
         <el-form>
           <el-form-item>
             <el-input class="border-0 shadow-input" style="max-width:240px" />
           </el-form-item>
-          <el-button size="small" type="primary" class="shadow-primary">Enviar <i class="el-icon-right ml-1" /></el-button>
+          <el-button size="small" type="primary" class="shadow-primary">
+            {{ $lang.translate(translations, 'send') }} <i class="el-icon-right ml-1" /></el-button>
         </el-form>
       </div>
     </div>
@@ -112,7 +139,41 @@
 export default {
   data() {
     return {
-      currentYear: new Date().getFullYear()
+      currentYear: new Date().getFullYear(),
+      translations: {
+        es_ES: {
+          experiences: 'Experiencias',
+          destinations: 'Destinos',
+          help: 'Ayuda',
+          blog: 'Blog',
+          terms: 'Términos y condiciones',
+          policies: 'Políticas de Privacidad',
+          about: 'Nosotros',
+          team: 'Nuestro equipo',
+          social_points: 'Puntos sociales',
+          impact: 'Impacto social',
+          how_it_works: 'Cómo funciona',
+          contact: 'Contacto',
+          subscribe: 'Suscríbete a nuestro Blog',
+          send: 'Enviar'
+        },
+        en_EN: {
+          experiences: 'Experiences',
+          destinations: 'Destinations',
+          help: 'Help',
+          blog: 'Blog',
+          terms: 'Terms and Conditions',
+          policies: 'Privacy Policies',
+          about: 'About Us',
+          team: 'Our Team',
+          social_points: 'Social Points',
+          impact: 'Social Impact',
+          how_it_works: 'How it works',
+          contact: 'Contact Us',
+          subscribe: 'Sign up for our blog:',
+          send: 'Subscribe'
+        }
+      }
     }
   }
 }

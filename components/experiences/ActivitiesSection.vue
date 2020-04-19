@@ -1,19 +1,11 @@
 <template>
   <div id="activities-section" class="experience-container py-6 pb-super">
-    <div class="container mx-auto">
+    <div class="container px-4 md:px-0 mx-auto">
       <div class="activities py-6 position-relative">
-        <h3 class="text-6xl font-light mb-6 pb-24">{{ $lang.translate(pageTranslations, 'activities') }}</h3>
+        <h3 class="text-4xl md:text-6xl font-light mb-6 pb-24">{{ $lang.translate(pageTranslations, 'activities') }}</h3>
         <div class="flex flex-wrap">
-          <div class="w-6/12 pr-6">
+          <div class="w-full md:w-6/12 pr-6">
             <div class="flex flex-wrap pb-12">
-              <div v-if="duration" class="flex-1 pr-4">
-                <img
-                  src="~/assets/images/features/clock-icon.svg"
-                  style="height:20px"
-                />
-                <div class="block text-lg font-light mt-6 mb-4">{{ $lang.translate(pageTranslations, 'duration') }}</div>
-                <p class="text-sm">{{ duration }}</p>
-              </div>
               <div v-if="location" class="flex-1 pr-4">
                 <img
                   src="~/assets/images/features/map-icon.svg"
@@ -21,6 +13,14 @@
                 />
                 <div class="block text-lg font-light mt-6 mb-4">{{ $lang.translate(pageTranslations, 'location') }}</div>
                 <p class="text-sm">{{ location }}</p>
+              </div>
+              <div v-if="duration" class="flex-1 pr-4">
+                <img
+                  src="~/assets/images/features/clock-icon.svg"
+                  style="height:20px"
+                />
+                <div class="block text-lg font-light mt-6 mb-4">{{ $lang.translate(pageTranslations, 'duration') }}</div>
+                <p class="text-sm">{{ duration }}</p>
               </div>
               <div v-if="altitude" class="flex-1 pr-4">
                 <img
@@ -52,13 +52,12 @@
           </div>
         </div>
         <div class="flex flex-wrap py-6 my-6 .text-sm">
-          <div class="w-5/12">
-            <ul
-              v-for="(consideration, n) in translations.considerations"
-              :key="'consideration_' + n"
-              class="checkbox-list"
-            >
-              <li class="checkbox-list__item mb-4">
+          <div class="w-full md:w-5/12">
+            <ul class="checkbox-list mb-12 md:mb-0">
+              <li
+                v-for="(consideration, n) in translations.considerations"
+                :key="'consideration_' + n"
+                class="checkbox-list__item mb-4">
                 <img
                   src="~/assets/images/checkbox-icon.svg"
                   class="checkbox-list__icon"
@@ -67,7 +66,7 @@
               </li>
             </ul>
           </div>
-          <div class="w-6/12 ml-auto">
+          <div class="w-full md:w-6/12 ml-auto">
             <img
               :src="$imagePath(experience.activity_image.path)"
               class="activity-img"

@@ -3,13 +3,15 @@
     :ref="`additional_traveler_${number}`"
     :model="travelerData"
     :rules="travelerRules">
-    <span class="block mb-3 text-xl">{{ number }}. Viajero</span>
+    <span class="block mb-3 text-xl">
+      {{ $lang.translate(translations, 'traveler') }} #{{ number }}
+    </span>
     <div class="flex -mx-3">
       <div class="w-1/2 px-3">
         <div
           :class="{ 'has-value' : travelerData.fullname !== '' }"
           class="input-underline"
-          data-placeholder="Nombres y Apellidos">
+          :data-placeholder="$lang.translate(translations, 'fullname')">
           <el-form-item prop="fullname">
             <input type="text" v-model="travelerData.fullname">
           </el-form-item>
@@ -19,7 +21,7 @@
         <div
           :class="{ 'has-value' : travelerData.docNumber !== '' }"
           class="input-underline"
-          data-placeholder="Doc. de Identidad o Pasaporte">
+          :data-placeholder="$lang.translate(translations, 'doc_number')">
           <el-form-item prop="docNumber">
             <input type="text" v-model="travelerData.docNumber">
           </el-form-item>
@@ -41,7 +43,7 @@
         <div
           :class="{ 'has-value' : travelerData.country !== '' }"
           class="input-underline"
-          data-placeholder="País">
+          :data-placeholder="$lang.translate(translations, 'country')">
           <el-form-item prop="country">
             <el-select
               v-model="travelerData.country"
@@ -82,11 +84,11 @@ export default {
   data() {
     const validateFullname = (rule, value, callback) => {
       if (value === '') {
-        callback(new Error('Este campo es requerido'))
+        callback(new Error(this.$lang.translate(this.translations, 'field_required')))
       } else {
         const splitted = value.split(' ')
         if(splitted.length <= 1 || splitted[splitted.length - 1].trim().length < 2) {
-          callback(new Error('Ingrese su apellido'))
+          callback(new Error(this.$lang.translate(this.translations, 'lastname_required')))
         } else {
           callback()
         }
@@ -94,33 +96,64 @@ export default {
     }
 
     return {
+      validateFullname,
       travelerData: {
         fullname: '',
         docNumber: '',
         email: '',
         country: this.defaultCountry ? this.defaultCountry : ''
       },
-      travelerRules: {
-        fullname: [
-          { required: true, message: 'Este campo es requerido', trigger: 'blur' },
-          { validator: validateFullname, trigger: 'blur' }
-        ],
-        docNumber: [
-          { required: true, message: 'Este campo es requerido', trigger: 'blur' }
-        ],
-        email: [
-          { required: true, message: 'Este campo es requerido', trigger: 'blur' },
-          { type: 'email', message: 'Ingrese un e-mail válido', trigger: 'blur' }
-        ],
-        country: [
-          { required: true, message: 'Este campo es requerido', trigger: 'change' }
-        ]
+      translations: {
+        'es_ES': {
+          traveler: 'Viajero',
+          field_required: 'Este campo es requerido',
+          valid_email: 'Ingrese un e-mail válido',
+          lastname_required: 'Ingrese su apellido',
+          fullname: 'Nombre y Apellido',
+          doc_number: 'Doc. de Identidad o Pasaporte',
+          email: 'E-mail',
+          country: 'País'
+        },
+        'en_EN': {
+          traveler: 'Traveler',
+          field_required: 'This field is required',
+          valid_email: 'Enter a valid email',
+          lastname_required: 'Enter your last name',
+          fullname: 'Full Name',
+          doc_number: 'ID or Passport Number',
+          email: 'E-mail',
+          country: 'Country'
+        }
       }
     }
   },
   computed: {
     countries() {
       return this.$store.state.countries
+    },
+    fieldRequired() {
+      return this.$lang.translate(this.translations, 'field_required')
+    },
+    validEmail() {
+      return this.$lang.translate(this.translations, 'valid_email')
+    },
+    travelerRules() {
+      return {
+        fullname: [
+          { required: true, message: this.fieldRequired, trigger: 'blur' },
+          { validator: this.validateFullname, trigger: 'blur' }
+        ],
+        docNumber: [
+          { required: true, message: this.fieldRequired, trigger: 'blur' }
+        ],
+        email: [
+          { required: true, message: this.fieldRequired, trigger: 'blur' },
+          { type: 'email', message: this.validEmail, trigger: 'blur' }
+        ],
+        country: [
+          { required: true, message: this.fieldRequired, trigger: 'change' }
+        ]
+      }
     }
   },
   watch: {

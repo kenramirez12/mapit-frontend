@@ -1,84 +1,98 @@
 <template>
-  <div v-if="reserve" class="container pb-10 px-4 mx-auto">
-    <el-breadcrumb class="mt-6 mb-8 p-4 bg-gray-100" separator-class="el-icon-arrow-right">
-      <el-breadcrumb-item :to="{ path: `/${$lang.current().slug}/my/reserves` }">Historial de reservas</el-breadcrumb-item>
-      <el-breadcrumb-item>
-        {{ $lang.apiTranslate(reserve.experience.translations, 'title') }}
-      </el-breadcrumb-item>
-    </el-breadcrumb>
-    <!-- <pre>
-      {{reserve}}
-    </pre> -->
-    <h1 class="mb-6 text-3xl reserves-container__title">
-      Detalles de la reserva
-    </h1>
-    <div class="flex flex-wrap">
-      <div class="w-3/5 pr-16">
-        <div class="flex flex-wrap">
-          <div class="w-1/2">
-            <span class="block">Llegada</span>
-            <span class="block font-light">15:00</span>
-            <span class="block font-light">Lun. 26 ago.</span>
-          </div>
-          <div class="w-1/2">
-            <span class="block">Salida</span>
-            <span class="block font-light">15:00</span>
-            <span class="block font-light">Lun. 26 ago.</span>
-          </div>
+  <div v-if="reserve && reserve.status === 2">
+    <div class="reserve-header" :style="`background-image:url(${$imagePath(reserve.experience.banner_image.path)})`">
+      <div class="container flex items-center px-4 m-auto">
+        <div class="block mr-3">
+          <el-button
+            circle
+            icon="el-icon-arrow-left"
+            @click="$router.push(`/${$lang.current().slug}/my/reserves`)" />
         </div>
-        <hr class="my-3">
-        <div class="w-full">
-          <p v-if="reserve.experience.host !== ''" class="mb-6">
-            <span>Wiser: </span>
-            <span class="font-light">
-              {{ $lang.apiTranslate(reserve.experience.host.translations, 'fullname') }}
-            </span>
-          </p>
-          <p v-if="reserve.group_size > 1">
-            <span class="block">¿Quién te acompaña?</span>
-            <span v-if="reserve.group_size === 2" class="font-light">
-              1 viajero
-            </span>
-            <span v-else class="font-light">{{ reserve.group_size - 1 }} viajeros</span>
-          </p>
-        </div>
-        <hr class="my-3">
-        <div class="w-full">
-          <p class="mb-6">
-            <span class="block">Dirección</span>
-            <span class="font-light">Cusco, Perú</span>
-          </p>
-          <p>
-            <span class="block">¿Qué llevar?</span>
-            <span class="font-light">Cámara, Capas de ropa, ya que la temperatura suele variar en el transcurso del día, Zapatos cómodos, Snacks y agua.</span>
-          </p>
-        </div>
-        <hr class="my-3">
-        <div class="w-full">
-          <p class="mb-6">
-            <span class="block">Código</span>
-            <span class="font-light">{{ reserve.code }}</span>
-          </p>
-          <p>
-            <span class="block">Costo total</span>
-            <span>$140.00</span>
-          </p>
-        </div>
-      </div>
-      <div class="w-2/5">
-        <span class="block">¿Necesitas una copia de los detalles de tu reservación?</span>
-        <p class="font-light mb-8">
-          En ocasiones, los nombres de los viajeros y la prueba de estadía son requisito para el trámite de una visa. Comprueba qué requisitos debes cumplir para obtener la visa para un país en específico.
-        </p>
-        <p>
-          <span class="text-sm font-light">Guardar copia de los detalles de la reservación (PDF)</span><br>
-          <el-button class="mt-3" type="primary" icon="el-icon-document-add">
-            Imprimir información
-          </el-button>
-        </p>
+        <h1 class="text-white text-3xl">
+          {{ $lang.apiTranslate(reserve.experience.translations, 'title') }}
+        </h1>
       </div>
     </div>
-    <!-- {{ reserve }} -->
+    <div class="container py-12 px-4 mx-auto">
+      <div class="flex flex-wrap">
+        <div class="w-4/6 pr-16">
+          <div class="flex flex-wrap">
+            <div class="w-1/2 font-light">
+              <span class="block">{{ $lang.translate(translations, 'starting_time') }}</span>
+              <span class="block">15:00</span>
+              <span class="block">Lun. 26 ago.</span>
+            </div>
+            <div class="w-1/2 font-light">
+              <span class="block">{{ $lang.translate(translations, 'ending_time') }}</span>
+              <span class="block">15:00</span>
+              <span class="block">Lun. 26 ago.</span>
+            </div>
+          </div>
+
+          <hr class="my-3">
+
+          <div class="flex flex-wrap mb-6">
+            <div class="w-1/2 font-light">
+              <p v-if="reserve.experience.host !== ''" class="font-light mb-0">
+                <span class="block">Wiser</span>
+                {{ $lang.apiTranslate(reserve.experience.host.translations, 'fullname') }}
+              </p>
+            </div>
+            <div class="w-1/2 font-light">
+              <span class="block">{{ $lang.translate(translations, 'language') }}</span>
+              <span>{{ $lang.apiTranslate(reserve.experience.translations, 'languages') }}</span>
+            </div>
+          </div>
+          <div class="flex flex-wrap">
+            <div class="w-1/2 font-light">
+              <p v-if="reserve.group_size > 1">
+                <span class="block">{{ $lang.translate(translations, 'group_size') }}</span>
+                <span class="font-light">
+                  {{ reserveGroupSize }}
+                </span>
+              </p>
+            </div>
+            <div class="w-1/2 font-light">
+              <span class="block">{{ $lang.translate(translations, 'additionals') }}</span>
+              <span>{{ $lang.apiTranslate(reserve.experience.translations, 'carry').join(', ') }}</span>
+            </div>
+          </div>
+          <hr class="my-3">
+          <div class="flex flex-wrap mb-6">
+            <div class="w-1/2 font-light">
+              <span class="block">{{ $lang.translate(translations, 'destination') }}</span>
+              <span>{{ reserve.experience.destination.name }}</span>
+            </div>
+            <div class="w-1/2 font-light">
+              <span class="block">{{ $lang.translate(translations, 'booking_code') }}</span>
+              <span>{{ reserve.code }}</span>
+            </div>
+          </div>
+          <div class="flex flex-wrap font-light mb-6">
+            <div class="w-1/2">
+              <span class="block">{{ $lang.translate(translations, 'meeting_point') }}</span>
+              <span>{{ $lang.apiTranslate(reserve.experience.translations, 'meeting_place') }}</span>
+            </div>
+            <div class="w-1/2">
+              <span class="block">{{ $lang.translate(translations, 'price') }}</span>
+              <span>$140.00</span>
+            </div>
+          </div>
+          <hr class="my-3">
+          <div class="w-full">
+            <p class="font-light">
+              <span class="block">{{ $lang.translate(translations, 'bring') }}</span>
+              <span>Traductor</span>
+            </p>
+          </div>
+        </div>
+        <div class="w-2/6">
+          <el-button icon="el-icon-download">
+            {{ $lang.translate(translations, 'download_details') }}
+          </el-button>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -96,14 +110,68 @@ export default {
       console.error('error', error.response)
     }
   },
+  data() {
+    return {
+      translations: {
+        'es_ES': {
+          starting_time: 'Hora de inicio',
+          ending_time: 'Hora de finalización',
+          group_size: 'Tamaño de grupo',
+          destination: 'Destino',
+          booking_code: 'Código de reserva',
+          bring: '¿Qué llevar?',
+          price: 'Precio final',
+          meeting_point: 'Punto de encuentro',
+          language: 'Idioma',
+          additionals: 'Servicios adicionales',
+          download_details: 'Guardar detalles de la reserva',
+          you: 'Tú',
+          traveler_you: 'Un viajero y tú',
+          travelers_you: 'viajeros y tú'
+        },
+        'en_EN': {
+          starting_time: 'Starting time',
+          ending_time: 'Ending time',
+          group_size: 'Group size',
+          destination: 'Destination',
+          booking_code: 'Booking code',
+          bring: 'What to bring?',
+          price: 'Price',
+          meeting_point: 'Meeting point',
+          language: 'Language',
+          additionals: 'Additional services',
+          download_details: 'Download booking details',
+          you: 'You',
+          traveler_you: 'A traveler and you',
+          travelers_you: 'travelers and you'
+        }
+      }
+    }
+  },
+  computed: {
+    reserveGroupSize() {
+      if(this.reserve.group_size === 1) {
+        return this.$lang.translate(this.translations, 'you')
+      } else if(this.reserve.group_size === 2) {
+        return this.$lang.translate(this.translations, 'traveler_you')
+      } else {
+        return `${this.reserve.group_size - 1} ${this.$lang.translate(this.translations, 'travelers_you')}`
+      }
+    }
+  },
   mounted() {
     if(this.reserve && this.reserve.status === 1) {
-      return $router.push(`/${this.$lang.current().slug}/my/reserves/${this.reserve.code}/travelers-info`)
+      return this.$router.push(`/${this.$lang.current().slug}/my/reserves/${this.reserve.code}/travelers-info`)
     }
   }
 }
 </script>
 
-<style>
-
+<style lang="scss" scoped>
+  .reserve-header {
+    display: flex;
+    background-size: cover;
+    background-position: center;
+    height: 230px;
+  }
 </style>

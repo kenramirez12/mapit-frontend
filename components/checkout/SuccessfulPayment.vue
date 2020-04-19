@@ -3,14 +3,44 @@
     <img class="character character--01" src="~/assets/images/sitting-checkout-01.svg">
     <img class="character character--02" src="~/assets/images/standing-checkout-01.svg">
     <div class="success-card m-auto p-6">
-      <img src="~/assets/images/include-icon.svg" class="mx-auto" width="100">
-      <h3 class="success-card__title mt-6">Compra<br>exitosa</h3>
-      <p class="success-card__copy my-5 mb-0">¡Gracias por reservar tu experiencia con nosotros!<br>Dentro de las próximas 24 hrs te llegará un correo de confirmación con el código de reserva y los detalles de la experiencia.</p>
-      <div class="success-social py-6">
+      <img src="~/assets/images/include-icon.svg" class="mx-auto" width="70">
+      <h3 class="success-card__title mt-6">
+        {{ $lang.translate(pageTranslations, 'succesfull') }}<br>
+        {{ $lang.translate(pageTranslations, 'purchase') }}
+      </h3>
+      <p class="success-card__copy my-5 mb-0">
+        {{ $lang.translate(pageTranslations, 'copy') }}<br>
+        {{ $lang.translate(pageTranslations, 'copy2') }}
+      </p>
+      <div class="py-6 font-light">
+        <div class="flex flex-wrap text-sm">
+          <div class="w-1/2 py-2">
+            {{ $lang.translate(translations, 'order_number') }}:<br>
+            {{ reserve.payment.details.order.traceNumber }}
+          </div>
+          <div class="w-1/2 py-2">
+            {{ $lang.translate(translations, 'order_date') }}:<br>
+            {{ reserve.payment.details.order.transactionDate }}
+          </div>
+        </div>
+        <div class="flex flex-wrap text-sm">
+          <div class="w-1/2 py-2">
+            {{ $lang.translate(translations, 'card_number') }}:<br>
+            {{ reserve.payment.details.dataMap.CARD }}
+          </div>
+          <div class="w-1/2 py-2">
+            {{ $lang.translate(translations, 'amount') }}:<br>
+            {{ reserve.payment.details.order.amount }} {{ reserve.payment.details.order.currency }}
+          </div>
+        </div>
+      </div>
+      <!-- <div class="success-social py-6">
         <strong class="success-social__points">+{{ reserve.social_points }}</strong>
         <span class="success-social__label">Puntos sociales</span>
-      </div>
-      <el-button type="primary" class="px-6">Entendido</el-button>
+      </div> -->
+      <el-button type="primary" class="px-6" @click="$router.push(`/${$lang.current().slug}/experiences`)">
+        {{ $lang.translate(pageTranslations, 'gotit') }}
+      </el-button>
     </div>
   </div>
 </template>
@@ -22,6 +52,40 @@ export default {
       type: Object,
       required: true,
       default: () => {}
+    },
+    translations: {
+      type: Object,
+      required: true
+    }
+  },
+  data() {
+    return {
+      pageTranslations: {
+        'es_ES': {
+          succesfull: 'Compra',
+          purchase: 'exitosa',
+          copy: '¡Gracias por reservar tu experiencia con nosotros!',
+          copy2: 'Dentro de las próximas 24 hrs te llegará un correo de confirmación con el código de reserva y los detalles de la experiencia.',
+          gotit: 'Entendido',
+          order_number: 'Número de pedido',
+          order_date: 'Fecha de pedido',
+          denial_reason: 'Motivo de denegación',
+          card_number: 'Número de tarjeta',
+          amount: 'Monto'
+        },
+        'en_EN': {
+          succesfull: 'Succesfull',
+          purchase: 'purchase',
+          copy: 'Thank you for booking with us!',
+          copy2: 'Within the next 24 hrs, you will receive a confirmation email with the reservation code and the details of the experience.',
+          gotit: 'Got it!',
+          order_number: 'Order number',
+          order_date: 'Order date',
+          denial_reason: 'Reason of denial',
+          card_number: 'Credit card number',
+          amount: 'Amount'
+        }
+      }
     }
   }
 }

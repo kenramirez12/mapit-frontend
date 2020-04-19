@@ -1,10 +1,12 @@
 <template>
   <div id="program-section" class="experience-container py-6 pb-super">
-    <div class="container mx-auto">
+    <div class="container mx-auto px-4 md:px-0">
       <div class="activities py-6 position-relative">
-        <h3 class="text-6xl font-light mb-6 pb-6">{{ $lang.translate(pageTranslations, 'program') }}</h3>
+        <h3 class="text-4xl md:text-6xl font-light mb-6 pb-6">
+          {{ $lang.translate(pageTranslations, 'program') }}
+        </h3>
         <div class="flex flex-wrap">
-          <div class="w-5/12">
+          <div class="w-full md:w-5/12">
             <div class="program mb-6 pb-6">
               <span class="text-2xl uppercase">{{ $lang.translate(pageTranslations, 'departures') }}</span>
               <div class="bg-primary rounded-lg py-2 px-4 mt-3">
@@ -34,9 +36,9 @@
         </div>
 
         <div class="flex flex-wrap">
-          <div class="w-6/12">
+          <div class="w-full md:w-6/12">
             <div class="itinerary pr-4">
-              <span class="text-lg uppercase">{{ $lang.translate(pageTranslations, 'itinerary') }}</span>
+              <span class="text-2xl uppercase">{{ $lang.translate(pageTranslations, 'itinerary') }}</span>
               <el-tabs
                 v-model="activeDay"
                 class="mt-4"
@@ -58,7 +60,7 @@
               </el-tabs>
             </div>
           </div>
-          <div class="w-6/12">
+          <div class="w-6/12 hidden md:block">
             <img :src="$imagePath(experience.itinerary_image.path)" class="s" alt="">
           </div>
         </div>

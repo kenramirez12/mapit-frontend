@@ -1,8 +1,8 @@
 <template>
-  <div id="overview-section" class="container mx-auto px-4 pt-6 pb-super">
-    <div class="overview py-6">
+  <div id="overview-section" class="container mx-auto px-4 md:pt-6 pb-super">
+    <div class="overview pb-6 md:pt-6">
       <div class="flex flex-wrap my-10 py-10">
-        <div class="w-5/12 pr-6">
+        <div class="w-full md:w-5/12 pr-6">
           <p class="dark-gray text-3xl ">{{ $lang.apiTranslate(experience.translations, 'description') }}</p>
           <p
             v-if="'host' in experience && experience.host.constructor === Object"
@@ -14,29 +14,31 @@
             <span>Wiser: {{ $lang.apiTranslate(experience.host.translations, 'fullname') }}</span>
           </p>
           <div v-else class="my-6 py-6" />
-          <ul
-            v-for="(feature, n) in translations.features"
-            :key="'feature_' + n"
-            class="checkbox-list">
-            <li class="checkbox-list__item mb-4 text-base">
+          <ul class="checkbox-list mb-10 md:mb-0">
+            <li
+              v-for="(feature, n) in translations.features"
+              :key="'feature_' + n"
+              class="checkbox-list__item mb-4 text-base">
               <img src="~/assets/images/checkbox-icon.svg" class="checkbox-list__icon">
               {{ feature }}
             </li>
           </ul>
         </div>
-        <div class="w-6/12 ml-auto">
+        <div class="w-full md:w-6/12 ml-auto">
           <div class="">
-            <div class="flex items-center mb-3">
-              <img src="~/assets/images/include-icon.svg" style="height:64px" class="ml-0 ">
-              <span class="dark-gray text-2xl font-light ml-8">{{ $lang.translate(pageTranslations, 'included') }}</span>
-              
+            <div class="flex items-center mb-5 md:mb-3">
+              <img src="~/assets/images/include-icon.svg" style="height:32px" class="md:hidden ml-0">
+              <img src="~/assets/images/include-icon.svg" style="height:64px" class="hidden md:block ml-0">
+              <span class="dark-gray text-2xl font-light ml-4 md:ml-8">
+                {{ $lang.translate(pageTranslations, 'included') }}
+              </span>
             </div>
-            <p class="dark-gray mb-5 ml-24 text-base leading-6">
+            <p class="dark-gray mb-5 md:ml-24 text-base leading-6">
               {{ $lang.apiTranslate(experience.translations, 'includes') }}
             </p>
           </div>
           <div class="mt-16">
-            <div v-swiper:mySwiper="swiperOption" class="shadow-xl">
+            <div v-swiper:mySwiper="swiperOption" class="overview-slider__container">
               <div class="swiper-wrapper overview-slider">
                 <div
                   v-for="(slide, n) in experience.slider_images"
@@ -50,7 +52,7 @@
               </div>
               <div class="swiper-pagination" />
               <div class="swiper-button-prev">
-                <img src="~/assets/images/arrow-prev.svg">
+                <img src="~/assets/images/arrow-left.svg">
               </div>
               <div class="swiper-button-next">
                 <img src="~/assets/images/arrow-right.svg">
@@ -120,17 +122,17 @@ export default {
   color: #fff;
   font-size: 2rem;
   line-height: 1;
-  height: 32px!important;
+  height: 37px!important;
 }
 .swiper-button-prev {
-  left: 2rem;
+  left: 4rem;
 }
 .swiper-button-next {
-  right: 2rem;
+  right: 4rem;
 }
 .swiper-pagination-bullet {
   width: 20px;
-  height: 2px;
+  height: 3px;
   border-radius: 0!important;
   background: #fff;
   opacity: .8;
@@ -167,7 +169,10 @@ export default {
 }
 
 .overview-slider {
-  box-shadow: 0px 0px 100px rgba(0, 0, 0, 0.33);
+  // box-shadow: 0px 0px 100px rgba(0, 0, 0, 0.33);
+  &__container {
+    box-shadow: 0px 0px 100px rgba(0, 0, 0, 0.33);
+  }
 }
 
 .el-carousel__indicators {

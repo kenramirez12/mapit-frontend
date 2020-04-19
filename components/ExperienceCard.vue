@@ -25,9 +25,10 @@
         </PuSkeleton>
         <a
           v-if="!loading"
+          v-loading="updatingFavorite"
           href="#"
           class="ml-auto"
-          @click.prevent="updateFavorite(favorite, experience.id)">
+          @click.prevent="updateFavorite(experience.id)">
           <img v-if="favorite" src="~/assets/images/icon-heart.svg" height="20">
           <img v-else src="~/assets/images/icon-heart-outline.svg" height="20">
         </a>
@@ -53,7 +54,7 @@
           <PuSkeleton :loading="loading" height="26px" width="110px">
             <span
               v-if="experience"
-              class="block font-light"
+              class="block font-light leading-none"
               :class="{'has-sale-price' : experience.on_sale === 1 }">
               US$ {{ experience.min_price }}</span>
           </PuSkeleton>
@@ -85,18 +86,28 @@ export default {
   },
   data () {
     return {
-      favorite: false,
+      updatingFavorite: false,
       translations: {
         'es_ES': {
-          from: 'Desde'
+          from: 'Desde',
+          favorite_added: 'Experiencia agregada a tu lista de favoritos',
+          favorite_deleted: 'Experiencia eliminada de tu lista de favoritos'
         },
         'en_EN': {
-          from: 'From'
+          from: 'From',
+          favorite_added: 'This experience has been added to your favorites list',
+          favorite_deleted: 'This experience has been removed from your favorites list'
         }
       }
     }
   },
   computed: {
+    loggedIn () {
+      return this.$auth.loggedIn
+    },
+    userFavorites () {
+      return this.$auth.$state.user.favorites
+    },
     salePrice () {
       if(!this.experience || this.experience.on_sale === 0) return null
 
@@ -107,35 +118,69 @@ export default {
     experienceLink () {
       if(!this.experience) return ''
       return `/${this.$lang.current().slug}/experiences/${this.$lang.apiTranslate(this.experience.translations, 'slug')}`
+    },
+    favorite () {
+      if(!this.loggedIn) return false
+      if(this.userFavorites && this.userFavorites.length > 0) {
+        return this.userFavorites.includes(this.experience.id)
+      }
+
+      return false
     }
   },
   methods: {
     ...mapMutations({
       setAuthDialogVisible: 'SET_AUTH_DIALOG_VISIBLE'
     }),
-    updateFavorite(favorite, experienceId) {
+    async storeFavorite(experienceId) {
+      this.updatingFavorite = true
+      try {
+        const resp = await this.$axios.post(`/experiences/${experienceId}/favorite`)
+        await this.$auth.fetchUser()
+
+        this.updatingFavorite = false
+        return this.$message({
+          customClass: 'message-dark',
+          dangerouslyUseHTMLString: true,
+          showClose: true,
+          message: this.$lang.translate(this.translations, 'favorite_added'),
+          iconClass: 'el-icon-circle-plus text-white mr-2'
+        })
+      } catch (error) {
+        console.error('storeFavorite', error.response)
+        this.updatingFavorite = false
+      }
+    },
+    async removeFavorite(experienceId) {
+      this.updatingFavorite = true
+      try {
+        const resp = await this.$axios.delete(`/experiences/${experienceId}/favorite`)
+        await this.$auth.fetchUser()
+
+        this.updatingFavorite = false
+        return this.$message({
+          customClass: 'message-dark',
+          dangerouslyUseHTMLString: true,
+          showClose: true,
+          message: this.$lang.translate(this.translations, 'favorite_deleted'),
+          iconClass: 'el-icon-remove text-white mr-2'
+        })
+      } catch (error) {
+        console.error('removeFavorite', error.response)
+        this.updatingFavorite = false
+      }
+    },
+    updateFavorite(experienceId) {
+      if(this.updatingFavorite) return null
       if(!this.$auth.loggedIn) {
         return this.setAuthDialogVisible(true)
       }
       
-      const newFavorite = !favorite
-      this.favorite = newFavorite
-
-      let message = ''
-        message = newFavorite ?
-        `Experiencia agregada a tu lista de favoritos` :
-        `Experiencia eliminada de tu lista de favoritos`
-      const iconClass = newFavorite ?
-        'el-icon-circle-plus text-white mr-2' :
-        'el-icon-remove text-white mr-2'
-
-      return this.$message({
-        customClass: 'message-dark',
-        dangerouslyUseHTMLString: true,
-        showClose: true,
-        message,
-        iconClass
-      })
+      if(this.favorite) {
+        this.removeFavorite(experienceId)
+      } else {
+        this.storeFavorite(experienceId)
+      }
     }
   }
 }
@@ -172,22 +217,22 @@ export default {
     margin: auto;
 
     @media screen and (min-width: 768px) {
-      max-width: 18rem;
+      max-width: 19rem;
     }
 
     &:hover {
-      transform: scale(.99);
-      box-shadow: 0 0 8px rgba(0, 0, 0, .2);
+      // transform: scale(.99);
+      box-shadow: 0 0 8px rgba(0, 0, 0, .3);
     }
 
     &__sale {
       position: absolute;
-      top: -14px;
-      right: -16px;
-      width: 32px;
+      top: -12px;
+      right: -12px;
+      width: 26px;
 
       &-percentage {
-        font-size: .8rem;
+        font-size: .65rem;
         color: #fff;
         position: absolute;
         top: 50%;
@@ -212,7 +257,7 @@ export default {
       display: flex;
       flex-direction: column;
       background-color: #fff;
-      padding: 1.5rem;
+      padding: .5rem 1.5rem 1rem;
     }
 
     &__sale-price {

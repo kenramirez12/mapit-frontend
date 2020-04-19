@@ -2,19 +2,24 @@
   <div 
     v-loading="isLoading"
     :class="{ 'is-loading': isLoading }">
-    <AuthPopup />
-    <el-alert
-      class="pt-3 pb-4"
-      style="height:55px;background-color:#E9FFFF"
-      center
-      :closable="false">
-      <p class="font-light text-center text-black mb-0" style="font-size:14px">
-        Get the latest on our COVID-19 response and cancellation policies. <a href="#" class="font-medium underline">Learn more</a>
-      </p>
-    </el-alert>
-    <AppHeader />
-    <nuxt class="main-content" />
-    <AppFooter v-if="$route.name && $route.name !== 'lang-experiences-id'" />
+    <nuxt v-if="$route.name === 'pruebas'" />
+    <div v-else>
+      <AuthPopup />
+      <el-alert
+        class="top-bar pt-3 pb-4"
+        center
+        :closable="false">
+        <p class="font-light text-center text-black mb-0">
+          {{ $lang.translate(translations, 'covid_policies') }} 
+          <a href="#" class="font-medium underline">
+            {{ $lang.translate(translations, 'click') }}</a>
+        </p>
+      </el-alert>
+      <AppHeader />
+      <AppResponsiveNavbar />
+      <nuxt class="main-content" />
+      <AppFooter v-if="$route.name && $route.name !== 'lang-experiences-id'" />
+    </div>
   </div>
 </template>
 <script>
@@ -22,16 +27,28 @@ import { mapGetters, mapMutations, mapActions } from 'vuex'
 import AuthPopup from '~/components/auth/AuthPopup'
 import AppHeader from '~/layouts/components/AppHeader'
 import AppFooter from '~/layouts/components/AppFooter'
+import AppResponsiveNavbar from '~/layouts/components/AppResponsiveNavbar'
 
 export default {
   components: {
     AuthPopup,
     AppHeader,
-    AppFooter
+    AppFooter,
+    AppResponsiveNavbar
   },
   data () {
     return {
-      isLoading: false
+      isLoading: false,
+      translations: {
+        es_ES: {
+          covid_policies: 'Para más información  sobre las políticas de cancelación de COVID-19 y las últimas actualizaciones.',
+          click: 'Clic aquí'
+        },
+        en_EN: {
+          covid_policies: 'Learn more about our COVID-19 response and cancellation policies.',
+          click: 'Click here'
+        }
+      }
     }
   },
   computed: {
@@ -117,7 +134,12 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+  .top-bar {
+    height:55px;
+    background-color:#E9FFFF;
+  }
+
   .main-content {
     min-height: calc(100vh - var(--header-height) - 55px);
   }

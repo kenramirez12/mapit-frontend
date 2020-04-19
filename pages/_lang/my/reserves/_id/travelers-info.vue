@@ -4,39 +4,24 @@
     v-loading="isLoading"
     class="container relative pb-4 mx-auto">
     <el-breadcrumb class="mt-6 p-4 bg-gray-100" separator-class="el-icon-arrow-right">
-      <el-breadcrumb-item :to="{ path: `/${$lang.current().slug}/my/reserves` }">Historial de reservas</el-breadcrumb-item>
+      <el-breadcrumb-item :to="{ path: `/${$lang.current().slug}/my/reserves` }">
+        {{ $lang.translate(translations, 'booking_history') }}
+      </el-breadcrumb-item>
       <el-breadcrumb-item>
         {{ $lang.apiTranslate(reserve.experience.translations, 'title') }}
       </el-breadcrumb-item>
     </el-breadcrumb>
     <div class="traveler-info__header">
-      <div class="w-6/12 pr-16">
-        <h1 class="text-3xl">Hola {{ travelerName }},</h1>
-        <p class="font-light text-sm">Necesitamos los datos de tus acompañantes <template v-if="!reserve.traveler_arrival_date">y tu fecha de llegada al país</template> para finalizar la solicitud de compra.</p>
-      </div>
-      <div class="w-4/12 ml-2 mr-auto">
-        <div
-          :class="{ 'has-value' : arrivalForm.arrivalRules !== '' }"
-          class="input-underline mt-8 mb-2"
-          style="width:220px!important"
-          data-placeholder="Fecha de llegada al país">
-          <el-form ref="arrivalForm" :model="arrivalForm" :rules="arrivalRules">
-            <el-form-item prop="arrivalDate">
-              <el-date-picker
-                v-model="arrivalForm.arrivalDate"
-                :clearable="false"
-                :picker-options="arrivalOptions"
-                class="input-underline"
-                type="date">
-              </el-date-picker>
-            </el-form-item>
-          </el-form>
-        </div>
+      <div class="w-full pr-16">
+        <h1 class="text-3xl">{{ $lang.translate(translations, 'hello') }} {{ travelerName }},</h1>
+        <p class="font-light text-sm">
+          {{ $lang.translate(translations, 'info_required') }}
+        </p>
       </div>
     </div>
     <div class="flex flex-wrap -mx-2 pt-6 mt-6">
       <AdditionalTravelerForm
-        v-for="n in 3"
+        v-for="n in (reserve.group_size - 1)"
         :ref="`additional_traveler_${n}`"
         :key="'traveler_' + n"
         :number="n"
@@ -50,7 +35,9 @@
         class="w-4/12 mb-6 pb-6" />
     </div>
     <div class="block mb-8">
-      <el-button type="primary" @click="handleSubmit()">Continuar</el-button>
+      <el-button type="primary" @click="handleSubmit()">
+        {{ $lang.translate(translations, 'continue') }}
+      </el-button>
     </div>
   </div>
 </template>
@@ -83,19 +70,26 @@ export default {
   data() {
     return {
       isLoading: false,
-      arrivalForm: {
-        arrivalDate: ''
-      },
-      arrivalRules: {
-        arrivalDate: [
-          { required: true, type: 'date', message: 'Este campo es requerido', trigger: 'change' }
-        ]
-      },
       attempts: 1,
       isValid: [],
-      arrivalOptions: {
-        disabledDate: (time) => {
-          return time < new Date()
+      translations: {
+        'es_ES': {
+          booking_history: 'Historial de reservas',
+          hello: 'Hola',
+          info_required: 'Necesitamos los datos de tus acompañantes para finalizar la solicitud de compra.',
+          all_fields_required: 'Tienes que llenar todos los campos.',
+          continue: 'Continuar',
+          reserve_confirmed: '¡Listo! Hemos confirmado tu reserva',
+          reserve_error: 'No pudimos enviar la información, por favor inténtelo nuevamente'
+        },
+        'en_EN': {
+          booking_history: 'Booking history',
+          hello: 'Hi',
+          info_required: 'We need your group\’s information to finish the booking process.',
+          all_fields_required: 'All fields are required.',
+          continue: 'Continue',
+          reserve_confirmed: 'Your booking is now confirmed!',
+          reserve_error: 'Your information could not be sent. Please try again.'
         }
       }
     }
@@ -107,7 +101,7 @@ export default {
         if(!this.reserve) return null
         if(value.length === (this.reserve.group_size - 1)) {
           if(value.includes(0)) {
-            this.$message.error('Tienes que llenar todos los campos.')
+            this.$message.error(this.$lang.translate(this.translations, 'all_fields_required'))
           } else {
             this.trySubmit()
           }
@@ -127,24 +121,16 @@ export default {
   methods: {
     handleSubmit() {
       this.isValid = []
-      this.$refs.arrivalForm.validate()
       return this.attempts += 1
     },
     additionalTravelerValidation(value) {
       this.isValid.push(value ? 1: 0)
     },
     trySubmit() {
-      this.$refs.arrivalForm.validate(valid => {
-        if(!valid) {
-          return this.$message.error('Selecciona la fecha de llegada al país.')
-        } else {
-          this.updateReserveDetails()
-        }
-      })
+      this.updateReserveDetails()
     },
     async updateReserveDetails() {
       const data = {
-        traveler_arrival_date: this.arrivalForm.arrivalDate,
         additional_travelers: []
       }
 
@@ -155,12 +141,13 @@ export default {
       this.isLoading = true
       try {
         const resp = await this.$axios.$put('/reserve-details/' + this.reserve.details.id, data)
+        await this.$auth.fetchUser()
         this.isLoading = false
-        this.$message.success('¡Listo! Hemos confirmado tu reserva')
+        this.$message.success(this.$lang.translate(this.translations, 'reserve_confirmed'))
         this.$router.push(`/${this.$lang.current().slug}/my/reserves/${this.reserve.code}`)
       } catch (error) {
         this.isLoading = false
-        this.$message.error('No pudimos enviar la información, por favor inténtelo nuevamente')
+        this.$message.error(this.$lang.translate(this.translations, 'reserve_error'))
         console.error(error)
         console.error(error.response)
       }

@@ -1,9 +1,18 @@
 <template>
   <div v-loading="!reserve">
-    <PaymentFailed v-if="reserve.status === 0" :reserve="reserve" />
+    <PaymentFailed
+      v-if="reserve.status === 0"
+      :reserve="reserve"
+      :translations="translations" />
     <template v-else>
-      <SuccessfulPayment v-if="reserve.group_size === 1" :reserve="reserve" />
-      <RequireAdditionalInfo v-else />
+      <SuccessfulPayment
+        v-if="reserve.group_size === 1"
+        :reserve="reserve"
+        :translations="translations" />
+      <RequireAdditionalInfo
+        v-else
+        :reserve="reserve"
+        :translations="translations" />
     </template>
   </div>
 </template>
@@ -18,7 +27,6 @@ export default {
     try {
       const resp = await app.$axios.$get(`/reserves/${params.id}`)
       const reserve = resp.reserve
-      console.log('Success: ', reserve)
       
       return {
         reserve
@@ -31,6 +39,28 @@ export default {
     SuccessfulPayment,
     RequireAdditionalInfo,
     PaymentFailed
+  },
+  data() {
+    return {
+      translations: {
+        'es_ES': {
+          order_number: 'Número de pedido',
+          order_date: 'Fecha de pedido',
+          denial_reason: 'Motivo de denegación',
+          card_number: 'Número de tarjeta',
+          amount: 'Monto',
+          api_error: 'Problemas técnicos en nuestra aplicación.'
+        },
+        'en_EN': {
+          order_number: 'Order number',
+          order_date: 'Order date',
+          denial_reason: 'Reason of denial',
+          card_number: 'Credit card number',
+          amount: 'Amount',
+          api_error: 'Technical problems in our application.'
+        }
+      }
+    }
   }
 }
 </script>
@@ -70,7 +100,7 @@ export default {
     z-index: 2;
 
     &__title {
-      font-size: 54px;
+      font-size: 46px;
       line-height: 1;
       font-weight: 300;
     }

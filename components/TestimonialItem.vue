@@ -1,23 +1,32 @@
 <template>
   <div
     class="testimonial-item"
-    :class="{ 'testimonial-item--white' : testimonialNumber !== null }"  
+    :class="{ 'testimonial-item--white' : formattedTestimonialNumber !== null }"  
   >
-    <span v-if="testimonialNumber" class="testimonial-item__number">0{{ testimonialNumber }}</span>
+    <span v-if="formattedTestimonialNumber" class="testimonial-item__number">
+      {{ formattedTestimonialNumber }}
+    </span>
     <div class="testimonial-item__content">
-      <span class="text-3xl font-light leading-tight">"{{ testimonial.review }}"</span>
+      <span class="text-3xl font-light leading-tight">
+        "{{ $lang.apiTranslate(testimonial.translations, 'comment') }}"
+      </span>
       <div class="my-auto">
-        <a href="#" class="flex items-center py-6 my-6">
-          <i class="el-icon-collection-tag text-2xl mr-2"></i> Lee más opiniones en
+        <a
+          v-if="testimonial.external_link !== ''"
+          :href="testimonial.external_link"
+          target="_blank"
+          class="flex items-center py-6 my-6">
+          <i class="el-icon-collection-tag text-2xl mr-2"></i> 
+          {{ $lang.translate(translations, 'read_more') }}
           <img class="ml-4" src="~/assets/images/social/tripadvisorlight.svg" alt="Trip Advisor Logo" width="30">
         </a>
         <div class="flex flex-col">
-          <span>{{ testimonial.fullname }}</span>
-          <small>{{ testimonial.country }}</small>
+          <span>{{ testimonial.author }}</span>
+          <small>{{ $lang.apiTranslate(testimonial.translations, 'author_country') }}</small>
         </div>
       </div>
     </div>
-    <img src="~/assets/images/testimonial.jpg" class="testimonial-item__image" alt="">
+    <img :src="$imagePath(testimonial.avatar.path)" class="testimonial-item__image" alt="">
   </div>
 </template>
 
@@ -32,6 +41,28 @@ export default {
       type: Number,
       required: false,
       default: () => null
+    }
+  },
+  data() {
+    return {
+      translations: {
+        'es_ES': {
+          read_more: 'Lee más opiniones en'
+        },
+        'en_EN': {
+          read_more: 'For more reviews go to'
+        }
+      }
+    }
+  },
+  computed: {
+    formattedTestimonialNumber() {
+      if(this.testimonialNumber === null) return null
+      if(this.testimonialNumber < 10) {
+        return '0' + this.testimonialNumber
+      } else {
+        return this.testimonialNumber
+      }
     }
   }
 }
@@ -81,6 +112,11 @@ export default {
       object-fit: cover;
       margin-bottom: 5rem;
       order: 0;
+
+      @media screen and (min-width: 560px) {
+        width: 100%;
+        margin-left: 0;
+      }
 
       @media screen and (min-width: 768px) {
         width: 300px;

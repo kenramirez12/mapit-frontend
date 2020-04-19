@@ -1,5 +1,5 @@
 <template>
-  <div class="error-page">
+  <div class="error-page py-5">
     <img class="error-page__image" src="/images/404-animation.gif">
     <div class="error-page__content">
       <el-button
@@ -11,7 +11,7 @@
         @click="$router.push(`/${$lang.current().slug}/`)" />
       <h2 class="error-page__subtitle">404 - PAGE NOT FOUND</h2>
       <h1 class="error-page__title">WHOOPS!</h1>
-      <p class="error-page__copy">Guess we got lost in the day<br>Get back to track</p>
+      <p class="error-page__copy">Guess we got lost in the way<br>Get back to track</p>
     </div>
   </div>
 </template>
@@ -39,9 +39,13 @@ export default {
     justify-content: center;
 
     &__image {
-      max-width: 420px;
+      max-width: 280px;
       width: calc(100% - 30px);
       margin: 0 auto;
+
+      @media screen and (min-width: 640px) {
+        max-width: 420px;
+      }
     }
 
     &__content {
@@ -55,14 +59,23 @@ export default {
     &__btn {
       transform: scale(1.5);
       position: absolute;
-      right: -3rem;
-      top: 0;
+      right: -2rem;
+      top: -1rem;
+
+      @media screen and (min-width: 640px) {
+        right: -3rem;
+        top: 0;
+      }
     }
 
     &__title {
-      font-size: 64px;
+      font-size: 52px;
       line-height: 1;
       font-weight: 300;
+
+      @media screen and (min-width: 640px) {
+        font-size: 64px;
+      }
     }
 
     &__subtitle {

@@ -1,8 +1,8 @@
 <template>
-  <div v-loading="isLoading" class="flex flex-col h-full pt-5">
+  <div v-if="experience" v-loading="isLoading" class="flex flex-col h-full pt-5">
     <div class="flex mb-6 pb-4">
       <div class="w-1/3">
-        <span class="font-light">Fecha</span>
+        <span class="font-light">{{ $lang.translate(translations, 'date') }}</span>
         <div class="block mt-1">
           <el-date-picker
             v-model="reserveDate"
@@ -13,18 +13,22 @@
             style="border:1px solid var(--primary)"
             type="date"
             size="small"
-            placeholder="Fecha"
+            :placeholder="$lang.translate(translations, 'date')"
           />
         </div>
       </div>
       <div class="w-1/3">
-        <span class="font-light">Puntos acumulados</span>
+        <span class="font-light">
+          {{ $lang.translate(translations, 'points') }}
+        </span>
         <div class="block">
           <span class="text-3xl font-light">{{ parseFloat(reservePrice) * groupSize }}</span>
         </div>
       </div>
       <div class="w-1/3">
-        <span class="font-light">Cantidad de viajeros</span>
+        <span class="font-light">
+          {{ $lang.translate(translations, 'group_size') }}
+        </span>
         <div class="flex items-center">
           <span class="text-3xl font-light mr-6">{{ groupSize > 9 ? groupSize : '0' + groupSize }}</span>
           <div>
@@ -48,7 +52,9 @@
     </div>
 
     <div class="block mb-6 pb-4">
-      <span class="font-light">Elige tu horario de inicio</span>
+      <span class="font-light">
+        {{ $lang.translate(translations, 'starting_time') }}
+      </span>
       <div
         v-if="availableHours && availableHours.length > 0"
         class="block mt-2 -mx-1">
@@ -67,11 +73,11 @@
       <p v-else class="text-sm font-light mt-3">No se encontraron horarios disponibles.</p>
     </div>
 
-    <div
-      v-if="experience && experience.extras !== null && experience.extras.length > 0"
-      class="flex">
-      <div class="w-1/3">
-        <el-checkbox-group v-model="reserveExtras">
+    <div class="flex flex-wrap">
+      <div class="w-1/3 pr-6">
+        <el-checkbox-group
+          v-if="experience && experience.extras !== null && experience.extras.length > 0"
+          v-model="reserveExtras">
           <el-checkbox
             v-for="extra in experience.extras"
             :key="extra.id"
@@ -81,10 +87,16 @@
           </el-checkbox>
         </el-checkbox-group>
       </div>
+      <div class="w-1/2 pl-8">
+        <span class="block mb-2 font-light">
+          {{ $lang.translate(translations, 'message') }}
+        </span>
+        <el-input v-model="message" type="textarea" :rows="3" class="shadow-input border-0" />
+      </div>
     </div>
 
     <div class="mt-auto">
-      <el-button @click="trySubmit()" type="primary">Continuar</el-button>
+      <el-button @click="trySubmit()" type="primary">{{ $lang.translate(translations, 'continue') }}</el-button>
     </div>
   </div>
 </template>
@@ -99,6 +111,31 @@ export default {
       datesOption: {
         disabledDate: (time) => this.shouldDisableDate(time)
       },
+      translations: {
+        'es_ES': {
+          date: 'Fecha',
+          points: 'Puntos acumulados',
+          group_size: 'Cantidad de viajeros',
+          starting_time: 'Elige tu horario de inicio',
+          message: 'Mensaje al wiser',
+          continue: 'Continuar',
+          no_places: 'No hay cupos suficientes para la fecha seleccionada',
+          time_required: 'Seleccione un horario para continuar',
+          process_error: 'No pudimos completar el proceso, por favor inténtelo nuevamente'
+
+        },
+        'en_EN': {
+          date: 'Date',
+          points: 'Accumulated points',
+          group_size: 'Group size',
+          starting_time: 'Choose your starting time',
+          message: 'Message to the wiser',
+          continue: 'Continue',
+          no_places: 'There are no available places for this day',
+          time_required: 'Please, choose your starting time to continue',
+          process_error: 'No pudimos completar el proceso, por favor inténtelo nuevamente'
+        }
+      }
     }
   },
   computed: {
@@ -143,6 +180,14 @@ export default {
       set (value) {
         this.setReserveField({ field: 'extras', value })
       }
+    },
+    message: {
+      get () {
+        return this.$store.state.reserves.form.message
+      },
+      set (value) {
+        this.setReserveField({ field: 'message', value })
+      }
     }
   },
   watch: {
@@ -153,6 +198,11 @@ export default {
     groupSize() {
       this.reserveTime = ''
       this.retrieveAvailableHours()
+    }
+  },
+  mounted() {
+    if(!this.experience) {
+      this.$router.push(`/${this.$lang.current().slug}/experiences`)
     }
   },
   methods: {
@@ -185,10 +235,10 @@ export default {
     },
     trySubmit() {
       if(!this.hasAvailableHours) {
-        return this.$message.error('No hay cupos suficientes para la fecha seleccionada')
+        return this.$message.error(this.$lang.translate(this.translations, 'no_places'))
       }
       if(this.reserveTime === '') {
-        return this.$message.warning('Seleccione un horario para continuar')
+        return this.$message.warning(this.$lang.translate(this.translations, 'time_required'))
       }
       this.setCheckoutStep(2)
     },
@@ -199,16 +249,16 @@ export default {
         this.isLoading = false
 
         if(!resp) {
-          return this.$message.error('No pudimos completar el proceso, por favor inténtelo nuevamente')
+          return this.$message.error(this.$lang.translate(this.translations, 'process_error'))
         }
 
         if(!this.hasAvailableHours) {
-          return this.$message.error('No hay cupos suficientes para la fecha seleccionada')
+          return this.$message.error(this.$lang.translate(this.translations, 'no_places'))
         }
       } catch (error) {
         console.error(error)
         this.isLoading = false
-        return this.$message.error('No pudimos completar el proceso, por favor inténtelo nuevamente')
+        return this.$message.error(this.$lang.translate(this.translations, 'process_error'))
       }
     }
   }

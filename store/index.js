@@ -259,9 +259,106 @@ const countries = [
   {name: 'Zimbabwe', code: 'ZW'}
 ]
 
+const faqs = {
+  'es_ES': [
+    {
+      question: '¿Cómo se diferencia MAP IT de los demás?',
+      answer: 'Somos una empresa enfocada en el desarrollo sostenible del Perú, que busca generar un cambio a través del turismo. Las experiencias son diferentes a las convencionales: te permiten descubrir la ciudad como una persona local, disfrutando de su verdadera escencia. Gracias a esto, apoyamos a las comunidades rurales con proyectos, preservamos sus tradiciones, y generamos ingresos para los locales.'
+    },
+    {
+      question: '¿Las experiencias son seguras?',
+      answer: 'Sí lo son. Todas las experiencias han sido probadas con estándares de seguridad, y son supervisadas periódicamente.'
+    },
+    {
+      question: '¿Cómo reservo una experiencia?',
+      answer: 'Revisa la sección: "Cómo funciona" para más información en como reservar una experiencia en MAP IT.'
+    },
+    {
+      question: '¿Puedo personalizar una experiencia?',
+      answer: '¡Claro! En caso quieras hacerlo, contáctanos por correo electrónico para cotizar alguna experiencia a tu medida.'
+    },
+    {
+      question: 'Viajo solo ¿Puedo unirme a sus experiencias?',
+      answer: 'Sí, en caso requiera un grupo mínimo, mándanos un correo; la podrías reservar con un recargo, o en caso tengamos un grupo ya reservado, te podrías unir a éste.'
+    },
+    {
+      question: '¿Se aceptan más personas de las indicadas en la experiencia?',
+      answer: 'Sí, aceptamos en la mayoría de las experiencias. Para conocer nuestras tarifas grupales que no aparecen en la web, mándanos un correo!'
+    },
+    {
+      question: '¿Qué medios de pago aceptan?',
+      answer: 'Aceptamos tarjeta de débito y crédito VISA y Mastercard.'
+    },
+    {
+      question: '¿La operación de pago es segura?',
+      answer: '¡Sí es segura! Utilizamos Pago Web de Niubiz para procesar su pago, asegurándonos que sus datos confidenciales estén protegidos y seguros a través de un sistema que cuenta con  Certificación PCI DSS.'
+    },
+    {
+      question: '¡Ayuda! No puedo pagar',
+      answer: 'Si no puedes pagar, debe ser que el emisor de tu tarjeta rechazó el pago. La solución es utilizar otra tarjeta para realizar la reserva, y llamar a tu banco para saber por qué rechazó la otra. Si tienes otro problema con el pago, contáctanos por correo y te ayudaremos a solucionarlo.'
+    },
+    {
+      question: '¿Puedo cancelar una experiencia?',
+      answer: 'Revisa las Políticas de Cancelación que se encuentran en "Términos y Condiciones"'
+    },
+    {
+      question: '¿Cuánto se demora procesar un reembolso?',
+      answer: 'Cuando se procesa un reembolso: Su reembolso demorará hasta 15 días hábiles para que el reembolso se refleje en su cuenta.'
+    },
+  ],
+  'en_EN': [
+    {
+      question: 'How is MAP IT different from the rest?',
+      answer: 'We are a company that promotes sustainable development in Peru through tourism. Our experiences are unique and different from conventional tours: they allow travelers to discover the city in an authentic way from a local perspective. Through them, we generate job opportunities for locals in rural communities and encourage them to preserve their traditions.'
+    },
+    {
+      question: 'Are these experiences safe?',
+      answer: 'Yes they are. All experiences have been tested with safety standards, and they are supervised periodically. '
+    },
+    {
+      question: 'How do I book an experience?',
+      answer: 'Check the "How it Works" tab for more information on how to book an experience with MAP IT.'
+    },
+    {
+      question: 'Can I customize an experience? ',
+      answer: 'Sure! If you want a customized option, send us an e-mail and we\'ll get back to you with a plan that suits you! '
+    },
+    {
+      question: 'I\'m traveling alone, can I join your tours?',
+      answer: 'Yes, if it requires a minimum group, send us an email: you could book it with a surcharge, or if we have a group already booked, you could join it.'
+    },
+    {
+      question: 'Do you accept groups of more people?',
+      answer: 'Yes, we accept it in most experiences. To know our group rates that do not appear on the web, send us an email!'
+    },
+    {
+      question: 'What payment methods do you accept?',
+      answer: 'We accept VISA and Mastercard debit and credit card.'
+    },
+    {
+      question: 'Is my payment transaction secure?',
+      answer: 'Yes it is! We use Niubiz Web Payment to process your payment, making sure that your private data is protected and secure through a system that has PCI DSS certification.'
+    },
+    {
+      question: 'I can\'t pay, help!',
+      answer: 'If you can\'t pay, it must be that your card issuer declined the payment. The solution is to use a different card to make the booking and to call the bank to find out why the other one was rejected. If you have another payment problem,  you can contact us by mail for support.'
+    },
+    {
+      question: 'Can I cancel an experience?',
+      answer: 'Check the Cancellation Policies listed in "Terms and Conditions"'
+    },
+    {
+      question: 'How long does a refund takes to process?',
+      answer: 'When a refund is issued: Your refund will take up to 15 working days for the refund to be reflected in your account.'
+    }
+  ]
+}
+
+
 export const state = () => ({
   langs,
-  countries: countries,
+  faqs,
+  countries,
   currentLangCode: 'ENG',
   authDialogVisible: false
 })

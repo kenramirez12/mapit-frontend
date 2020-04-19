@@ -1,7 +1,9 @@
 <template>
   <div id="testimonials-section" class="experience-container py-6 pb-super">
     <div class="container mx-auto">
-      <h3 class="text-5xl font-light pb-4 mb-6">{{ $lang.translate(pageTranslations, 'reviews') }}</h3>
+      <h3 class="text-3xl md:text-5xl font-light pb-4 mb-6">
+        {{ $lang.translate(pageTranslations, 'reviews') }}
+      </h3>
     </div>
     <div class="testimonials-slider">
       <div v-swiper:mySwiper="swiperOption">
@@ -11,8 +13,8 @@
         </div>
         <div class="swiper-wrapper">
           <TestimonialItem
-            v-for="n in 6"
-            :key="n"
+            v-for="testimonial in testimonials"
+            :key="testimonial.id"
             :testimonial="testimonial"
             class="swiper-slide"
           />
@@ -29,6 +31,12 @@ import TestimonialItem from '~/components/TestimonialItem'
 export default {
   components: {
     TestimonialItem
+  },
+  props: {
+    testimonials: {
+      type: Array,
+      required: true
+    }
   },
   data() {
     return {

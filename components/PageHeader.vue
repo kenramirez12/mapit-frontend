@@ -3,8 +3,8 @@
     <div class="container page-header__container m-auto px-4">
       <div :class="contentClass">
         <p v-if="preTitle !== ''" class="mb-8 text-2xl text-white font-light page-header__pre-title">{{ preTitle }}</p>
-        <h1 class="page-header__title pr-4 mb-8">{{ title }}</h1>
-        <p v-if="subtitle !== ''" class="page-header__description">{{ subtitle }}</p>
+        <h1 class="page-header__title pr-4 mb-8">{{ headerTitle }}</h1>
+        <p v-if="headerSubtitle !== ''" class="page-header__description">{{ headerSubtitle }}</p>
       </div>
       <slot></slot>
     </div>
@@ -18,17 +18,19 @@ export default {
   props: {
     title: {
       type: String,
-      required: true
+      required: false
     },
     preTitle: {
       type: String,
-      required: false,
-      default: () => ''
+      required: false
     },
     subtitle: {
       type: String,
-      required: false,
-      default: () => ''
+      required: false
+    },
+    translations: {
+      type: Object,
+      required: false
     },
     image: {
       type: String,
@@ -36,13 +38,30 @@ export default {
     },
     contentClass: {
       type: String,
-      required: false,
-      default: () => ''
+      required: false
     }
   },
   data() {
     return {
       baseBackground
+    }
+  },
+  computed: {
+    headerTitle() {
+      if(this.title) return this.title
+      if(this.translations) {
+        return this.$lang.translate(this.translations, 'title')
+      }
+
+      return ''
+    },
+    headerSubtitle() {
+      if(this.subtitle) return this.subtitle
+      if(this.translations) {
+        return this.$lang.translate(this.translations, 'subtitle')
+      }
+
+      return null
     }
   }
 }
@@ -51,10 +70,14 @@ export default {
 <style lang="scss" scoped>
   .page-header {
     display: flex;
-    height: 640px;
+    height: calc(100vh - 80px - 55px);
     // background-attachment: fixed;
     background-size: cover;
     background-position: center;
+
+    @media screen and (min-width: 768px) {
+      height: 640px;
+    }
 
     &__container {
       height: 100%;
@@ -64,9 +87,13 @@ export default {
 
     &__title {
       font-weight: 300;
-      font-size: 65px;
+      font-size: 48px;
       line-height: 1.2;
       color: #fff;
+
+      @media screen and (min-width: 768px) {
+        font-size: 65px;
+      }
     }
 
     &__pre-title {
