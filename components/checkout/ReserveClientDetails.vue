@@ -257,7 +257,7 @@ export default {
       form: {
         fullname: this.$auth.loggedIn ? this.$auth.$state.user.fullname : '',
         email: this.$auth.loggedIn ? this.$auth.$state.user.email : '',
-        phone: this.$auth.loggedIn ? this.$auth.$state.user.phone.nationalNumber : '',
+        phone: this.$auth.loggedIn && this.$auth.$state.user.phone && this.$auth.$state.user.phone.constructor === Object && 'nationalNumber' in this.$auth.$state.user.phone ? this.$auth.$state.user.phone.nationalNumber : '',
         birthdate: '',
         country: this.$auth.loggedIn ? this.$auth.$state.user.country : '',
         docNumber: '',
