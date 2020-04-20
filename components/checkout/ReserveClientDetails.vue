@@ -80,11 +80,7 @@
                 <VuePhoneNumberInput
                   v-model="form.phone"
                   @update="setPhoneData"
-                  :default-country-code="
-                    $auth.loggedIn ?
-                    $auth.$state.user.phone.countryCode :
-                    form.country
-                  "
+                  :default-country-code="defaultCountryCode"
                   :translations="{
                     countrySelectorLabel: $lang.translate(translations, 'code'),
                     phoneNumberLabel: $lang.translate(translations, 'phone'),
