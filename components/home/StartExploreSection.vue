@@ -30,6 +30,7 @@ export default {
   justify-content: center;
   height: 34rem;
   background-size: cover;
+  background-position: center;
 
   @media screen and (min-width: 768px) {
     background-attachment: fixed;

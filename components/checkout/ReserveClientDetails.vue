@@ -308,6 +308,17 @@ export default {
         ]
       }
     },
+    defaultCountryCode() {
+      if(!this.$auth.loggedIn) return this.form.country
+      if(
+        this.$auth.$state.user.phone &&
+        this.$auth.$state.user.phone.counstructor === Object &&
+        'countryCode' in this.$auth.$state.user.phone) {
+        return this.$auth.$state.user.phone.countryCode
+      } else {
+        return this.form.country
+      }
+    },
     visanetFirstname() {
       return this.form.fullname.split(' ')[0]
     },
