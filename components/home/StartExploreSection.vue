@@ -29,8 +29,11 @@ export default {
   align-items: center;
   justify-content: center;
   height: 34rem;
-  background-attachment: fixed;
   background-size: cover;
+
+  @media screen and (min-width: 768px) {
+    background-attachment: fixed;
+  }
 }
 
 .main-btn {

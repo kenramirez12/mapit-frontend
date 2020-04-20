@@ -106,11 +106,7 @@
                 <VuePhoneNumberInput
                   v-model="formData.phone"
                   @update="setPhoneData"
-                  :default-country-code="
-                    formData.phone !== '' ?
-                    user.phone.countryCode :
-                    formData.country
-                  "
+                  :default-country-code="defaultCountryCode"
                   :translations="{
                     countrySelectorLabel: $lang.translate(translations, 'code'),
                     phoneNumberLabel: $lang.translate(translations, 'phone'),
@@ -204,7 +200,7 @@ export default {
         fullname: this.$auth.$state.user ? this.$auth.$state.user.fullname : '',
         country: this.$auth.$state.user ? this.$auth.$state.user.country : '',
         email: this.$auth.$state.user ? this.$auth.$state.user.email : '',
-        phone: this.$auth.$state.user ? this.$auth.$state.user.phone.nationalNumber : ''
+        phone: this.$auth.$state.user && this.$auth.$state.user.phone && 'nationalNumber' in this.$auth.$state.user.phone ? this.$auth.$state.user.phone.nationalNumber : ''
       }
     }
   },
@@ -243,6 +239,17 @@ export default {
       }
 
       return ''
+    },
+    defaultCountryCode() {
+      if(!this.user) return this.formData.country
+      if(
+        this.user.phone &&
+        this.user.phone.counstructor === Object &&
+        'countryCode' in this.user.phone) {
+        return this.user.phone.countryCode
+      } else {
+        return this.formData.country
+      }
     }
   },
   watch: {
@@ -307,7 +314,7 @@ export default {
       this.formData.fullname = this.$auth.$state.user.fullname
       this.formData.country = this.$auth.$state.user.country
       this.formData.email = this.$auth.$state.user.email
-      this.formData.phone = this.$auth.$state.user.phone.nationalNumber
+      this.formData.phone = this.$auth.$state.user.phone && 'nationalNumber' in this.$auth.$state.user.phone ? this.$auth.$state.user.phone.nationalNumber : ''
       this.isEditing = false
       this.avatarChanged = false
       this.avatar = ''

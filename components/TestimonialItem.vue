@@ -7,7 +7,7 @@
       {{ formattedTestimonialNumber }}
     </span>
     <div class="testimonial-item__content">
-      <span class="text-3xl font-light leading-tight">
+      <span class="text-2xl font-light leading-tight">
         "{{ $lang.apiTranslate(testimonial.translations, 'comment') }}"
       </span>
       <div class="my-auto">
@@ -120,7 +120,8 @@ export default {
 
       @media screen and (min-width: 768px) {
         width: 300px;
-        height: auto;
+        height: 550px;
+        object-fit: cover;
         margin-left: 0;
         margin-bottom: 0;
         order: 1;

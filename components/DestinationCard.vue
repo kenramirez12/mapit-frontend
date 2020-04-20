@@ -15,6 +15,7 @@
         </PuSkeleton>
         <el-button
           v-if="!isLoading"
+          @click="$router.push(`/${$lang.current().slug}/destinations?destination=${destination.id}`)"
           type="primary"
           size="small"
           plain
