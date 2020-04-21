@@ -1,6 +1,6 @@
 <template>
   <div>
-    <AppHero :translations="translations" />
+    <AppHero />
     <main class="flex flex-col">
       <div class="container mx-auto pt-8 inline-block">
         <div class="w-full flex items-center mb-4 md:mb-8 mt-6 pl-2 md:pl-0">

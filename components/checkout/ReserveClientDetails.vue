@@ -108,6 +108,9 @@
             </div>
           </div>
         </div>
+        <div class="my-4 py-2 px-3 self-start font-light" style="background:rgb(233, 255, 255);font-size:12px">
+          {{ $lang.translate(translations, 'noArrivalDate') }}
+        </div>
         <div class="block mt-4">
           <el-form-item prop="terms" class="mb-0">
             <el-checkbox v-model="form.terms" class="font-light">
@@ -117,10 +120,7 @@
         </div>
       </div>
     </el-form>
-    <div class="mt-6 mb-4 py-3 px-4 self-start font-light" style="background:rgb(233, 255, 255);font-size:14px">
-      {{ $lang.translate(translations, 'noArrivalDate') }}
-    </div>
-    <div class="mt-auto">
+    <div class="mt-auto pt-6">
       <el-button @click="handleSubmit('clientDetailsForm')" type="primary">
         {{ $lang.translate(translations, 'continue') }}
       </el-button>

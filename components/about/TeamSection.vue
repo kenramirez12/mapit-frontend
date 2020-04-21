@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="flex flex-wrap pt-16 mb-16">
+    <div class="flex flex-wrap pt-16 mb-12">
       <div class="w-4/12">
         <h2 class="text-5xl font-light">
           {{ $lang.translate(translations, 'title') }}
@@ -10,22 +10,31 @@
         <div class="flex flex-wrap">
           <div class="w-11/12 flex flex-wrap">
             <div class="flex-1">
-              <h5 class="text-2xl font-light">Ursula</h5>
-              <span class="font-light text-sm">
-                {{ $lang.translate(translations, 'cofounder') }}
-              </span>
-            </div>
-            <div class="flex-1">
               <h5 class="text-2xl font-light">Daniela</h5>
               <span class="font-light text-sm">
                 {{ $lang.translate(translations, 'cofounder') }}
               </span>
+              <div class="block mt-4">
+                <el-button size="small" type="primary" icon="el-icon-bottom" circle />
+              </div>
+            </div>
+            <div class="flex-1">
+              <h5 class="text-2xl font-light">Ursula</h5>
+              <span class="font-light text-sm">
+                {{ $lang.translate(translations, 'cofounder') }}
+              </span>
+              <div class="block mt-4">
+                <el-button size="small" type="primary" icon="el-icon-bottom" circle />
+              </div>
             </div>
             <div class="flex-1">
               <h5 class="text-2xl font-light">Mirella</h5>
               <span class="font-light text-sm">
                 {{ $lang.translate(translations, 'cofounder') }}
               </span>
+              <div class="block mt-4">
+                <el-button size="small" type="primary" icon="el-icon-bottom" circle />
+              </div>
             </div>
           </div>
         </div>

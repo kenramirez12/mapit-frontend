@@ -9,9 +9,12 @@
         class="error-page__btn"
         circle
         @click="$router.push(`/${$lang.current().slug}/`)" />
-      <h2 class="error-page__subtitle">404 - PAGE NOT FOUND</h2>
+      <h2 class="error-page__subtitle">404 - {{ $lang.translate(translations, 'not_found') }}</h2>
       <h1 class="error-page__title">WHOOPS!</h1>
-      <p class="error-page__copy">Guess we got lost in the way<br>Get back to track</p>
+      <p class="error-page__copy">
+        {{ $lang.translate(translations, 'not_found_copy_1') }}<br>
+        {{ $lang.translate(translations, 'not_found_copy_2') }}
+      </p>
     </div>
   </div>
 </template>
@@ -19,6 +22,22 @@
 import { mapMutations } from 'vuex'
 
 export default {
+  data() {
+    return {
+      translations: {
+        es_ES: {
+          not_found: 'PÁGINA NO ENCONTRADA',
+          not_found_copy_1: 'Nos perdimos en el camino',
+          not_found_copy_2: 'Vuelve a la página anterior'
+        },
+        en_EN: {
+          not_found: 'PAGE NOT FOUND',
+          not_found_copy_1: 'Guess we got lost in the way',
+          not_found_copy_2: 'Get back to track'
+        }
+      }
+    }
+  },
   methods: {
     ...mapMutations({
       setLang: 'SET_LANG_BY_SLUG'

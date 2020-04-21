@@ -20,7 +20,7 @@
         <div class="flex flex-wrap text-sm">
           <div class="w-1/2 py-2">
             {{ $lang.translate(translations, 'order_number') }}:<br>
-            {{ reserve.payment.details.order.traceNumber }}
+            {{ reserve.id + 300 }}
           </div>
           <div class="w-1/2 py-2">
             {{ $lang.translate(translations, 'order_date') }}:<br>
@@ -34,7 +34,7 @@
           </div>
           <div class="w-1/2 py-2">
             {{ $lang.translate(translations, 'amount') }}:<br>
-            {{ reserve.payment.details.order.amount }} {{ reserve.payment.details.order.currency }}
+            {{ reserve.payment.details.order.amount.toFixed(2) }} {{ reserve.payment.details.order.currency }}
           </div>
         </div>
       </div>
@@ -66,7 +66,7 @@ export default {
         'en_EN': {
           title: 'Last step',
           copy: 'To complete the booking and enjoy the experience, you must fill the other travelers’ information.',
-          gotit: 'Got it!'
+          gotit: 'Got it !'
         }
       }
     }

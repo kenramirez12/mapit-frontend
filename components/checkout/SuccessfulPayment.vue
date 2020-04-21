@@ -16,7 +16,7 @@
         <div class="flex flex-wrap text-sm">
           <div class="w-1/2 py-2">
             {{ $lang.translate(translations, 'order_number') }}:<br>
-            {{ reserve.payment.details.order.traceNumber }}
+            {{ reserve.id + 300 }}
           </div>
           <div class="w-1/2 py-2">
             {{ $lang.translate(translations, 'order_date') }}:<br>
@@ -30,7 +30,7 @@
           </div>
           <div class="w-1/2 py-2">
             {{ $lang.translate(translations, 'amount') }}:<br>
-            {{ reserve.payment.details.order.amount }} {{ reserve.payment.details.order.currency }}
+            {{ reserve.payment.details.order.amount.toFixed(2) }} {{ reserve.payment.details.order.currency }}
           </div>
         </div>
       </div>
@@ -78,7 +78,7 @@ export default {
           purchase: 'purchase',
           copy: 'Thank you for booking with us!',
           copy2: 'Within the next 24 hrs, you will receive a confirmation email with the reservation code and the details of the experience.',
-          gotit: 'Got it!',
+          gotit: 'Got it !',
           order_number: 'Order number',
           order_date: 'Order date',
           denial_reason: 'Reason of denial',

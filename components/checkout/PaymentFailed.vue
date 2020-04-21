@@ -12,7 +12,7 @@
         <div v-else class="flex flex-wrap text-sm">
           <div class="w-1/2 py-2">
             {{ $lang.translate(translations, 'order_number') }}:<br>
-            {{ reserve.payment.details.data.TRACE_NUMBER }}
+            {{ reserve.id + 300 }}
           </div>
           <div class="w-1/2 py-2">
             {{ $lang.translate(translations, 'order_date') }}:<br>

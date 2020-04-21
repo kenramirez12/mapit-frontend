@@ -1,7 +1,7 @@
 <template>
   <div
     class="hero super-center flex-col px-4"
-    style="background-image: url('/images/home/principal_3.jpg')">
+    style="background-image: url('/images/home/banner.jpg')">
     <h1 class="hidden sm:block text-5xl md:text-6xl font-light px-8 pb-4 mb-6 text-white not-italic text-center leading-tight">
       {{ $lang.translate(translations, 'hero_title') }}
     </h1>
@@ -9,7 +9,7 @@
       <el-form-item class="sm:hidden w-full">
         <el-select
           v-model="cascada"
-          placeholder="Select"
+          :placeholder="$lang.translate(translations, 'search_placeholder')"
           filterable
           collapse-tags
           multiple
@@ -32,7 +32,7 @@
         <el-select
           :disabled="categories === null"
           v-model="filters.category_id"
-          :placeholder="$lang.translate(translations, 'experiences').toUpperCase()"
+          :placeholder="$lang.translate(translations, 'categories').toUpperCase()"
           class="shadow-input"
           size="large">
           <template v-if="categories && categories.length > 0">
@@ -86,19 +86,28 @@
 import { mapState, mapGetters } from 'vuex'
 
 export default {
-  props: {
-    translations: {
-      type: Object,
-      required: true
-    }
-  },
-
   data () {
     return {
       cascada: '',
       filters: {
         category_id: '',
         destination_id: ''
+      },
+      translations: {
+        'es_ES': {
+          hero_title: 'Descubre el Perú como un local',
+          search: 'Buscar',
+          search_placeholder: 'Buscar...',
+          categories: 'Categorías',
+          destinations: 'Destinos'
+        },
+        'en_EN': {
+          hero_title: 'Experience it, live it',
+          search: 'Search',
+          search_placeholder: 'Search...',
+          categories: 'Categories',
+          destinations: 'Destinations',
+        }
       }
     }
   },

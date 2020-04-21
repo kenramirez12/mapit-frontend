@@ -84,7 +84,7 @@
                 {{ currentCountry }}
               </span>
               <span v-else class="font-light text-gray-500">
-                País no especificado
+                {{ $lang.translate(translations, 'missing_country') }}
               </span>
             </div>
             <div
@@ -120,7 +120,7 @@
                 {{ user.phone.formatInternational }}
               </span>
               <span v-else class="font-light text-gray-500">
-                Teléfono no especificado
+                {{ $lang.translate(translations, 'missing_phone') }}
               </span>
             </div>
             <div v-if="isEditing" class="mt-8">
@@ -179,7 +179,9 @@ export default {
           example: 'Ejemplo',
           social_points: 'Puntos sociales',
           required_field: 'Campo requerido',
-          invalid_number: 'Ingrese un número válido'
+          invalid_number: 'Ingrese un número válido',
+          missing_phone: 'Teléfono no especificado',
+          missing_country: 'País no especificado'
         },
         en_EN: {
           profile: 'Profile',
@@ -193,7 +195,9 @@ export default {
           example: 'i.e.',
           social_points: 'Social Points',
           required_field: 'Required field',
-          invalid_number: 'Enter a valid number'
+          invalid_number: 'Enter a valid number',
+          missing_phone: 'Country: missing information',
+          missing_country: 'Phone: missing information'
         }
       },
       formData: {

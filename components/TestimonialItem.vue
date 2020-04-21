@@ -7,7 +7,7 @@
       {{ formattedTestimonialNumber }}
     </span>
     <div class="testimonial-item__content">
-      <span class="text-2xl font-light leading-tight">
+      <span class="text-lg font-light leading-snug">
         "{{ $lang.apiTranslate(testimonial.translations, 'comment') }}"
       </span>
       <div class="my-auto">
@@ -94,6 +94,7 @@ export default {
       display: flex;
       flex-direction: column;
       padding-right: 1.5rem;
+      width: 100%;
       max-width: 30rem;
       order: 1;
 

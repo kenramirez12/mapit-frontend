@@ -46,7 +46,7 @@
         </div>
       </div>
     </div>
-    <div class="bg-primary md:none pt-4 pb-12 overflow-x-auto">
+    <div class="bg-primary md:hidden pt-4 pb-12 overflow-x-auto">
       <div class="container px-4 mx-auto">
         <div class="flex items-center">
           <h3 class="text-4xl font-light">{{ $lang.translate(pageTranslations, 'bring') }}</h3>

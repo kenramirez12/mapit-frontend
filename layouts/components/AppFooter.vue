@@ -26,7 +26,7 @@
                 </a>
               </li>
               <li class="mb-1">
-                <a href="https://mapit.medium.com" target="_blank">Blog</a>
+                <a href="https://medium.com/map-it-blog" target="_blank">Blog</a>
               </li>
             </ul>
           </div>

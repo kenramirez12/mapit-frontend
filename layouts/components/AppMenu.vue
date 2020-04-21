@@ -13,7 +13,7 @@
       </a>
     </li> 
     <li :class="{ active : $route.name === 'lang-blog' }" class="header-menu__item">
-      <a href="https://mapit.medium.com" target="_blank" class="header-menu__link">
+      <a href="https://medium.com/map-it-blog" target="_blank" class="header-menu__link">
         {{ $lang.translate(translations, 'blog') }}
       </a>
     </li>

@@ -48,7 +48,7 @@
         <img src="/images/navbar/account-icon.svg" alt="">
       </div>
       <span class="responsive-navbar__label">
-        Ingresar
+        {{ $lang.translate(translations, 'login') }}
       </span>
     </template>
   </div>
@@ -66,7 +66,7 @@ export default {
           profile: 'Perfil',
           booking_history: 'Historial de reservas',
           favorites: 'Favoritos',
-          login: 'Iniciar sesión',
+          login: 'Ingresar',
           logout: 'Cerrar sesión'
         },
         'en_EN': {

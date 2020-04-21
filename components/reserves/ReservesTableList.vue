@@ -26,7 +26,7 @@
         </el-table-column>
         <el-table-column label="Nombre">
           <template slot-scope="scope">
-            {{ $lang.apiTranslate(scope.row.experience.translations, 'title') }} {{ scope.row.code }}
+            {{ $lang.apiTranslate(scope.row.experience.translations, 'title') }}
           </template>
         </el-table-column>
         <el-table-column

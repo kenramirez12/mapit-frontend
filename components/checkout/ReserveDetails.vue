@@ -51,7 +51,7 @@
       </div>
     </div>
 
-    <div class="block mb-6 pb-4">
+    <div v-if="experience.extras !== null" class="block mb-6 pb-4">
       <span class="font-light">
         {{ $lang.translate(translations, 'starting_time') }}
       </span>
@@ -74,7 +74,8 @@
     </div>
 
     <div class="flex flex-wrap">
-      <div class="w-1/3 pr-6">
+
+      <div class="w-1/3 pr-12">
         <el-checkbox-group
           v-if="experience && experience.extras !== null && experience.extras.length > 0"
           v-model="reserveExtras">
@@ -86,17 +87,45 @@
             {{ $lang.apiTranslate(extra.translations, 'title') }} (+ {{ extra.price }})
           </el-checkbox>
         </el-checkbox-group>
+        <div v-else class="block mb-6 pb-4">
+          <span class="font-light">
+            {{ $lang.translate(translations, 'starting_time') }}
+          </span>
+          <div
+            v-if="availableHours && availableHours.length > 0"
+            class="block mt-2 -mx-1">
+            <el-button
+              v-for="(hour, n) in availableHours"
+              :key="'hour_' + n"
+              :disabled="hour.available_quota < groupSize"
+              @click="reserveTime = hour.start_time"
+              type="primary"
+              size="small"
+              :plain="reserveTime !== hour.start_time"
+              class="mx-1">
+              {{ hour.start_time }}
+            </el-button>
+          </div>
+          <p v-else class="text-sm font-light mt-3">No se encontraron horarios disponibles.</p>
+        </div>
       </div>
-      <div class="w-1/2 pl-8">
+      <div class="w-1/2">
         <span class="block mb-2 font-light">
           {{ $lang.translate(translations, 'message') }}
         </span>
-        <el-input v-model="message" type="textarea" :rows="3" class="shadow-input border-0" />
+        <el-input
+          v-model="message"
+          type="textarea"
+          :rows="3"
+          :placeholder="$lang.translate(translations, 'message_placeholder')"
+          class="shadow-input border-0" />
       </div>
     </div>
 
-    <div class="mt-auto">
-      <el-button @click="trySubmit()" type="primary">{{ $lang.translate(translations, 'continue') }}</el-button>
+    <div class="w-5/6 mt-auto flex">
+      <el-button @click="trySubmit()" type="primary" class="ml-auto">
+        {{ $lang.translate(translations, 'continue') }}
+      </el-button>
     </div>
   </div>
 </template>
@@ -118,6 +147,7 @@ export default {
           group_size: 'Cantidad de viajeros',
           starting_time: 'Elige tu horario de inicio',
           message: 'Mensaje al wiser',
+          message_placeholder: 'Avísale a tu wiser si tienes algún requerimiento especial',
           continue: 'Continuar',
           no_places: 'No hay cupos suficientes para la fecha seleccionada',
           time_required: 'Seleccione un horario para continuar',
@@ -130,6 +160,7 @@ export default {
           group_size: 'Group size',
           starting_time: 'Choose your starting time',
           message: 'Message to the wiser',
+          message_placeholder: 'Let your wiser know if you have any special request',
           continue: 'Continue',
           no_places: 'There are no available places for this day',
           time_required: 'Please, choose your starting time to continue',
