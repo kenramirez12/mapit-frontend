@@ -3,7 +3,7 @@
     <PageHeader
       :translations="headerTranslations"
       image="/images/about/banner.jpg" />
-    <div class="container mx-auto pt-16" style="max-width:1280px!important">
+    <div class="container mx-auto px-4 pt-16">
       <AboutSection />
       <WhyMapitSection />
       <TeamSection />

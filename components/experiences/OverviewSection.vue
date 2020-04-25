@@ -125,10 +125,10 @@ export default {
   height: 37px!important;
 }
 .swiper-button-prev {
-  left: 4rem;
+  left: 20%;
 }
 .swiper-button-next {
-  right: 4rem;
+  right: 20%;
 }
 .swiper-pagination-bullet {
   width: 20px;

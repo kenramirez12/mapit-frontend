@@ -36,12 +36,16 @@
                 <a href="#">FAQs</a>
               </li>
               <li class="mb-1">
-                <a href="#">
+                <a
+                  href="#"
+                  @click.prevent="$router.push(`/${$lang.current().slug}/terms-and-conditions`)">
                   {{ $lang.translate(translations, 'terms') }}
                 </a>
               </li>
               <li class="mb-1">
-                <a href="#">
+                <a
+                  href="#"
+                  @click.prevent="$router.push(`/${$lang.current().slug}/privacy-policy`)">
                   {{ $lang.translate(translations, 'policies') }}
                 </a>
               </li>
@@ -53,38 +57,82 @@
           <div class="w-1/2 lg:w-1/4 px-3">
             <ul>
               <h5 class="mb-2">
-                {{ $lang.translate(translations, 'about') }}
+                <a
+                  href="#"
+                  @click.prevent="$router.push(`/${$lang.current().slug}/about`)">
+                  {{ $lang.translate(translations, 'about') }}
+                </a>
               </h5>
               <li class="mb-1">
-                <a href="#" class="light-gray">
+                <a
+                  href="#"
+                  @click.prevent="$router.push({
+                    path: `/${$lang.current().slug}/about`,
+                    hash: 'why-mapit'
+                  })"
+                  class="light-gray">
+                  {{ $lang.translate(translations, 'why_mapit') }}
+                </a>
+              </li>
+              <li class="mb-1">
+                <a
+                  href="#"
+                  @click.prevent="$router.push({
+                    path: `/${$lang.current().slug}/about`,
+                    hash: 'our-team'
+                  })"
+                  class="light-gray">
                   {{ $lang.translate(translations, 'team') }}
                 </a>
               </li>
               <li class="mb-1">
-                <a href="#" class="light-gray">
-                  {{ $lang.translate(translations, 'social_points') }}
-                </a>
-              </li>
-              <li class="mb-1">
-                <a href="#" class="light-gray">
+                <a
+                  href="#"
+                  @click.prevent="$router.push({
+                    path: `/${$lang.current().slug}/about`,
+                    hash: 'social-impact'
+                  })"
+                  class="light-gray">
                   {{ $lang.translate(translations, 'impact') }}
                 </a>
               </li>
               <li class="mb-1">
-                <a href="#" class="light-gray">Host</a>
+                <a
+                  href="#"
+                  @click.prevent="$router.push({
+                    path: `/${$lang.current().slug}/about`,
+                    hash: 'wisers'
+                  })"
+                  class="light-gray">
+                  Wisers
+                </a>
               </li>
             </ul>
           </div>
           <div class="w-1/2 lg:w-1/4 px-3">
             <ul>
               <h5 class="mb-2">
-                {{ $lang.translate(translations, 'how_it_works') }}
+                <a
+                  href="#"
+                  @click.prevent="$router.push(`/${$lang.current().slug}/how-it-works`)">
+                  {{ $lang.translate(translations, 'how_it_works') }}
+                </a>
               </h5>
               <li class="mb-1">
-                <a href="#" class="light-gray">Travelers</a>
+                <a
+                  href="#"
+                  @click.prevent="$router.push(`/${$lang.current().slug}/how-it-works/travelers`)"
+                  class="light-gray">
+                  {{ $lang.translate(translations, 'for_travelers') }}
+                </a>
               </li>
               <li class="mb-1">
-                <a href="#" class="light-gray">Host</a>
+                <a
+                  href="#"
+                  @click.prevent="$router.push(`/${$lang.current().slug}/how-it-works/host`)"
+                  class="light-gray">
+                  {{ $lang.translate(translations, 'for_hosts') }}
+                </a>
               </li>
             </ul>
           </div>
@@ -93,13 +141,17 @@
       <div class="w-full lg:w-2/12 px-3">
         <ul>
           <h5 class="mb-2">
-            {{ $lang.translate(translations, 'contact') }}
+            <a
+              href="#"
+              @click.prevent="$router.push(`/${$lang.current().slug}/contact`)">
+              {{ $lang.translate(translations, 'contact') }}
+            </a>
           </h5>
           <li class="mb-1">
-            <a href="#" class="light-gray">info@mapit.pe</a>
+            <a href="mailto:info@mapit.pe" target="_blank" class="light-gray">info@mapit.pe</a>
           </li>
           <li class="mb-1">
-            <a href="#" class="light-gray">(+511) 516-9988</a>
+            <a href="tel:+51977319968" target="_blank" class="light-gray">(+51) 9773 19968</a>
           </li>
         </ul>
         <div class="w-full px-3 my-4 lg:hidden">
@@ -119,13 +171,7 @@
         <h5 class="mb-2">
           {{ $lang.translate(translations, 'subscribe') }}
         </h5>
-        <el-form>
-          <el-form-item>
-            <el-input class="border-0 shadow-input" style="max-width:240px" />
-          </el-form-item>
-          <el-button size="small" type="primary" class="shadow-primary">
-            {{ $lang.translate(translations, 'send') }} <i class="el-icon-right ml-1" /></el-button>
-        </el-form>
+        <SubscribeForm />
       </div>
     </div>
     <hr>
@@ -136,7 +182,12 @@
 </template>
 
 <script>
+import SubscribeForm from '@/layouts/components/SubscribeForm'
+
 export default {
+  components: {
+    SubscribeForm
+  },
   data() {
     return {
       currentYear: new Date().getFullYear(),
@@ -149,13 +200,14 @@ export default {
           terms: 'Términos y condiciones',
           policies: 'Políticas de Privacidad',
           about: 'Nosotros',
+          why_mapit: '¿Por qué MAP IT?',
           team: 'Nuestro equipo',
-          social_points: 'Puntos sociales',
           impact: 'Impacto social',
           how_it_works: 'Cómo funciona',
-          contact: 'Contacto',
+          contact: 'Contáctanos',
           subscribe: 'Suscríbete a nuestro Blog',
-          send: 'Enviar'
+          for_travelers: 'Para Viajeros',
+          for_hosts: 'Para Anfitriones'
         },
         en_EN: {
           experiences: 'Experiences',
@@ -163,15 +215,16 @@ export default {
           help: 'Help',
           blog: 'Blog',
           terms: 'Terms and Conditions',
-          policies: 'Privacy Policies',
+          policies: 'Privacy Policy',
           about: 'About Us',
+          why_mapit: 'Why MAP IT?',
           team: 'Our Team',
-          social_points: 'Social Points',
           impact: 'Social Impact',
           how_it_works: 'How it works',
           contact: 'Contact Us',
           subscribe: 'Sign up for our blog:',
-          send: 'Subscribe'
+          for_travelers: 'For Travelers',
+          for_hosts: 'For Hosts'
         }
       }
     }

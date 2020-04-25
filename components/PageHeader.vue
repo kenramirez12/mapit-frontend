@@ -1,10 +1,22 @@
 <template>
-  <div class="page-header" :style="{ backgroundImage: `url(${image ? image : baseBackground})` }">
+  <div
+    class="page-header"
+    :style="{ backgroundImage: `url(${image ? image : baseBackground})` }">
     <div class="container page-header__container m-auto px-4">
       <div :class="contentClass">
-        <p v-if="preTitle !== ''" class="mb-8 text-2xl text-white font-light page-header__pre-title">{{ preTitle }}</p>
-        <h1 class="page-header__title pr-4 mb-8">{{ headerTitle }}</h1>
-        <p v-if="headerSubtitle !== ''" class="page-header__description">{{ headerSubtitle }}</p>
+        <p
+          v-if="preTitle !== ''"
+          class="mb-8 text-2xl text-white font-light page-header__pre-title">
+          {{ preTitle }}
+        </p>
+        <h1 class="page-header__title pr-4 mb-8">
+          {{ headerTitle }}
+        </h1>
+        <p
+          v-if="headerSubtitle !== ''"
+          class="page-header__description">
+          {{ headerSubtitle }}
+        </p>
       </div>
       <slot></slot>
     </div>

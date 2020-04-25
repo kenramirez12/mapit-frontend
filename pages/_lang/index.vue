@@ -2,8 +2,8 @@
   <div>
     <AppHero />
     <main class="flex flex-col">
-      <div class="container mx-auto pt-8 inline-block">
-        <div class="w-full flex items-center mb-4 md:mb-8 mt-6 pl-2 md:pl-0">
+      <div class="container mx-auto pt-8 px-4 inline-block">
+        <div class="w-full flex items-center mb-4 md:mb-8 mt-6">
           <div class="pr-6 md:pr-0">
             <h3 class="text-4xl font-light mb-6">{{ $lang.translate(translations, 'experiences') }}</h3>
             <p class="mb-0">{{ $lang.translate(translations, 'experiences_label') }}</p>
@@ -14,15 +14,15 @@
           </div>
         </div>
       </div>
-      <div class="sliders-container">
+      <div>
         <ExperiencesSlider
           :prev="expSliderPrev"
           :next="expSliderNext"
           :experiences="lastExperiences"
           :translations="experiencesTranslations" />
       </div>
-      <div class="container mx-auto pt-8 inline-block">
-        <div class="w-full flex items-center mb-4 md:mb-8 mt-6 pl-2 md:pl-0">
+      <div class="container mx-auto pt-8 px-4 inline-block">
+        <div class="w-full flex items-center mb-4 md:mb-8 mt-6">
           <div class="pr-6 md:pr-0">
             <h3 class="text-4xl font-light mb-4">{{ $lang.translate(translations, 'destinations') }}</h3>
             <p class="mb-0">{{ $lang.translate(translations, 'destinations_label') }}</p>
@@ -33,7 +33,7 @@
           </div>
         </div>
       </div>
-      <div class="sliders-container">
+      <div class="container-left-margin">
         <DestinationsSlider :prev="destSliderPrev" :next="destSliderNext" />
       </div>
       <WhySection :translations="translations" />

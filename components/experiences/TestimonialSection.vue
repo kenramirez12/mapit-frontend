@@ -5,7 +5,7 @@
         {{ $lang.translate(pageTranslations, 'reviews') }}
       </h3>
     </div>
-    <div class="testimonials-slider">
+    <div class="container-left-margin">
       <div v-swiper:mySwiper="swiperOption">
         <div class="testimonials-slider__arrows">
           <el-button @click="prevSlide()" type="primary" icon="el-icon-back" square class="px-3"></el-button>

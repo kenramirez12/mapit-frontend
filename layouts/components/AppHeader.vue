@@ -26,6 +26,7 @@ export default {
 
 <style lang="scss">
   .header {
+    background-color: #fff;
     display: none;
     border-bottom: 1px solid #e8e8e8;
 

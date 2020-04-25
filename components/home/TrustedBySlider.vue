@@ -5,8 +5,11 @@
     <el-button @click="nextSlide()" class="trusted-by__arrow-next text-gray-500" size="mini" icon="el-icon-right" circle plain></el-button>
     <div v-swiper:mySwiper="swiperOption" class="trusted-by-slider">
       <div class="swiper-wrapper">
-        <div v-for="n in 6" :key="n" class="swiper-slide">
-          <img src="~/assets/images/startup-peru.png" class="client-logo" alt="">
+        <div
+          v-for="(logo, n) in trusted"
+          :key="'logo_' + n"
+          class="swiper-slide">
+          <img :src="logo" class="client-logo" alt="">
         </div>
       </div>
     </div>
@@ -24,6 +27,12 @@ export default {
   
   data() {
     return {
+      trusted: [
+        '/images/home/supported/startup-logo.png',
+        '/images/home/supported/innovate-logo.png',
+        '/images/home/supported/telefonica-logo.png',
+        '/images/home/supported/endeavor-logo.png'
+      ],
       swiperOption: {
         loop: true,
         slidesPerView: 4,
@@ -62,7 +71,7 @@ export default {
 
 <style lang="scss" scoped>
   .trusted-by {
-    background-color: #fafafa;
+    background-color: #fff;
     box-shadow: -20px 40px 150px rgba(0, 0, 0, 0.35);
     width: calc(100% - 2rem);
     max-width: 1000px;
@@ -72,6 +81,13 @@ export default {
 
     @media screen and (min-width: 640px) {
       padding: 3rem 4rem;
+    }
+
+    &:hover {
+      .client-logo {
+        filter: grayscale(0);
+        opacity: 1;
+      }
     }
   }
 
@@ -100,5 +116,8 @@ export default {
     margin: 0 auto;
     max-width: 170px;
     width: 100%;
+    filter: grayscale(1);
+    opacity: .5;
+    transition: all 0.3s;
   }
 </style>

@@ -10,13 +10,15 @@
       @click="isExpanded = !isExpanded">
       <div class="flex items-center">
         <div>
-          <span class="font-light">{{ $lang.translate(translations, experience.price_type === 1 || groupSize != '' ? 'per_person' : 'from') }}</span>
-          <span class="block font-light text-3xl leading-none"
-            >US$ {{ reservePrice }}</span
-          >
+          <span class="font-light">
+            {{ $lang.translate(translations, experience.price_type === 1 || groupSize != '' ? 'per_person' : 'from') }}
+          </span>
+          <span class="block font-light text-3xl leading-none">US$ {{ reservePrice }}</span>
         </div>
         <div v-if="sticky" class="flex items-center ml-auto">
-          <span class="text-sm">{{isExpanded ? $lang.translate(translations, 'show_less') : $lang.translate(translations, 'see_more') }}</span>
+          <span class="text-sm">
+            {{isExpanded ? $lang.translate(translations, 'show_less') : $lang.translate(translations, 'see_more') }}
+          </span>
           <el-button
             :icon="`el-icon-${isExpanded ? 'minus' : 'plus'}`"
             type="primary"
@@ -68,6 +70,21 @@
         <el-button
           class="w-full submit-btn text-sm font-normal"
           type="primary"
+            @click="$router.push({
+              path: `/${$lang.current().slug}/contact`,
+              query: {
+                type: 'reserve',
+                experience: $lang.apiTranslate(experience.translations, 'title'),
+                date: reserveDate,
+                group_size: groupSize
+              }
+            })"
+        >
+          {{ $lang.translate(translations, 'book_now_pay_later') }}
+        </el-button>
+        <el-button
+          class="w-full submit-btn text-sm font-normal"
+          type="primary"
             @click="formSubmit('reserveForm')"
         >
           {{ $lang.translate(translations, 'book') }}
@@ -86,6 +103,13 @@
         size="small"
         plain
         class="py-2 ml-5 text-dark"
+        @click="$router.push({
+          path: `/${$lang.current().slug}/contact`,
+          query: {
+            type: 'inquire',
+            experience: $lang.apiTranslate(experience.translations, 'title')
+          }
+        })"
       >
         {{ $lang.translate(translations, 'inquiry') }}
       </el-button>
@@ -128,6 +152,7 @@ export default {
           date: 'Fecha',
           persons: 'Personas',
           book: 'Reservar',
+          book_now_pay_later: 'Reserva ahora / Paga después',
           reserve_copy: 'Personaliza tu experiencia: día, hora, tamaño de grupo, preferencias, y más.',
           inquiry: 'Consulta',
           missing_date: 'Seleccione una fecha',
@@ -143,6 +168,7 @@ export default {
           date: 'Date',
           persons: 'Group Size',
           book: 'Book',
+          book_now_pay_later: 'Book Now / Pay Later',
           reserve_copy: 'Customize your experience: day, time, group size, preferences, and more.',
           inquiry: 'Inquire',
           missing_date: 'Choose a date',

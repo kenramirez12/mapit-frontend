@@ -48,7 +48,8 @@ body {
 }
 
 .border-0 {
-  .el-input__inner {
+  .el-input__inner,
+  .el-textarea__inner {
     border: 0;
   }
 }
@@ -63,16 +64,6 @@ body {
 
 .w-full .el-date-editor.el-input {
   width: 100%;
-}
-
-.container {
-  // max-width: 1170px;
-  width: calc(100% - 2rem)!important;
-  max-width: none!important;
-  
-  @media screen and (min-width: 768px) {
-    width: calc(100% - 5rem)!important;
-  }
 }
 
 .el-input--large {

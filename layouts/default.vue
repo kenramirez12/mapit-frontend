@@ -2,23 +2,34 @@
   <div 
     v-loading="isLoading"
     :class="{ 'is-loading': isLoading }">
-    <nuxt v-if="$route.name === 'pruebas'" />
-    <div v-else>
+    <div>
       <AuthPopup />
-      <el-alert
-        class="top-bar pt-3 pb-4"
-        center
-        :closable="false">
-        <p class="font-light text-center text-black mb-0">
-          {{ $lang.translate(translations, 'covid_policies') }} 
-          <a href="#" class="font-medium underline">
-            {{ $lang.translate(translations, 'click') }}</a>
-        </p>
-      </el-alert>
-      <AppHeader />
+      <div
+        :class="{
+          'header-fixed' : $route.name === 'lang-how-it-works-travelers'
+        }">
+        <el-alert
+          class="top-bar pt-3 pb-4"
+          center>
+          <p class="font-light text-center text-black mb-0">
+            {{ $lang.translate(translations, 'covid_policies') }} 
+            <a
+              href="#"
+              @click.prevent="$router.push(`/${$lang.current().slug}/covid`)"
+              class="font-medium underline">
+              {{ $lang.translate(translations, 'click') }}</a>
+          </p>
+        </el-alert>
+        <AppHeader />
+      </div>
       <AppResponsiveNavbar />
-      <nuxt class="main-content" />
-      <AppFooter v-if="$route.name && $route.name !== 'lang-experiences-id'" />
+      <nuxt
+        :class="{'main-content' : $route.name !== 'lang-contact' }" />
+      <AppFooter
+        v-if="
+        $route.name &&
+        $route.name !== 'lang-experiences-id' && 
+        $route.name !== 'lang-how-it-works'" />
     </div>
   </div>
 </template>
@@ -133,6 +144,65 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+  .header-fixed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+  }
+
+  .top-bar {
+    .el-alert__closebtn {
+      top: 50%!important;
+      transform: translateY(-50%);
+      color: #6f6f6f!important;
+    }
+  }
+
+  .container {
+    @media (min-width: 1280px) {
+      max-width: 1170px;
+    }
+  }
+
+  .container-left-margin {
+    width: 100%;
+
+    @media (min-width: 640px) {
+      --width: 640px;
+      margin-left: calc((100% - var(--width)) / 2);
+      width: calc(100% - ((100% - var(--width)) / 2));
+    }
+
+    @media (min-width: 768px) {
+      --width: 768px;
+    }
+
+    @media (min-width: 1024px) {
+      --width: 1024px;
+    }
+
+    @media (min-width: 1280px) {
+      --width: 1170px;
+    }
+  // max-width: 1170px;
+    // width: calc(100% - 2rem)!important;
+    // max-width: none!important;
+
+    // @media screen and (min-width: 768px) {
+    //   width: calc(100% - 5rem)!important;
+    // }
+  }
+
+  .el-input__inner,
+  .el-textarea__inner,
+  .el-button {
+    letter-spacing: 0.05rem;
+  }
+</style>
 
 <style lang="scss" scoped>
   .top-bar {

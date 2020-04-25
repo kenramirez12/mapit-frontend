@@ -2,6 +2,7 @@
   <el-dialog
     :visible.sync="isVisible"
     custom-class="auth-dialog">
+    <!-- <el-button size="small" icon="el-icon-close" class="shadow" /> -->
     <div class="flex">
       <div class="auth-dialog__left">
         <div class="auth-hero">
@@ -76,6 +77,20 @@ export default {
 </script>
 
 <style lang="scss">
+  .el-dialog__headerbtn {
+    z-index: 9;
+    background: #fff;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: .7rem;
+    right: .5rem;
+  }
+  
   .full.el-tabs {
     .el-tabs--border-card {
       box-shadow: 0 0 0!important;

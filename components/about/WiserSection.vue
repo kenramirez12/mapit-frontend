@@ -1,6 +1,6 @@
 <template>
-  <div class="bg-primary pt-12">
-    <div class="container pt-4">
+  <div id="wisers" class="bg-primary pt-12">
+    <div class="container mx-auto pt-4">
       <div class="flex flex-wrap">
         <div class="w-4/12 mx-auto relative">
           <h3 class="text-5xl mb-10 font-light">Wiser</h3>

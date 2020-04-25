@@ -19,8 +19,16 @@
       </div>
     </div>
     <div class="faqs-footer py-6 px-4 text-center">
-      <p class="font-bold text-sm">{{ $lang.translate(translations, 'not_found') }}</p>
-      <el-button type="primary" plain class="mt-4">{{ $lang.translate(translations, 'contact_us') }}</el-button>
+      <p class="font-bold text-sm">
+        {{ $lang.translate(translations, 'not_found') }}
+      </p>
+      <el-button
+        @click="$router.push(`/${$lang.current().lang}/contact`)"
+        type="primary"
+        plain
+        class="mt-4">
+        {{ $lang.translate(translations, 'contact_us') }}
+      </el-button>
     </div>
     </div>
 </template>

@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-wrap -mt-16">
+  <div id="why-mapit" class="flex flex-wrap -mt-16">
     <div class="w-5/12">
       <h2 class="text-5xl font-light" v-html="$lang.translate(translations, 'title')" />
     </div>

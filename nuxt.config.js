@@ -6,11 +6,12 @@ export default {
   ** Headers of the page
   */
   head: {
-    title: 'MAP IT',
+    title: 'MAP IT - Responsible travel in Peru',
     meta: [
       { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
+      { hid: 'description', name: 'description', content: 'Find things to do in Peru: food tours, art tours, experiences with local communities, what to do at night, and much more.' },
+      { hid: 'og:description', name: 'og:description', content: 'Find things to do in Peru: food tours, art tours, experiences with local communities, what to do at night, and much more.' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1' }
     ],
     link: [
       { rel: 'icon', type: 'image/png', href: '/images/favicon.png' }
@@ -44,6 +45,7 @@ export default {
     '@/plugins/element-ui',
     { src: '@/plugins/swiper.js', ssr: false },
     { src: '@/plugins/phone-code.js', ssr: false },
+    { src: '@/plugins/fullpage.js', ssr: false },
     '@/plugins/lang',
     '@/plugins/api-image',
     '@/plugins/skeleton'
@@ -87,7 +89,7 @@ modules: [
   '@nuxtjs/axios',
   '@nuxtjs/auth',
   '@nuxtjs/dotenv',
-  'fullpage-nuxt'
+  // 'fullpage-nuxt'
   ],
   /*
   ** Build configuration

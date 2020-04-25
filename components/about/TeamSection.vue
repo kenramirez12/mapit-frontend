@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="our-team">
     <div class="flex flex-wrap pt-16 mb-12">
       <div class="w-4/12">
         <h2 class="text-5xl font-light">

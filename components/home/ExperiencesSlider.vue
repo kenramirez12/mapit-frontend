@@ -3,7 +3,7 @@
     <div
       v-if="experiences && experiences.length === 0"
       class="flex">
-      <div class="container mx-auto pb-4 inline-block">
+      <div class="container px-4 mx-auto pb-4 inline-block">
         <el-alert
           class="pt-4 pb-6"
           type="error"
@@ -19,7 +19,7 @@
     </div>
     <div
       v-else
-      class="experiences-slider">
+      class="container-left-margin">
       <div v-swiper:mySwiper="swiperOption">
         <div class="swiper-wrapper py-5">
           <template v-if="experiences === null">
@@ -95,16 +95,11 @@ export default {
   .experiences-slider {
     width: 100%;
     height: 480px;
-    padding-left: .5rem;
-
-    @media screen and (min-width: 768px) {
-      padding-left: 1.5rem;
-    }
   }
 
   .swiper-container {
-    padding-left: .75rem;
-    width: calc(100% - .75rem);
+    padding-left: 1rem;
+    width: 100%;
   }
 
   .swiper-slide {

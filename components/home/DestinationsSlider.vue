@@ -72,16 +72,11 @@ export default {
   .experiences-slider {
     width: 100%;
     height: 480px;
-    padding-left: .5rem;
-
-    @media screen and (min-width: 768px) {
-      padding-left: 1.5rem;
-    }
   }
 
   .swiper-container {
-    padding-left: .75rem;
-    width: calc(100% - .75rem);
+    padding-left: 1rem;
+    width: 100% ;
   }
 
   .swiper-slide {

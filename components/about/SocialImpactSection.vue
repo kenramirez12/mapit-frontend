@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-wrap py-16 mb-10">
+  <div id="social-impact" class="flex flex-wrap py-16 mb-10">
     <div class="w-4/12 pr-14">
       <h2 class="text-5xl font-light mb-12">
         {{ $lang.translate(translations, 'title') }}
@@ -24,7 +24,7 @@
         <img src="~/assets/images/social-house-icon-primary.svg" alt="" style="width:80px">
       </div>
     </div>
-    <div class="w-5/12 mx-auto">
+    <div class="w-5/12 ml-auto mr-10">
       <div class="social-impact-slider">
         <div v-swiper:SocialImpactSwiper="swiperOption" class="h-full">
           <div class="swiper-wrapper">
