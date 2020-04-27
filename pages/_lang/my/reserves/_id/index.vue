@@ -8,14 +8,14 @@
             icon="el-icon-arrow-left"
             @click="$router.push(`/${$lang.current().slug}/my/reserves`)" />
         </div>
-        <h1 class="text-white text-3xl">
+        <h1 id="reserve-title" class="text-white text-3xl">
           {{ $lang.apiTranslate(reserve.experience.translations, 'title') }}
         </h1>
       </div>
     </div>
     <div class="container py-12 px-4 mx-auto">
       <div class="flex flex-wrap">
-        <div class="w-4/6 pr-16">
+        <div id="reserve-details" class="w-4/6 pr-16">
           <div class="flex flex-wrap">
             <div class="w-1/2 font-light">
               <span class="block">{{ $lang.translate(translations, 'starting_time') }}</span>
@@ -50,7 +50,8 @@
             </div>
             <div class="w-1/2 font-light mb-6">
               <p>
-                <span class="block">{{ $lang.translate(translations, 'group_size') }}</span>
+                <span class="block" v-if="isOnline">{{ $lang.translate(translations, 'number_devices') }}</span>
+                <span class="block" v-else>{{ $lang.translate(translations, 'group_size') }}</span>
                 <span class="font-light">
                   {{ reserveGroupSize }}
                 </span>
@@ -91,7 +92,9 @@
           </div>
         </div>
         <div class="w-2/6">
-          <el-button icon="el-icon-download">
+          <el-button
+            @click="handleDownload()"
+            icon="el-icon-download">
             {{ $lang.translate(translations, 'download_details') }}
           </el-button>
         </div>
@@ -116,11 +119,15 @@ export default {
   },
   data() {
     return {
+      onlineCategoryId: process.env.onlineId,
+      html2canvas: null,
+      doc: null,
       translations: {
         'es_ES': {
           starting_time: 'Hora de inicio',
           ending_time: 'Hora de finalización',
           group_size: 'Tamaño de grupo',
+          number_devices: 'Cantidad de dispositivos',
           destination: 'Destino',
           booking_code: 'Código de reserva',
           bring: '¿Qué llevar?',
@@ -133,12 +140,15 @@ export default {
           travelers: 'viajeros',
           you: 'Tú',
           traveler_you: 'Un viajero y tú',
-          travelers_you: 'viajeros y tú'
+          travelers_you: 'viajeros y tú',
+          device: 'dispositivo',
+          devices: 'dispositivos'
         },
         'en_EN': {
           starting_time: 'Starting time',
           ending_time: 'Ending time',
           group_size: 'Group size',
+          number_devices: 'Number of devices',
           destination: 'Destination',
           booking_code: 'Booking code',
           bring: 'What to bring?',
@@ -151,7 +161,9 @@ export default {
           travelers: 'travelers',
           you: 'You',
           traveler_you: 'A traveler and you',
-          travelers_you: 'travelers and you'
+          travelers_you: 'travelers and you',
+          device: 'device',
+          devices: 'devices'
         }
       }
     }
@@ -162,19 +174,24 @@ export default {
         return this.reserve.experience.translations[0].duration.split(' ')[0]
       } return null
     },
+    isOnline () {
+      if(!this.reserve || this.reserve.experience.categories.length === 0) return false
+
+      let isOnline = false
+      this.reserve.experience.categories.forEach(item => {
+        if(item.id === parseInt(this.onlineCategoryId)) {
+          isOnline = true
+        }
+      })
+
+      return isOnline
+    },
     reserveGroupSize() {
       if(this.reserve.group_size === 1) {
-        return '1 ' + this.$lang.translate(this.translations, 'traveler')
+        return '1 ' + this.$lang.translate(this.translations, this.isOnline ? 'device' : 'traveler')
       } else {
-        return this.reserve.group_size + ' ' + this.$lang.translate(this.translations, 'travelers')
+        return this.reserve.group_size + ' ' + this.$lang.translate(this.translations, this.isOnline ? 'devices' : 'travelers')
       }
-      // if(this.reserve.group_size === 1) {
-      //   return this.$lang.translate(this.translations, 'you')
-      // } else if(this.reserve.group_size === 2) {
-      //   return this.$lang.translate(this.translations, 'traveler_you')
-      // } else {
-      //   return `${this.reserve.group_size - 1} ${this.$lang.translate(this.translations, 'travelers_you')}`
-      // }
     },
     reserveExtras() {
       if(!this.reserve.extras) return ''
@@ -190,6 +207,34 @@ export default {
   mounted() {
     if(this.reserve && this.reserve.status === 1) {
       return this.$router.push(`/${this.$lang.current().slug}/my/reserves/${this.reserve.code}/travelers-info`)
+    }
+
+    if(process.client) {
+      const jsPDF = require('jspdf')
+      this.doc = new jsPDF('portrait', 'mm', 'a4')
+      this.html2canvas = require('html2canvas')
+    }
+  },
+  methods: {
+    handleDownload() {
+      if(this.doc && this.html2canvas) {
+        const reserveDetails = document.getElementById('reserve-details')
+        const imageWidth = reserveDetails.clientWidth / 4
+        const imageHeight = reserveDetails.clientHeight / 4
+
+
+        this.html2canvas(reserveDetails, {scrollY: -window.scrollY}).then((canvas) => {
+          let logo = new Image();
+          logo.src = process.env.baseUrl + '/images/logo-pdf.png'
+
+          this.doc.addImage(logo, 'png', 10, 10);
+
+          const img = canvas.toDataURL("image/png");
+          this.doc.text('Barranco bohemio: descubre el arte urbano y crea tu propio graffiti', 10, 35)
+          this.doc.addImage(img, 'JPEG', 10, 50, imageWidth, imageHeight);
+          this.doc.save(`mapit_reserve_${this.reserve.code}.pdf`);        
+      })
+      }
     }
   }
 }

@@ -60,18 +60,22 @@ import TestimonialSection from '~/components/experiences/TestimonialSection'
 import ExperienceReserveForm from '~/components/experiences/reserveForm'
 
 export default {
-  async asyncData({ app, params, store, error }) {
+  async asyncData({ app, params, store, error, route }) {
     store.commit('reserves/RESET_FORM')
 
     try {
-      const currentLang = app.$lang.current().iso_lang
+      let currentLang = ('lang' in route.params) ? route.params.lang : 'en'
+      currentLang = currentLang === 'es' ? 'es_ES' : 'en_EN'
+
       const resp = await app.$axios.$get(`/experiences/${params.id}`)
       const experience = resp.experience
       store.commit('reserves/SET_EXPERIENCE', experience)
-      const translations = experience.translations.find(item => item.iso_lang === currentLang)
 
+      const translations = experience.translations.find(item => item.iso_lang == currentLang)
       return {
-        pageTitle: 'MAP IT - ' + translations.title
+        pageTitle: 'MAP IT - ' + translations.title,
+        pageDescription: translations.description,
+        pageImage: experience.main_image.path
       }
     } catch (error) {
       console.error(error)
@@ -79,7 +83,12 @@ export default {
   },
   head () {
     return {
-      title: this.pageTitle
+      title: this.pageTitle,
+      meta: [
+        { hid: 'description', name: 'description', content: this.pageDescription },
+        { hid: 'og:description', name: 'og:description', content: this.pageDescription },
+        { hid: 'og:image', name: 'og:image', content: this.$imagePath(this.pageImage) }
+      ]
     }
   },
   components: {

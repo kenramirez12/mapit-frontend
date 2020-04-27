@@ -11,17 +11,23 @@
           <div class="w-full sm:w-1/2 lg:w-1/4 px-3">
             <ul>
               <li class="mb-1">
-                <a href="#" @click.prevent="$router.push(`/${$lang.current().slug}/experiences`)">
+                <a
+                  href="#"
+                  @click.prevent="$router.push(`/${$lang.current().slug}/experiences`)">
                   {{ $lang.translate(translations, 'experiences') }}
                 </a>
               </li>
               <li class="mb-1">
-                <a href="#" @click.prevent="$router.push(`/${$lang.current().slug}/destinations`)">
+                <a
+                  href="#"
+                  @click.prevent="$router.push(`/${$lang.current().slug}/destinations`)">
                   {{ $lang.translate(translations, 'destinations') }}
                 </a>
               </li>
               <li class="mb-1">
-                <a href="#">
+                <a
+                  href="#"
+                  @click.prevent="$router.push(`/${$lang.current().slug}/help`)">
                   {{ $lang.translate(translations, 'help') }}
                 </a>
               </li>
@@ -33,7 +39,11 @@
           <div class="w-full sm:w-1/2 lg:w-1/4 px-3 lg:px-0">
             <ul>
               <li class="mb-1">
-                <a href="#">FAQs</a>
+                <a
+                  href="#" 
+                  @click.prevent="$router.push(`/${$lang.current().slug}/help`)">
+                  FAQs
+                </a>
               </li>
               <li class="mb-1">
                 <a

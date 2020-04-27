@@ -11,7 +11,7 @@
       <div class="flex items-center">
         <div>
           <span class="font-light">
-            {{ $lang.translate(translations, experience.price_type === 1 || groupSize != '' ? 'per_person' : 'from') }}
+            {{ priceLabel }}
           </span>
           <span class="block font-light text-3xl leading-none">US$ {{ reservePrice }}</span>
         </div>
@@ -34,7 +34,7 @@
       :key="'reserve_' + this.$lang.current().slug"
       :class="{ 'mt-6' : sticky }"
       class="reserve-form">
-      <div class="w-1/2 pr-2">
+      <div v-if="isOnline" class="w-1/2 pr-2">
         <el-form-item prop="date" class="w-full mb-3">
           <el-date-picker
             ref="reserveDate"
@@ -48,13 +48,17 @@
           </el-date-picker>
         </el-form-item>
       </div>
-      <div class="w-1/2 pl-2">
+      <div
+        :class="{
+          'w-full' : !isOnline,
+          'w-1/2 pl-2' : isOnline
+        }">
         <el-form-item prop="quota" class="w-full mb-3">
           <el-select
             v-model="groupSize"
             ref="reserveGroupSize"
             class="w-full border-0 input-shadow"
-            :placeholder="$lang.translate(translations, 'persons')"
+            :placeholder="$lang.translate(translations, isOnline ? 'devices' : 'persons')"
           >
             <el-option
               v-for="item in groupOptions"
@@ -68,6 +72,7 @@
       </div>
       <div class="w-full mt-2">
         <el-button
+          v-if="!isOnline"
           class="w-full submit-btn text-sm font-normal"
           type="primary"
             @click="$router.push({
@@ -75,7 +80,6 @@
               query: {
                 type: 'reserve',
                 experience: $lang.apiTranslate(experience.translations, 'title'),
-                date: reserveDate,
                 group_size: groupSize
               }
             })"
@@ -83,6 +87,7 @@
           {{ $lang.translate(translations, 'book_now_pay_later') }}
         </el-button>
         <el-button
+          v-else
           class="w-full submit-btn text-sm font-normal"
           type="primary"
             @click="formSubmit('reserveForm')"
@@ -140,6 +145,7 @@ export default {
   },
   data() {
     return {
+      onlineCategoryId: process.env.onlineId,
       isLoading: false,
       isExpanded: false,
       datesOption: {
@@ -149,8 +155,10 @@ export default {
         'es_ES': {
           from: 'Desde',
           per_person: 'Por persona',
+          per_device: 'Por dispositivo',
           date: 'Fecha',
           persons: 'Personas',
+          devices: 'Dispositivos',
           book: 'Reservar',
           book_now_pay_later: 'Reserva ahora / Paga después',
           reserve_copy: 'Personaliza tu experiencia: día, hora, tamaño de grupo, preferencias, y más.',
@@ -165,8 +173,10 @@ export default {
         'en_EN': {
           from: 'From',
           per_person: 'Per person',
+          per_device: 'Per device',
           date: 'Date',
           persons: 'Group Size',
+          devices: 'Devices',
           book: 'Book',
           book_now_pay_later: 'Book Now / Pay Later',
           reserve_copy: 'Customize your experience: day, time, group size, preferences, and more.',
@@ -194,6 +204,25 @@ export default {
     loggedIn () {
       return this.$auth.loggedIn
     },
+    priceLabel () {
+      if(this.experience.price_type === 1 || this.groupSize != '') {
+        return this.$lang.translate(this.translations, this.isOnline ? 'per_device' : 'per_person')
+      }
+
+      return this.$lang.translate(this.translations, 'from')
+    },
+    isOnline () {
+      if(!this.experience || this.experience.categories.length === 0) return false
+
+      let isOnline = false
+      this.experience.categories.forEach(item => {
+        if(item.id === parseInt(this.onlineCategoryId)) {
+          isOnline = true
+        }
+      })
+
+      return isOnline
+    },
     reserveDate: {
       get () {
         return this.$store.state.reserves.form.date
@@ -213,9 +242,14 @@ export default {
     groupOptions () {
       if (!this.experience) return []
 
-      const translations = {
-        single: this.$lang.current().slug === 'es' ? 'persona' : 'person',
-        multiple: this.$lang.current().slug === 'es' ? 'personas' : 'people'
+      const translations = {}
+
+      if(this.isOnline) {
+        translations.single = this.$lang.current().slug === 'es' ? 'dispositivo' : 'device',
+        translations.multiple = this.$lang.current().slug === 'es' ? 'dispositivos' : 'devices'
+      } else {
+        translations.single = this.$lang.current().slug === 'es' ? 'persona' : 'person',
+        translations.multiple = this.$lang.current().slug === 'es' ? 'personas' : 'people'
       }
 
       const groups = []

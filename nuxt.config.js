@@ -9,9 +9,11 @@ export default {
     title: 'MAP IT - Responsible travel in Peru',
     meta: [
       { charset: 'utf-8' },
+      { property: 'og:type', content: 'website' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { hid: 'og:image', name: 'og:image', content: process.env.BASE_URL + '/images/home/banner.jpg' },
       { hid: 'description', name: 'description', content: 'Find things to do in Peru: food tours, art tours, experiences with local communities, what to do at night, and much more.' },
       { hid: 'og:description', name: 'og:description', content: 'Find things to do in Peru: food tours, art tours, experiences with local communities, what to do at night, and much more.' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' }
     ],
     link: [
       { rel: 'icon', type: 'image/png', href: '/images/favicon.png' }
@@ -21,7 +23,8 @@ export default {
     baseUrl: process.env.BASE_URL,
     apiUrl: process.env.API_URL || 'http://127.0.0.1:8000/api',
     imageUrl: process.env.IMAGE_URL || 'http://127.0.0.1:8000',
-    visanetMerchantId: process.env.VISANET_MERCHANT_ID
+    visanetMerchantId: process.env.VISANET_MERCHANT_ID,
+    onlineId: process.env.ONLINE_ID
   },
   /*
   ** Customize the progress-bar color
@@ -79,18 +82,24 @@ export default {
   /*
   ** Nuxt.js dev-modules
   */
-buildModules: [
-  '@nuxtjs/moment'
-],
-/*
-** Nuxt.js modules
-*/
-modules: [
-  '@nuxtjs/axios',
-  '@nuxtjs/auth',
-  '@nuxtjs/dotenv',
+  buildModules: [
+    '@nuxtjs/moment'
+  ],
+  /*
+  ** Nuxt.js modules
+  */
+  modules: [
+    '@nuxtjs/axios',
+    '@nuxtjs/auth',
+    '@nuxtjs/dotenv',
+    '@nuxtjs/recaptcha'
   // 'fullpage-nuxt'
   ],
+  recaptcha: {
+    hideBadge: true,
+    siteKey: '6LeBpe4UAAAAAEGnUNlJfxIdqheEJqzvX0txn_9V',
+    version: 3
+  },
   /*
   ** Build configuration
   */

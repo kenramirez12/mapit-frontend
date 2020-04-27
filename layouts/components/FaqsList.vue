@@ -10,13 +10,10 @@
       <i class="el-icon-search" />
     </div>
     <div class="faqs-container">
-      <div
+      <FaqItem
         v-for="(faq, n) in filteredFaqs"
         :key="'faq_' + n"
-        class="faq-item">
-        <strong class="text-sm block mb-2">{{ faq.question }}</strong>  
-        <p class="text-sm font-light">{{ faq.answer }}</p>
-      </div>
+        :faq="faq" />
     </div>
     <div class="faqs-footer py-6 px-4 text-center">
       <p class="font-bold text-sm">
@@ -30,11 +27,16 @@
         {{ $lang.translate(translations, 'contact_us') }}
       </el-button>
     </div>
-    </div>
+  </div>
 </template>
 
 <script>
+import FaqItem from '@/components/shared/FaqItem'
+
 export default {
+  components: {
+    FaqItem
+  },
   data() {
     return {
       faqs: this.$store.state.faqs,
@@ -177,16 +179,6 @@ export default {
       transform: scaleY(1);
       opacity: 1;
       z-index: 999;
-    }
-  }
-
-  .faq-item {
-    padding: 1rem 1.5rem;
-    margin-bottom: 1rem;
-    box-shadow: 0px 0px 12px rgba(174, 174, 192, 0.4);
-
-    &:last-child {
-      margin-bottom: 0;
     }
   }
 </style>

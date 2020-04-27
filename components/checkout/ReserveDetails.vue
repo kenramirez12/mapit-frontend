@@ -27,7 +27,7 @@
       </div>
       <div class="w-1/3">
         <span class="font-light">
-          {{ $lang.translate(translations, 'group_size') }}
+          {{ $lang.translate(translations, isOnline ? 'device_quantity' : 'group_size') }}
         </span>
         <div class="flex items-center">
           <span class="text-3xl font-light mr-6">{{ groupSize > 9 ? groupSize : '0' + groupSize }}</span>
@@ -54,6 +54,9 @@
     <div v-if="experience.extras !== null" class="block mb-6 pb-4">
       <span class="font-light">
         {{ $lang.translate(translations, 'starting_time') }}
+        <el-tooltip v-if="isOnline" effect="dark" content="GMT -5" placement="right">
+          <i class="el-icon-info ml-2" />
+        </el-tooltip>
       </span>
       <div
         v-if="availableHours && availableHours.length > 0"
@@ -136,6 +139,7 @@ import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
 export default {
   data() {
     return {
+      onlineCategoryId: process.env.onlineId,
       isLoading: false,
       datesOption: {
         disabledDate: (time) => this.shouldDisableDate(time)
@@ -145,6 +149,7 @@ export default {
           date: 'Fecha',
           points: 'Puntos acumulados',
           group_size: 'Cantidad de viajeros',
+          device_quantity: 'Dispositivos',
           starting_time: 'Elige tu horario de inicio',
           message: 'Mensaje al wiser',
           message_placeholder: 'Avísale a tu wiser si tienes algún requerimiento especial',
@@ -158,6 +163,7 @@ export default {
           date: 'Date',
           points: 'Accumulated points',
           group_size: 'Group size',
+          device_quantity: 'Devices',
           starting_time: 'Choose your starting time',
           message: 'Message to the wiser',
           message_placeholder: 'Let your wiser know if you have any special request',
@@ -180,6 +186,18 @@ export default {
       availableDays: 'reserves/availableDays',
       holidaysArray: 'reserves/holidaysArray'
     }),
+    isOnline () {
+      if(!this.experience || this.experience.categories.length === 0) return false
+
+      let isOnline = false
+      this.experience.categories.forEach(item => {
+        if(item.id === parseInt(this.onlineCategoryId)) {
+          isOnline = true
+        }
+      })
+
+      return isOnline
+    },
     reserveDate: {
       get () {
         return this.$store.state.reserves.form.date

@@ -1,5 +1,8 @@
 <template>
   <div class="container px-4 py-12 mx-auto">
+    <div class="w-full pb-2 mb-8 text-sm font-light border-b">
+      Last revision May 05, 2020
+    </div>
     <h1 class="text-3xl font-light mb-5">Privacy Statement</h1>
     <div class="flex flex-wrap">
       <div class="w-7/12">

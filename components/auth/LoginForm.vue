@@ -31,8 +31,14 @@
         type="primary">
         {{ $lang.translate(translations, 'login') }}
       </el-button>
+      <div class="mt-2 break-words px-5 text-center leading-tight text-gray-500">
+        <small>This site is protected by reCAPTCHA and the Google 
+          <a class="underline" href="https://policies.google.com/privacy">Privacy Policy</a> and
+          <a class="underline" href="https://policies.google.com/terms">Terms of Service</a> apply.
+        </small>
+      </div>
       <div class="mt-4 text-center">
-        <a href="#" class="text-xs">
+        <a href="#" class="text-sm">
           {{ $lang.translate(translations, 'forgot_password') }}
         </a>
       </div>
@@ -89,6 +95,9 @@ export default {
       }
     }
   },
+  async mounted() {
+    await this.$recaptcha.init()
+  },
   methods: {
     ...mapMutations({
       setAuthDialogVisible: 'SET_AUTH_DIALOG_VISIBLE'
@@ -96,13 +105,18 @@ export default {
     onSubmit (formName) {
       this.$refs[formName].validate((valid) => {
         if(valid) {
-          this.tryLogin(this.loginData)
+          this.tryLogin()
         }
       })
     },
-    async tryLogin (data) {
+    async tryLogin () {
       this.isLoading = true
+      const data = this.loginData
+
       try {
+        const token = await this.$recaptcha.execute('login')
+        data.token = token
+
         await this.$auth.loginWith('local', { data })
         this.setAuthDialogVisible(false)
         this.isLoading = false

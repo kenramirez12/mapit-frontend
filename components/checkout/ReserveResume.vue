@@ -5,7 +5,7 @@
     </h3>
     <div class="flex font-light">
       <div class="w-2/3">
-        {{ $lang.translate(translations, 'group_size') }}
+        {{ $lang.translate(translations, isOnline ? 'device_quantity' : 'group_size') }}
       </div>
       <div class="w-1/3 text-right">{{ groupSize }}</div>
     </div>
@@ -18,7 +18,7 @@
     <hr class="my-3">
     <div class="flex font-light">
       <div class="w-2/3">
-        {{ $lang.translate(translations, 'per_person') }}
+        {{ $lang.translate(translations, isOnline ? 'per_device' : 'per_person') }}
       </div>
       <div class="w-1/3 text-right">${{ reservePrice }}</div>
     </div>
@@ -39,7 +39,7 @@
 
     <div class="flex font-light">
       <div class="w-2/3">
-        {{ $lang.translate(translations, 'subtotal') }}
+        {{ $lang.translate(translations, isOnline ? 'device_subtotal' : 'subtotal') }}
       </div>
       <div class="w-1/3 text-right">${{ subpricePerPerson.toFixed(2) }}</div>
     </div>
@@ -49,7 +49,7 @@
     </div>
     <div class="flex pt-3 font-light">
       <div class="w-2/3">
-        {{ $lang.translate(translations, 'total_per_person') }}
+        {{ $lang.translate(translations, isOnline ? 'total_per_device' : 'total_per_person') }}
       </div>
       <div class="w-1/3 text-right">${{ pricePerPerson.toFixed(2) }}</div>
     </div>
@@ -69,6 +69,7 @@ import { mapState, mapGetters } from 'vuex'
 export default {
   data() {
     return {
+      onlineCategoryId: process.env.onlineId,
       translations: {
         'es_ES': {
           group_size: 'Cantidad de viajeros',
@@ -76,7 +77,11 @@ export default {
           subtotal: 'Subtotal por persona',
           igv: 'IGV',
           total_per_person: 'TOTAL POR PERSONA',
-          total: 'TOTAL'
+          total: 'TOTAL',
+          device_quantity: 'Cantidad de dispositivos',
+          per_device: 'Precio por dispositivo',
+          device_subtotal: 'Subtotal por dispositivo',
+          total_per_device: 'TOTAL POR DISPOSITIVO'
         },
         'en_EN': {
           group_size: 'Group size',
@@ -84,7 +89,11 @@ export default {
           subtotal: 'Subtotal per person',
           igv: 'VAT',
           total_per_person: 'TOTAL PER PERSON',
-          total: 'TOTAL'
+          total: 'TOTAL',
+          device_quantity: 'Number of devices',
+          per_device: 'Price per device',
+          device_subtotal: 'Subtotal per device',
+          total_per_device: 'TOTAL PER DEVICE'
         }
       }
     }
@@ -100,6 +109,18 @@ export default {
       totalPrice: 'reserves/totalPrice',
       igv: 'reserves/igv'
     }),
+    isOnline () {
+      if(!this.experience || this.experience.categories.length === 0) return false
+
+      let isOnline = false
+      this.experience.categories.forEach(item => {
+        if(item.id === parseInt(this.onlineCategoryId)) {
+          isOnline = true
+        }
+      })
+
+      return isOnline
+    },
     groupSize() {
       return this.$store.state.reserves.form.groupSize
     },

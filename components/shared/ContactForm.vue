@@ -79,7 +79,13 @@ export default {
           field_required: 'Campo requerido',
           valid_email: 'Ingrese un email válido',
           submit_success: '¡Listo! hemos recibo tu mensaje y te responderemos pronto.',
-          submit_failed: 'No pudimos enviar tu mensaje, por favor inténtelo nuevamente.'
+          submit_failed: 'No pudimos enviar tu mensaje, por favor inténtelo nuevamente.',
+          inquire: 'Hola, estoy interesado en la experiencia',
+          reserve_1: 'Hola! Quisiera hacer una reserva para la experiencia',
+          reserve_for: 'para',
+          reserve_person: 'persona',
+          reserve_persons: 'personas',
+          reserve_2: 'Por favor, me podrían mandar un e-mail con los pasos que debo seguir para completar la solicitud de reserva. Gracias!'
         },
         en_EN: {
           name: 'NAME',
@@ -90,7 +96,13 @@ export default {
           field_required: 'Field required',
           valid_email: 'Enter a valid email',
           submit_success: 'Done! have received your message and we will get in touch soon.',
-          submit_failed: 'We could not send your message, please try again.'
+          submit_failed: 'We could not send your message, please try again.',
+          inquire: 'Hi, I\'m interested in the experience',
+          reserve_1: 'Hi! I would like to book the experience',
+          reserve_for: 'for',
+          reserve_person: 'person',
+          reserve_persons: 'people',
+          reserve_2: 'Please send me an e-mail with the steps I should follow to complete the booking request.'
         }
       }
     }
@@ -120,7 +132,7 @@ export default {
         if(this.$route.query.type === 'inquire') {
           this.formData.type = this.$route.query.type
           this.formData.experience = this.$route.query.experience
-          this.formData.message = 'Necesito información sobre la experiencia ' + this.$route.query.experience
+          this.formData.message =  this.$lang.translate(this.translations, 'inquire') + ' ' + this.$route.query.experience
         }
 
         if(this.$route.query.type === 'reserve') {
@@ -128,7 +140,19 @@ export default {
           this.formData.date = this.$route.query.date
           this.formData.group_size = this.$route.query.group_size
           this.formData.experience = this.$route.query.experience
-          this.formData.message = 'Voy a reservar ' + this.$route.query.experience
+
+          this.formData.message = `${this.$lang.translate(this.translations, 'reserve_1')} ${this.$route.query.experience}`
+          
+          if('group_size' in this.$route.query) {
+            this.formData.message += ` ${this.$lang.translate(this.translations, 'reserve_for')} ${this.$route.query.group_size} `
+            if(parseInt(this.$route.query.group_size) === 1) {
+              this.formData.message += this.$lang.translate(this.translations, 'reserve_person')
+            } else {
+              this.formData.message += this.$lang.translate(this.translations, 'reserve_persons')
+            }
+          }
+
+          this.formData.message += `.\n\n${this.$lang.translate(this.translations, 'reserve_2')}`
         }
       }
     }

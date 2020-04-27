@@ -15,7 +15,9 @@ import { mapGetters } from 'vuex'
 import AppMenu from '~/layouts/components/AppMenu'
 
 export default {
-  components: { AppMenu },
+  components: {
+    AppMenu
+  },
   computed: {
     ...mapGetters({
       currentLang: 'currentLang'

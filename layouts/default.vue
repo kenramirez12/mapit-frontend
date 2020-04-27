@@ -47,9 +47,29 @@ export default {
     AppFooter,
     AppResponsiveNavbar
   },
+  head() {
+    return {
+      title: this.pageTranslations[this.currentLang].pageTitle,
+      meta: [
+        { hid: 'description', name: 'description', content: this.pageTranslations[this.currentLang].pageDescription },
+        { hid: 'og:description', name: 'og:description', content: this.pageTranslations[this.currentLang].pageDescription }
+      ]
+    }
+  },
   data () {
     return {
       isLoading: false,
+      currentLang: 'lang' in this.$route.params ? this.$route.params.lang : 'en',
+      pageTranslations: {
+        es: {
+          pageTitle: 'MAP IT - Turismo sostenible en Perú',
+          pageDescription: 'Encuentra qué hacer en Perú: tours gastronómicos, talleres de arte, experiencias con comunidades, cosas para hacer de noche, y mucho más.'
+        },
+        en: {
+          pageTitle: 'MAP IT - Responsible travel in Peru',
+          pageDescription: 'Find things to do in Peru: food tours, art tours, experiences with local communities, what to do at night, and much more.'
+        }
+      },
       translations: {
         es_ES: {
           covid_policies: 'Para más información  sobre las políticas de cancelación de COVID-19 y las últimas actualizaciones.',

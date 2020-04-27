@@ -20,6 +20,12 @@
       <el-button @click="onSubmit('registerForm')" class="shadow-primary w-full" type="primary">
         {{ $lang.translate(translations, 'register') }}
       </el-button>
+      <div class="mt-2 break-words px-5 text-center leading-tight text-gray-500">
+        <small>This site is protected by reCAPTCHA and the Google 
+          <a class="underline" href="https://policies.google.com/privacy">Privacy Policy</a> and
+          <a class="underline" href="https://policies.google.com/terms">Terms of Service</a> apply.
+        </small>
+      </div>
     </el-form>
   </div>
 </template>
@@ -92,6 +98,9 @@ export default {
       }
     }
   },
+  async mounted() {
+    await this.$recaptcha.init()
+  },
   methods: {
     ...mapMutations({
       setAuthDialogVisible: 'SET_AUTH_DIALOG_VISIBLE'
@@ -99,13 +108,18 @@ export default {
     onSubmit (formName) {
       this.$refs[formName].validate((valid) => {
         if(valid) {
-          this.tryRegister(this.registerData)
+          this.tryRegister()
         }
       })
     },
-    async tryRegister (data) {
+    async tryRegister () {
       this.isLoading = true
+      const data = this.registerData
+
       try {
+        const token = await this.$recaptcha.execute('login')
+        data.token = token
+
         await this.$axios.post('/register', data)
 
         await this.$auth.loginWith('local', { data })

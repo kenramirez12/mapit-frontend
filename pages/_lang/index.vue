@@ -64,15 +64,6 @@ import TestimonialsSlider from '~/components/home/TestimonialsSlider'
 import StartExploreSection from '~/components/home/StartExploreSection'
 
 export default {
-    head () {
-    return {
-      title: this.translations[this.lang].pageTitle,
-      meta: [
-        { hid: 'description', name: 'description', content: this.translations[this.lang].pageDescription },
-        { hid: 'og:description', name: 'og:description', content: this.translations[this.lang].pageDescription },
-      ]
-    }
-  },
   components: {
     AppHero,
     ExperiencesSlider,
@@ -114,9 +105,7 @@ export default {
           why_mapit_3: 'Impacto social',
           why_mapit_4: 'Experiencias seguras',
           trust_us: 'Confían en nosotros',
-          start_explore: 'Comienza a explorar',
-          pageTitle: 'MAP IT - Turismo sostenible en Perú',
-          pageDescription: 'Encuentra qué hacer en Perú: tours gastronómicos, talleres de arte, experiencias con comunidades, cosas para hacer de noche, y mucho más.'
+          start_explore: 'Comienza a explorar'
         },
         'en_EN': {
           hero_title: 'Experience it, live it',
@@ -131,9 +120,7 @@ export default {
           why_mapit_3: 'Social impact',
           why_mapit_4: 'Safe experiences',
           trust_us: 'Trusted by',
-          start_explore: 'Go to experiences',
-          pageTitle: 'MAP IT - Responsible travel in Peru',
-          pageDescription: 'Find things to do in Peru: food tours, art tours, experiences with local communities, what to do at night, and much more.'
+          start_explore: 'Go to experiences'
         }
       }
     }
