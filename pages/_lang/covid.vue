@@ -44,7 +44,7 @@ export default {
       },
       translations: {
         es_ES: {
-          updated_at: 'Última actualización 20/4/2020',
+          updated_at: 'Última actualización 5/5/2020',
           content: `<p class="mb-8">Hasta el 30 de abril, las fronteras de Perú estarán cerradas (Fechas sujetas a prórroga). La mejor actualización sobre la propagación del Coronavirus en Perú es el Ministerio de Salud de Perú (@Minsa_Peru en Twitter). No se sabe cuándo se levantarán las restricciones de viaje, es por eso que en Map It hemos decidido pausar nuestras experiencias a partir del 16 de marzo, hasta nuevo aviso.</p>
           <p class="mb-8">Sin embargo, una vez que se vuelvan a abrir las fronteras del país, se levanten las restricciones de viaje, y el panorama sea adecuado para el turismo, continuaremos ofreciendo nuestras experiencias. Estamos monitoreando de cerca la situación para determinar la fecha correspondiente. Además, seguimos trabajando arduamente para adaptar nuestras políticas, y así brindarle el mejor apoyo posible.</p>
           <p class="mb-8">Con ese fin, hemos realizado las siguientes actualizaciones en nuestras políticas:</p>
@@ -56,7 +56,7 @@ export default {
           <p class="mb-8">Si deseas tener una experiencia privada o realizar cualquier otro cambio, o hacer una cancelación, comunícate con info@mapit.pe</p>`
         },
         en_EN: {
-          updated_at: 'Last updated 04/20/2020',
+          updated_at: 'Last updated 05/05/2020',
           content: `<p class="mb-8">Peru is on lockdown and has been closed until April 30th (Dates subject to extend). The best update on the spread and numbers in Peru is the Ministry of Health of Peru (@Minsa_Peru on Twitter).  It is uncertain when travel restrictions will lift, that is why in Map It we have decided to pause experiences starting from March 16th until further notice.</p>
           <p class="mb-8">However, once the country’s borders re opens, travel restrictions are lifted and the landscape is suitable for tourism, we will continue offering our experiences. We are closely monitoring the situation to determine when. Besides, we are working hard to adapt our policies to best support you.</p>
           <p class="mb-8">To that end, we’ve made the following updates in our policies:</p>

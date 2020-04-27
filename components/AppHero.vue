@@ -1,7 +1,7 @@
 <template>
   <div
     class="hero super-center flex-col px-4"
-    style="background-image: url('/images/home/banner.jpg')">
+    style="background-image: url('/images/home/banner_2.jpg')">
     <h1 class="hidden sm:block text-5xl md:text-6xl font-light px-8 pb-4 mb-6 text-white not-italic text-center leading-tight">
       {{ $lang.translate(translations, 'hero_title') }}
     </h1>

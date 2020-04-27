@@ -237,9 +237,10 @@ export default {
     &:not(.current)::before {
       content: attr(data-cat-name);
       font-size: 14px;
+      line-height: 1.2;
       position: absolute;
+      bottom: 1rem;
       display: block;
-      top: -1.5rem;
       padding-bottom: 1.5rem;
       color: #fff;
       transition: all .15s;

@@ -12,22 +12,22 @@
             <ul>
               <li class="mb-1">
                 <a
-                  href="#"
+                  :href="`/${$lang.current().slug}/experiences`"
                   @click.prevent="$router.push(`/${$lang.current().slug}/experiences`)">
                   {{ $lang.translate(translations, 'experiences') }}
                 </a>
               </li>
               <li class="mb-1">
                 <a
-                  href="#"
+                  :href="`/${$lang.current().slug}/destinations`"
                   @click.prevent="$router.push(`/${$lang.current().slug}/destinations`)">
                   {{ $lang.translate(translations, 'destinations') }}
                 </a>
               </li>
               <li class="mb-1">
                 <a
-                  href="#"
-                  @click.prevent="$router.push(`/${$lang.current().slug}/help`)">
+                  :href="`/${$lang.current().slug}/contact`"
+                  @click.prevent="$router.push(`/${$lang.current().slug}/contact`)">
                   {{ $lang.translate(translations, 'help') }}
                 </a>
               </li>
@@ -40,21 +40,21 @@
             <ul>
               <li class="mb-1">
                 <a
-                  href="#" 
-                  @click.prevent="$router.push(`/${$lang.current().slug}/help`)">
+                  :href="`/${$lang.current().slug}/faqs`" 
+                  @click.prevent="$router.push(`/${$lang.current().slug}/faqs`)">
                   FAQs
                 </a>
               </li>
               <li class="mb-1">
                 <a
-                  href="#"
+                  :href="`/${$lang.current().slug}/terms-and-conditions`"
                   @click.prevent="$router.push(`/${$lang.current().slug}/terms-and-conditions`)">
                   {{ $lang.translate(translations, 'terms') }}
                 </a>
               </li>
               <li class="mb-1">
                 <a
-                  href="#"
+                  :href="`/${$lang.current().slug}/privacy-policy`"
                   @click.prevent="$router.push(`/${$lang.current().slug}/privacy-policy`)">
                   {{ $lang.translate(translations, 'policies') }}
                 </a>
@@ -68,14 +68,14 @@
             <ul>
               <h5 class="mb-2">
                 <a
-                  href="#"
+                  :href="`/${$lang.current().slug}/about`"
                   @click.prevent="$router.push(`/${$lang.current().slug}/about`)">
                   {{ $lang.translate(translations, 'about') }}
                 </a>
               </h5>
               <li class="mb-1">
                 <a
-                  href="#"
+                  :href="`/${$lang.current().slug}/about#why-mapit`"
                   @click.prevent="$router.push({
                     path: `/${$lang.current().slug}/about`,
                     hash: 'why-mapit'
@@ -86,7 +86,7 @@
               </li>
               <li class="mb-1">
                 <a
-                  href="#"
+                  :href="`/${$lang.current().slug}/about#our-team`"
                   @click.prevent="$router.push({
                     path: `/${$lang.current().slug}/about`,
                     hash: 'our-team'
@@ -97,7 +97,7 @@
               </li>
               <li class="mb-1">
                 <a
-                  href="#"
+                  :href="`/${$lang.current().slug}/about#social-impact`"
                   @click.prevent="$router.push({
                     path: `/${$lang.current().slug}/about`,
                     hash: 'social-impact'
@@ -108,7 +108,7 @@
               </li>
               <li class="mb-1">
                 <a
-                  href="#"
+                  :href="`/${$lang.current().slug}/about#wisers`"
                   @click.prevent="$router.push({
                     path: `/${$lang.current().slug}/about`,
                     hash: 'wisers'
@@ -123,14 +123,14 @@
             <ul>
               <h5 class="mb-2">
                 <a
-                  href="#"
+                  :href="`/${$lang.current().slug}/how-it-works`"
                   @click.prevent="$router.push(`/${$lang.current().slug}/how-it-works`)">
                   {{ $lang.translate(translations, 'how_it_works') }}
                 </a>
               </h5>
               <li class="mb-1">
                 <a
-                  href="#"
+                  :href="`/${$lang.current().slug}/how-it-works/travelers`"
                   @click.prevent="$router.push(`/${$lang.current().slug}/how-it-works/travelers`)"
                   class="light-gray">
                   {{ $lang.translate(translations, 'for_travelers') }}
@@ -138,7 +138,7 @@
               </li>
               <li class="mb-1">
                 <a
-                  href="#"
+                  :href="`/${$lang.current().slug}/how-it-works/host`"
                   @click.prevent="$router.push(`/${$lang.current().slug}/how-it-works/host`)"
                   class="light-gray">
                   {{ $lang.translate(translations, 'for_hosts') }}
@@ -152,7 +152,7 @@
         <ul>
           <h5 class="mb-2">
             <a
-              href="#"
+              :href="`/${$lang.current().slug}/contact`"
               @click.prevent="$router.push(`/${$lang.current().slug}/contact`)">
               {{ $lang.translate(translations, 'contact') }}
             </a>

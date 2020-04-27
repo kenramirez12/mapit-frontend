@@ -1,15 +1,29 @@
 <template>
-  <div id="program-section" class="experience-container py-6 pb-super">
-    <div class="container mx-auto px-4 md:px-0">
+  <div id="program-section" class="experience-container py-6 pb-super overflow-hidden">
+    <div class="container mx-auto px-6 md:px-4 md:px-0">
       <div class="activities py-6 position-relative">
-        <h3 class="text-4xl md:text-6xl font-light mb-6 pb-6">
+        <h3 class="text-4xl md:text-5xl xl:text-6xl font-light mb-6 pb-6">
           {{ $lang.translate(pageTranslations, 'program') }}
         </h3>
         <div class="flex flex-wrap">
           <div class="w-full md:w-5/12">
             <div class="program mb-6 pb-6">
-              <span class="text-2xl uppercase">{{ $lang.translate(pageTranslations, 'departures') }}</span>
-              <div class="bg-primary rounded-lg py-2 px-4 mt-3">
+              <span class="text-2xl uppercase">
+                {{ $lang.translate(pageTranslations, 'departures') }}
+                <el-tooltip v-if="isOnline" effect="dark" content="GMT -5" placement="right">
+                  <i class="el-icon-info ml-2" />
+                </el-tooltip>
+              </span>
+              <div class="bg-primary rounded-lg py-2 px-4 mt-3 shadow-lg schedule-table">
+                <div class="schedule-table-overlay">
+                  <div class="schedule-table-overlay__content">
+                    <span>Gire la pantalla para ver</span>
+                    <img
+                      src="/images/mobile-phone.png"
+                      class="ml-3"
+                      style="margin-top:-8px;width:2rem;height:2rem">
+                  </div>
+                </div>
                 <div class="flex flex-wrap w-full py-3 px-2 text-sm">
                   <div class="flex-1 text-center"><span>{{ $lang.translate(pageTranslations, 'monday') }}</span></div>
                   <div class="flex-1 text-center"><span>{{ $lang.translate(pageTranslations, 'tuesday') }}</span></div>
@@ -53,15 +67,15 @@
                     :key="'activity_' + x"
                     :class="{ 'mt-5' : n === 1 }"
                     class="flex flex-wrap mb-5">
-                    <div class="w-2/12">{{ activity.time }}</div>
-                    <div class="w-10/12">{{ activity.description }}</div>
+                    <div class="w-3/12 md:w-2/12 pr-3">{{ activity.time }}</div>
+                    <div class="w-9/12 md:w-10/12">{{ activity.description }}</div>
                   </div>
                 </el-tab-pane>
               </el-tabs>
             </div>
           </div>
-          <div class="w-6/12 hidden md:block">
-            <img :src="$imagePath(experience.itinerary_image.path)" class="s" alt="">
+          <div class="w-6/12 hidden md:flex">
+            <img :src="$imagePath(experience.itinerary_image.path)" class="my-auto xl:mt-0">
           </div>
         </div>
       </div>
@@ -79,20 +93,21 @@ export default {
   },
   data() {
     return {
+      onlineCategoryId: process.env.onlineId,
       activeDay: 'day_1',
       pageTranslations: {
         'es_ES': {
           program: 'Programa',
-          departures: 'Horarios de inico',
+          departures: 'Horarios de inicio',
           itinerary: 'Itinerario',
           day: 'Día',
-          monday: 'Lunes',
-          tuesday: 'Martes',
-          wednesday: 'Miércoles',
-          thursday: 'Jueves',
-          friday: 'Viernes',
-          saturday: 'Sábado',
-          sunday: 'Domingo'
+          monday: 'Lun',
+          tuesday: 'Mar',
+          wednesday: 'Mié',
+          thursday: 'Jue',
+          friday: 'Vie',
+          saturday: 'Sáb',
+          sunday: 'Dom'
         },
         'en_EN': {
           program: 'Program',
@@ -120,6 +135,18 @@ export default {
       })
 
       return translations
+    },
+    isOnline () {
+      if(!this.experience || this.experience.categories.length === 0) return false
+
+      let isOnline = false
+      this.experience.categories.forEach(item => {
+        if(item.id === parseInt(this.onlineCategoryId)) {
+          isOnline = true
+        }
+      })
+
+      return isOnline
     }
   },
   methods: {
@@ -138,6 +165,37 @@ export default {
 </script>
 
 <style lang="scss">
+  .schedule-table {
+    width: 450px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.15);
+    position: relative;
+  }
+
+  .schedule-table-overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 0.5rem;
+
+    @media screen and (min-width: 490px) {
+      display: none;
+    }
+
+    &__content {
+      color: #fff;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      padding-left: 1rem;
+    }
+  }
+
   .el-tabs__item {
     border: 1px solid var(--primary);
     border-radius: .3rem;

@@ -1,15 +1,19 @@
 <template>
-  <div id="testimonials-section" class="experience-container py-6 pb-super">
-    <div class="container mx-auto">
-      <h3 class="text-3xl md:text-5xl font-light pb-4 mb-6">
+  <div
+    id="testimonials-section"
+    class="experience-container pb-6 md:py-6 pb-super overflow-hidden">
+    <div class="container mx-auto hidden md:block px-6 md:px-4">
+      <h3 class="text-4xl md:text-5xl xl:text-6xl font-light pb-4 mb-6">
         {{ $lang.translate(pageTranslations, 'reviews') }}
       </h3>
     </div>
-    <div class="container-left-margin">
-      <div v-swiper:mySwiper="swiperOption">
+    <div class="container-left-margin px-5 md:px-4">
+      <div
+        v-swiper:mySwiper="swiperOption"
+        class="overflow-visible md:overflow-hidden pb-16 md:pb-0">
         <div class="testimonials-slider__arrows">
-          <el-button @click="prevSlide()" type="primary" icon="el-icon-back" square class="px-3"></el-button>
-          <el-button @click="nextSlide()" type="primary" icon="el-icon-right" square class="px-3"></el-button>
+          <el-button @click="prevSlide()" type="primary" icon="el-icon-back" square class="px-3" />
+          <el-button @click="nextSlide()" type="primary" icon="el-icon-right" square class="px-3" />
         </div>
         <div class="swiper-wrapper">
           <TestimonialItem
@@ -19,7 +23,7 @@
             class="swiper-slide"
           />
         </div>
-        <div class="swiper-pagination swiper-pagination-bullets"></div>
+        <div class="swiper-pagination swiper-pagination-bullets" />
       </div>
     </div>
   </div>
@@ -91,8 +95,12 @@ export default {
 
   .testimonial-item {
     display: flex;
-    width: 75%;
+    width: 100%;
     margin-right: 4rem;
+
+    @media screen and (min-width: 1024px) {
+      width: 75%;
+    }
 
     &__content {
       padding-right: 3rem;

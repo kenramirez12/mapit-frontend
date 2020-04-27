@@ -51,7 +51,7 @@
       </div>
     </div>
 
-    <div v-if="experience.extras !== null" class="block mb-6 pb-4">
+    <div v-if="experience.extras !== null && experience.extras.length > 0" class="block mb-6 pb-4">
       <span class="font-light">
         {{ $lang.translate(translations, 'starting_time') }}
         <el-tooltip v-if="isOnline" effect="dark" content="GMT -5" placement="right">
@@ -78,7 +78,7 @@
 
     <div class="flex flex-wrap">
 
-      <div class="w-1/3 pr-12">
+      <div class="w-1/3 pr-6">
         <el-checkbox-group
           v-if="experience && experience.extras !== null && experience.extras.length > 0"
           v-model="reserveExtras">
@@ -93,6 +93,9 @@
         <div v-else class="block mb-6 pb-4">
           <span class="font-light">
             {{ $lang.translate(translations, 'starting_time') }}
+            <el-tooltip v-if="isOnline" effect="dark" content="GMT -5" placement="right">
+              <i class="el-icon-info ml-2" />
+            </el-tooltip>
           </span>
           <div
             v-if="availableHours && availableHours.length > 0"

@@ -108,7 +108,10 @@
             </div>
           </div>
         </div>
-        <div class="my-4 py-2 px-3 self-start font-light" style="background:rgb(233, 255, 255);font-size:12px">
+        <div
+          v-if="form.country !== 'PE'"
+          class="my-4 py-2 px-3 self-start font-light"
+          style="background:rgb(233, 255, 255);font-size:12px">
           {{ $lang.translate(translations, 'noArrivalDate') }}
         </div>
         <div class="block mt-4">
@@ -428,3 +431,9 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+  .el-input__suffix {
+    z-index: 99!important;
+  }
+</style>

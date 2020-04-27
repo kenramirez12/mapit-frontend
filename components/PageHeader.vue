@@ -6,10 +6,10 @@
       <div :class="contentClass">
         <p
           v-if="preTitle !== ''"
-          class="mb-8 text-2xl text-white font-light page-header__pre-title">
+          class="mb-6 md:mb-8 md:text-2xl text-white font-light page-header__pre-title">
           {{ preTitle }}
         </p>
-        <h1 class="page-header__title pr-4 mb-8">
+        <h1 class="page-header__title pr-4 mb-4 md:mb-8">
           {{ headerTitle }}
         </h1>
         <p
@@ -82,7 +82,8 @@ export default {
 <style lang="scss" scoped>
   .page-header {
     display: flex;
-    height: calc(100vh - 80px - 55px);
+    // height: calc(100vh - 80px - 55px);
+    height: 440px;
     // background-attachment: fixed;
     background-size: cover;
     background-position: center;
@@ -99,11 +100,15 @@ export default {
 
     &__title {
       font-weight: 300;
-      font-size: 48px;
+      font-size: 32px;
       line-height: 1.2;
       color: #fff;
 
       @media screen and (min-width: 768px) {
+        font-size: 48px;
+      }
+
+      @media screen and (min-width: 1024px) {
         font-size: 65px;
       }
     }

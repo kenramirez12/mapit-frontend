@@ -3,7 +3,7 @@
     v-if="experience"
     v-loading="isLoading"
     :class="{ 'reserve-form--sticky': sticky }"
-    class="reserve-form bg-white p-5 shadow-xl"
+    class="reserve-form bg-white px-5 py-2 md:py-5 md:shadow-xl"
   >
     <div
       class="reserve-form__price"
@@ -13,7 +13,7 @@
           <span class="font-light">
             {{ priceLabel }}
           </span>
-          <span class="block font-light text-3xl leading-none">US$ {{ reservePrice }}</span>
+          <span class="block font-light text-xl lg:text-3xl leading-none">US$ {{ reservePrice }}</span>
         </div>
         <div v-if="sticky" class="flex items-center ml-auto">
           <span class="text-sm">
@@ -32,7 +32,7 @@
       v-show="!sticky || isExpanded"
       ref="reserveForm"
       :key="'reserve_' + this.$lang.current().slug"
-      :class="{ 'mt-6' : sticky }"
+      :class="{ 'mt-2 md:mt-6' : sticky }"
       class="reserve-form">
       <div v-if="isOnline" class="w-1/2 pr-2">
         <el-form-item prop="date" class="w-full mb-3">
@@ -362,7 +362,8 @@ export default {
 
 .reserve-form {
   width: 100%;
-  max-width: 20rem;
+  // max-width: 20rem;
+  // max-width: 20rem;
   margin-left: auto;
   display: flex;
   flex-wrap: wrap;
@@ -372,8 +373,13 @@ export default {
   }
 
   &--sticky {
-    width: 380px;
-    max-width: auto;
+    width: 460px;
+    margin: auto;
+    max-width: 100%;
+
+    @media screen and (min-width: 768px) {
+      width: 380px;
+    }
 
     .el-form {
       padding-top: 0;

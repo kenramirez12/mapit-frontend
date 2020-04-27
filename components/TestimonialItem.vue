@@ -1,7 +1,9 @@
 <template>
   <div
     class="testimonial-item"
-    :class="{ 'testimonial-item--white' : formattedTestimonialNumber !== null }"  
+    :class="{
+      'testimonial-item--white' : formattedTestimonialNumber !== null
+    }"  
   >
     <span v-if="formattedTestimonialNumber" class="testimonial-item__number">
       {{ formattedTestimonialNumber }}
@@ -26,7 +28,13 @@
         </div>
       </div>
     </div>
-    <img :src="$imagePath(testimonial.avatar.path)" class="testimonial-item__image" alt="">
+    <img
+      class="testimonial-item__image md:mb-0"
+      :src="$imagePath(testimonial.avatar.path)"
+      :class="{
+        'mb-16' : testimonialNumber,
+        'mb-8' : !testimonialNumber
+      }">
   </div>
 </template>
 
@@ -71,6 +79,7 @@ export default {
 <style lang="scss" scoped>
   .testimonial-item {
     display: flex;
+    flex-wrap: wrap;
     flex-direction: column;
 
     @media screen and (min-width: 768px) {
@@ -94,12 +103,13 @@ export default {
       display: flex;
       flex-direction: column;
       padding-right: 1.5rem;
-      width: 100%;
-      max-width: 30rem;
+      width: 90%;
       order: 1;
 
       @media screen and (min-width: 768px) {
-        padding-right: 3rem;
+        width: calc(100% - 400px);
+        max-width: 30rem;
+        padding-right: 2.5rem;
         position: unset;
         order: 0;
       }
@@ -111,7 +121,6 @@ export default {
       margin-left: -2rem;
       height: 300px;
       object-fit: cover;
-      margin-bottom: 5rem;
       order: 0;
 
       @media screen and (min-width: 560px) {
@@ -120,16 +129,11 @@ export default {
       }
 
       @media screen and (min-width: 768px) {
-        width: 300px;
+        width: 400px;
         height: 550px;
-        object-fit: cover;
         margin-left: 0;
         margin-bottom: 0;
         order: 1;
-      }
-
-      @media screen and (min-width: 920px) {
-        width: 400px;
       }
     }
 
@@ -137,11 +141,25 @@ export default {
       position: absolute;
       line-height: 1;
       font-weight: 200;
-      font-size: 14rem;
-      left: -20%;
       color: #D8D8D8;
       transition: opacity .3s;
-      top: 280px;
+      font-size: 5rem;
+      top: 310px;
+      right: 0;
+      font-size: 5rem;
+
+      // @media screen and (min-width: 768px) {
+      //   top: 280px;
+      //   right: auto;
+      //   left: -20%;
+      //   font-size: 14rem;
+      // }
+      @media screen and (min-width: 768px) {
+        top: 0;
+        right: auto;
+        left: -25%;
+        font-size: 10rem;
+      }
 
       @media screen and (min-width: 1024px) {
         font-size: 8rem;
@@ -150,7 +168,7 @@ export default {
 
       @media screen and (min-width: 1024px) {
         font-size: 16rem;
-        left: -45%;
+        left: -40%;
       }
     }
   }

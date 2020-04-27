@@ -76,7 +76,7 @@ export default {
       swiperOption: {
         slidesPerView: 'auto',
         spaceBetween: 20,
-        loop: false
+        loop: true
       }
     }
   },

@@ -45,7 +45,10 @@
     <div class="flex flex-wrap -mx-2">
       <div class="w-1/2 px-2">
         <el-form-item prop="phone">
-          <el-input v-model="formData.phone" placeholder="PHONE" class="border-0 shadow-input" />
+          <el-input
+            v-model="formData.phone"
+            :placeholder="$lang.translate(translations, 'phone')"
+            class="border-0 shadow-input" />
         </el-form-item>
       </div>
       <div class="w-1/2 px-2">
@@ -101,7 +104,7 @@ export default {
           other_category: 'OTRA CATEGORÍA',
           city: 'CIUDAD',
           phone: 'TELÉFONO',
-          email: 'E-MAIL',
+          email: 'CORREO ELECTRÓNICO',
           message: 'MENSAJE',
           send: 'ENVIAR',
           required_field: 'Campo requerido',
@@ -114,7 +117,7 @@ export default {
           other_category: 'OTHER CATEGORY',
           city: 'CITY',
           phone: 'PHONE',
-          email: 'CORREO ELECTRÓNICO',
+          email: 'E-MAIL',
           message: 'TELL US',
           send: 'SEND',
           required_field: 'Required field',

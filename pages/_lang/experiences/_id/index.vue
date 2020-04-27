@@ -1,11 +1,39 @@
 <template>
-  <div v-if="experience">
+  <div v-if="experience" class="relative">
+    <div class="responsive-floating">
+      <el-dropdown
+        trigger="click"
+        class="w-full"
+        @command="onCommandDropdown">
+        <el-button class="w-full border-0 py-3 font-normal">
+          <div class="flex relative mx-auto" style="max-width:460px">
+            <span class="mx-auto">{{ sectionName }}</span>
+            <i style="position:absolute;right:0" class="el-icon-arrow-down el-icon--right text-gray-600" />
+          </div>
+        </el-button>
+        <el-dropdown-menu slot="dropdown" class="categories-dropdown py-0">
+          <el-dropdown-item
+            v-for="(section,n) in sections"
+            :key="n"
+            :class="{
+              'border-b' : n <= sections.length,
+              'text-primary' : section.name === currentSection
+            }"
+            :command="section.name"
+            class="text-center py-1">
+            {{ section.translations[$lang.current().iso_lang].label }}
+          </el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
+      <ExperienceReserveForm :experience="experience" :sticky="true" />
+    </div>
     <PageHeader
       :preTitle="experience.destination.name"
       :title="$lang.apiTranslate(experience.translations, 'title')"
       :image="$imagePath(experience.banner_image.path)"
+      class="pt-4 mt-12 md:mt-0"
       contentClass="mr-6">
-      <ExperienceReserveForm :experience="experience" class="ml-5" />
+      <ExperienceReserveForm :experience="experience" class="ml-5 page-header__booking" />
     </PageHeader>
 
     <div id="experience-container" class="relative">
@@ -87,7 +115,7 @@ export default {
       meta: [
         { hid: 'description', name: 'description', content: this.pageDescription },
         { hid: 'og:description', name: 'og:description', content: this.pageDescription },
-        { hid: 'og:image', name: 'og:image', content: this.$imagePath(this.pageImage) }
+        { property: 'og:image', content: this.$imagePath(this.pageImage) }
       ]
     }
   },
@@ -179,6 +207,21 @@ export default {
       }
 
       return sections
+    },
+    sectionName () {
+      if(this.sections.length > 0) {
+        const current = this.sections.find(item => {
+          return item.name === this.currentSection
+        })
+
+        if(current) {
+          return this.$lang.translate(current.translations, 'label')
+        }
+
+        return null
+      }
+
+      return null
     }
   },
   created() {
@@ -253,12 +296,52 @@ export default {
       } else {
         return null
       }
+    },
+    onCommandDropdown(command) {
+      this.navigateSection(command)
     }
   }
 }
 </script>
 
+<style lang="scss">
+  .categories-dropdown {
+    z-index: 9999!important;
+    margin-top: 0!important;
+    left: 0!important;
+    right: 0!important;
+
+    & > .popper__arrow {
+      display: none!important;
+    }
+  }
+</style>
+
 <style lang="scss" scoped>
+  .responsive-floating {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 9999;
+    background-color: #fff;
+    box-shadow: 0 0 20px 10px rgba(0, 0, 0, 0.1);
+
+    @media screen and (min-width: 768px) {
+      display: none;
+    }
+  }
+
+  .page-header {
+    &__booking {
+      display: none;
+
+      @media screen and (min-width: 768px) {
+        display: flex;
+      }
+    }
+  }
+
   .experience-navbar {
     display: none;
     position: absolute;
@@ -343,6 +426,11 @@ export default {
     transform: translateX(100%);
     transition: all 0.3s;
     z-index: 9;
+    display: none;
+
+    @media screen and (min-width: 768px) {
+      display: block;
+    }
 
     &.show {
       transform: translateX(0);

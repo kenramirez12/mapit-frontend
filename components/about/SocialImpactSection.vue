@@ -118,7 +118,7 @@ export default {
         es_ES: {
           title: 'Impacto Social',
           copy_1: 'Al reservar con nosotros, estás acumulando puntos sociales:',
-          copy_2: 'Promovemos el empoderamiento e inclusión de la mujer, pues 6 de cada 10 de las experiencias MAP IT son guiadas por ellas. Buscamos que tengan un rol de liderazgo en la industria turística, brindándoles una oportunidad laboral y de desarrollo.',
+          copy_2: 'Con tu aporte, podemos llevar a cabo proyectos sociales en comunidades a lo largo del país:  Capacitaciones, mejora de infraestructuras, reforestación, programas de educación, y muchos más. Ayúdanos a hacerlos realidad, ¡sumáte a la causa!',
           value: '1USD = 1 Punto Social',
           feature: 'Las comunidades rurales son nuestros embajadores de la cultura, quienes comparten sus tradiciones con el mundo. Con MAPIT, los viajeros no solo participan de experiencias auténticas, sino que también contribuyen a la preservación de la cultura y a la forma de vida local.'
         },

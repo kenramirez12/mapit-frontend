@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-wrap .-m-2">
-    <template v-if="isLoading">
+    <template v-if="isLoading || !experiences">
       <div
         v-for="n in 3*3"
         :key="n"

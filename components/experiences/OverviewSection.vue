@@ -1,9 +1,11 @@
 <template>
-  <div id="overview-section" class="container mx-auto px-4 md:pt-6 pb-super">
+  <div id="overview-section" class="container mx-auto px-6 md:px-4 md:pt-6 pb-super">
     <div class="overview pb-6 md:pt-6">
       <div class="flex flex-wrap my-10 py-10">
-        <div class="w-full md:w-5/12 pr-6">
-          <p class="dark-gray text-3xl ">{{ $lang.apiTranslate(experience.translations, 'description') }}</p>
+        <div class="w-full md:w-6/12 xl:w-5/12 pr-6">
+          <p class="dark-gray text-xl md:text-2xl xl:text-3xl font-light">
+            {{ $lang.apiTranslate(experience.translations, 'description') }}
+          </p>
           <p
             v-if="'host' in experience && experience.host.constructor === Object"
             class="flex items-center my-6 py-6 font-light text-xl">
@@ -13,7 +15,7 @@
               :src="$imagePath(experience.host.avatar.path)" />
             <span>Wiser: {{ $lang.apiTranslate(experience.host.translations, 'fullname') }}</span>
           </p>
-          <div v-else class="my-6 py-6" />
+          <div v-else class="md:my-6 py-6" />
           <ul class="checkbox-list mb-10 md:mb-0">
             <li
               v-for="(feature, n) in translations.features"
@@ -172,6 +174,13 @@ export default {
   // box-shadow: 0px 0px 100px rgba(0, 0, 0, 0.33);
   &__container {
     box-shadow: 0px 0px 100px rgba(0, 0, 0, 0.33);
+    width: calc(100% + 3rem);
+    margin-left: -1.5rem;
+
+    @media screen and (min-width: 560px) {
+      width: 100%;
+      margin-left: 0;
+    }
   }
 }
 

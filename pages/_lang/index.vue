@@ -43,7 +43,7 @@
       <div
         v-if="testimonials && testimonials.length > 0"
         class="container mx-auto py-6 my-6 px-4">
-        <div class="ml-auto py-6 my-6 md:w-11/12 lg:w-3/4">
+        <div class="ml-auto py-6 my-6 w-full lg:w-10/12 xl:w-3/4">
           <TestimonialsSlider :testimonials="testimonials" />
         </div>
       </div>

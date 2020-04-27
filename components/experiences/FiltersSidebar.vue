@@ -194,7 +194,7 @@ export default {
   },
   mounted() {
     if(Object.keys(this.$route.query).length > 0) {
-      if('destination' in this.$route.query) {
+      if('destination' in this.$route.query && this.$route.query.destination !== '') {
         this.filters.destination_id = parseInt(this.$route.query.destination)
       }
     }

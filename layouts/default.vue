@@ -9,9 +9,10 @@
           'header-fixed' : $route.name === 'lang-how-it-works-travelers'
         }">
         <el-alert
-          class="top-bar pt-3 pb-4"
+          :class="{ 'hidden md:block' : $route.name === 'lang-experiences-id' }"
+          class="top-bar md:text-center pt-3 pb-4"
           center>
-          <p class="font-light text-center text-black mb-0">
+          <p class="font-light text-black mb-0">
             {{ $lang.translate(translations, 'covid_policies') }} 
             <a
               href="#"
@@ -166,6 +167,14 @@ export default {
 </script>
 
 <style lang="scss">
+  body {
+    margin-bottom: 80px;
+
+    @media screen and (min-width: 768px) {
+      margin-bottom: 0;
+    }
+  }
+
   .header-fixed {
     position: absolute;
     top: 0;

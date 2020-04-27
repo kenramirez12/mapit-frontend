@@ -42,6 +42,6 @@ export default {
     box-shadow: -20px 60px 220px rgba(0, 0, 0, 0.44);
     height: 355px;
     width: auto;
-    transform: translate(-450px, -250px);
+    transform: translate(-450px, -180px);
   }
 </style>

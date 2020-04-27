@@ -141,6 +141,8 @@ export const mutations = {
 
 export const actions = {
   async getAvailableHours ({ state, commit }) {
+    if(!state.form.experienceId) return false
+    
     const data = {
       date: state.form.date,
       group_size: state.form.groupSize

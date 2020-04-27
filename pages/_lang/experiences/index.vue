@@ -1,7 +1,7 @@
 <template>
   <div>
     <CategoriesHeaderSlider :translations="pageTranslations" />
-    <div class="container max-width-container py-6 lg:px-4 my-6 mx-auto">
+    <div class="container max-width-container py-6 px-4 my-6 mx-auto">
       <div class="flex">
         <FiltersSidebar @refresh="retrieveExperiences" />
 
@@ -58,7 +58,7 @@ export default {
   },
   mounted () {
     if(Object.keys(this.$route.query).length > 0) {
-      if('category' in this.$route.query) {
+      if('category' in this.$route.query && this.$route.query.category !== '') {
         this.setCurrentCategory(parseInt(this.$route.query.category))
       }
     }

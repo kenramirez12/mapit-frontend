@@ -1,8 +1,8 @@
 <template>
-  <div id="additional-info-section" class="experience-container py-6 pb-super">
-    <div class="container mx-auto px-4 md:px-0">
+  <div id="additional-info-section" class="experience-container py-6 pb-super overflow-hidden">
+    <div class="container mx-auto px-6 md:px-4 md:px-0">
       <div class="activities py-6 position-relative">
-        <h3 class="text-4xl md:text-6xl font-light mb-6 pb-6">
+        <h3 class="text-4xl md:text-5xl xl:text-6xl font-light mb-6 pb-6">
           {{ $lang.translate(pageTranslations, 'additional_info') }}
         </h3>
         <div class="flex flex-wrap">
@@ -26,12 +26,12 @@
               </li>
             </ul>
             <img src="~/assets/images/danger-icon.svg" class="mb-3" alt="">
-            <p>{{ translations.legal_info }}</p>
+            <p class="font-light">{{ translations.legal_info }}</p>
           </div>
           <div class="w-5/12 hidden md:block ml-auto">
             <div class="flex items-center">
-              <h3 class="text-4xl">{{ $lang.translate(pageTranslations, 'bring') }}</h3>
-              <img src="~/assets/images/sitting-01.svg" class="ml-auto" alt="">
+              <h3 class="text-4xl font-light">{{ $lang.translate(pageTranslations, 'bring') }}</h3>
+              <img src="~/assets/images/sitting-01.svg" class="ml-auto" style="width:15rem;margin-right:-7rem">
             </div>
             <ul class="pr-6">
               <li
@@ -46,11 +46,11 @@
         </div>
       </div>
     </div>
-    <div class="bg-primary md:hidden pt-4 pb-12 overflow-x-auto">
-      <div class="container px-4 mx-auto">
+    <div class="bg-primary md:hidden pt-4 pb-12 overflow-hidden">
+      <div class="container px-6 mx-auto">
         <div class="flex items-center">
           <h3 class="text-4xl font-light">{{ $lang.translate(pageTranslations, 'bring') }}</h3>
-          <img src="~/assets/images/sitting-01.svg" class="ml-auto" style="width:180px;translateX(5rem)">
+          <img src="~/assets/images/sitting-01.svg" class="ml-auto" style="width:180px;margin-right:-80px;translateX(5rem)">
         </div>
         <ul class="pr-6">
           <li
