@@ -172,10 +172,10 @@ export default {
 
   methods: {
     handleSearch() {
-      const query = {
-        category: this.filters.category_id,
-        destination: this.filters.destination_id
-      }
+      let query = {}
+
+      if(this.filters.category_id !== '') query.category = this.filters.category_id
+      if(this.filters.destination_id !== '') query.destination = this.filters.destination_id
 
       return this.$router.push({
         path: `/${this.$lang.current().slug}/experiences`,
