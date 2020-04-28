@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-wrap .-m-2">
-    <template v-if="isLoading || !experiences">
+    <template v-if="!experiences">
       <div
         v-for="n in 3*3"
         :key="n"
@@ -41,12 +41,7 @@ export default {
   props: {
     experiences: {
       type: Array,
-      required: true
-    },
-    isLoading: {
-      type: Boolean,
-      required: true,
-      default: () => false
+      required: false
     }
   },
 

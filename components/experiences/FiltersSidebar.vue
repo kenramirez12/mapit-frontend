@@ -1,7 +1,7 @@
 <template>
   <div class="experiences-sidebar">
     <el-select
-      v-model="filters.sort_by"
+      v-model="filterSort"
       class="w-full text-center mb-6 pn-6 border-0"
       style="border:1px solid var(--primary)"
       :placeholder="$lang.translate(pageTranslations, 'sortBy')">
@@ -18,7 +18,7 @@
         closable
         size="medium"
         :disable-transitions="false"
-        @close="handleClose('category_id')"
+        @close="filterCategory = ''"
         class="mr-2 mb-2">
         {{ $lang.apiTranslate(currentCategoryObject.translations, 'name') }}
       </el-tag>
@@ -27,7 +27,7 @@
         closable
         size="medium"
         :disable-transitions="false"
-        @close="handleClose('destination_id')"
+        @close="filterDestination = ''"
         class="mr-2 mb-2">
         {{ currentDestination.name }}
       </el-tag>
@@ -36,7 +36,7 @@
         closable
         size="medium"
         :disable-transitions="false"
-        @close="handleClose('sort_by')"
+        @close="filterSort = ''"
         class="mb-2">
         {{ $lang.translate(currentSortFilter.translations, 'label') }}
       </el-tag>
@@ -51,9 +51,9 @@
       <li
         v-for="destination in destinations"
         :key="destination.id"
-        @click.prevent="filters.destination_id = destination.id"
+        @click.prevent="filterDestination = destination.id"
         class="item-with-counter cursor-pointer">
-        <span :class="{ 'text-primary font-bold' : filters.destination_id === destination.id }">
+        <span :class="{ 'text-primary font-bold' : filterDestination === destination.id }">
           {{ destination.name }}
         </span>
         <div class="rounded-counter">
@@ -63,7 +63,7 @@
     </ul>
     <div v-if="showCategories" class="mt-10 mb-5">
       <el-select
-        v-model="filters.category_id"
+        v-model="filterCategory"
         :placeholder="$lang.translate(pageTranslations, 'categories')"
         class="w-full border-0 shadow-input">
         <el-option
@@ -78,7 +78,7 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from 'vuex'
+import { mapState, mapGetters, mapMutations } from 'vuex'
 
 export default {
   props: {
@@ -90,12 +90,6 @@ export default {
   },
   data() {
     return {
-      filters: {
-        destination_id: '',
-        category_id: '',
-        sort_by: '',
-        sort: ''
-      },
       pageTranslations: {
         'es_ES': {
           sortBy: 'ORDENAR POR',
@@ -107,53 +101,45 @@ export default {
           all: 'ALL',
           categories: 'Categories'
         }
-      },
-      sortFilters: [
-        {
-          value: 'min_price',
-          sort: 'ASC',
-          translations: {
-            'es_ES': {
-              label: 'Precio - menor a mayor'
-            },
-            'en_EN': {
-              label: 'Price - low to high'
-            }
-          }
-        },
-        {
-          value: 'max_price',
-          sort: 'DESC',
-          translations: {
-            'es_ES': {
-              label: 'Precio - mayor a menor'
-            },
-            'en_EN': {
-              label: 'Price - high to low'
-            }
-          }
-        },
-        {
-          value: 'on_sale',
-          sort: 'DESC',
-          translations: {
-            'es_ES': {
-              label: 'En oferta'
-            },
-            'en_EN': {
-              label: 'On sale'
-            }
-          }
-        }
-      ]
+      }
     }
   },
   computed: {
-    ...mapGetters({
-      destinations: 'destinations/destinations',
-      categories: 'categories/categories',
-      currentCategory: 'categories/currentCategory'
+    ...mapState({
+      sortFilters: (s) => s.experiences.sortFilters
     }),
+    ...mapGetters({
+      filters: 'experiences/filters',
+      destinations: 'destinations/destinations',
+      categories: 'categories/categories'
+    }),
+    filterSort: {
+      get() {
+        return this.filters.sort
+      },
+      set(value) {
+        this.setFilter({ prop: 'sort', value })
+        this.setFilter({ prop: 'page', value: 1 })
+      }
+    },
+    filterCategory: {
+      get() {
+        return this.filters.category
+      },
+      set(value) {
+        this.setFilter({ prop: 'category', value })
+        this.setFilter({ prop: 'page', value: 1 })
+      }
+    },
+    filterDestination: {
+      get() {
+        return this.filters.destination
+      },
+      set(value) {
+        this.setFilter({ prop: 'destination', value })
+        this.setFilter({ prop: 'page', value: 1 })
+      }
+    },
     totalDestinationExpCount() {
       if(!this.destinations) return 0
       let total = 0
@@ -164,57 +150,25 @@ export default {
       return total
     },
     currentDestination() {
-      if(this.filters.destination_id === '' || !this.destinations) return null
-      const current = this.destinations.find(item => item.id === this.filters.destination_id)
+      if(this.filterDestination == '' || !this.destinations) return null
+      const current = this.destinations.find(item => item.id === this.filterDestination)
       return current
     },
     currentSortFilter() {
-      if(this.filters.sort_by === '') return null
-      const current = this.sortFilters.find(item => item.value === this.filters.sort_by)
+      if(this.filterSort === '') return null
+      const current = this.sortFilters.find(item => item.value === this.filterSort)
       return current
     },
     currentCategoryObject() {
-      if(this.filters.category_id === '' || !this.categories) return null
-      const current = this.categories.find(item => item.id === this.filters.category_id)
+      if(this.filterCategory === '' || !this.categories) return null
+      const current = this.categories.find(item => item.id === this.filterCategory)
       return current
-    }
-  },
-  watch: {
-    filters: {
-      deep: true,
-      handler (value) {
-        let sanitizedFilters = this.filters
-        sanitizedFilters.sort = this.currentSortFilter ? this.currentSortFilter.sort : ''
-        this.$emit('refresh', sanitizedFilters)
-      }
-    },
-    currentCategory(value) {
-      this.filters.category_id = value
-    }
-  },
-  mounted() {
-    if(Object.keys(this.$route.query).length > 0) {
-      if('destination' in this.$route.query && this.$route.query.destination !== '') {
-        this.filters.destination_id = parseInt(this.$route.query.destination)
-      }
     }
   },
   methods: {
     ...mapMutations({
-      setCurrentCategory: 'categories/SET_CURRENT_CATEGORY'
-    }),
-
-    handleClose (tag) {
-      this.filters[tag] = ''
-
-      if(tag === 'sort_by') {
-        this.filters.sort = ''
-      }
-
-      if(tag === 'category_id') {
-        this.setCurrentCategory('')
-      }
-    }
+      setFilter: 'experiences/SET_FILTER'
+    })
   }
 }
 </script>

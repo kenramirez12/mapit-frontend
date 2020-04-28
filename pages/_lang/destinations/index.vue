@@ -10,9 +10,7 @@
           @refresh="retrieveExperiences" />
 
         <div class="experiences-container">
-          <ExperiencesGrid
-            :experiences.sync="experiences"
-            :is-loading.sync="loadingExperiences" />
+          <ExperiencesGrid :experiences.sync="experiences" />
           
           <div
             v-if="experiences && experiences.length > 0 && lastPage > 1"
@@ -22,7 +20,6 @@
               layout="prev, pager, next"
               :current-page.sync="currentPage"
               :page-count="lastPage"
-              @current-change="handleCurrentPage"
             />
           </div>
         </div>
@@ -32,7 +29,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapGetters, mapMutations, mapActions } from 'vuex'
 import PageHeader from '@/components/PageHeader'
 import ExperiencesGrid from '@/components/ExperiencesGrid'
 import FiltersSidebar from '@/components/experiences/FiltersSidebar'
@@ -45,10 +42,7 @@ export default {
   },
   data() {
     return {
-      flag: 0,
-      experiences: [],
-      loadingExperiences: false,
-      selectedDestination: '',
+      experiences: null,
       pageTranslations: {
         'es_ES': {
           title: 'Destinos',
@@ -59,31 +53,85 @@ export default {
           subtitle: 'Book authentic experiences in Cusco, Lima, Puno, Arequipa and beyond.'
         }
       },
-      currentPage: 1,
       lastPage: 1
     }
   },
+  computed: {
+    ...mapGetters({
+      filters: 'experiences/filters',
+      selectedSort: 'experiences/selectedSort'
+    }),
+    currentPage: {
+      get() {
+        return this.filters.page
+      },
+      set(value) {
+        this.setFilter({ prop: 'page', value })
+      }
+    }
+  },
+  watch: {
+    filters: {
+      deep: true,
+      handler (value, oldValue) {
+        this.$router.push({ query : value })
+        let sanitizedFilters = this.sanitizeFilters(this.filters)
+        this.retrieveExperiences(sanitizedFilters)
+      }
+    }
+  },
   mounted () {
-    this.retrieveExperiences()
+    this.resetFilters()
+    
+    if(Object.keys(this.$route.query).length > 0) {
+      const filters = ['category', 'destination', 'page']
+
+      filters.forEach(item => {
+        if(item in this.$route.query) {
+          this.setFilter({ prop: item, value: parseInt(this.$route.query[item]) })
+        }
+      })
+
+      if('sort' in this.$route.query) {
+        this.setFilter({ prop: 'sort', value: this.$route.query.sort })
+      }
+
+      const sanitized = this.sanitizeFilters(this.filters)
+      this.retrieveExperiences(sanitized)
+    } else {
+      this.retrieveExperiences()
+    }
   },
   methods: {
     ...mapActions({
       getExperiences: 'experiences/getExperiences'
     }),
-    handleCurrentPage (page) {
-      const params = {page, ...this.filters }
-      this.retrieveExperiences(params)
+    ...mapMutations({
+      setFilter: 'experiences/SET_FILTER',
+      resetFilters: 'experiences/RESET_FILTERS'
+    }),
+    sanitizeFilters(filters) {
+      let sanitized = {
+        category_id: filters.category,
+        destination_id: filters.destination,
+        page: filters.page
+      }
+
+      if(this.selectedSort) {
+        sanitized = { ...sanitized, ...this.selectedSort }
+      }
+
+      return sanitized
     },
     async retrieveExperiences(params = null) {
-      this.loadingExperiences = true
+      this.experiences = null
 
       try {
         const experiences = await this.getExperiences(params)
         this.experiences = experiences.data
         this.lastPage = experiences.last_page 
-        this.loadingExperiences = false
       } catch (error) {
-        this.loadingExperiences = false
+        this.experiences = []
       }
     }
   }

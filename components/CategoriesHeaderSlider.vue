@@ -84,9 +84,11 @@ export default {
 
   computed: {
     ...mapGetters({
-      categories: 'categories/categories',
-      currentCategory: 'categories/currentCategory'
+      categories: 'categories/categories'
     }),
+    currentCategory() {
+      return this.$store.state.experiences.filters.category
+    },
     sanitizedCategories () {
       if(this.categories) {
         const generalCategory = {
@@ -127,7 +129,7 @@ export default {
   },
 
   created() {
-    this.setCurrentCategory('')
+    this.setFilter('category', '')
   },
 
   mounted() {
@@ -140,7 +142,7 @@ export default {
 
   methods: {
     ...mapMutations({
-      setCurrentCategory: 'categories/SET_CURRENT_CATEGORY'
+      setFilter: 'experiences/SET_FILTER'
     }),
 
     updateCurrentSlide(catId) {
@@ -154,9 +156,9 @@ export default {
     },
 
     updateCurrentCat(index) {
-      this.setCurrentCategory(this.sanitizedCategories[index].id)
+      this.setFilter({ prop: 'category', value: this.sanitizedCategories[index].id })
+      this.setFilter({ prop: 'page', value: 1 })
       this.mySwiper.slideTo(index)
-      this.$emit('handlerCategory', this.sanitizedCategories[index].id)
     },
 
     prevSlide() {
@@ -241,14 +243,14 @@ export default {
       position: absolute;
       bottom: 1rem;
       display: block;
-      padding-bottom: 1.5rem;
+      padding-right: .5rem;
+      padding-bottom: 1rem;
       color: #fff;
       transition: all .15s;
     }
 
     &:hover::before {
-      top: -2rem;
-      padding-bottom: 2rem;
+      padding-bottom: 1.5rem;
     }
 
     &__arrow {

@@ -3,13 +3,9 @@
     <CategoriesHeaderSlider :translations="pageTranslations" />
     <div class="container max-width-container py-6 px-4 my-6 mx-auto">
       <div class="flex">
-        <FiltersSidebar @refresh="retrieveExperiences" />
-
+        <FiltersSidebar />
         <div class="experiences-container">
-          <ExperiencesGrid
-            :experiences.sync="experiences"
-            :is-loading.sync="loadingExperiences" />
-          
+          <ExperiencesGrid :experiences.sync="experiences" />
           <div
             v-if="experiences && experiences.length > 0 && lastPage > 1"
             class="block mt-6">
@@ -18,7 +14,6 @@
               layout="prev, pager, next"
               :current-page.sync="currentPage"
               :page-count="lastPage"
-              @current-change="handleCurrentPage"
             />
           </div>
         </div>
@@ -28,7 +23,7 @@
 </template>
 
 <script>
-import { mapMutations, mapActions } from 'vuex'
+import { mapGetters, mapMutations, mapActions } from 'vuex'
 import CategoriesHeaderSlider from '@/components/CategoriesHeaderSlider'
 import ExperiencesGrid from '@/components/ExperiencesGrid'
 import FiltersSidebar from '@/components/experiences/FiltersSidebar'
@@ -41,9 +36,7 @@ export default {
   },
   data() {
     return {
-      flag: 0,
-      experiences: [],
-      loadingExperiences: false,
+      experiences: null,
       pageTranslations: {
         'es_ES': {
           copy: `¡Conoce nuestras<br>categorías!`
@@ -52,40 +45,85 @@ export default {
           copy: '¡Check out<br>our categories!'
         }
       },
-      currentPage: 1,
       lastPage: 1
     }
   },
-  mounted () {
-    if(Object.keys(this.$route.query).length > 0) {
-      if('category' in this.$route.query && this.$route.query.category !== '') {
-        this.setCurrentCategory(parseInt(this.$route.query.category))
+  computed: {
+    ...mapGetters({
+      filters: 'experiences/filters',
+      selectedSort: 'experiences/selectedSort'
+    }),
+    currentPage: {
+      get() {
+        return this.filters.page
+      },
+      set(value) {
+        this.setFilter({ prop: 'page', value })
       }
     }
+  },
+  watch: {
+    filters: {
+      deep: true,
+      handler (value, oldValue) {
+        this.$router.push({ query : value })
+        let sanitizedFilters = this.sanitizeFilters(this.filters)
+        this.retrieveExperiences(sanitizedFilters)
+      }
+    }
+  },
+  mounted () {
+    this.resetFilters()
     
-    this.retrieveExperiences()
+    if(Object.keys(this.$route.query).length > 0) {
+      const filters = ['category', 'destination', 'page']
+
+      filters.forEach(item => {
+        if(item in this.$route.query) {
+          this.setFilter({ prop: item, value: parseInt(this.$route.query[item]) })
+        }
+      })
+
+      if('sort' in this.$route.query) {
+        this.setFilter({ prop: 'sort', value: this.$route.query.sort })
+      }
+
+      const sanitized = this.sanitizeFilters(this.filters)
+      this.retrieveExperiences(sanitized)
+    } else {
+      this.retrieveExperiences()
+    }
   },
   methods: {
     ...mapActions({
       getExperiences: 'experiences/getExperiences'
     }),
     ...mapMutations({
-      setCurrentCategory: 'categories/SET_CURRENT_CATEGORY'
+      setFilter: 'experiences/SET_FILTER',
+      resetFilters: 'experiences/RESET_FILTERS'
     }),
-    handleCurrentPage (page) {
-      const params = {page, ...this.filters }
-      this.retrieveExperiences(params)
+    sanitizeFilters(filters) {
+      let sanitized = {
+        category_id: filters.category,
+        destination_id: filters.destination,
+        page: filters.page
+      }
+
+      if(this.selectedSort) {
+        sanitized = { ...sanitized, ...this.selectedSort }
+      }
+
+      return sanitized
     },
     async retrieveExperiences(params = null) {
-      this.loadingExperiences = true
+      this.experiences = null
 
       try {
         const experiences = await this.getExperiences(params)
         this.experiences = experiences.data
-        this.lastPage = experiences.last_page 
-        this.loadingExperiences = false
+        this.lastPage = experiences.last_page
       } catch (error) {
-        this.loadingExperiences = false
+        this.experiences = []
       }
     }
   }
