@@ -1,5 +1,5 @@
 <template>
-  <div class="page-header">
+  <div class="page-header mt-10 md:mt-0">
     <div class="categories-slider__arrows container">
       <el-button @click="prevSlide()" class="text-white hover:text-white bg-transparent hover:bg-primary" icon="el-icon-back" circle />
       <el-button @click="nextSlide()" class="text-white hover:text-white bg-transparent hover:bg-primary" icon="el-icon-right" circle />
@@ -16,7 +16,7 @@
           }"
           :data-cat-value="category.id"
           class="swiper-slide">
-          <div class="container m-auto px-4">
+          <div class="container m-auto px-5 md:px-4">
             <h1
               v-if="category.id === ''"
               class="page-header__title"
@@ -115,6 +115,14 @@ export default {
     currentCategory (value) {
       if(value === '') {
         return this.mySwiper.slideTo(0)
+      } else {
+        const currentIndex = this.sanitizedCategories.findIndex(item => {
+          return item.id === value
+        })
+
+        if(currentIndex > -1) {
+          this.mySwiper.slideTo(currentIndex)
+        }
       }
 
       const mainHeader = document.querySelector('.header').clientHeight
@@ -175,7 +183,7 @@ export default {
   .page-header {
     display: flex;
     position: relative;
-    height: 100vh;
+    height: 440px;
 
     @media screen and (min-width: 768px) {
       height: 640px;
@@ -199,12 +207,17 @@ export default {
   .categories-slider {
     &__arrows {
       position: absolute;
-      top: 10rem;
+      top: 9rem;
       left: 50%;
       transform: translateX(-50%);
       padding-right: 1rem;
       text-align: right;
       z-index: 9;
+      display: none;
+
+      @media screen and (min-width: 768px) {
+        display: block;
+      }
     }
   }
 
@@ -214,13 +227,17 @@ export default {
   }
 
   .categories-carousel {
-    display: flex;
+    display: none;
     border-bottom: 1px solid rgba(#fff, .5);
     position: absolute;
     left: 0;
     right: 0;
     bottom: 5rem;
     z-index: 9;
+
+    @media screen and (min-width: 768px) {
+      display: flex;
+    }
   }
 
   .categories-carousel-item {

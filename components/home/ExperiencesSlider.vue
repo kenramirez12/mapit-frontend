@@ -20,7 +20,7 @@
     <div
       v-else
       class="container-left-margin">
-      <div v-swiper:mySwiper="swiperOption">
+      <div v-swiper:experienceSwiper="swiperOption">
         <div class="swiper-wrapper py-5">
           <template v-if="experiences === null">
             <div
@@ -73,19 +73,30 @@ export default {
   },
   data () {
     return {
+      hasEnd: false,
       swiperOption: {
         slidesPerView: 'auto',
         spaceBetween: 20,
-        loop: true
+        // loop: true,
+        on: {
+          reachEnd: () => {
+            this.hasEnd = true
+          }
+        }
       }
     }
   },
   watch: {
     prev() {
-      this.mySwiper.slidePrev()
+      this.experienceSwiper.slidePrev()
     },
     next() {
-      this.mySwiper.slideNext()
+      if(this.hasEnd) {
+        this.hasEnd = false
+        this.experienceSwiper.slideTo(1)
+      } else {
+        this.experienceSwiper.slideNext()
+      }
     }
   }
 }

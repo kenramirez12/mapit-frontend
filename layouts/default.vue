@@ -9,7 +9,7 @@
           'header-fixed' : $route.name === 'lang-how-it-works-travelers'
         }">
         <el-alert
-          :class="{ 'hidden md:block' : $route.name === 'lang-experiences-id' }"
+          :class="{ 'hidden md:block' : $route.name === 'lang-experiences-id' || $route.name === 'lang-experiences' }"
           class="top-bar md:text-center pt-3 pb-4"
           center>
           <p class="font-light text-black mb-0">
