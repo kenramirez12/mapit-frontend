@@ -17,12 +17,12 @@
         <a href="#" class="steps__link">2. {{ $lang.translate(translations, 'traveler_details') }}</a>
       </li>
     </ul>
-    <div class="container flex m-auto py-6">
-      <div class="w-2/3">
+    <div class="container flex flex-wrap m-auto py-6">
+      <div class="w-full md:w-2/3 order-2 md:order-1">
         <ReserveDetails v-if="currentStep === 1" />
         <ReserveClientDetails v-if="currentStep === 2" />
       </div>
-      <div class="w-1/3">
+      <div class="reserve-resume w-full md:w-1/3 order-1 md:order-2 px-4 md:px-0">
         <ReserveResume />
       </div>
     </div>
@@ -64,6 +64,18 @@ export default {
 </script>
 
 <style lang="scss">
+  .reserve-resume {
+    position: sticky;
+    top: 10px;
+    z-index: 99;
+
+    @media screen and (min-width: 768px) {
+      position: relative;
+      top: unset;
+      z-index: unset;
+    }
+  }
+
   .checkout-lg {
     display: flex;
     align-items: center;
@@ -112,6 +124,11 @@ export default {
       padding: .8rem;
       border-top: 6px solid #C4C4C4;
       font-weight: 300;
+      font-size: 80%;
+
+      @media screen and (min-width: 768px) {
+        font-size: 100%;
+      }
 
       &.active {
         border-color: #555;

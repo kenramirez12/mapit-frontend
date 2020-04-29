@@ -4,7 +4,10 @@
       type="primary"
       style="min-width:46px"
       @click="showFilters = !showFilters">
-      <el-badge is-dot class="item">
+      <el-badge
+        is-dot
+        :hidden="!hasFilters"
+        class="item">
         <i class="el-icon-s-operation text-xl" />
       </el-badge>
     </el-button>
@@ -22,7 +25,7 @@
       </el-button>
       <el-dropdown-menu slot="dropdown" class="top-categories-dropdown py-0">
         <el-dropdown-item
-          v-for="category in categories"
+          v-for="category in sanitizedCategories"
           :key="category.id"
           :command="category.id"
           class="text-center py-1 border-b">
@@ -66,12 +69,41 @@ export default {
         this.setFilter({ prop: 'page', value: 1 })
       }
     },
+    hasFilters() {
+      return this.filters.category !== '' || this.filters.destination !== '' || this.filters.sort !== ''
+    },
     currentCategoryObject() {
-      if(this.filterCategory === '' || !this.categories) return null
-      const current = this.categories.find(item => item.id === this.filterCategory)
+      if(!this.sanitizedCategories) return null
+
+      const current = this.sanitizedCategories.find((item) => {
+        return item.id === this.filterCategory
+      })
+      
       if(current) {
         return current
       } else return null
+    },
+    sanitizedCategories () {
+      if(this.categories) {
+        const generalCategory = {
+          id: '',
+          translations: [
+            {
+              iso_lang: 'es_ES',
+              name: 'General'
+            },
+            {
+              iso_lang: 'en_EN',
+              name: 'General'
+            }
+          ],
+          image: '/images/default-category-bg.jpg'
+        }
+
+        const sanitizedCategories = JSON.parse(JSON.stringify(this.categories))
+        sanitizedCategories.unshift(generalCategory)
+        return sanitizedCategories
+      }
     }
   },
   methods: {

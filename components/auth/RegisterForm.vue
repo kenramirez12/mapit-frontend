@@ -20,7 +20,7 @@
       <el-button @click="onSubmit('registerForm')" class="shadow-primary w-full" type="primary">
         {{ $lang.translate(translations, 'register') }}
       </el-button>
-      <div class="mt-2 break-words px-5 text-center leading-tight text-gray-500">
+      <div class="mt-2 break-words px-0 md:px-5 text-center leading-tight text-gray-500">
         <small>This site is protected by reCAPTCHA and the Google 
           <a class="underline" href="https://policies.google.com/privacy">Privacy Policy</a> and
           <a class="underline" href="https://policies.google.com/terms">Terms of Service</a> apply.

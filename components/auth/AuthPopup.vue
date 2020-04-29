@@ -80,15 +80,22 @@ export default {
   .el-dialog__headerbtn {
     z-index: 9;
     background: #fff;
-    width: 26px;
-    height: 26px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.15);
     display: flex;
     align-items: center;
     justify-content: center;
-    top: .7rem;
-    right: .5rem;
+    top: .9rem;
+    right: .4rem;
+
+    @media screen and (min-width: 768px) {
+      width: 26px;
+      height: 26px;
+      top: .7rem;
+      right: .5rem;
+    }
   }
   
   .full.el-tabs {
@@ -107,10 +114,17 @@ export default {
 
     .el-tabs__item {
       flex: 1;
+      width: 50%;
+      margin: 0!important;
       text-align: center;
       border: 0!important;
       height: 50px;
       line-height: 50px;
+      font-size: 90%;
+
+      @media screen and (min-width: 768px) {
+        font-size: 100%;
+      }
 
       &:hover,
       &.is-active {

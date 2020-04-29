@@ -2,14 +2,14 @@
   <div
     v-loading="isLoading"
     :element-loading-text="loadingMessage"
-    class="flex flex-col h-full">
+    class="flex flex-col h-full px-4 md:px-0 pb-4 md:pb-0 mt-5 md:mt-0">
     <span class="block mb-5 pb-3">
       {{ $lang.translate(translations, 'traveler') }}
     </span>
     <el-form :model="form" :rules="formRules" ref="clientDetailsForm">
-      <div class="w-2/3">
-        <div class="flex -mx-4">
-          <div class="w-1/2 px-4">
+      <div class="w-full md:w-2/3">
+        <div class="flex flex-wrap -mx-4">
+          <div class="w-full md:w-1/2 px-4">
             <div
               :class="{ 'has-value' : form.fullname !== '' }"
               class="input-underline"
@@ -19,7 +19,7 @@
               </el-form-item>
             </div>
           </div>
-          <div class="w-1/2 px-4">
+          <div class="w-full md:w-1/2 px-4">
             <div
               :class="{ 'has-value' : form.docNumber !== '' }"
               class="input-underline"
@@ -30,8 +30,8 @@
             </div>
           </div>
         </div>
-        <div class="flex -mx-4">
-          <div class="w-1/2 px-4">
+        <div class="flex flex-wrap -mx-4">
+          <div class="w-full md:w-1/2 px-4">
             <div
               :class="{ 'has-value' : form.email !== '' }"
               class="input-underline"
@@ -41,7 +41,7 @@
               </el-form-item>
             </div>
           </div>
-          <div class="w-1/2 px-4">
+          <div class="w-full md:w-1/2 px-4">
             <div
               :class="{ 'has-value' : form.birthdate !== '' }"
               class="input-underline"
@@ -52,8 +52,8 @@
             </div>
           </div>
         </div>  
-        <div class="flex -mx-4">
-          <div class="w-1/2 px-4">
+        <div class="flex flex-wrap -mx-4">
+          <div class="w-full md:w-1/2 px-4">
             <div
               :class="{ 'has-value' : form.country !== '' }"
               class="input-underline"
@@ -74,7 +74,7 @@
               </el-form-item>
             </div>
           </div>
-          <div class="w-1/2 px-4">
+          <div class="w-full md:w-1/2 px-4">
             <div class="input-underline">
               <el-form-item prop="phone" class="custom-input-phone mb-0">
                 <VuePhoneNumberInput
@@ -91,8 +91,8 @@
             </div>
           </div>
         </div>
-        <div class="flex -mx-4">
-          <div v-if="form.country !== 'PE'" class="w-1/2 px-4">
+        <div class="flex flex-wrap -mx-4">
+          <div v-if="form.country !== 'PE'" class="w-full md:w-1/2 px-4">
             <div
               :class="{ 'has-value' : form.Date !== '' }"
               class="input-underline"
@@ -116,8 +116,10 @@
         </div>
         <div class="block mt-4">
           <el-form-item prop="terms" class="mb-0">
-            <el-checkbox v-model="form.terms" class="font-light">
-              {{ $lang.translate(translations, 'terms') }} <a href="#" class="font-medium">{{ $lang.translate(translations, 'terms2') }}</a>
+            <el-checkbox v-model="form.terms" class="font-light flex items-center">
+              <span style="white-space:normal">
+                {{ $lang.translate(translations, 'terms') }} <a href="#" class="font-medium">{{ $lang.translate(translations, 'terms2') }}</a>
+              </span>
             </el-checkbox>
           </el-form-item>
         </div>

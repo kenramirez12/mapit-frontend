@@ -144,7 +144,7 @@ export default {
     top: 0;
     right: 0;
     left: 0;
-    z-index: 9999;
+    z-index: 2000;
     background-color: #fff;
     box-shadow: 0 0 20px 10px rgba(0, 0, 0, 0.1);
 

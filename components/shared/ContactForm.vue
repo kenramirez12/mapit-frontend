@@ -13,7 +13,7 @@
             class="shadow-input border-0" />
         </el-form-item>
       </div>
-      <div class="w-1/2 px-2">
+      <div class="w-full md:w-1/2 px-2">
         <el-form-item prop="country">
           <el-input
             v-model="formData.country"
@@ -21,7 +21,7 @@
             class="shadow-input border-0" />
         </el-form-item>
       </div>
-      <div class="w-1/2 px-2">
+      <div class="w-full md:w-1/2 px-2">
         <el-form-item prop="email">
           <el-input
             v-model="formData.email"

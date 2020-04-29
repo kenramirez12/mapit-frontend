@@ -1,7 +1,10 @@
 <template>
-  <div v-if="experience" v-loading="isLoading" class="flex flex-col h-full pt-5">
-    <div class="flex mb-6 pb-4">
-      <div class="w-1/3">
+  <div
+    v-if="experience"
+    v-loading="isLoading"
+    class="flex flex-col h-full pt-5 px-5 md:px-0">
+    <div class="flex flex-wrap md:mb-6">
+      <div class="md:w-1/3 order-1 pb-4">
         <span class="font-light">{{ $lang.translate(translations, 'date') }}</span>
         <div class="block mt-1">
           <el-date-picker
@@ -17,7 +20,7 @@
           />
         </div>
       </div>
-      <div class="w-1/3">
+      <div class="w-full md:w-1/3 order-3 md:order-2 pb-4">
         <span class="font-light">
           {{ $lang.translate(translations, 'points') }}
         </span>
@@ -25,7 +28,7 @@
           <span class="text-3xl font-light">{{ parseFloat(reservePrice) * groupSize }}</span>
         </div>
       </div>
-      <div class="w-1/3">
+      <div class="w-full md:w-1/3 order-2 md:order-3 pb-4">
         <span class="font-light">
           {{ $lang.translate(translations, isOnline ? 'device_quantity' : 'group_size') }}
         </span>
@@ -78,7 +81,7 @@
 
     <div class="flex flex-wrap">
 
-      <div class="w-1/3 pr-6">
+      <div class="w-full md:w-1/3 pr-6">
         <el-checkbox-group
           v-if="experience && experience.extras !== null && experience.extras.length > 0"
           v-model="reserveExtras">
@@ -115,7 +118,7 @@
           <p v-else class="text-sm font-light mt-3">No se encontraron horarios disponibles.</p>
         </div>
       </div>
-      <div class="w-1/2">
+      <div class="w-full md:w-1/2">
         <span class="block mb-2 font-light">
           {{ $lang.translate(translations, 'message') }}
         </span>
@@ -128,8 +131,8 @@
       </div>
     </div>
 
-    <div class="w-5/6 mt-auto flex">
-      <el-button @click="trySubmit()" type="primary" class="ml-auto">
+    <div class="w-full md:w-5/6 mt-6 md:mt-auto flex">
+      <el-button @click="trySubmit()" type="primary" class="md:ml-auto">
         {{ $lang.translate(translations, 'continue') }}
       </el-button>
     </div>

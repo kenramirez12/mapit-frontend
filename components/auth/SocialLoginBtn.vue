@@ -74,18 +74,26 @@ export default {
 <style lang="scss" scoped>
   .social-login-btn {
     width: 100%;
-    height: 60px;
+    height: 46px;
     display: flex;
     align-items: center;
     font-size: 90%;
     letter-spacing: .05rem;
+
+    @media screen and (min-width: 768px) {
+      height: 60px;
+    }
 
     img {
       flex: 1;
     }
 
     span {
-      flex: 3;
+      flex: 4;
+
+      @media screen and (min-width: 768px) {
+        flex: 3;
+      }
 
       @media screen and (min-width: 830px) {
         flex: 2;
