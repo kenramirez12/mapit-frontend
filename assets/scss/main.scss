@@ -29,6 +29,12 @@ body {
   overflow-y: auto;
 }
 
+@media screen and (max-width: 767px) {
+  input, select, textarea {
+    font-size: 16px !important;
+  }
+}
+
 .text-primary,
 .hover\:text-primary:hover,
 .focus\:text-primary:focus {
