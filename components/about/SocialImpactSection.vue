@@ -1,30 +1,11 @@
 <template>
-  <div id="social-impact" class="flex flex-wrap py-16 mb-10">
-    <div class="w-4/12 pr-14">
-      <h2 class="text-5xl font-light mb-12">
+  <div id="social-impact" class="flex flex-wrap pb-16 md:pt-16 md:mb-10">
+    <div class="w-full md:hidden">
+      <h2 class="text-2xl font-light mb-8">
         {{ $lang.translate(translations, 'title') }}
       </h2>
-      <div class="social-impact__content">
-        <div class="social-impact__icon">
-          <img src="/images/social-points-icon.svg" width="65">
-        </div>
-        <span class="social-impact__copy">
-          {{ $lang.translate(translations, 'copy_1') }}
-        </span>
-      </div>
-      <span class="block text-3xl font-light my-6">
-        {{ $lang.translate(translations, 'value') }}
-      </span>
-      <p class="font-light">
-        {{ $lang.translate(translations, 'copy_2') }}
-      </p>
-      <div class="flex justify-between mt-6 pt-6 pr-6">
-        <img src="~/assets/images/social-three-icon-primary.svg" alt="" style="width:80px">
-        <img src="~/assets/images/social-book-icon-primary.svg" alt="" style="width:80px">
-        <img src="~/assets/images/social-house-icon-primary.svg" alt="" style="width:80px">
-      </div>
     </div>
-    <div class="w-5/12 ml-auto mr-10">
+    <div class="w-full md:w-5/12 ml-auto md:mr-10 md:order-2">
       <div class="social-impact-slider">
         <div v-swiper:SocialImpactSwiper="swiperOption" class="h-full">
           <div class="swiper-wrapper">
@@ -38,7 +19,7 @@
                   <img class="social-impact-item__human -mb-6" src="/images/about/social-human-01.svg">
                 </div>
                 <div class="social-impact-item__col-2">
-                  <p class="text-lg font-light mt-12">
+                  <p class="text-xs md:text-lg font-light mt-12">
                     {{ $lang.translate(feature.translations, 'description' )}}
                   </p>
                 </div>
@@ -53,6 +34,30 @@
             <img src="~/assets/images/arrow-right.svg">
           </div>
         </div>
+      </div>
+    </div>
+    <div class="w-full md:w-4/12 pr-14 md:order-1">
+      <h2 class="text-5xl font-light mb-12 hidden md:block">
+        {{ $lang.translate(translations, 'title') }}
+      </h2>
+      <div class="social-impact__content mt-6 md:mt-0">
+        <div class="social-impact__icon">
+          <img src="/images/social-points-icon.svg">
+        </div>
+        <span class="text-xs md:text-base social-impact__copy">
+          {{ $lang.translate(translations, 'copy_1') }}
+        </span>
+      </div>
+      <span class="block text-xl md:text-3xl font-light my-6">
+        {{ $lang.translate(translations, 'value') }}
+      </span>
+      <p class="text-sm md:text-base font-light">
+        {{ $lang.translate(translations, 'copy_2') }}
+      </p>
+      <div class="flex justify-between mt-6 pt-6 md:pr-6">
+        <img src="~/assets/images/social-three-icon-primary.svg" class="social-icons">
+        <img src="~/assets/images/social-book-icon-primary.svg" class="social-icons">
+        <img src="~/assets/images/social-house-icon-primary.svg" class="social-icons">
       </div>
     </div>
   </div>
@@ -148,18 +153,33 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  .social-icons {
+    width:60px;
+
+    @media screen and (min-width: 768px) {
+      width:80px;
+    }
+  }
   .social-swiper-pagination {
-    bottom: 20px;
+    bottom: 10px;
     position: absolute;
     color: #fff;
     text-align: center;
     font-size: 90%;
+
+    @media screen and (min-width: 768px) {
+      bottom: 20px;
+    }
   }
   .social-swiper-button-prev,
   .social-swiper-button-next {
     position: absolute;
-    bottom: 24px;
+    bottom: 15px;
     z-index: 2;
+
+    @media screen and (min-width: 768px) {
+      bottom: 24px;
+    }
 
     img {
       height: 14px;
@@ -175,7 +195,11 @@ export default {
     display: flex;
     flex-direction: column;
     height: 100%;
-    padding: 0 2.5rem;
+    padding: 0 1.2rem;
+
+    @media screen and (min-width: 768px) {
+      padding: 0 2.5rem;
+    }
 
     &__col-1, &__col-2 {
       position: relative;
@@ -198,10 +222,14 @@ export default {
   .social-impact-slider {
     width: 100%;
     max-width: 455px;
-    height: 700px;
+    height: 510px;
     background: linear-gradient(to bottom, #F6F6F6 50%, #37d7d7 50%);
     border-radius: 2rem;
     margin-left: auto;
+
+    @media screen and (min-width: 768px) {
+      height: 700px;
+    }
   }
 
   .social-impact {
@@ -212,8 +240,13 @@ export default {
     }
 
     &__icon {
-      width: 70px;
-      margin-right: 2rem;
+      width: 50px;
+      margin-right: 1rem;
+
+      @media screen and (min-width: 768px) {
+        width: 70px;
+        margin-right: 2rem;
+      }
 
       img {
         width: 100%;

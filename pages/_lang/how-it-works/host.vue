@@ -1,25 +1,33 @@
 <template>
   <div class="container mx-auto py-12 px-4">
     <div class="flex flex-wrap">
-      <div class="w-5/12 flex flex-col">
-        <h5 class="font-light">Para anfitriones</h5>
-        <h1 class="text-5xl font-light leading-tight my-auto">¡Comparte tu experiencia con viajeros de todo el mundo!</h1>
+      <div class="w-full md:w-5/12 flex flex-col">
+        <h5 class="font-light">
+          {{ $lang.translate(translations, 'for_host') }}
+        </h5>
+        <h1 class="text-2xl md:text-5xl font-light leading-tight my-auto mt-3 md:mt-0">
+          {{ $lang.translate(translations, 'title') }}
+        </h1>
       </div>
-      <div class="w-5/12 ml-auto">
+      <div class="w-full md:w-5/12 ml-auto hidden md:block">
         <img src="/images/how-it-works/hosts/main_image.jpg" class="w-full shadow-image" alt="">
       </div>
     </div>
-    <div class="flex flex-wrap mt-4 mb-12">
-      <div class="w-8/12 mx-auto flex items-center">
-        <img src="/images/how-it-works/hosts/human_1.svg" class="human-1">
-        <h3 class="text-center font-light text-3xl">¡Únete a nuestra comunidad y ayúdanos a promover el turismo responsable y de impacto!</h3>
+    <div class="flex-wrap mt-4 mb-12 hidden md:flex">
+      <div class="w-full md:w-8/12 mx-auto flex items-center">
+        <img src="/images/how-it-works/hosts/human_1.svg" class="human-1 hidden md:block">
+        <h3 class="text-center font-light text-xl md:text-3xl">
+          {{ $lang.translate(translations, 'subtitle') }}
+        </h3>
       </div>
     </div>
     <div class="flex flex-wrap">
-      <div class="w-5/12 px-6">
-        <p class="font-light">MAP IT conecta a viajeros con experiencias únicas y culturales, guiadas por expertos locales como tú. Si quieres convertirte en uno de ellos, y tienes alguna actividad en mente que vaya de la mano con nuestro propósito, ¿qué estás esperando? Mándanos tu propuesta llenando el siguiente formulario.</p>
+      <div class="w-full md:w-5/12 md:px-6 my-5 md:my-0">
+        <p class="text-sm md:text-base font-light">
+          {{ $lang.translate(translations, 'copy') }}
+        </p>
       </div>
-      <div class="w-5/12 mx-auto">
+      <div class="w-full md:w-5/12 mx-auto">
         <HostContactForm />
       </div>
     </div>
@@ -32,6 +40,24 @@ import HostContactForm from '@/components/how-it-works/host/ContactForm'
 export default {
   components: {
     HostContactForm
+  },
+  data() {
+    return {
+      translations: {
+        es_ES: {
+          for_host: 'Para anfitriones',
+          title: '¡Comparte tu experiencia con viajeros de todo el mundo!',
+          subtitle: '¡Únete a nuestra comunidad y ayúdanos a promover el turismo responsable y de impacto!',
+          copy: 'MAP IT conecta a viajeros con experiencias únicas y culturales, guiadas por expertos locales como tú. Si quieres convertirte en uno de ellos, y tienes alguna actividad en mente que vaya de la mano con nuestro propósito, ¿qué estás esperando? Mándanos tu propuesta llenando el siguiente formulario'
+        },
+        en_EN: {
+          for_host: 'For hosts',
+          title: 'Share your experience with travelers from all over the world!',
+          subtitle: 'Join our community and help us promote responsible and sustainable tourism',
+          copy: 'MAPIT connects travelers with unique and cultural experiences, guided by local experts like you. If you want to be part of them, and if you have in mind an activity that goes hand in hand with our purpose, what are you waiting for? Send us your information through the following form.'
+        }
+      }
+    }
   }
 }
 </script>

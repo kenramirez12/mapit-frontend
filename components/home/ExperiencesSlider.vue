@@ -8,10 +8,10 @@
           class="pt-4 pb-6"
           type="error"
           :closable="false">
-          <h4 class="text-3xl text-black">
+          <h4 class="text-xl md:text-3xl text-black">
             ¡Whoops!
           </h4>
-          <p class="text-base font-light text-black">
+          <p class="text-sm md:text-base font-light text-black">
             {{ $lang.translate(translations, 'noResultsCopy') }}
           </p>
         </el-alert>

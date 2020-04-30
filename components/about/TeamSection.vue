@@ -1,35 +1,20 @@
 <template>
   <div id="our-team">
-    <div class="flex flex-wrap pt-16 mb-12">
-      <div class="w-4/12">
-        <h2 class="text-5xl font-light">
+    <div class="flex flex-wrap pt-8 md:pt-16 mb-6 md:mb-12">
+      <div class="w-full md:w-4/12 mb-6 md:mb-0">
+        <h2 class="text-2xl md:text-5xl font-light">
           {{ $lang.translate(translations, 'title') }}
         </h2>
       </div>
-      <div class="w-7/12 ml-auto">
+      <div class="w-full md:w-7/12 ml-auto">
         <div class="flex flex-wrap">
-          <div class="w-11/12 flex flex-wrap">
-            <div class="flex-1">
-              <h5 class="text-2xl font-light">Daniela</h5>
-              <span class="font-light text-sm">
-                {{ $lang.translate(translations, 'cofounder') }}
-              </span>
-              <div class="block mt-4">
-                <el-button size="small" type="primary" icon="el-icon-bottom" circle />
-              </div>
-            </div>
-            <div class="flex-1">
-              <h5 class="text-2xl font-light">Ursula</h5>
-              <span class="font-light text-sm">
-                {{ $lang.translate(translations, 'cofounder') }}
-              </span>
-              <div class="block mt-4">
-                <el-button size="small" type="primary" icon="el-icon-bottom" circle />
-              </div>
-            </div>
-            <div class="flex-1">
-              <h5 class="text-2xl font-light">Mirella</h5>
-              <span class="font-light text-sm">
+          <div class="w-full md:w-11/12 flex flex-wrap">
+            <div
+              v-for="(item, n) in team"
+              :key="'member_' + n"
+              class="flex-1">
+              <h5 class="text-base md:text-2xl font-light">{{ item }}</h5>
+              <span class="font-light text-xs md:text-sm">
                 {{ $lang.translate(translations, 'cofounder') }}
               </span>
               <div class="block mt-4">
@@ -41,12 +26,12 @@
       </div>
     </div>
     <div class="flex flex-wrap pb-12">
-      <div class="w-4/12 pr-10">
+      <div class="w-full md:w-7/12 ml-auto md:order-2">
+        <img src="/images/about/team.jpg" class="team-image" alt="Equipo Map it!">
+      </div>
+      <div class="w-full md:w-4/12 mt-6 md:mt-0 md:pr-10 md:order-1 text-sm md:text-base">
         <p class="mb-6 font-light">{{ $lang.translate(translations, 'copy_1') }}</p>
         <p class="mb-6 font-light">{{ $lang.translate(translations, 'copy_2') }}</p>
-      </div>
-      <div class="w-7/12 ml-auto">
-        <img src="/images/about/team.jpg" class="w-full" alt="Equipo Map it!">
       </div>
     </div>
   </div>
@@ -56,6 +41,7 @@
 export default {
   data() {
     return {
+      team: ['Daniela', 'Ursula', 'Mirella'],
       translations: {
         es_ES: {
           title: 'Nuestro Equipo',
@@ -75,6 +61,15 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+  .team-image {
+    width: calc(100% + 2rem);
+    margin-left: -1rem;
+    max-width: unset;
 
+    @media screen and (min-width: 560px) {
+      width: 100%;
+      margin-left: 0;
+    }
+  }
 </style>

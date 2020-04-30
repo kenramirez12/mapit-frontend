@@ -1,30 +1,33 @@
 <template>
   <div v-if="reserve && reserve.status === 2">
-    <div class="reserve-header" :style="`background-image:url(${$imagePath(reserve.experience.banner_image.path)})`">
-      <div class="container flex items-center px-4 m-auto">
-        <div class="block mr-3">
-          <el-button
-            circle
-            icon="el-icon-arrow-left"
-            @click="$router.push(`/${$lang.current().slug}/my/reserves`)" />
-        </div>
-        <h1 id="reserve-title" class="text-white text-3xl">
-          {{ $lang.apiTranslate(reserve.experience.translations, 'title') }}
-        </h1>
-      </div>
-    </div>
-    <div class="container py-12 px-4 mx-auto">
+    <ReserveHeader :experience="reserve.experience" />
+    <div class="container py-8 md:py-12 px-4 mx-auto">
       <div class="flex flex-wrap">
-        <div id="reserve-details" class="w-4/6 pr-16">
+        <div class="w-full md:w-2/6 md:order-2">
+          <el-button
+            @click="handleDownload()"
+            icon="el-icon-download"
+            size="small"
+            class="md:hidden mb-8">
+            {{ $lang.translate(translations, 'download_details') }}
+          </el-button>
+          <el-button
+            @click="handleDownload()"
+            icon="el-icon-download"
+            class="hidden md:inline-block">
+            {{ $lang.translate(translations, 'download_details') }}
+          </el-button>
+        </div>
+        <div id="reserve-details" class="w-full md:w-4/6 md:pr-16 md:order-1">
           <div class="flex flex-wrap">
-            <div class="w-1/2 font-light">
+            <div class="w-full md:w-1/2 mb-6 md:mb-0 font-light">
               <span class="block">{{ $lang.translate(translations, 'starting_time') }}</span>
               <span class="block">{{ reserve.time }}</span>
               <span class="block">
                 {{ $moment(reserve.date, 'YYYY-MM-DD').locale('es').format('ddd. DD MMM') }}
               </span>
             </div>
-            <div class="w-1/2 font-light">
+            <div class="w-full md:w-1/2 font-light">
               <span class="block">{{ $lang.translate(translations, 'ending_time') }}</span>
               <span class="block">
                 {{ $moment(reserve.time, 'HH:mm').add(duration, 'hours').format('HH:mm') }}<br>
@@ -38,17 +41,17 @@
           <hr class="my-3">
 
           <div class="flex flex-wrap mb-6">
-            <div v-if="reserve.experience.host !== ''" class="w-1/2 font-light mb-6">
+            <div v-if="reserve.experience.host !== ''" class="w-full md:w-1/2 font-light mb-6">
               <p class="font-light mb-0">
                 <span class="block">Wiser</span>
                 {{ $lang.apiTranslate(reserve.experience.host.translations, 'fullname') }}
               </p>
             </div>
-            <div class="w-1/2 font-light mb-6">
+            <div class="w-full md:w-1/2 font-light mb-6">
               <span class="block">{{ $lang.translate(translations, 'language') }}</span>
               <span>{{ $lang.apiTranslate(reserve.experience.translations, 'languages') }}</span>
             </div>
-            <div class="w-1/2 font-light mb-6">
+            <div class="w-full md:w-1/2 font-light">
               <p>
                 <span class="block" v-if="isOnline">{{ $lang.translate(translations, 'number_devices') }}</span>
                 <span class="block" v-else>{{ $lang.translate(translations, 'group_size') }}</span>
@@ -64,21 +67,21 @@
           </div>
           <hr class="-mt-3 mb-3">
           <div class="flex flex-wrap mb-6">
-            <div class="w-1/2 font-light">
+            <div class="w-full md:w-1/2 font-light mb-6 md:mb-0">
               <span class="block">{{ $lang.translate(translations, 'destination') }}</span>
               <span>{{ reserve.experience.destination.name }}</span>
             </div>
-            <div class="w-1/2 font-light">
+            <div class="w-full md:w-1/2 font-light">
               <span class="block">{{ $lang.translate(translations, 'booking_code') }}</span>
               <span>{{ reserve.code.toUpperCase() }}</span>
             </div>
           </div>
           <div class="flex flex-wrap font-light mb-6">
-            <div class="w-1/2">
+            <div class="w-full md:w-1/2 mb-6 md:mb-0">
               <span class="block">{{ $lang.translate(translations, 'meeting_point') }}</span>
               <span>{{ $lang.apiTranslate(reserve.experience.translations, 'meeting_place') }}</span>
             </div>
-            <div class="w-1/2">
+            <div class="w-full md:w-1/2">
               <span class="block">{{ $lang.translate(translations, 'price') }}</span>
               <span>${{ reserve.payment.amount }}</span>
             </div>
@@ -91,19 +94,14 @@
             </p>
           </div>
         </div>
-        <div class="w-2/6">
-          <el-button
-            @click="handleDownload()"
-            icon="el-icon-download">
-            {{ $lang.translate(translations, 'download_details') }}
-          </el-button>
-        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import ReserveHeader from '@/components/reserves/ReserveHeader'
+
 export default {
   async asyncData({ app, params, store, error }) {  
     try {
@@ -116,6 +114,9 @@ export default {
     } catch (error) {
       console.error('error', error.response)
     }
+  },
+  components: {
+    ReserveHeader
   },
   data() {
     return {
@@ -239,12 +240,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-  .reserve-header {
-    display: flex;
-    background-size: cover;
-    background-position: center;
-    height: 230px;
-  }
-</style>

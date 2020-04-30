@@ -16,7 +16,7 @@
       </div>
     </div>
     <div class="flex flex-wrap -mx-2">
-      <div class="w-1/2 px-2">
+      <div class="w-full sm:w-1/2 px-2">
         <el-form-item prop="category">
           <el-select
             v-model="formData.category"
@@ -33,7 +33,7 @@
           </el-select>
         </el-form-item>
       </div>
-      <div class="w-1/2 px-2">
+      <div class="w-full sm:w-1/2 px-2">
         <el-form-item prop="city">
           <el-input
             v-model="formData.city"
@@ -43,7 +43,7 @@
       </div>
     </div>
     <div class="flex flex-wrap -mx-2">
-      <div class="w-1/2 px-2">
+      <div class="w-full sm:w-1/2 px-2">
         <el-form-item prop="phone">
           <el-input
             v-model="formData.phone"
@@ -51,7 +51,7 @@
             class="border-0 shadow-input" />
         </el-form-item>
       </div>
-      <div class="w-1/2 px-2">
+      <div class="w-full sm:w-1/2 px-2">
         <el-form-item prop="email">
           <el-input
             v-model="formData.email"

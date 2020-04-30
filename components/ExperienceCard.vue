@@ -258,6 +258,7 @@ export default {
       flex-direction: column;
       background-color: #fff;
       padding: .5rem 1.5rem 1rem;
+      height: calc(100% - 240px);
     }
 
     &__sale-price {

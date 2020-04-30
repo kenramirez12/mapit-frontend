@@ -1,19 +1,19 @@
 <template>
-  <div id="why-mapit" class="flex flex-wrap -mt-16">
-    <div class="w-5/12">
-      <h2 class="text-5xl font-light" v-html="$lang.translate(translations, 'title')" />
+  <div id="why-mapit" class="flex flex-wrap mt-10 md:-mt-16">
+    <div class="w-full md:w-5/12">
+      <h2 class="text-2xl md:text-5xl font-light mb-4 md:mb-0" v-html="$lang.translate(translations, 'title')" />
     </div>
-    <div class="w-6/12">
+    <div class="w-full md:w-6/12">
       <div class="flex flex-wrap">
         <div
           v-for="(feature, n) in features"
           :key="'item_' + n"
-          class="w-1/2 mb-10 pr-12">
-          <img :src="feature.icon" class="mb-4" style="height:120px">
+          class="w-1/2 mb-10 pr-6 md:pr-12">
+          <img :src="feature.icon" class="mb-4 feature-icon">
           <h4
-            class="text-xl font-light mb-4"
+            class="text-lg md:text-xl font-light mb-4"
             v-html="$lang.translate(feature.translations, 'title')" />
-          <p class="font-light text-gray-600 text-sm">
+          <p class="font-light text-gray-600 text-xs md:text-sm">
             {{ $lang.translate(feature.translations, 'copy') }}
           </p>
         </div>
@@ -93,6 +93,12 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+  .feature-icon {
+    height: 70px;
 
+    @media screen and (min-width: 768px) {
+      height: 120px;
+    }
+  }
 </style>

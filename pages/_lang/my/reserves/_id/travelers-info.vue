@@ -1,48 +1,43 @@
 <template>
   <div
     v-if="reserve"
-    v-loading="isLoading"
-    class="container relative pb-4 mx-auto">
-    <el-breadcrumb class="mt-6 p-4 bg-gray-100" separator-class="el-icon-arrow-right">
-      <el-breadcrumb-item :to="{ path: `/${$lang.current().slug}/my/reserves` }">
-        {{ $lang.translate(translations, 'booking_history') }}
-      </el-breadcrumb-item>
-      <el-breadcrumb-item>
-        {{ $lang.apiTranslate(reserve.experience.translations, 'title') }}
-      </el-breadcrumb-item>
-    </el-breadcrumb>
-    <div class="traveler-info__header">
-      <div class="w-full pr-16">
-        <h1 class="text-3xl">{{ $lang.translate(translations, 'hello') }} {{ travelerName }},</h1>
-        <p class="font-light text-sm">
-          {{ $lang.translate(translations, 'info_required') }}
-        </p>
+    v-loading="isLoading">
+    <ReserveHeader :experience="reserve.experience" />
+    <div class="container relative pb-4 px-4 mx-auto">
+      <div class="traveler-info__header">
+        <div class="w-full md:pr-16">
+          <h1 class="text-2xl md:text-3xl">{{ $lang.translate(translations, 'hello') }} {{ travelerName }},</h1>
+          <p class="font-light text-sm">
+            {{ $lang.translate(translations, 'info_required') }}
+          </p>
+        </div>
       </div>
-    </div>
-    <div class="flex flex-wrap -mx-2 pt-6 mt-6">
-      <AdditionalTravelerForm
-        v-for="n in (reserve.group_size - 1)"
-        :ref="`additional_traveler_${n}`"
-        :key="'traveler_' + n"
-        :number="n"
-        :attempts.sync="attempts"
-        :default-country="reserve.details.traveler_country"
-        @handle-validation="additionalTravelerValidation"
-        :class="{
-          'mx-auto' : n % 2 === 0,
-          'mx-2' : n % 2 !== 0
-        }"
-        class="w-4/12 mb-6 pb-6" />
-    </div>
-    <div class="block mb-8">
-      <el-button type="primary" @click="handleSubmit()">
-        {{ $lang.translate(translations, 'continue') }}
-      </el-button>
+      <div class="flex flex-wrap -mx-2 md:pt-6 mt-6">
+        <AdditionalTravelerForm
+          v-for="n in (reserve.group_size - 1)"
+          :ref="`additional_traveler_${n}`"
+          :key="'traveler_' + n"
+          :number="n"
+          :attempts.sync="attempts"
+          :default-country="reserve.details.traveler_country"
+          @handle-validation="additionalTravelerValidation"
+          :class="{
+            'xl:mx-auto' : n % 2 === 0,
+            'xl:mx-2' : n % 2 !== 0
+          }"
+          class="md:w-1/2 xl:w-5/12 mb-6 px-2 xl:px-0 md:pr-8 xl:pr-0 pb-6" />
+      </div>
+      <div class="block mb-8">
+        <el-button type="primary" @click="handleSubmit()">
+          {{ $lang.translate(translations, 'continue') }}
+        </el-button>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import ReserveHeader from '@/components/reserves/ReserveHeader'
 import AdditionalTravelerForm from '~/components/reserves/AdditionalTravelerForm'
 
 export default {
@@ -59,7 +54,8 @@ export default {
     }
   },
   components: {
-    AdditionalTravelerForm
+    AdditionalTravelerForm,
+    ReserveHeader
   },
   computed: {
     travelerName() {

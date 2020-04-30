@@ -1,24 +1,24 @@
 <template>
-  <div id="wisers" class="bg-primary pt-12">
-    <div class="container mx-auto pt-4">
+  <div id="wisers" class="bg-primary pt-8 md:pt-12 pb-10 md:pb-10">
+    <div class="container mx-auto px-4 pt-4">
       <div class="flex flex-wrap">
-        <div class="w-4/12 mx-auto relative">
-          <h3 class="text-5xl mb-10 font-light">Wiser</h3>
-          <p class="text-2xl font-light">
+        <div class="w-full md:w-4/12 mx-auto relative">
+          <h3 class="text-2xl md:text-3xl md:text-5xl mb-4 md:mb-10 font-light">Wiser</h3>
+          <p class="md:text-2xl font-light">
             {{ $lang.translate(translations, 'copy') }}
           </p>
-          <img src="/images/about/human-01.svg" class="human-01">
-          <img src="/images/about/human-02.svg" class="human-02 mt-8 ml-auto">
+          <img src="/images/about/human-01.svg" class="hidden md:block human-01">
+          <img src="/images/about/human-02.svg" class="hidden md:block human-02 mt-8 ml-auto">
         </div>
-        <div class="w-4/12">
+        <div class="w-full md:w-4/12 mt-12 md:mt-0">
           <div
             v-for="(feature, n) in features"
             :key="'wiser_feature_' + n"
             class="block mb-8 font-light">
-            <h5 class="text-xl mb-2">
+            <h5 class="md:text-xl mb-2">
               {{ $lang.translate(feature.translations, 'title') }}
             </h5>
-            <p>
+            <p class="text-sm md:text-base">
               {{ $lang.translate(feature.translations, 'copy') }}
             </p>
           </div>

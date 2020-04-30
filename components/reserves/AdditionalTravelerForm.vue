@@ -3,11 +3,11 @@
     :ref="`additional_traveler_${number}`"
     :model="travelerData"
     :rules="travelerRules">
-    <span class="block mb-3 text-xl">
+    <span class="block mb-3 text-lg md:text-xl">
       {{ $lang.translate(translations, 'traveler') }} #{{ number }}
     </span>
-    <div class="flex -mx-3">
-      <div class="w-1/2 px-3">
+    <div class="flex flex-wrap -mx-3">
+      <div class="w-full lg:w-1/2 px-3">
         <div
           :class="{ 'has-value' : travelerData.fullname !== '' }"
           class="input-underline"
@@ -17,7 +17,7 @@
           </el-form-item>
         </div>
       </div>
-      <div class="w-1/2 px-3">
+      <div class="w-full lg:w-1/2 px-3">
         <div
           :class="{ 'has-value' : travelerData.docNumber !== '' }"
           class="input-underline"
@@ -28,8 +28,8 @@
         </div>
       </div>
     </div>
-    <div class="flex -mx-3">
-      <div class="w-1/2 px-3">
+    <div class="flex flex-wrap -mx-3">
+      <div class="w-full lg:w-1/2 px-3">
         <div
           :class="{ 'has-value' : travelerData.email !== '' }"
           class="input-underline"
@@ -39,7 +39,7 @@
           </el-form-item>
         </div>
       </div>
-      <div class="w-1/2 px-3">
+      <div class="w-full lg:w-1/2 px-3">
         <div
           :class="{ 'has-value' : travelerData.country !== '' }"
           class="input-underline"

@@ -17,7 +17,7 @@
               <div class="bg-primary rounded-lg py-2 px-4 mt-3 shadow-lg schedule-table">
                 <div class="schedule-table-overlay">
                   <div class="schedule-table-overlay__content">
-                    <span>Gire la pantalla para ver</span>
+                    <span>{{ $lang.translate(pageTranslations, 'rotate') }}</span>
                     <img
                       src="/images/mobile-phone.png"
                       class="ml-3"
@@ -100,6 +100,7 @@ export default {
           program: 'Programa',
           departures: 'Horarios de inicio',
           itinerary: 'Itinerario',
+          rotate: 'Gire la pantalla para ver',
           day: 'Día',
           monday: 'Lun',
           tuesday: 'Mar',
@@ -113,6 +114,7 @@ export default {
           program: 'Program',
           departures: 'Departures',
           itinerary: 'Itinerary',
+          rotate: 'Rotate the screen to see',
           day: 'Day',
           monday: 'Mon',
           tuesday: 'Tue',

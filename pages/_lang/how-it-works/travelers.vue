@@ -26,7 +26,7 @@ export default {
         licenseKey: 'YOUR_KEY_HEERE',
         menu: '#menu',
         anchors: ['info', 'steps'],
-        paddingTop: '100px',
+        // paddingTop: '100px',
       }
     }
   },
@@ -43,3 +43,11 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+  .section {
+    @media screen and (min-width: 768px) {
+      padding-top: 100px;
+    }
+  }
+</style>

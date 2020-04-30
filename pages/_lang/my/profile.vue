@@ -1,48 +1,20 @@
 <template>
   <div v-loading="isLoading" class="flex flex-col">
-    <div class="container mx-auto py-8 inline-block">
+    <div class="container mx-auto py-8 px-5 md:px-4 inline-block">
       <div class="w-full flex items-center justify-between mb-8 md:mb-10 mt-6">
-        <h3 class="text-4xl font-light">
+        <h3 class="text-2xl md:text-4xl font-light">
           {{ $lang.translate(translations, 'profile') }}
         </h3>
         <a
           href="#"
           @click.prevent="isEditing = true"
-          class="link-underline text-xl">
+          class="link-underline text-sm md:text-xl">
           <span>{{ $lang.translate(translations, 'edit') }}</span>
-          <img src="/images/edit-icon.svg" class="ml-4">
+          <img src="/images/edit-icon.svg" class="ml-3 md:ml-4">
         </a>
       </div>
       <div v-if="user" class="flex flex-wrap">
-        <div class="w-1/3 flex">
-          <div class="ml-auto flex flex-col">
-            <el-upload
-              v-loading="avatarLoading"
-              class="avatar-uploader"
-              action="https://jsonplaceholder.typicode.com/posts/"
-              :show-file-list="false"
-              :on-change="avatarUpload">
-              <img v-if="userAvatar" :src="userAvatar" class="avatar">
-              <i class="el-icon-plus avatar-uploader-icon" />
-            </el-upload>
-            <el-button
-              v-if="avatarChanged"
-              type="primary"
-              size="small"
-              class="mx-auto mt-2"
-              @click="updateAvatar">
-              {{ $lang.translate(translations, 'save') }}
-            </el-button>
-            <a
-              v-if="avatarChanged"
-              href="#"
-              @click.prevent="clearAvatarChanged"
-              class="link-underline block mt-2 mx-auto text-sm">
-              <span>{{ $lang.translate(translations, 'cancel') }}</span>
-            </a>
-          </div>
-        </div>
-        <div class="w-1/4 mx-auto">
+        <div class="w-3/4 md:w-2/4 lg:w-1/4 mx-auto md:order-2 pt-2 md:pt-0">
           <el-form ref="profileForm" :model="formData" :rules="formRules">
             <div
               v-if="isEditing"
@@ -132,15 +104,45 @@
               </el-button>
             </div>
             <div v-else class="block relative">
-              <img src="/images/social-points-icon.svg" class="social-points-icon">
+              <img
+                src="/images/social-points-icon.svg"
+                class="social-points-icon hidden md:block">
               <span class="font-light">
                 {{ $lang.translate(translations, 'social_points') }}
               </span>
-              <span class="block text-5xl">
+              <span class="block text-4xl md:text-5xl">
                 {{ user.social_points }} pt
               </span>
             </div>
           </el-form>
+        </div>
+        <div class="w-1/4 md:w-1/3 flex md:order-1">
+          <div class="ml-auto flex flex-col">
+            <el-upload
+              v-loading="avatarLoading"
+              class="avatar-uploader"
+              action="https://jsonplaceholder.typicode.com/posts/"
+              :show-file-list="false"
+              :on-change="avatarUpload">
+              <img v-if="userAvatar" :src="userAvatar" class="avatar">
+              <i class="el-icon-plus avatar-uploader-icon" />
+            </el-upload>
+            <el-button
+              v-if="avatarChanged"
+              type="primary"
+              size="small"
+              class="mx-auto mt-2"
+              @click="updateAvatar">
+              {{ $lang.translate(translations, 'save') }}
+            </el-button>
+            <a
+              v-if="avatarChanged"
+              href="#"
+              @click.prevent="clearAvatarChanged"
+              class="link-underline block mt-2 mx-auto text-sm">
+              <span>{{ $lang.translate(translations, 'cancel') }}</span>
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -380,28 +382,40 @@ export default {
     }
   }
   .avatar-uploader-icon {
+    --size: 60px;
     font-size: 28px;
     color: #8c939d;
-    width: 100px;
-    height: 100px;
-    line-height: 100px;
+    width: var(--size);
+    height: var(--size);
+    line-height: var(--size);
     text-align: center;
     border-radius: 50%;
     background-color: #efefef;
     transition: all 0.2s;
 
+    @media screen and (min-width: 768px) {
+      --size: 100px;
+    }
+
     &:hover {
-      opacity: .8;
+      @media screen and (min-width: 768px) {
+        opacity: .8;
+      }
     }
   }
   .avatar {
-    width: 100px;
-    height: 100px;
+    --size: 60px;
+    width: var(--size);
+    height: var(--size);
     display: block;
     border-radius: 50%;
     object-fit: cover;
     position: absolute;
     transition: all .3s;
+
+    @media screen and (min-width: 768px) {
+      --size: 100px;
+    }
 
     &:hover {
       opacity: .1;

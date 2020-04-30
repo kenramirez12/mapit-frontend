@@ -127,10 +127,16 @@ export default {
   height: 37px!important;
 }
 .swiper-button-prev {
-  left: 12%;
+  left: 5%;
+  @media screen and (min-width: 768px) {
+    left: 15%;
+  }
 }
 .swiper-button-next {
-  right: 12%;
+  right: 5%;
+  @media screen and (min-width: 768px) {
+    left: 15%;
+  }
 }
 .swiper-pagination-bullet {
   width: 20px;

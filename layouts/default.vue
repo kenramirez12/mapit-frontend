@@ -73,11 +73,11 @@ export default {
       },
       translations: {
         es_ES: {
-          covid_policies: 'Para más información  sobre las políticas de cancelación de COVID-19 y las últimas actualizaciones.',
+          covid_policies: 'Sobre nuestras experiencias online y nuestra respuesta al COVID-19.',
           click: 'Clic aquí'
         },
         en_EN: {
-          covid_policies: 'Learn more about our COVID-19 response and cancellation policies.',
+          covid_policies: 'Learn about our online experiences and our COVID-19 response.',
           click: 'Click here'
         }
       }

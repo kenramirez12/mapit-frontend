@@ -21,19 +21,27 @@ export default {
 
 <style lang="scss" scoped>
   .hero {
-    width: 50%;
+    width: 100%;
     // height: 100%;
     background-size: cover;
     background-position: center;
     position: relative;
     cursor: pointer;
 
+    @media screen and (min-width: 768px) {
+      width: 50%;
+    }
+
     &__traveler {
       background-image: url('/images/how-it-works/travelers.jpg');
 
       &:hover {
         .hero__title {
-          padding: 14rem 3.5rem 2rem;
+          padding: 5rem 3.5rem 2rem;
+
+          @media screen and (min-width: 768px) {
+            padding-top: 14rem;
+          }
         }
       }
 
@@ -42,7 +50,11 @@ export default {
         top: 18%;
         left: 50%;
         transform: translateX(-50%);
-        padding: 10rem 1.5rem 2rem;
+        padding: 4rem 1.5rem 2rem;
+
+        @media screen and (min-width: 768px) {
+          padding-top: 10rem;
+        }
 
 
         &::before {
@@ -59,7 +71,11 @@ export default {
 
       &:hover {
         .hero__title {
-          padding: 7rem 3rem 7rem 1.5rem;
+          padding: 4rem 3rem 7rem 1.5rem;
+
+          @media screen and (min-width: 768px) {
+            padding-top: 7rem;
+          }
         }
       }
 
@@ -68,7 +84,11 @@ export default {
         top: 50%;
         right: 5%;
         transform: translateY(-50%);
-        padding: 5rem 1.5rem;
+        padding: 3rem 1.5rem;
+
+        @media screen and (min-width: 768px) {
+          padding-top: 5rem;
+        }
 
         &::before {
           width: 18px;
@@ -80,7 +100,7 @@ export default {
     }
 
     &__title {
-      font-size: 42px;
+      font-size: 28px;
       font-weight: 300;
       color: #fff;
       line-height: 1;
@@ -89,6 +109,10 @@ export default {
       display: inline-block;
       position: relative;
       transition: padding 0.3s;
+
+      @media screen and (min-width: 768px) {
+        font-size: 42px;
+      }
 
       &::before {
         content: '';
