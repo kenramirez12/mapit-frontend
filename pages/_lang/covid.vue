@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import PageHeader from '@/components/PageHeader'
+import PageHeader from '@/components/shared/PageHeader'
 
 export default {
   components: {

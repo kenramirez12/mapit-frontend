@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import PageHeader from '@/components/PageHeader'
+import PageHeader from '@/components/shared/PageHeader'
 import AboutSection from '@/components/about/AboutSection'
 import WhyMapitSection from '@/components/about/WhyMapitSection'
 import TeamSection from '@/components/about/TeamSection'

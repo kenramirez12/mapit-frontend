@@ -112,10 +112,10 @@ export default {
           { validator: this.validateFullname, trigger: 'blur' }
         ],
         email: [
-          { type: 'email', required: true, message: this.$lang.translate(this.translations, 'valid_email') }
+          { type: 'email', required: true, message: this.$lang.translate(this.translations, 'valid_email'), trigger: 'blur' }
         ],
         password: [
-          { required: true, message: this.$lang.translate(this.translations, 'required_field') }
+          { required: true, message: this.$lang.translate(this.translations, 'required_field'), trigger: 'blur' }
         ]
       }
     }

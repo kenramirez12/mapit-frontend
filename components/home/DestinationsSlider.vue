@@ -23,7 +23,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import DestinationCard from '~/components/DestinationCard'
+import DestinationCard from '~/components/shared/DestinationCard'
 
 export default {
   props: {

@@ -36,7 +36,7 @@
       <ExperienceReserveForm :experience="experience" class="ml-5 page-header__booking" />
     </PageHeader>
 
-    <div id="experience-container" class="relative">
+    <div class="relative">
       <div
         :class="{ show : showReserveFormSticky }"
         class="container reserve-container-fixed px-3">
@@ -78,7 +78,7 @@
 
 <script>
 import { mapGetters, mapMutations } from 'vuex'
-import PageHeader from '~/components/PageHeader'
+import PageHeader from '~/components/shared/PageHeader'
 import OverviewSection from '~/components/experiences/OverviewSection'
 import ActivitiesSection from '~/components/experiences/ActivitiesSection'
 import ProgramSection from '~/components/experiences/ProgramSection'

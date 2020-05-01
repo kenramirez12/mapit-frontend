@@ -49,7 +49,10 @@
         </small>
       </div>
       <div class="mt-4 text-center">
-        <a href="#" class="text-sm">
+        <a
+          href="#"
+          @click.prevent="$router.push(`/${$lang.current().slug}/password/recovery`)"
+          class="text-sm">
           {{ $lang.translate(translations, 'forgot_password') }}
         </a>
       </div>
@@ -109,10 +112,10 @@ export default {
     loginFormRules() {
       return {
         email: [
-          { type: 'email', required: true, message: this.$lang.translate(this.translations, 'valid_email') }
+          { type: 'email', required: true, message: this.$lang.translate(this.translations, 'valid_email'), trigger: 'blur' }
         ],
         password: [
-          { required: true, message: this.$lang.translate(this.translations, 'valid_password') }
+          { required: true, message: this.$lang.translate(this.translations, 'valid_password'), trigger: 'blur' }
         ]
       }
     }

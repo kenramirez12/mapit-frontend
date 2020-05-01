@@ -1,7 +1,7 @@
 export const state = () => ({
   experience: null,
   form: {
-    experienceId: '8',
+    experienceId: '',
     date: '',
     groupSize: '',
     time: '',

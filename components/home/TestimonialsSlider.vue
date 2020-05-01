@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import TestimonialItem from '~/components/TestimonialItem'
+import TestimonialItem from '~/components/shared/TestimonialItem'
 
 export default {
   components: { TestimonialItem },

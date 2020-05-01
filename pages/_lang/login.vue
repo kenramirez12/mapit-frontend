@@ -15,6 +15,18 @@ export default {
   middleware: 'guest',
   components: {
     LoginForm
+  },
+  computed: {
+    isLoggedIn() {
+      return this.$auth.loggedIn
+    }
+  },
+  watch: {
+    isLoggedIn(value) {
+      if(value) {
+        this.$router.push(`/${this.$lang.current().slug}/experiences`)
+      }
+    }
   }
 }
 </script>

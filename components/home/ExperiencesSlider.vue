@@ -48,7 +48,7 @@
 
 <script>
 import { mapActions } from 'vuex'
-import ExperienceCard from '~/components/ExperienceCard'
+import ExperienceCard from '~/components/shared/ExperienceCard'
 
 export default {
   props: {

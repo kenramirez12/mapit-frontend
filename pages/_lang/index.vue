@@ -16,7 +16,7 @@
       </div>
       <div>
         <ExperiencesSlider
-          :prev="onlineSliderNext"
+          :prev="onlineSliderPrev"
           :next="onlineSliderNext"
           :experiences="onlineExperiences"
           :translations="experiencesTranslations" />
@@ -76,7 +76,7 @@
 
 <script>
 import { mapActions } from 'vuex'
-import AppHero from '~/components/AppHero'
+import AppHero from '~/components/home/AppHero'
 import ExperiencesSlider from '~/components/home/ExperiencesSlider'
 import DestinationsSlider from '~/components/home/DestinationsSlider'
 import WhySection from '~/components/home/WhySection'

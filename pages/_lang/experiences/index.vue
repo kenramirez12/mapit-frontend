@@ -4,10 +4,10 @@
       <ResponsiveFilterBar />
     </div>
     <CategoriesHeaderSlider :translations="translations" />
-    <div class="container max-width-container py-6 px-4 my-6 mx-auto">
+    <div class="container experiences-container py-6 px-4 my-6 mx-auto">
       <div class="flex">
-        <FiltersSidebar class="experiences-sidebar" />
-        <div class="experiences-container">
+        <FiltersSidebar class="experiences-container__sidebar" />
+        <div class="experiences-container__grid">
           <ExperiencesGrid :experiences.sync="experiences" />
           <div
             v-if="experiences && experiences.length > 0 && lastPage > 1"
@@ -27,8 +27,8 @@
 
 <script>
 import { mapGetters, mapMutations, mapActions } from 'vuex'
-import CategoriesHeaderSlider from '@/components/CategoriesHeaderSlider'
-import ExperiencesGrid from '@/components/ExperiencesGrid'
+import CategoriesHeaderSlider from '@/components/experiences/CategoriesHeaderSlider'
+import ExperiencesGrid from '@/components/shared/ExperiencesGrid'
 import FiltersSidebar from '@/components/experiences/FiltersSidebar'
 import ResponsiveFilterBar from '@/components/experiences/ResponsiveFilterBar'
 
@@ -165,49 +165,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-  .responsive-floating {
-    position: fixed;
-    top: 0;
-    right: 0;
-    left: 0;
-    z-index: 2000;
-    background-color: #fff;
-    box-shadow: 0 0 20px 10px rgba(0, 0, 0, 0.1);
-
-    @media screen and (min-width: 768px) {
-      display: none;
-    }
-  }
-
-  .max-width-container {
-    max-width: 980px!important;
-
-    @media screen and (min-width: 1270px) {
-      max-width: 1300px!important;
-    }
-  }
-
-  .experiences-container {
-    width: 100%;
-    max-width: calc(20rem*2);
-    margin-right: auto;
-    margin-left: auto;
-
-    @media screen and (min-width: 960px) {
-      padding-left: 1rem;
-    }
-
-    @media screen and (min-width: 1270px) {
-      margin-right: 0;
-      max-width: calc(20rem*3);
-    }
-  }
-
-  .experiences-sidebar {
-    @media screen and (max-width: 960px) {
-      display: none;
-    }
-  }
-</style>
