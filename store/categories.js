@@ -27,7 +27,7 @@ export const actions = {
       const resp = await this.$axios.$get('/categories')
       commit('SET_CATEGORIES_LIST', resp.categories)
     } catch (error) {
-      console.error(error)
+      return error
     }
   }
 }

@@ -23,6 +23,7 @@ import RequireAdditionalInfo from '~/components/checkout/RequireAdditionalInfo'
 import PaymentFailed from '~/components/checkout/PaymentFailed'
 
 export default {
+  middleware: 'auth',
   async asyncData({ app, params, store, error }) {
     try {
       const resp = await app.$axios.$get(`/reserves/${params.id}`)
@@ -32,7 +33,7 @@ export default {
         reserve
       }
     } catch (error) {
-      console.error('Error:', error.response)
+      this.$log.error('Error:', error.response)
     }
   },
   components: {

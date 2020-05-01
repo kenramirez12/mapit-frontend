@@ -61,9 +61,11 @@
 
       <div
         v-if="testimonials && testimonials.length > 0"
-        class="container mx-auto py-6 my-6 px-4">
-        <div class="ml-auto py-6 my-6 w-full lg:w-10/12 xl:w-3/4">
-          <TestimonialsSlider :testimonials="testimonials" />
+        class="overflow-hidden">
+        <div class="container mx-auto py-6 my-6 px-5 md:px-4">
+          <div class="ml-auto py-6 my-6 w-full lg:w-10/12 xl:w-3/4">
+            <TestimonialsSlider :testimonials="testimonials" />
+          </div>
         </div>
       </div>
 
@@ -177,7 +179,7 @@ export default {
         })
         this.onlineExperiences = onlineResp ? onlineResp.data : []
       } catch (error) {
-        console.error('getOnlineExperiences', error.response)
+        this.$log.error('getOnlineExperiences', error.response)
       }
     },
     async getLatestExperiences() {
@@ -188,7 +190,7 @@ export default {
         })
         this.lastExperiences = expResp ? expResp.data : []
       } catch (error) {
-        console.error('getFeaturedTestimonials', error.response)
+        this.$log.error('getFeaturedTestimonials', error.response)
       }
     },
     async getFeaturedTestimonials() {
@@ -196,7 +198,7 @@ export default {
         const resp = await this.$axios.get('/testimonials/featured')
         this.testimonials = resp.data.testimonials
       } catch (error) {
-        console.error('getFeaturedTestimonials', error.response)
+        this.$log.error('getFeaturedTestimonials', error.response)
       }
     }
   }

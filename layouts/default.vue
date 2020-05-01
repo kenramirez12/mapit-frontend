@@ -64,7 +64,6 @@ export default {
   data () {
     return {
       isLoading: false,
-      currentLang: 'lang' in this.$route.params ? this.$route.params.lang : 'en',
       pageTranslations: {
         es: {
           pageTitle: 'MAP IT - Turismo sostenible en Perú',
@@ -88,7 +87,16 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['authDialogVisible'])
+    ...mapGetters(['authDialogVisible']),
+    currentLang() {
+      if(this.validLang) {
+        return this.$route.params.lang
+      } return 'en'
+    },
+    validLang() {
+      const allowedLangs = ['es', 'en']
+      return 'lang' in this.$route.params && allowedLangs.includes(this.$route.params.lang)
+    }
   },
   methods: {
     ...mapActions({
@@ -129,7 +137,7 @@ export default {
           return this.$router.push('/')
         }
       }).catch( (e) => {
-        console.error('socialAuth()', e)
+        this.$log.error('socialAuth', e, e.response)
         this.$auth.logout()
         this.isLoading = false
         // return this.$router.push(`/auth/${this.$route.query.origin ? this.$route.query.origin : 'register'}?error=1`)
@@ -157,13 +165,12 @@ export default {
     }
 
     /** Lang */
-    if(!('lang' in this.$route.params)) { // Route has not lang
-      const dest = this.$route
-      dest.params.lang = this.$lang.current().slug
-      this.$router.push(dest)
+    if(!this.validLang) { // Route has not lang
+      const path = this.$route.path
+      return this.$router.push(`/${this.currentLang}${path}`)
     }
 
-    if(this.$route.params.lang !== this.$lang.current().iso_lang) { // Update lang in store
+    if(this.validLang && this.$route.params.lang !== this.$lang.current().iso_lang) { // Update lang in store
       this.setLang(this.$route.params.lang)
     }
   }
@@ -221,13 +228,6 @@ export default {
     @media (min-width: 1280px) {
       --width: 1170px;
     }
-  // max-width: 1170px;
-    // width: calc(100% - 2rem)!important;
-    // max-width: none!important;
-
-    // @media screen and (min-width: 768px) {
-    //   width: calc(100% - 5rem)!important;
-    // }
   }
 
   .el-input__inner,

@@ -20,6 +20,17 @@
       <el-button @click="onSubmit('registerForm')" class="shadow-primary w-full" type="primary">
         {{ $lang.translate(translations, 'register') }}
       </el-button>
+      <div v-if="showLoginLink" class="pt-5 text-center">
+        <span class="font-light">
+          {{ $lang.translate(translations, 'have_account') }}
+        </span> 
+        <a
+          href="#"
+          @click.prevent="$router.push(`/${$lang.current().slug}/login`)"
+          class="underline">
+          {{ $lang.translate(translations, 'sign_in') }}
+        </a>
+      </div>
       <div class="mt-2 break-words px-0 md:px-5 text-center leading-tight text-gray-500">
         <small>This site is protected by reCAPTCHA and the Google 
           <a class="underline" href="https://policies.google.com/privacy">Privacy Policy</a> and
@@ -35,6 +46,13 @@ import { mapMutations } from 'vuex'
 import SocialLoginBtn from '~/components/auth/SocialLoginBtn'
 
 export default {
+  props: {
+    showLoginLink: {
+      type: Boolean,
+      required: false,
+      default: () => false
+    }
+  },
   components: {
     SocialLoginBtn
   },
@@ -63,7 +81,9 @@ export default {
           register: 'Registrate',
           required_field: 'Este campo es requerido',
           required_lastname: 'Ingrese su apellido',
-          valid_email: 'Ingrese un email válido'
+          valid_email: 'Ingrese un email válido',
+          have_account: '¿Ya tienes una cuenta?',
+          sign_in: 'Iniciar sesión'
         },
         'en_EN': {
           fullname: 'Nombre y Apellido',
@@ -72,7 +92,9 @@ export default {
           register: 'Register',
           required_field: 'Required field',
           required_lastname: 'Enter your last name',
-          valid_email: 'Enter a valid email'
+          valid_email: 'Enter a valid email',
+          have_account: 'Already have an account?',
+          sign_in: 'Sign in'
         }
       },
       registerData: {
@@ -127,7 +149,7 @@ export default {
 
         this.isLoading = false
       } catch(e) {
-        console.error('RegisterForm.tryRegister()', e.response)
+        this.$log.error('tryRegister.error: ', e, e.response)
         let error = 'No pudimos procesar el registro, por favor inténtelo nuevamente.'
 
         const errors = 'errors' in e.response.data ? e.response.data.errors : null

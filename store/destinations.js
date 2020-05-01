@@ -20,7 +20,7 @@ export const actions = {
       const resp = await this.$axios.$get('/destinations')
       commit('SET_DESTINATIONS', resp.destinations)
     } catch (error) {
-      console.error(error)
+      return error
     }
   }
 }

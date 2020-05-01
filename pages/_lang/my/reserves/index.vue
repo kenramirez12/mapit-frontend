@@ -22,6 +22,7 @@
 import ReservesTableList from '~/components/reserves/ReservesTableList'
 
 export default {
+  middleware: 'auth',
   async asyncData({ app, params, store, error }) {  
     try {
       const resp = await app.$axios.$get('/reserves')
@@ -35,7 +36,7 @@ export default {
         pagination
       }
     } catch (error) {
-      console.error('error', error.response)
+      this.$log.error('error', error.response)
     }
   },
   components: {
@@ -71,7 +72,7 @@ export default {
       } catch (error) {
         this.reserves = []
         this.lastPage = 1
-        console.error('error', error.response)
+        this.$log.error('getReserves', error, error.response)
       }
     }
   }

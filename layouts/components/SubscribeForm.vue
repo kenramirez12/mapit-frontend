@@ -83,7 +83,7 @@ export default {
           this.$message.error(this.$lang.translate(this.translations, 'error_subscribe'))
         }
       } catch (error) {
-        console.error('subscribe', error)
+        this.$log.error('subscribe', error)
         this.isLoading = false
         this.$message.error(this.$lang.translate(this.translations, 'error_subscribe'))
       }

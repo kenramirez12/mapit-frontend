@@ -33,6 +33,7 @@
 import ExperiencesSlider from '~/components/home/ExperiencesSlider'
 
 export default {
+  middleware: 'auth',
   components: { ExperiencesSlider },
   data() {
     return {
@@ -90,7 +91,7 @@ export default {
         this.favorites = resp.data.favorites
         this.recommended = resp.data.recommended
       } catch (error) {
-        console.error(error)
+        this.$log.error('retrieveFavorites', error, error.response)
       }
     }
   }

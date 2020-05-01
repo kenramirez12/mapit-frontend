@@ -103,6 +103,7 @@
 import ReserveHeader from '@/components/reserves/ReserveHeader'
 
 export default {
+  middleware: 'auth',
   async asyncData({ app, params, store, error }) {  
     try {
       const resp = await app.$axios.$get('/reserves/' + params.id)
@@ -112,7 +113,7 @@ export default {
         reserve
       }
     } catch (error) {
-      console.error('error', error.response)
+      this.$log.error('error', error.response)
     }
   },
   components: {

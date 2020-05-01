@@ -31,6 +31,17 @@
         type="primary">
         {{ $lang.translate(translations, 'login') }}
       </el-button>
+      <div v-if="showRegisterLink" class="pt-5 text-center">
+        <span class="font-light">
+          {{ $lang.translate(translations, 'havent_account') }}
+        </span> 
+        <a
+          href="#"
+          @click.prevent="$router.push(`/${$lang.current().slug}/signup`)"
+          class="underline">
+          {{ $lang.translate(translations, 'register') }}
+        </a>
+      </div>
       <div class="mt-2 break-words px-0 md:px-5 text-center leading-tight text-gray-500">
         <small>This site is protected by reCAPTCHA and the Google 
           <a class="underline" href="https://policies.google.com/privacy">Privacy Policy</a> and
@@ -51,6 +62,13 @@ import { mapMutations } from 'vuex'
 import SocialLoginBtn from '~/components/auth/SocialLoginBtn'
 
 export default {
+  props: {
+    showRegisterLink: {
+      type: Boolean,
+      required: false,
+      default: () => false
+    }
+  },
   components: {
     SocialLoginBtn
   },
@@ -65,7 +83,9 @@ export default {
           forgot_password: '¿Olvidaste tu contraseña?',
           valid_email: 'Ingrese un email válido',
           valid_password: 'Ingrese su contraseña',
-          incorrect_data: 'El correo y/o la contraseña son incorrectos.'
+          incorrect_data: 'El correo y/o la contraseña son incorrectos.',
+          havent_account: '¿No tienes cuenta?',
+          register: 'Regístrate'
         },
         'en_EN': {
           email: 'Email',
@@ -74,7 +94,9 @@ export default {
           forgot_password: 'Forgot Password?',
           valid_email: 'Enter a valid email',
           valid_password: 'Enter your password',
-          incorrect_data: 'Email or password does not match.'
+          incorrect_data: 'Email or password does not match.',
+          havent_account: 'Don’t have an account?',
+          register: 'Sign up'
         }
       },
       loginData: {
@@ -121,9 +143,7 @@ export default {
         this.setAuthDialogVisible(false)
         this.isLoading = false
       } catch(e) {
-        if(process.env.NODE_ENV === 'dev') {
-          console.error('LoginForm.tryLogin()', e)
-        }
+        this.$log.error('tryLogin.error: ', e, e.response)
         this.isLoading = false
         this.$message.error(this.$lang.translate(this.translations, 'incorrect_data'));
       }

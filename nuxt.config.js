@@ -11,8 +11,8 @@ export default {
       { charset: 'utf-8' },
       { property: 'og:type', content: 'website' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'image', name: 'image', content: process.env.BASE_URL + '/images/home/banner.jpg' },
-      { hid: 'og:image', name: 'og:image', content: process.env.BASE_URL + '/images/home/banner.jpg' },
+      { hid: 'image', name: 'image', content: process.env.BASE_URL + '/images/home/banner_2.jpg' },
+      { hid: 'og:image', name: 'og:image', content: process.env.BASE_URL + '/images/home/banner_2.jpg' },
       { hid: 'og:image:type', name: 'og:image:type', content: 'image/jpg' },
       { hid: 'description', name: 'description', content: 'Find things to do in Peru: food tours, art tours, experiences with local communities, what to do at night, and much more.' },
       { hid: 'og:description', name: 'og:description', content: 'Find things to do in Peru: food tours, art tours, experiences with local communities, what to do at night, and much more.' },
@@ -94,8 +94,16 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/auth',
     '@nuxtjs/dotenv',
-    '@nuxtjs/recaptcha'
-  // 'fullpage-nuxt'
+    '@nuxtjs/recaptcha',
+    ['nuxt-log', {
+      isEnabled: (process.env.NODE_ENV === 'development') ? true : false,
+      logLevel : 'debug',
+      stringifyArguments : false,
+      showLogLevel : false,
+      showMethodName : true,
+      separator: '|',
+      showConsoleColors: false
+    }]
   ],
   recaptcha: {
     hideBadge: true,

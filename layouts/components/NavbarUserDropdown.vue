@@ -120,7 +120,7 @@ export default {
       } catch (e) {
         this.isLoggingOut = false
         if(process.env.NODE_ENV === 'dev') {
-          console.error('UserDropdown.logout()', e)
+          this.$log.error('UserDropdown.logout()', e)
         }
         
         this.$message.error('No pudimos cerrar su sesión, por favor inténtelo nuevamente.');

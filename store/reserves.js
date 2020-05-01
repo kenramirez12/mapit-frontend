@@ -153,7 +153,6 @@ export const actions = {
       commit('SET_AVAILABLE_HOURS', resp.data.available_hours)
       return true
     } catch (error) {
-      console.error(error)
       return false
     }
   }

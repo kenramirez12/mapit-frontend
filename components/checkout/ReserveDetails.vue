@@ -311,7 +311,7 @@ export default {
           return this.$message.error(this.$lang.translate(this.translations, 'no_places'))
         }
       } catch (error) {
-        console.error(error)
+        this.$log.error('retrieveAvailableHours', error, error.response)
         this.isLoading = false
         return this.$message.error(this.$lang.translate(this.translations, 'process_error'))
       }

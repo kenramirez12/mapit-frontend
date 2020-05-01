@@ -147,7 +147,7 @@ export default {
           iconClass: 'el-icon-circle-plus text-white mr-2'
         })
       } catch (error) {
-        console.error('storeFavorite', error.response)
+        this.$log.error('storeFavorite', error, error.response)
         this.updatingFavorite = false
       }
     },
@@ -166,7 +166,7 @@ export default {
           iconClass: 'el-icon-remove text-white mr-2'
         })
       } catch (error) {
-        console.error('removeFavorite', error.response)
+        this.$log.error('removeFavorite', error, error.response)
         this.updatingFavorite = false
       }
     },

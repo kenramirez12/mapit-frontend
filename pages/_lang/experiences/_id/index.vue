@@ -106,7 +106,7 @@ export default {
         pageImage: experience.main_image.path
       }
     } catch (error) {
-      console.error(error)
+      this.$log.error(error)
     }
   },
   head () {
@@ -115,7 +115,8 @@ export default {
       meta: [
         { hid: 'description', name: 'description', content: this.pageDescription },
         { hid: 'og:description', name: 'og:description', content: this.pageDescription },
-        { property: 'og:image', content: this.$imagePath(this.pageImage) }
+        { hid: 'image', name: 'image', content: this.$imagePath(this.pageImage) },
+        { hid: 'og:image', name: 'og:image', content: this.$imagePath(this.pageImage) }
       ]
     }
   },

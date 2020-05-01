@@ -345,7 +345,7 @@ export default {
             return this.$message.error(this.$lang.translate(this.translations, 'not_enough_places'))
           }
         } catch (error) {
-          console.error(error)
+          this.$log.error('getAvailableHours', error, error.response)
           this.isLoading = false
           return this.$message.error(this.$lang.translate(this.translations, 'validation_error'))
         }

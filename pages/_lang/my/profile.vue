@@ -151,6 +151,7 @@
 
 <script>
 export default {
+  middleware: 'auth',
   data() {
     const validatePhone = (rule, value, callback) => {
       if(value === '' || this.phoneData.isValid) {
@@ -280,7 +281,7 @@ export default {
         this.avatarChanged = false
         this.avatar = ''
       } catch (error) {
-        console.error(error.response)
+        this.$log.error('updateAvatar', error, error.response)
         this.$message.error('No pudimos actualizar tu foto de perfil, inténtealo nuevamente un unos minutos.')
         this.isEditing = false
         this.isLoading = false
@@ -297,7 +298,7 @@ export default {
         this.isEditing = false
         this.isLoading = false
       } catch (error) {
-        console.error(error.response)
+        this.$log.error('updateProfile', error, error.response)
         this.$message.error('No pudimos actualizar la información de tu perfil.')
         this.isEditing = false
         this.isLoading = false

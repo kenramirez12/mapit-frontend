@@ -3,7 +3,7 @@
     <div class="responsive-floating">
       <ResponsiveFilterBar />
     </div>
-    <CategoriesHeaderSlider :translations="pageTranslations" />
+    <CategoriesHeaderSlider :translations="translations" />
     <div class="container max-width-container py-6 px-4 my-6 mx-auto">
       <div class="flex">
         <FiltersSidebar class="experiences-sidebar" />
@@ -39,10 +39,29 @@ export default {
     FiltersSidebar,
     ResponsiveFilterBar
   },
+  head() {
+    return {
+      title: this.pageTranslations[this.currentLang].pageTitle,
+      meta: [
+        { hid: 'description', name: 'description', content: this.pageTranslations[this.currentLang].pageDescription },
+        { hid: 'og:description', name: 'og:description', content: this.pageTranslations[this.currentLang].pageDescription }
+      ]
+    }
+  },
   data() {
     return {
       experiences: null,
       pageTranslations: {
+        es: {
+          pageTitle: 'MAP IT - Encuentra los mejores tours en Peru!',
+          pageDescription: 'Reserva experiencias auténticas en Cusco, Lima, Puno, Arequipa y más.',
+        },
+        en: {
+          pageTitle: 'MAP IT - Find unique things to do in Peru!',
+          pageDescription: 'Book authentic experiences in Cusco, Lima, Puno, Arequipa and beyond.'
+        }
+      },
+      translations: {
         'es_ES': {
           copy: `¡Conoce nuestras<br>categorías!`
         },
@@ -58,6 +77,15 @@ export default {
       filters: 'experiences/filters',
       selectedSort: 'experiences/selectedSort'
     }),
+    currentLang() {
+      if(this.validLang) {
+        return this.$route.params.lang
+      } return 'en'
+    },
+    validLang() {
+      const allowedLangs = ['es', 'en']
+      return 'lang' in this.$route.params && allowedLangs.includes(this.$route.params.lang)
+    },
     currentPage: {
       get() {
         return this.filters.page
