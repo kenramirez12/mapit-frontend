@@ -1,7 +1,7 @@
 <template>
   <div class="success-container p-4">
-    <img class="character character--01" src="~/assets/images/standing-checkout-03.svg">
-    <img class="character character--02" src="~/assets/images/sitting-checkout-04.svg">
+    <img class="character character--01 hidden md:block" src="~/assets/images/standing-checkout-03.svg">
+    <img class="character character--02 hidden md:block" src="~/assets/images/sitting-checkout-04.svg">
     <div class="success-card m-auto p-6">
       <img src="~/assets/images/edit-icon-lg.svg" class="mx-auto" width="70">
       <h3 class="success-card__title mt-6">
@@ -77,15 +77,25 @@ export default {
 <style lang="scss" scoped>
   .character {
     &--01 {
-      width: 13rem;
-      left: 3rem;
       bottom: 0;
+      width: 11rem;
+      left: 2rem;
+
+      @media screen and (min-width: 992px) {
+        width: 13rem;
+        left: 3rem;
+      }
     }
 
     &--02 {
-      width: 19rem;
-      right: 3rem;
       bottom: 10%;
+      width: 16rem;
+      right: 1rem;
+
+      @media screen and (min-width: 992px) {
+        width: 19rem;
+        right: 3rem;
+      }
     }
   }
 </style>

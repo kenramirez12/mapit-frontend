@@ -60,6 +60,15 @@
           <el-dropdown-item command="blog">
             Blog
           </el-dropdown-item>
+          <template v-for="(lang, n) in langs">
+            <el-dropdown-item
+              v-if="$lang.current().iso_lang !== lang.iso_lang"
+              :key="'lang_' + n"
+              :command="lang.slug"
+              divided>
+              {{ lang.code }}
+            </el-dropdown-item>
+          </template>
         </el-dropdown-menu>
       </el-dropdown>
     </div>
@@ -67,6 +76,7 @@
 </template>
 
 <script>
+import { mapState, mapMutations } from 'vuex'
 import NavbarUserDropdown from '@/layouts/components/NavbarUserDropdown'
 import FaqsList from '@/layouts/components/FaqsList'
 
@@ -93,7 +103,28 @@ export default {
       }
     }
   },
+  computed: {
+    ...mapState({
+      langs: s => s.langs
+    })
+  },
   methods: {
+    ...mapMutations({
+      setLang: 'SET_LANG'
+    }),
+    updateLang (lang) {
+      const current = this.langs.find(item => {
+        return item.slug === lang
+      })
+
+      if(current) {
+        this.setLang(current.code)
+  
+        const dest = this.$route
+        dest.params.lang = lang
+        this.$router.push(dest)
+      }
+    },
     onCommandDropdown(value) {
       const langSlug = this.$lang.current().slug
 
@@ -104,7 +135,12 @@ export default {
         case 'about':
           return this.$router.push(`/${langSlug}/about`)
           break;
-      
+        case 'es':
+          return this.updateLang('es')
+          break;
+        case 'en':
+          return this.updateLang('en')
+          break;
         default:
           break;
       }

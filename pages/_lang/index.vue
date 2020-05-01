@@ -4,13 +4,32 @@
     <main class="flex flex-col">
       <div class="container mx-auto pt-8 px-4 inline-block">
         <div class="w-full flex items-center mb-4 md:mb-8 mt-6">
-          <div class="pr-6 md:pr-0">
-            <h3 class="text-4xl font-light mb-6">{{ $lang.translate(translations, 'experiences') }}</h3>
-            <p class="mb-0">{{ $lang.translate(translations, 'experiences_label') }}</p>
+          <div class="pr-6">
+            <h3 class="text-4xl font-light mb-6">{{ $lang.translate(translations, 'online') }}</h3>
+            <p class="mb-0 font-light">{{ $lang.translate(translations, 'online_label') }}</p>
           </div>
           <div class="hidden md:flex ml-auto">
-            <el-button @click="expSliderPrev += 1" circle plain type="primary" icon="el-icon-back" class="flex"></el-button>
-            <el-button @click="expSliderNext += 1" circle plain type="primary" icon="el-icon-right" class="flex"></el-button>
+            <el-button @click="onlineSliderPrev += 1" circle plain type="primary" icon="el-icon-back" class="flex" />
+            <el-button @click="onlineSliderNext += 1" circle plain type="primary" icon="el-icon-right" class="flex" />
+          </div>
+        </div>
+      </div>
+      <div>
+        <ExperiencesSlider
+          :prev="onlineSliderNext"
+          :next="onlineSliderNext"
+          :experiences="onlineExperiences"
+          :translations="experiencesTranslations" />
+      </div>
+      <div class="container mx-auto pt-8 px-4 inline-block">
+        <div class="w-full flex items-center mb-4 md:mb-8 mt-6">
+          <div class="pr-6">
+            <h3 class="text-4xl font-light mb-6">{{ $lang.translate(translations, 'experiences') }}</h3>
+            <p class="mb-0 font-light">{{ $lang.translate(translations, 'experiences_label') }}</p>
+          </div>
+          <div class="hidden md:flex ml-auto">
+            <el-button @click="expSliderPrev += 1" circle plain type="primary" icon="el-icon-back" class="flex" />
+            <el-button @click="expSliderNext += 1" circle plain type="primary" icon="el-icon-right" class="flex" />
           </div>
         </div>
       </div>
@@ -23,13 +42,13 @@
       </div>
       <div class="container mx-auto pt-8 px-4 inline-block">
         <div class="w-full flex items-center mb-4 md:mb-8 mt-6">
-          <div class="pr-6 md:pr-0">
+          <div class="pr-6">
             <h3 class="text-4xl font-light mb-4">{{ $lang.translate(translations, 'destinations') }}</h3>
-            <p class="mb-0">{{ $lang.translate(translations, 'destinations_label') }}</p>
+            <p class="mb-0 font-light">{{ $lang.translate(translations, 'destinations_label') }}</p>
           </div>
           <div class="hidden md:flex ml-auto">
-            <el-button @click="destSliderPrev += 1" circle plain type="primary" icon="el-icon-back" class="flex"></el-button>
-            <el-button @click="destSliderNext += 1" circle plain type="primary" icon="el-icon-right" class="flex"></el-button>
+            <el-button @click="destSliderPrev += 1" circle plain type="primary" icon="el-icon-back" class="flex" />
+            <el-button @click="destSliderNext += 1" circle plain type="primary" icon="el-icon-right" class="flex" />
           </div>
         </div>
       </div>
@@ -76,6 +95,8 @@ export default {
 
   data() {
     return {
+      onlineId: process.env.onlineId,
+      onlineExperiences: null,
       lastExperiences: null,
       testimonials: null,
       experiencesTranslations: {
@@ -87,6 +108,8 @@ export default {
         }
       },
       yourNumber: '',
+      onlineSliderNext: 0,
+      onlineSliderPrev: 0,
       expSliderNext: 0,
       expSliderPrev: 0,
       destSliderNext: 0,
@@ -95,6 +118,8 @@ export default {
         'es_ES': {
           hero_title: 'Descubre el Perú como un local',
           search: 'Buscar',
+          online: 'Experiencias online',
+          online_label: 'Aunque hoy estemos separados, ¡podemos seguir conectados! Reserva y disfruta una de nuestras auténticas experiencias en línea con una persona local, desde la comodidad de tu hogar.',
           experiences: 'Experiencias',
           experiences_label: 'Encuentra qué hacer en Perú: tours gastronómicos, talleres de arte, experiencias con comunidades, cosas para hacer de noche, y mucho más.',
           destinations: 'Destinos',
@@ -110,6 +135,8 @@ export default {
         'en_EN': {
           hero_title: 'Experience it, live it',
           search: 'Search',
+          online: 'Online experiences',
+          online_label: 'Although today we might be apart, we want to stay connected! Take one of our one of a kind online experiences with a local from Peru from the comfort of your home.',
           experiences: 'Experiences',
           experiences_label: 'Find things to do in Peru: food tours, art tours, experiences with local communities, what to do at night, and much more.',
           destinations: 'Destinations',
@@ -132,16 +159,38 @@ export default {
     }
   },
 
-  async mounted () {
+  mounted () {
     this.getFeaturedTestimonials()
-    const resp = await this.getExperiences({ per_page: 10 })
-    this.lastExperiences = resp ? resp.data : []
+    this.getOnlineExperiences()
+    this.getLatestExperiences()
   },
 
   methods: {
     ...mapActions({
       getExperiences: 'experiences/getExperiences'
     }),
+    async getOnlineExperiences() {
+      try {
+        const onlineResp = await this.getExperiences({
+          category_id: this.onlineId,
+          per_page: 10
+        })
+        this.onlineExperiences = onlineResp ? onlineResp.data : []
+      } catch (error) {
+        console.error('getOnlineExperiences', error.response)
+      }
+    },
+    async getLatestExperiences() {
+      try {
+        const expResp = await this.getExperiences({
+          category_not_in: this.onlineId,
+          per_page: 10
+        })
+        this.lastExperiences = expResp ? expResp.data : []
+      } catch (error) {
+        console.error('getFeaturedTestimonials', error.response)
+      }
+    },
     async getFeaturedTestimonials() {
       try {
         const resp = await this.$axios.get('/testimonials/featured')

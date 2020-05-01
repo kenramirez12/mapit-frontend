@@ -113,16 +113,16 @@ export default {
       }
     }
 
-    &__pre-title {
-
-    }
-
     &__description {
       font-weight: 300;
-      font-size: 32px;
+      font-size: 20px;
       line-height: 1.3;
       color: rgba(#fff, .7);
       max-width: 640px;
+
+      @media screen and (min-width: 768px) {
+        font-size: 32px;
+      }
     }
   }
 </style>

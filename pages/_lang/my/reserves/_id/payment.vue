@@ -117,6 +117,6 @@ export default {
 
   .character {
     position: absolute;
-    z-index: 1;
+    z-index: 4;
   }
 </style>

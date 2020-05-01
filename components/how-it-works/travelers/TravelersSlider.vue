@@ -116,10 +116,10 @@ export default {
       ],
       translations: {
         es_ES: {
-          for_travelers: 'For travelers'
+          for_travelers: 'Para viajeros'
         },
         en_EN: {
-          for_travelers: 'Para viajeros'
+          for_travelers: 'For travelers'
         }
       },
       swiperOption: {
