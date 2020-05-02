@@ -6,25 +6,9 @@
       <AuthPopup />
       <div
         :class="{
-          'header-fixed' : $route.name === 'lang-how-it-works-travelers'
+          'header-fixed hidden' : $route.name === 'lang-how-it-works-travelers'
         }">
-        <el-alert
-          :class="{
-            'hidden md:block' : $route.name === 'lang-experiences-id' ||
-            $route.name === 'lang-experiences' || 
-            $route.name === 'lang-destinations'
-          }"
-          class="top-bar md:text-center pt-3 pb-4"
-          center>
-          <p class="font-light text-black mb-0">
-            {{ $lang.translate(translations, 'covid_policies') }} 
-            <a
-              href="#"
-              @click.prevent="$router.push(`/${$lang.current().slug}/covid`)"
-              class="font-medium underline">
-              {{ $lang.translate(translations, 'click') }}</a>
-          </p>
-        </el-alert>
+        <HeaderDialog />
         <AppHeader />
       </div>
       <AppResponsiveNavbar />
@@ -41,6 +25,7 @@
 <script>
 import { mapGetters, mapMutations, mapActions } from 'vuex'
 import AuthPopup from '~/components/auth/AuthPopup'
+import HeaderDialog from '~/layouts/components/HeaderDialog'
 import AppHeader from '~/layouts/components/AppHeader'
 import AppFooter from '~/layouts/components/AppFooter'
 import AppResponsiveNavbar from '~/layouts/components/AppResponsiveNavbar'
@@ -48,6 +33,7 @@ import AppResponsiveNavbar from '~/layouts/components/AppResponsiveNavbar'
 export default {
   components: {
     AuthPopup,
+    HeaderDialog,
     AppHeader,
     AppFooter,
     AppResponsiveNavbar
@@ -72,16 +58,6 @@ export default {
         en: {
           pageTitle: 'MAP IT - Responsible travel in Peru',
           pageDescription: 'Find things to do in Peru: food tours, art tours, experiences with local communities, what to do at night, and much more.'
-        }
-      },
-      translations: {
-        es_ES: {
-          covid_policies: 'Sobre nuestras experiencias online y nuestra respuesta al COVID-19.',
-          click: 'Clic aquí'
-        },
-        en_EN: {
-          covid_policies: 'Learn about our online experiences and our COVID-19 response.',
-          click: 'Click here'
         }
       }
     }
@@ -194,14 +170,6 @@ export default {
     z-index: 1;
   }
 
-  .top-bar {
-    .el-alert__closebtn {
-      top: 50%!important;
-      transform: translateY(-50%);
-      color: #6f6f6f!important;
-    }
-  }
-
   .container {
     @media (min-width: 1280px) {
       max-width: 1170px;
@@ -238,11 +206,6 @@ export default {
 </style>
 
 <style lang="scss" scoped>
-  .top-bar {
-    height:55px;
-    background-color:#E9FFFF;
-  }
-
   .main-content {
     min-height: calc(100vh - var(--header-height) - 55px);
   }

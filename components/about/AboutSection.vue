@@ -1,12 +1,12 @@
 <template>
   <div class="flex flex-wrap">
-    <div class="w-full md:w-6/12 font-light text-sm md:text-xl pt-12">
+    <div class="w-full md:w-7/12 md:pr-10 lg:pr-0 lg:w-6/12 font-light text-sm text-base lg:text-xl pt-6 lg:pt-12">
       <p class="mb-6">{{ $lang.translate(translations, 'copy_1') }}</p>
       <p class="mb-6">{{ $lang.translate(translations, 'copy_2') }}</p>
     </div>
     <div class="w-5/12 ml-auto hidden md:block">
       <img src="/images/about/about-us-vertical.jpg" class="about-vertical shadow-lg">
-      <img src="/images/about/about-us-horizontal.jpg" class="about-horizontal shadow-lg">
+      <img src="/images/about/about-us-horizontal.jpg" class="about-horizontal shadow-lg hidden lg:block">
     </div>
   </div>
 </template>

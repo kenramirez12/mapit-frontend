@@ -3,7 +3,7 @@
     <div
       v-if="experiences && experiences.length === 0"
       class="flex">
-      <div class="container px-4 mx-auto pb-4 inline-block">
+      <div class="container px6 sm:px-4 mx-auto pb-4 inline-block">
         <el-alert
           class="pt-4 pb-6"
           type="error"
@@ -109,8 +109,12 @@ export default {
   }
 
   .swiper-container {
-    padding-left: 1rem;
+    padding-left: 24px;
     width: 100%;
+
+    @media screen and (min-width: 640px) {
+      padding-left: 1rem;
+    }
   }
 
   .swiper-slide {

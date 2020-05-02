@@ -1,5 +1,5 @@
 <template>
-  <footer class="main-footer w-full px-4">
+  <footer class="main-footer w-full px-4 pb-2">
     <div class="container main-footer__container mx-auto flex flex-wrap">
       <div class="w-full lg:w-1/12 px-3 lg:px-0 pb-8 lg:pb-0">
         <a href="#" @click.prevent="$router.push(`/${$lang.current().slug}/`)">
@@ -168,7 +168,7 @@
           <hr>
         </div>
         <div class="w-full lg:pt-4">
-         <a class="inline-flex justify-around sm:justify-start w-full">
+          <a class="inline-flex justify-around sm:justify-start w-full">
           <div class="social-icon"><img src="~/assets/images/social/instagram.svg" alt="" width="50%"></div>
           <div class="social-icon"><img src="~/assets/images/social/facebook.svg" alt=""></div>
           <div class="social-icon"><img src="~/assets/images/social/linkedin.svg" alt=""></div>
@@ -245,7 +245,7 @@ export default {
 <style lang="scss">
   .main-footer {
     background: #fafafa;
-    padding: 1rem 0;
+    // padding: 1rem 0;
     font-size: 90%;
 
     &__container {

@@ -1,9 +1,9 @@
 <template>
-  <div id="why-mapit" class="flex flex-wrap mt-10 md:-mt-16">
-    <div class="w-full md:w-5/12">
-      <h2 class="text-2xl md:text-5xl font-light mb-4 md:mb-0" v-html="$lang.translate(translations, 'title')" />
+  <div id="why-mapit" class="flex flex-wrap mt-10 lg:-mt-16">
+    <div class="w-full lg:w-5/12">
+      <h2 class="text-2xl md:text-4xl lg:text-5xl font-light mb-4 md:mb-6 lg:mb-0" v-html="$lang.translate(translations, 'title')" />
     </div>
-    <div class="w-full md:w-6/12">
+    <div class="w-full lg:w-6/12">
       <div class="flex flex-wrap">
         <div
           v-for="(feature, n) in features"

@@ -36,7 +36,7 @@
       <ExperienceReserveForm :experience="experience" class="ml-5 page-header__booking" />
     </PageHeader>
 
-    <div class="relative">
+    <div id="experience-container" class="relative">
       <div
         :class="{ show : showReserveFormSticky }"
         class="container reserve-container-fixed px-3">
@@ -103,7 +103,7 @@ export default {
       return {
         pageTitle: 'MAP IT - ' + translations.title,
         pageDescription: translations.description,
-        pageImage: experience.main_image.path
+        pageImage: experience.banner_image.path
       }
     } catch (error) {
       this.$log.error(error)

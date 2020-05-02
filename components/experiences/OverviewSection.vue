@@ -8,7 +8,7 @@
           </p>
           <p
             v-if="'host' in experience && experience.host.constructor === Object"
-            class="flex items-center my-6 py-6 font-light text-xl">
+            class="flex items-center my-6 py-6 font-light text-lg md:text-xl">
             <img
               v-if="'path' in experience.host.avatar"
               class="wiser-avatar mr-3"
@@ -20,7 +20,7 @@
             <li
               v-for="(feature, n) in translations.features"
               :key="'feature_' + n"
-              class="checkbox-list__item mb-4 text-base">
+              class="checkbox-list__item mb-4 text-sm md:text-base">
               <img src="~/assets/images/checkbox-icon.svg" class="checkbox-list__icon">
               {{ feature }}
             </li>
@@ -31,11 +31,11 @@
             <div class="flex items-center mb-5 md:mb-3">
               <img src="~/assets/images/include-icon.svg" style="height:32px" class="md:hidden ml-0">
               <img src="~/assets/images/include-icon.svg" style="height:64px" class="hidden md:block ml-0">
-              <span class="dark-gray text-2xl font-light ml-4 md:ml-8">
+              <span class="dark-gray text-xl sm:text-2xl font-light ml-4 md:ml-8">
                 {{ $lang.translate(pageTranslations, 'included') }}
               </span>
             </div>
-            <p class="dark-gray mb-5 md:ml-24 text-base leading-6">
+            <p class="dark-gray mb-5 md:ml-24 text-sm sm:text-base leading-6">
               {{ $lang.apiTranslate(experience.translations, 'includes') }}
             </p>
           </div>

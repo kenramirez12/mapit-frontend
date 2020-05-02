@@ -2,7 +2,7 @@
   <div id="activities-section" class="experience-container py-6 pb-super">
     <div class="container px-6 md:px-4 md:px-0 mx-auto">
       <div class="activities py-6 position-relative">
-        <h3 class="text-4xl md:text-5xl xl:text-6xl font-light mb-6 md:pb-12 xl:pb-24">
+        <h3 class="text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-light mb-6 md:pb-12 xl:pb-24">
           {{ $lang.translate(pageTranslations, 'activities') }}
         </h3>
         <div class="flex flex-wrap">
@@ -13,7 +13,7 @@
                   src="~/assets/images/features/map-icon.svg"
                   style="height:20px"
                 />
-                <div class="block text-lg font-light mt-6 mb-4">{{ $lang.translate(pageTranslations, 'location') }}</div>
+                <div class="block text-lg font-light mt-6 mb-2 md:mb-4">{{ $lang.translate(pageTranslations, 'location') }}</div>
                 <p class="text-sm">{{ location }}</p>
               </div>
               <div v-if="duration" class="w-1/2 lg:w-auto lg:flex-1 pr-3 my-4">
@@ -21,7 +21,7 @@
                   src="~/assets/images/features/clock-icon.svg"
                   style="height:20px"
                 />
-                <div class="block text-lg font-light mt-6 mb-4">{{ $lang.translate(pageTranslations, 'duration') }}</div>
+                <div class="block text-lg font-light mt-6 mb-2 md:mb-4">{{ $lang.translate(pageTranslations, 'duration') }}</div>
                 <p class="text-sm">{{ duration }}</p>
               </div>
               <div v-if="altitude" class="w-1/2 lg:w-auto lg:flex-1 pr-3 my-4">
@@ -29,7 +29,7 @@
                   src="~/assets/images/features/trip-icon.svg"
                   style="height:20px"
                 />
-                <div class="block text-lg font-light mt-6 mb-4">{{ $lang.translate(pageTranslations, 'altitude') }}</div>
+                <div class="block text-lg font-light mt-6 mb-2 md:mb-4">{{ $lang.translate(pageTranslations, 'altitude') }}</div>
                 <p class="text-sm">{{ altitude }}</p>
               </div>
               <div class="w-1/2 lg:w-auto lg:flex-1 pr-3 my-4">
@@ -37,7 +37,7 @@
                   src="~/assets/images/features/group-icon.svg"
                   style="height:20px"
                 />
-                <div class="block text-lg font-light mt-6 mb-4">{{ $lang.translate(pageTranslations, 'capacity') }}</div>
+                <div class="block text-lg font-light mt-6 mb-2 md:mb-4">{{ $lang.translate(pageTranslations, 'capacity') }}</div>
                 <p class="text-sm">
                   {{ experience.min_quota }}-{{ experience.max_quota }} {{ $lang.translate(pageTranslations, 'people') }}
                 </p>
@@ -47,7 +47,7 @@
                   src="~/assets/images/features/thumb-icon.svg"
                   style="height:20px"
                 />
-                <div class="block text-lg font-light mt-6 mb-4">{{ $lang.translate(pageTranslations, 'language') }}</div>
+                <div class="block text-lg font-light mt-6 mb-2 md:mb-4">{{ $lang.translate(pageTranslations, 'language') }}</div>
                 <p class="text-sm">{{ languages }}</p>
               </div>
             </div>
@@ -59,7 +59,7 @@
               <li
                 v-for="(consideration, n) in translations.considerations"
                 :key="'consideration_' + n"
-                class="checkbox-list__item mb-4">
+                class="checkbox-list__item mb-4 text-sm md:text-base">
                 <img
                   src="~/assets/images/checkbox-icon.svg"
                   class="checkbox-list__icon"

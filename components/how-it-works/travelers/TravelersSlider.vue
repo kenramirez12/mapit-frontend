@@ -1,45 +1,50 @@
 <template>
-  <div class="container mx-auto h-full">
-    <div class="flex flex-wrap items-center pt-12 md:pt-10 px-4 mb-4 md:mb-8">
-      <p class="text-sm md:text-2xl font-light my-6 leading-tight">
-        {{ $lang.translate(translations, 'for_travelers') }}
-      </p>
-      <div class="flex items-center ml-auto">
-        <div class="travelers-swiper-pagination pr-5 font-light text-sm md:text-lg" />
-        <div class="flex items-center md:hidden">
-          <el-button @click="prev" circle size="mini" type="primary" icon="el-icon-back" class="flex" />
-          <el-button @click="next" circle size="mini" type="primary" icon="el-icon-right" class="flex" />
-        </div>
-        <div class="hidden items-center md:flex">
-          <el-button @click="prev" circle plain type="primary" icon="el-icon-back" class="flex" />
-          <el-button @click="next" circle plain type="primary" icon="el-icon-right" class="flex" />
+  <div class="flex flex-wrap">
+    <div class="container m-auto pb-8 md:pt-6 md:pb-6">
+      <div class="flex flex-wrap items-center px-6 lg:px-4 mb-4 md:mb-8 travelers-slider-container">
+        <p class="text-sm md:text-xl lg:text-2xl font-light my-6 lg:my-0 leading-tight">
+          {{ $lang.translate(translations, 'for_travelers') }}
+        </p>
+        <div class="flex items-center ml-auto">
+          <div class="travelers-swiper-pagination pr-5 font-light text-sm md:text-base lg:text-lg" />
+          <div class="flex items-center md:hidden">
+            <el-button @click="prev" circle size="mini" type="primary" icon="el-icon-back" class="flex" />
+            <el-button @click="next" circle size="mini" type="primary" icon="el-icon-right" class="flex" />
+          </div>
+          <div class="hidden items-center md:flex">
+            <el-button @click="prev" circle plain type="primary" icon="el-icon-back" class="flex" />
+            <el-button @click="next" circle plain type="primary" icon="el-icon-right" class="flex" />
+          </div>
         </div>
       </div>
-    </div>
-    <div v-swiper:mySwiper="swiperOption" class="h-full overflow-visible">
-      <div class="swiper-wrapper">
-        <div
-          v-for="(step, n) in steps"
-          :key="'step_' + n"
-          class="swiper-slide px-4">
-          <div class="flex flex-wrap">
-            <div class="w-full mb-3">
-              <div class="step-icon">
-                <img :src="`/images/how-it-works/travelers/steps/${step.icon}`">
+      <div v-swiper:mySwiper="swiperOption" class="h-full overflow-visible">
+        <div class="swiper-wrapper">
+          <div
+            v-for="(step, n) in steps"
+            :key="'step_' + n"
+            class="swiper-slide px-6 lg:px-4">
+            <div class="flex flex-wrap">
+              <div class="w-full mb-5 md:mb-3">
+                <div class="step-icon">
+                  <img :src="`/images/how-it-works/travelers/steps/${step.icon}`">
+                </div>
               </div>
-            </div>
-            <div class="w-10/12 md:w-6/12">
-              <h2 class="text-xl md:text-5xl font-light leading-tight mb-4 md:mb-12">
-                {{ $lang.translate(step.translations, 'title') }}
-              </h2>
-              <p
-                :class="`w-full md:${step.description_width} font-light md:pr-6 text-sm`"
-                v-html="$lang.translate(step.translations, 'description')" />
-            </div>
-            <div class="w-5/12 ml-auto hidden md:block">
-              <img
-                :src="`/images/how-it-works/travelers/${step.image}`"
-                class="w-full image-shadow">
+              <div class="w-full md:w-5/12 lg:w-6/12">
+                <h2 class="text-xl md:text-3xl lg:text-4xl xl:text-5xl font-light leading-tight mb-4 md:mb-8 lg:mb-12 slider-title">
+                  {{ $lang.translate(step.translations, 'title') }}
+                </h2>
+                <img
+                  :src="`/images/how-it-works/travelers/${step.image}`"
+                  class="image-shadow md:hidden mb-6">
+                <p
+                  :class="`w-full lg:${step.description_width} font-light lg:pr-6 text-sm`"
+                  v-html="$lang.translate(step.translations, 'description')" />
+              </div>
+              <div class="md:w-6/12 ll:w-5/12 ml-auto hidden md:block">
+                <img
+                  :src="`/images/how-it-works/travelers/${step.image}`"
+                  class="image-shadow">
+              </div>
             </div>
           </div>
         </div>
@@ -49,7 +54,12 @@
 </template>
 
 <script>
+import AppFooter from '@/layouts/components/AppFooter'
+
 export default {
+  components: {
+    AppFooter
+  },
   data() {
     return {
       steps: [
@@ -74,12 +84,12 @@ export default {
           description_width: 'w-9/12',
           translations: {
             es_ES: {
-              title: 'Book it and pay for it safely online',
-              description: 'Use our platform to book your experience and pay for it through our secure payment system. After you make the booking, you will receive an automated mail confirming your request and payment.'
-            },
-            en_EN: {
               title: 'Reserva y paga de manera segura en línea',
               description: 'Usa nuestra plataforma para reservar la experiencia y realizar el pago de forma segura. Una vez que hayas hecho la reserva, te llegará un correo automático confirmando la solicitud de reserva y el pago realizado.'
+              },
+            en_EN: {
+              title: 'Book it and pay for it safely online',
+              description: 'Use our platform to book your experience and pay for it through our secure payment system. After you make the booking, you will receive an automated mail confirming your request and payment.'
             }
           }
         },
@@ -144,13 +154,39 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  .slider-title {
+    height: 50px;
+    
+    @media screen and (min-width: 768px) {
+      height: auto;
+    }
+  }
+
+  .travelers-slider-container {
+    // transform: translateY(calc(-80px + 1.5rem));
+
+    // @media screen and (min-width: 768px) {
+    //   transform: translateY(0);
+    // }
+  }
+
   .image-shadow {
-    box-shadow: -20px 60px 220px rgba(0, 0, 0, 0.44);
+    box-shadow: -10px 10px 60px rgba(0, 0, 0, 0.15);
+    width: 100%;
+
+    @media screen and (min-width: 768px) {
+      box-shadow: -20px 60px 220px rgba(0, 0, 0, 0.33);
+    }
   }
 
   .step-icon {
-    width: 65px;
-    height: 65px;
+    width: 55px;
+    height: 55px;
+
+    @media screen and (min-width: 1024) {
+      width: 65px;
+      height: 65px;
+    }
     
     img {
       max-width: 100%;

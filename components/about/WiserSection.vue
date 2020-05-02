@@ -1,16 +1,16 @@
 <template>
   <div id="wisers" class="bg-primary pt-8 md:pt-12 pb-10 md:pb-10">
-    <div class="container mx-auto px-4 pt-4">
+    <div class="container mx-auto px-6 md:px-4 pt-4">
       <div class="flex flex-wrap">
-        <div class="w-full md:w-4/12 mx-auto relative">
-          <h3 class="text-2xl md:text-3xl md:text-5xl mb-4 md:mb-10 font-light">Wiser</h3>
-          <p class="md:text-2xl font-light">
+        <div class="w-full md:w-5/12 lg:w-4/12 mx-auto relative">
+          <h3 class="text-2xl md:text-3xl lg:text-5xl mb-4 md:mb-10 font-light">Wiser</h3>
+          <p class="text-base md:text-lg lg:text-2xl font-light">
             {{ $lang.translate(translations, 'copy') }}
           </p>
           <img src="/images/about/human-01.svg" class="hidden md:block human-01">
           <img src="/images/about/human-02.svg" class="hidden md:block human-02 mt-8 ml-auto">
         </div>
-        <div class="w-full md:w-4/12 mt-12 md:mt-0">
+        <div class="w-full md:w-5/12 lg:w-4/12 mt-12 md:mt-0">
           <div
             v-for="(feature, n) in features"
             :key="'wiser_feature_' + n"
@@ -83,13 +83,21 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
   .human-01, .human-02 {
-    height: 330px;
+    height: 290px;
+
+    @media screen and (min-width: 1024px) {
+      height: 330px;
+    }
   }
   .human-01 {
     position: absolute;
-    left: -260px;
+    left: -160px;
     bottom: 100px;
+
+    @media screen and (min-width: 1024px) {
+      left: -260px;
+    }
   }
 </style>

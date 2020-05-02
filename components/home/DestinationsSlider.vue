@@ -75,8 +75,12 @@ export default {
   }
 
   .swiper-container {
-    padding-left: 1rem;
-    width: 100% ;
+    padding-left: 24px;
+    width: 100%;
+
+    @media screen and (min-width: 640px) {
+      padding-left: 1rem;
+    }
   }
 
   .swiper-slide {

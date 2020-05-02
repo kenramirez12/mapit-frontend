@@ -1,7 +1,7 @@
 <template>
   <div class="faq-item">
-    <strong class="text-sm block mb-2">{{ faq.question }}</strong>  
-    <p class="text-sm font-light">{{ faq.answer }}</p>
+    <span class="text-sm block mb-2 font-medium">{{ faq.question }}</span>  
+    <p class="text-xs sm:text-sm font-light">{{ faq.answer }}</p>
   </div>
 </template>
 

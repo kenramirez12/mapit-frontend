@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="container py-12 mx-auto">
+    <div class="container py-12 px-2 sm:px-0 mx-auto">
       <div class="flex flex-wrap items-center mb-4">
         <h1 class="w-full md:w-auto text-xl md:text-3xl font-light mb-3 md:mb-5 px-3">FAQs</h1>
         <div class="faqs-search md:ml-auto w-full md:w-auto">

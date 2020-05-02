@@ -1,14 +1,14 @@
 <template>
   <div id="program-section" class="experience-container py-6 pb-super overflow-hidden">
     <div class="container mx-auto px-6 md:px-4 md:px-0">
-      <div class="activities py-6 position-relative">
-        <h3 class="text-4xl md:text-5xl xl:text-6xl font-light mb-6 pb-6">
+      <div class="activities md:pt-6 pb-6 position-relative">
+        <h3 class="text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-light mb-6 pb-6">
           {{ $lang.translate(pageTranslations, 'program') }}
         </h3>
         <div class="flex flex-wrap">
           <div class="w-full md:w-5/12">
             <div class="program mb-6 pb-6">
-              <span class="text-2xl uppercase">
+              <span class="text-lg md:text-2xl uppercase">
                 {{ $lang.translate(pageTranslations, 'departures') }}
                 <el-tooltip v-if="isOnline" effect="dark" content="GMT -5" placement="right">
                   <i class="el-icon-info ml-2" />
@@ -52,7 +52,7 @@
         <div class="flex flex-wrap">
           <div class="w-full md:w-6/12">
             <div class="itinerary pr-4">
-              <span class="text-2xl uppercase">{{ $lang.translate(pageTranslations, 'itinerary') }}</span>
+              <span class="text-lg md:text-2xl uppercase">{{ $lang.translate(pageTranslations, 'itinerary') }}</span>
               <el-tabs
                 v-model="activeDay"
                 class="mt-4"
@@ -66,7 +66,7 @@
                     v-for="(activity, x) in day"
                     :key="'activity_' + x"
                     :class="{ 'mt-5' : n === 1 }"
-                    class="flex flex-wrap mb-5">
+                    class="flex flex-wrap mb-5 text-sm md:text-base">
                     <div class="w-3/12 md:w-2/12 pr-3">{{ activity.time }}</div>
                     <div class="w-9/12 md:w-10/12">{{ activity.description }}</div>
                   </div>

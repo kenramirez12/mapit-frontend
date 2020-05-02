@@ -28,12 +28,12 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 34rem;
+  height: 24rem;
   background-size: cover;
-  background-position: center;
+  background-position: center right;
 
   @media screen and (min-width: 768px) {
-    background-attachment: fixed;
+    height: 34rem;
   }
 }
 

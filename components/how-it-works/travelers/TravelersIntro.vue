@@ -1,18 +1,18 @@
 <template>
-  <div class="container mx-auto h-full flex py-6">
-    <div class="flex flex-wrap md:items-center my-auto px-4 pb-12 md:pb-0">
-      <div class="w-full md:w-6/12">
-        <h2 class="text-2xl md:text-5xl font-light">
+  <div class="container mx-auto h-full flex py-12 lg:py-6">
+    <div class="flex flex-wrap md:items-center lg:my-auto px-6 md:px-4 md:pb-0 travelers-intro-container">
+      <div class="w-full sm:w-10/12 md:w-6/12">
+        <h2 class="text-2xl md:text-3xl lg:text-5xl font-light">
           {{ $lang.translate(translations, 'for_travelers') }}
         </h2>
-        <p class="w-full md:w-9/12 md:text-2xl font-light my-6 leading-tight">
+        <p class="w-full md:w-9/12 text-xl lg:text-2xl font-light my-6 leading-tight">
           {{ $lang.translate(translations, 'subtitle') }}
         </p>
         <p class="font-light md:pr-6 text-xs md:text-sm">
           {{ $lang.translate(translations, 'copy') }}
         </p>
       </div>
-      <div class="w-full md:w-5/12 ml-auto hidden md:block">
+      <div class="w-full md:w-6/12 lg:w-5/12 ml-auto mt-8 lg:mt-0">
         <img src="/images/how-it-works/travelers/step-0.jpg" class="w-full image-shadow">
       </div>
     </div>
@@ -40,8 +40,26 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
   .image-shadow {
-    box-shadow: -20px 60px 220px rgba(0, 0, 0, 0.44);
+    box-shadow: -10px 10px 60px rgba(0, 0, 0, 0.15);
+    width: calc(100% + 3rem);
+    max-width: unset!important;
+    margin-left: -1.5rem;
+
+    @media screen and (min-width: 640px) {
+      box-shadow: -20px 60px 220px rgba(0, 0, 0, 0.44);
+      width: 100%;
+      max-width: 100%;
+      margin-left: 0;
+    }
+  }
+
+  .travelers-intro-container {
+    // transform: translateY(calc(-80px + 1.5rem));
+
+    // @media screen and (min-width: 768px) {
+    //   transform: translateY(0);
+    // }
   }
 </style>

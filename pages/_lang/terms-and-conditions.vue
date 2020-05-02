@@ -1,5 +1,5 @@
 <template>
-  <div class="container px-4 py-12 mx-auto">
+  <div class="container px-6 md:px-4 py-12 mx-auto">
     <div class="w-full pb-2 mb-8 text-sm font-light border-b">
       Last revision May 05, 2020
     </div>

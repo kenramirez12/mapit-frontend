@@ -1,6 +1,6 @@
 <template>
   <div class="trusted-by">
-    <span class="text-2xl light-gray font-light block mb-12 sm:mb-5">{{ $lang.translate(translations, 'trust_us') }}</span>
+    <span class="md:text-2xl light-gray font-light block mb-10 sm:mb-5">{{ $lang.translate(translations, 'trust_us') }}</span>
     <el-button @click="prevSlide()" class="trusted-by__arrow-prev text-gray-500" size="mini" icon="el-icon-back" circle plain></el-button>
     <el-button @click="nextSlide()" class="trusted-by__arrow-next text-gray-500" size="mini" icon="el-icon-right" circle plain></el-button>
     <div v-swiper:mySwiper="swiperOption" class="trusted-by-slider">
@@ -76,11 +76,12 @@ export default {
     width: calc(100% - 2rem);
     max-width: 1000px;
     padding: 2rem 4rem 3rem;
-    margin: 7rem 0;
+    margin: 3rem 0 0;
     position: relative;
 
     @media screen and (min-width: 640px) {
       padding: 3rem 4rem;
+      margin: 7rem 0;
     }
 
     &:hover {
@@ -93,13 +94,9 @@ export default {
 
   .trusted-by__arrow-prev {
     position: absolute;
-    top: 67%;
+    top: 62%;
     left: 1rem;
     transform: translateY(-50%);
-
-    @media screen and (min-width: 768px) { 
-      top: 62%;
-    }
   }
 
   .trusted-by__arrow-next {

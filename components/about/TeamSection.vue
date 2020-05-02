@@ -1,12 +1,12 @@
 <template>
   <div id="our-team">
     <div class="flex flex-wrap pt-8 md:pt-16 mb-6 md:mb-12">
-      <div class="w-full md:w-4/12 mb-6 md:mb-0">
-        <h2 class="text-2xl md:text-5xl font-light">
+      <div class="w-full lg:w-4/12 mb-6 lg:mb-0">
+        <h2 class="text-2xl md:text-4xl lg:text-5xl font-light">
           {{ $lang.translate(translations, 'title') }}
         </h2>
       </div>
-      <div class="w-full md:w-7/12 ml-auto">
+      <div class="w-full lg:w-7/12 ml-auto">
         <div class="flex flex-wrap">
           <div class="w-full md:w-11/12 flex flex-wrap">
             <div
@@ -26,10 +26,10 @@
       </div>
     </div>
     <div class="flex flex-wrap pb-12">
-      <div class="w-full md:w-7/12 ml-auto md:order-2">
+      <div class="w-full lg:w-7/12 ml-auto lg:order-2">
         <img src="/images/about/team.jpg" class="team-image" alt="Equipo Map it!">
       </div>
-      <div class="w-full md:w-4/12 mt-6 md:mt-0 md:pr-10 md:order-1 text-sm md:text-base">
+      <div class="w-full lg:w-4/12 mt-6 lg:mt-0 lg:pr-10 lg:order-1 text-sm md:text-base">
         <p class="mb-6 font-light">{{ $lang.translate(translations, 'copy_1') }}</p>
         <p class="mb-6 font-light">{{ $lang.translate(translations, 'copy_2') }}</p>
       </div>
@@ -63,11 +63,11 @@ export default {
 
 <style lang="scss" scoped>
   .team-image {
-    width: calc(100% + 2rem);
-    margin-left: -1rem;
+    width: calc(100% + 3rem);
+    margin-left: -1.5rem;
     max-width: unset;
 
-    @media screen and (min-width: 560px) {
+    @media screen and (min-width: 640px) {
       width: 100%;
       margin-left: 0;
     }

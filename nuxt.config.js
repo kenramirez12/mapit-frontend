@@ -18,7 +18,8 @@ export default {
       { hid: 'og:description', name: 'og:description', content: 'Find things to do in Peru: food tours, art tours, experiences with local communities, what to do at night, and much more.' },
     ],
     link: [
-      { rel: 'icon', type: 'image/png', href: '/images/favicon.png' }
+      { rel: 'icon', type: 'image/png', href: '/images/favicon.png' },
+      { rel:'stylesheet', href: 'https://unpkg.com/fullpage.js/dist/fullpage.min.css' }
     ]
   },
   env: {

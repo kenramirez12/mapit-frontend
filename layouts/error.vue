@@ -58,7 +58,7 @@ export default {
     justify-content: center;
 
     &__image {
-      max-width: 280px;
+      max-width: 260px;
       width: calc(100% - 30px);
       margin: 0 auto;
 
@@ -76,7 +76,7 @@ export default {
     }
 
     &__btn {
-      transform: scale(1.5);
+      transform: scale(1.3);
       position: absolute;
       right: -2rem;
       top: -1rem;
@@ -88,7 +88,7 @@ export default {
     }
 
     &__title {
-      font-size: 52px;
+      font-size: 48px;
       line-height: 1;
       font-weight: 300;
 
@@ -98,13 +98,23 @@ export default {
     }
 
     &__subtitle {
-      font-size: 1rem;
+      font-size: .9rem;
       font-weight: 300;
       line-height: 1;
+
+      @media screen and (min-width: 640px) {
+        font-size: 1rem;
+      }
     }
 
     &__copy {
       text-align: right;
+      font-weight: 300;
+      font-size: .9rem;
+
+      @media screen and (min-width: 640px) {
+        font-size: 1rem;
+      }
     }
   }
 </style>

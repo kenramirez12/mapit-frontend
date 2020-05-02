@@ -2,12 +2,12 @@
   <div id="social-points-section" class="experience-container pt-6 pb-super">
     <div class="container mx-auto px-6 md:px-4 md:px-0">
       <div class="activities py-6 position-relative">
-        <h3 class="text-4xl md:text-5xl xl:text-6xl font-light mb-6 pb-6">
+        <h3 class="text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-light mb-6 pb-6">
           {{ $lang.translate(pageTranslations, 'social_points') }}
         </h3>
         <div class="flex flex-wrap">
           <div class="w-full md:w-5/12 lg:pl-6 pb-6">
-            <p class="mb-6 font-light">{{ translations.social_impact }}</p>
+            <p class="mb-6 font-light text-sm md:text-base">{{ translations.social_impact }}</p>
           </div>
         </div>
         <div class="flex flex-wrap mt-6" style="position:relative">
@@ -40,8 +40,8 @@
       <div class="container mx-auto px-6">
         <img
           src="~/assets/images/sitting-05.svg"
-          style="height:13rem;transform: translate(-30px, -30px)">
-        <p class="mt-8 font-light">{{ $lang.translate(pageTranslations, 'social_copy_2') }}</p>
+          style="height:12rem;transform: translate(-30px, -30px)">
+        <p class="mt-4 sm:mt-8 font-light">{{ $lang.translate(pageTranslations, 'social_copy_2') }}</p>
         <div class="flex justify-between mt-6 pt-6 pb-10 pr-6">
           <img src="~/assets/images/social-three-icon.svg" alt="" style="width:80px">
           <img src="~/assets/images/social-book-icon.svg" alt="" style="width:80px">

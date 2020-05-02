@@ -6,7 +6,7 @@
       </PuSkeleton>
     </div>
     <div class="custom-card__content">
-      <div class="flex items-center justify-between text-2xl">
+      <div class="flex items-center justify-between text-xl sm:text-2xl">
         <PuSkeleton
           :loading="isLoading"
           width="120px"

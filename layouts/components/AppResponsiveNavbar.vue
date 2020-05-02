@@ -2,43 +2,9 @@
   <div>
     <FaqsList :class="{ show : showFaqsDropdown }" />
     <div class="responsive-navbar">
-      <div class="responsive-navbar__list">
-        <div
-          @click="$router.push(`/${$lang.current().slug}/experiences`)"
-          class="responsive-navbar__item">
-          <div class="responsive-navbar__icon">
-            <img
-              :src="`/images/navbar/experiences-icon${$route.name === 'lang-experiences' ? '-primary' : ''}.svg`">
-          </div>
-          <span class="responsive-navbar__label">
-            {{ $lang.translate(translations, 'experiences') }}
-          </span>
-        </div>
-        <div
-          @click="$router.push(`/${$lang.current().slug}/destinations`)"
-          class="responsive-navbar__item">
-          <div class="responsive-navbar__icon">
-            <img
-              :src="`/images/navbar/destinations-icon${$route.name === 'lang-destinations' ? '-primary' : ''}.svg`">
-          </div>
-          <span class="responsive-navbar__label">
-            {{ $lang.translate(translations, 'destinations') }}
-          </span>
-        </div>
-        <div
-          class="responsive-navbar__item"
-          @click="showFaqsDropdown = !showFaqsDropdown">
-          <div class="responsive-navbar__icon">
-            <img
-              :src="`/images/navbar/faqs-icon${showFaqsDropdown ? '-primary' : ''}.svg`">
-          </div>
-          <span class="responsive-navbar__label">FAQs</span>
-        </div>
-        <NavbarUserDropdown />
-      </div>
       <el-dropdown
         trigger="click"
-        placement="top-end"
+        placement="top-start"
         @visible-change="(value) => moreVisible = value"
         @command="onCommandDropdown">
         <div class="more-btn__container">
@@ -60,6 +26,9 @@
           <el-dropdown-item command="blog">
             Blog
           </el-dropdown-item>
+          <el-dropdown-item command="faqs">
+            FAQs
+          </el-dropdown-item>
           <template v-for="(lang, n) in langs">
             <el-dropdown-item
               v-if="$lang.current().iso_lang !== lang.iso_lang"
@@ -71,6 +40,40 @@
           </template>
         </el-dropdown-menu>
       </el-dropdown>
+      <div class="responsive-navbar__list">
+        <div
+          @click="$router.push(`/${$lang.current().slug}`)"
+          class="responsive-navbar__item">
+          <div class="responsive-navbar__icon">
+            <img
+              :src="`/images/navbar/experiences-icon${$route.name === 'lang' ? '-primary' : ''}.svg`">
+          </div>
+          <span class="responsive-navbar__label">
+            {{ $lang.translate(translations, 'home') }}
+          </span>
+        </div>
+        <div
+          @click="$router.push(`/${$lang.current().slug}/experiences`)"
+          class="responsive-navbar__item">
+          <div class="responsive-navbar__icon">
+            <img
+              :src="`/images/navbar/destinations-icon${$route.name === 'lang-experiences' ? '-primary' : ''}.svg`">
+          </div>
+          <span class="responsive-navbar__label">
+            {{ $lang.translate(translations, 'experiences') }}
+          </span>
+        </div>
+        <!-- <div
+          class="responsive-navbar__item"
+          @click="$router.push(`/${$lang.current().slug}/faqs`)">
+          <div class="responsive-navbar__icon">
+            <img
+              :src="`/images/navbar/faqs-icon${showFaqsDropdown ? '-primary' : ''}.svg`">
+          </div>
+          <span class="responsive-navbar__label">FAQs</span>
+        </div> -->
+        <NavbarUserDropdown />
+      </div>
     </div>
   </div>
 </template>
@@ -91,11 +94,13 @@ export default {
       moreVisible: false,
       translations:  {
         es_ES: {
+          home: 'Inicio',
           experiences: 'Experiencias',
           destinations: 'Destinos',
           login: 'Ingresar'
         },
         en_EN: {
+          home: 'Home',
           experiences: 'Experiences',
           destinations: 'Destinations',
           login: 'Log in'
@@ -224,14 +229,19 @@ export default {
         max-height: 100%;
         width: auto;
         height: auto;
+        margin: auto;
       }
     }
 
     &__label {
       white-space: nowrap;
       font-weight: 300 !important;
-      font-size: 11px !important;
+      font-size: 10px !important;
       color: #000 !important;
+
+      @media screen and (min-width: 520px) {
+        font-size: 11px !important;
+      }
     }
   }
 </style>

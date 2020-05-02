@@ -2,11 +2,11 @@
   <div>
     <AppHero />
     <main class="flex flex-col">
-      <div class="container mx-auto pt-8 px-4 inline-block">
+      <div class="container mx-auto pt-8 px-6 sm:px-4 inline-block">
         <div class="w-full flex items-center mb-4 md:mb-8 mt-6">
           <div class="pr-6">
-            <h3 class="text-4xl font-light mb-6">{{ $lang.translate(translations, 'online') }}</h3>
-            <p class="mb-0 font-light">{{ $lang.translate(translations, 'online_label') }}</p>
+            <h3 class="text-2xl md:text-4xl font-light mb-6 leading-tight">{{ $lang.translate(translations, 'online') }}</h3>
+            <p class="text-sm md:text-base mb-0 font-light">{{ $lang.translate(translations, 'online_label') }}</p>
           </div>
           <div class="hidden md:flex ml-auto">
             <el-button @click="onlineSliderPrev += 1" circle plain type="primary" icon="el-icon-back" class="flex" />
@@ -21,11 +21,11 @@
           :experiences="onlineExperiences"
           :translations="experiencesTranslations" />
       </div>
-      <div class="container mx-auto pt-8 px-4 inline-block">
+      <div class="container mx-auto pt-8 px-6 sm:px-4 inline-block">
         <div class="w-full flex items-center mb-4 md:mb-8 mt-6">
           <div class="pr-6">
-            <h3 class="text-4xl font-light mb-6">{{ $lang.translate(translations, 'experiences') }}</h3>
-            <p class="mb-0 font-light">{{ $lang.translate(translations, 'experiences_label') }}</p>
+            <h3 class="text-2xl md:text-4xl font-light mb-6">{{ $lang.translate(translations, 'experiences') }}</h3>
+            <p class="text-sm md:text-base mb-0 font-light">{{ $lang.translate(translations, 'experiences_label') }}</p>
           </div>
           <div class="hidden md:flex ml-auto">
             <el-button @click="expSliderPrev += 1" circle plain type="primary" icon="el-icon-back" class="flex" />
@@ -40,11 +40,11 @@
           :experiences="lastExperiences"
           :translations="experiencesTranslations" />
       </div>
-      <div class="container mx-auto pt-8 px-4 inline-block">
+      <div class="container mx-auto pt-8 px-6 sm:px-4 inline-block">
         <div class="w-full flex items-center mb-4 md:mb-8 mt-6">
           <div class="pr-6">
-            <h3 class="text-4xl font-light mb-4">{{ $lang.translate(translations, 'destinations') }}</h3>
-            <p class="mb-0 font-light">{{ $lang.translate(translations, 'destinations_label') }}</p>
+            <h3 class="text-2xl md:text-4xl font-light mb-4">{{ $lang.translate(translations, 'destinations') }}</h3>
+            <p class="text-sm md:text-base mb-0 font-light">{{ $lang.translate(translations, 'destinations_label') }}</p>
           </div>
           <div class="hidden md:flex ml-auto">
             <el-button @click="destSliderPrev += 1" circle plain type="primary" icon="el-icon-back" class="flex" />
