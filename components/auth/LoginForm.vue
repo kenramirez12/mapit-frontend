@@ -152,9 +152,6 @@ export default {
       } catch(e) {
         console.log(e)
         this.$log.error('tryLogin.error: ', e)
-        if('response' in e) {
-          this.$log.error('tryLogin.error.response: ', e.response)
-        }
         this.isLoading = false
         this.$message.error(this.$lang.translate(this.translations, 'incorrect_data'));
       }

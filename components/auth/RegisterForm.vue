@@ -149,7 +149,7 @@ export default {
 
         this.isLoading = false
       } catch(e) {
-        this.$log.error('tryRegister.error: ', e, e.response)
+        this.$log.error('tryRegister.error: ', e)
         let error = 'No pudimos procesar el registro, por favor inténtelo nuevamente.'
 
         const errors = 'errors' in e.response.data ? e.response.data.errors : null
