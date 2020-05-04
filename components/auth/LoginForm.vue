@@ -150,7 +150,11 @@ export default {
         this.setAuthDialogVisible(false)
         this.isLoading = false
       } catch(e) {
-        this.$log.error('tryLogin.error: ', e, e.response)
+        console.log(e)
+        this.$log.error('tryLogin.error: ', e)
+        if('response' in e) {
+          this.$log.error('tryLogin.error.response: ', e.response)
+        }
         this.isLoading = false
         this.$message.error(this.$lang.translate(this.translations, 'incorrect_data'));
       }

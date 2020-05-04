@@ -335,7 +335,7 @@ export default {
 
   .page-header {
     &__booking {
-      display: none;
+      display: none!important;
 
       @media screen and (min-width: 768px) {
         display: flex;
