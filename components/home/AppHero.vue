@@ -9,11 +9,12 @@
       <el-form-item class="sm:hidden w-full">
         <el-select
           v-model="cascada"
+          v-loading="!selectGroup"
           :placeholder="$lang.translate(translations, 'search_placeholder')"
           filterable
           collapse-tags
           multiple
-          class="shadow-input w-full"
+          class="shadow-input w-full cascada"
           size="large">
           <el-option-group
             v-for="group in selectGroup"
@@ -87,6 +88,7 @@ export default {
   data () {
     return {
       cascada: '',
+      cascadaVisible: false,
       filters: {
         category_id: '',
         destination_id: ''

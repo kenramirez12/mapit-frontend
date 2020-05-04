@@ -1,6 +1,6 @@
 <template>
   <div>
-    <EmailSent v-if="requestSent" />
+    <EmailSent v-if="requestSent" :email="email" />
     <PasswordResetRequestForm v-else @update-sent="updateSent" />
   </div>
 </template>
@@ -17,12 +17,14 @@ export default {
   data() {
     return {
       requestSent: false,
-      isLoading: false
+      isLoading: false,
+      email: ''
     }
   },
   methods: {
-    updateSent() {
+    updateSent(email) {
       this.requestSent = true
+      this.email = email
     }
   }
 }

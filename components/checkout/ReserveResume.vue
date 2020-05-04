@@ -1,7 +1,7 @@
 <template>
   <div v-if="experience" class="reserve-details p-6">
     <div class="flex justify-between items-start">
-      <h3 class="text-lg md:text-xl md:mt-3 mb-2 md:mb-6 pr-4">
+      <h3 class="text-lg lg:text-xl md:mt-3 mb-2 md:mb-4 lg:mb-6 pr-4">
         {{ $lang.apiTranslate(experience.translations, 'title') }}
       </h3>
       <el-button
@@ -15,7 +15,7 @@
 
     <div
       :class="{ show: showDetails }"
-      class="pt-4 reserve-details__collapse">
+      class="pt-4 md:pt-0 reserve-details__collapse text-sm lg:text-base">
       <div class="flex font-light">
         <div class="w-2/3">
           {{ $lang.translate(translations, isOnline ? 'device_quantity' : 'group_size') }}
@@ -70,7 +70,7 @@
 
     <hr class="my-4">
 
-    <div class="flex md:pt-3 md:mb-3 md:text-xl font-medium">
+    <div class="flex md:pt-3 lg:mb-3 md:text-lg lg:text-xl font-medium">
       <div class="w-2/3">
         {{ $lang.translate(translations, 'total') }} (x{{ groupSize }})
       </div>

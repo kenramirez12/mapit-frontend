@@ -18,7 +18,7 @@
             {{ $lang.translate(translations, 'download_details') }}
           </el-button>
         </div>
-        <div id="reserve-details" class="w-full md:w-4/6 md:pr-16 md:order-1">
+        <div id="reserve-details" class="w-full md:w-4/6 md:pr-8 lg:pr-16 md:order-1">
           <div class="flex flex-wrap">
             <div class="w-full md:w-1/2 mb-6 md:mb-0 font-light">
               <span class="block">{{ $lang.translate(translations, 'starting_time') }}</span>

@@ -17,12 +17,6 @@
         <el-dropdown-menu
           slot="dropdown"
           class="user-dropdown py-0">
-          <el-dropdown-item command="home">
-            Home
-          </el-dropdown-item>
-          <el-dropdown-item command="about">
-            About Us
-          </el-dropdown-item>
           <el-dropdown-item command="blog">
             Blog
           </el-dropdown-item>
@@ -63,15 +57,17 @@
             {{ $lang.translate(translations, 'experiences') }}
           </span>
         </div>
-        <!-- <div
+        <div
           class="responsive-navbar__item"
-          @click="$router.push(`/${$lang.current().slug}/faqs`)">
+          @click="$router.push(`/${$lang.current().slug}/about`)">
           <div class="responsive-navbar__icon">
             <img
               :src="`/images/navbar/faqs-icon${showFaqsDropdown ? '-primary' : ''}.svg`">
           </div>
-          <span class="responsive-navbar__label">FAQs</span>
-        </div> -->
+          <span class="responsive-navbar__label">
+            {{ $lang.translate(translations, 'about') }}
+          </span>
+        </div>
         <NavbarUserDropdown />
       </div>
     </div>
@@ -97,12 +93,14 @@ export default {
           home: 'Inicio',
           experiences: 'Experiencias',
           destinations: 'Destinos',
+          about: 'About',
           login: 'Ingresar'
         },
         en_EN: {
           home: 'Home',
           experiences: 'Experiences',
           destinations: 'Destinations',
+          about: 'About',
           login: 'Log in'
         }
       }
@@ -176,7 +174,7 @@ export default {
 
     &__container {
       display: flex;
-      height: 80px;
+      height: 65px;
       align-items: center;
     }
   }
@@ -192,7 +190,7 @@ export default {
     flex-wrap: nowrap;
     align-items: center;
     width: 100%;
-    height: 80px;
+    height: 65px;
     background-color: #fff;
     border-top: 1px solid rgba(0, 0, 0, 0.2);
     z-index: 99;
@@ -205,7 +203,7 @@ export default {
     &__list {
       display: flex;
       width: calc(100% - 40px);
-      height: 80px;
+      height: 65px;
     }
 
     &__item {

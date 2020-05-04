@@ -2,9 +2,9 @@
   <div
     v-if="experience"
     v-loading="isLoading"
-    class="flex flex-col h-full pt-5 px-5 md:px-0">
-    <div class="flex flex-wrap md:mb-6">
-      <div class="md:w-1/3 order-1 pb-4">
+    class="w-full mt-8 md:mt-0 md:pr-12">
+    <div class="flex flex-wrap md:-mx-3">
+      <div class="w-full md:w-1/2 xl:w-1/3 px-6 md:px-3 mb-4">
         <span class="font-light">{{ $lang.translate(translations, 'date') }}</span>
         <div class="block mt-1">
           <el-date-picker
@@ -20,7 +20,7 @@
           />
         </div>
       </div>
-      <div class="w-full md:w-1/3 order-3 md:order-2 pb-4">
+      <div class="w-full md:w-1/2 xl:w-1/3 px-6 md:px-3 mb-4">
         <span class="font-light">
           {{ $lang.translate(translations, 'points') }}
         </span>
@@ -28,7 +28,7 @@
           <span class="text-3xl font-light">{{ parseFloat(reservePrice) * groupSize }}</span>
         </div>
       </div>
-      <div class="w-full md:w-1/3 order-2 md:order-3 pb-4">
+      <div class="w-full lg:w-1/2 xl:w-1/3 px-6 md:px-3 mb-4">
         <span class="font-light">
           {{ $lang.translate(translations, isOnline ? 'device_quantity' : 'group_size') }}
         </span>
@@ -52,38 +52,41 @@
           </div>
         </div>
       </div>
-    </div>
-
-    <div v-if="experience.extras !== null && experience.extras.length > 0" class="block mb-6 pb-4">
-      <span class="font-light">
-        {{ $lang.translate(translations, 'starting_time') }}
-        <el-tooltip v-if="isOnline" effect="dark" content="GMT -5" placement="right">
-          <i class="el-icon-info ml-2" />
-        </el-tooltip>
-      </span>
-      <div
-        v-if="availableHours && availableHours.length > 0"
-        class="block mt-2 -mx-1">
-        <el-button
-          v-for="(hour, n) in availableHours"
-          :key="'hour_' + n"
-          :disabled="hour.available_quota < groupSize"
-          @click="reserveTime = hour.start_time"
-          type="primary"
-          size="small"
-          :plain="reserveTime !== hour.start_time"
-          class="mx-1">
-          {{ hour.start_time }}
-        </el-button>
+      <div class="w-full lg:w-1/2 xl:w-full mb-4 xl:mb-6 py-4 lg:py-0 xl:py-4 px-6 md:px-3">
+        <span class="font-light">
+          {{ $lang.translate(translations, 'starting_time') }}
+          <el-tooltip v-if="isOnline" effect="dark" content="GMT -5" placement="right">
+            <i class="el-icon-info ml-2" />
+          </el-tooltip>
+        </span>
+        <div
+          v-if="availableHours && availableHours.length > 0"
+          class="block mt-2 -mx-1">
+          <el-button
+            v-for="(hour, n) in availableHours"
+            :key="'hour_' + n"
+            :disabled="hour.available_quota < groupSize"
+            @click="reserveTime = hour.start_time"
+            type="primary"
+            size="small"
+            :plain="reserveTime !== hour.start_time"
+            class="mx-1">
+            {{ hour.start_time }}
+          </el-button>
+        </div>
+        <p v-else class="text-sm font-light mt-3">
+          {{ $lang.translate(translations, 'time_not_found') }}
+        </p>
       </div>
-      <p v-else class="text-sm font-light mt-3">No se encontraron horarios disponibles.</p>
     </div>
-
-    <div class="flex flex-wrap">
-
-      <div class="w-full md:w-1/3 pr-6">
+    <div class="flex flex-wrap md:-mx-3">
+      <div
+        v-if="hasExtras"
+        class="w-full lg:w-1/2 xl:w-1/3 px-6 md:px-3 mb-6">
+        <span class="block mb-2 font-light">
+          {{ $lang.translate(translations, 'extras') }}
+        </span>
         <el-checkbox-group
-          v-if="experience && experience.extras !== null && experience.extras.length > 0"
           v-model="reserveExtras">
           <el-checkbox
             v-for="extra in experience.extras"
@@ -93,32 +96,10 @@
             {{ $lang.apiTranslate(extra.translations, 'title') }} (+ {{ extra.price }})
           </el-checkbox>
         </el-checkbox-group>
-        <div v-else class="block mb-6 pb-4">
-          <span class="font-light">
-            {{ $lang.translate(translations, 'starting_time') }}
-            <el-tooltip v-if="isOnline" effect="dark" content="GMT -5" placement="right">
-              <i class="el-icon-info ml-2" />
-            </el-tooltip>
-          </span>
-          <div
-            v-if="availableHours && availableHours.length > 0"
-            class="block mt-2 -mx-1">
-            <el-button
-              v-for="(hour, n) in availableHours"
-              :key="'hour_' + n"
-              :disabled="hour.available_quota < groupSize"
-              @click="reserveTime = hour.start_time"
-              type="primary"
-              size="small"
-              :plain="reserveTime !== hour.start_time"
-              class="mx-1">
-              {{ hour.start_time }}
-            </el-button>
-          </div>
-          <p v-else class="text-sm font-light mt-3">No se encontraron horarios disponibles.</p>
-        </div>
       </div>
-      <div class="w-full md:w-1/2">
+      <div
+        class="w-full px-6 md:px-3 mb-6"
+        :class="{ 'lg:w-1/2 xl:w-2/3' : hasExtras }">
         <span class="block mb-2 font-light">
           {{ $lang.translate(translations, 'message') }}
         </span>
@@ -130,8 +111,7 @@
           class="shadow-input border-0" />
       </div>
     </div>
-
-    <div class="w-full md:w-5/6 mt-6 md:mt-auto flex">
+    <div class="w-full mt-6 md:mt-auto flex px-6 md:px-0">
       <el-button @click="trySubmit()" type="primary" class="md:ml-auto">
         {{ $lang.translate(translations, 'continue') }}
       </el-button>
@@ -162,8 +142,9 @@ export default {
           continue: 'Continuar',
           no_places: 'No hay cupos suficientes para la fecha seleccionada',
           time_required: 'Seleccione un horario para continuar',
-          process_error: 'No pudimos completar el proceso, por favor inténtelo nuevamente'
-
+          process_error: 'No pudimos completar el proceso, por favor inténtelo nuevamente',
+          time_not_found: 'No se encontraron horarios disponibles.',
+          extras: 'Servicios adicionales'
         },
         'en_EN': {
           date: 'Date',
@@ -176,7 +157,9 @@ export default {
           continue: 'Continue',
           no_places: 'There are no available places for this day',
           time_required: 'Please, choose your starting time to continue',
-          process_error: 'No pudimos completar el proceso, por favor inténtelo nuevamente'
+          process_error: 'No pudimos completar el proceso, por favor inténtelo nuevamente',
+          time_not_found: 'No available hours found.',
+          extras: 'Additional services'
         }
       }
     }
@@ -203,6 +186,9 @@ export default {
       })
 
       return isOnline
+    },
+    hasExtras () {
+      return this.experience && this.experience.extras !== null && this.experience.extras.length > 0
     },
     reserveDate: {
       get () {

@@ -51,7 +51,7 @@
       <div class="mt-4 text-center">
         <a
           href="#"
-          @click.prevent="$router.push(`/${$lang.current().slug}/password/recovery`)"
+          @click.prevent="toPasswordRecovery()"
           class="text-sm">
           {{ $lang.translate(translations, 'forgot_password') }}
         </a>
@@ -127,6 +127,10 @@ export default {
     ...mapMutations({
       setAuthDialogVisible: 'SET_AUTH_DIALOG_VISIBLE'
     }),
+    toPasswordRecovery() {
+      this.setAuthDialogVisible(false)
+      this.$router.push(`/${this.$lang.current().slug}/password/recovery`)
+    },
     onSubmit (formName) {
       this.$refs[formName].validate((valid) => {
         if(valid) {

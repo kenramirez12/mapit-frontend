@@ -155,7 +155,7 @@ export default {
 
 <style lang="scss">
   body {
-    margin-bottom: 80px;
+    margin-bottom: 65px;
 
     @media screen and (min-width: 768px) {
       margin-bottom: 0;

@@ -2,12 +2,12 @@
   <div
     v-loading="isLoading"
     :element-loading-text="loadingMessage"
-    class="flex flex-col h-full px-4 md:px-0 pb-4 md:pb-0 mt-5 md:mt-0">
+    class="flex flex-col h-full px-6 md:px-4 md:px-0 pb-8 md:pb-4 md:pb-0 mt-8 md:mt-0">
     <span class="block mb-5 pb-3">
       {{ $lang.translate(translations, 'traveler') }}
     </span>
     <el-form :model="form" :rules="formRules" ref="clientDetailsForm">
-      <div class="w-full md:w-2/3">
+      <div class="w-full md:pr-12 lg:w-2/3 lg:pr-0">
         <div class="flex flex-wrap -mx-4">
           <div class="w-full md:w-1/2 px-4">
             <div
@@ -264,7 +264,7 @@ export default {
         email: this.$auth.loggedIn ? this.$auth.$state.user.email : '',
         phone: this.$auth.loggedIn && this.$auth.$state.user.phone && this.$auth.$state.user.phone.constructor === Object && 'nationalNumber' in this.$auth.$state.user.phone ? this.$auth.$state.user.phone.nationalNumber : '',
         birthdate: '',
-        country: this.$auth.loggedIn ? this.$auth.$state.user.country : '',
+        country: this.$auth.loggedIn && this.$auth.$state.user.country ? this.$auth.$state.user.country : '',
         docNumber: '',
         Date: '',
         terms: '',

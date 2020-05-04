@@ -29,7 +29,7 @@ export default {
   .success-container {
     position: relative;
     display: flex;
-    min-height: calc(100vh - 80px);
+    min-height: calc(100vh - 65px);
     padding: 2rem;
   }
 
