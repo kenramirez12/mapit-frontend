@@ -17,7 +17,7 @@
             style="position:absolute;top:0;left:-6rem;height:18rem">
           <div class="w-full pr-6 md:hidden">
             <img src="~/assets/images/brujula-icon.svg" class="mb-4" style="width:60px" alt="">
-            <p class="mb-6">{{ $lang.translate(pageTranslations, 'social_copy') }}</p>
+            <p class="mb-6 font-light">{{ $lang.translate(pageTranslations, 'social_copy') }}</p>
             <p class="text-2xl">{{ $lang.translate(pageTranslations, 'social_values') }}</p>
           </div>
           <div class="w-4/12 xl:w-3/12 pr-6 hidden md:block" style="margin-left:10rem">

@@ -1,9 +1,9 @@
 <template>
   <div>
-    <h1 class="text-5xl leading-tight font-light mb-8">
+    <h1 class="text-2xl md:text-3xl lg:text-4xl leading-tight font-light mb-4">
       {{ $lang.translate(translations, 'done') }}
     </h1>
-    <p class="font-light mb-6">
+    <p class="font-light mb-4">
       {{ $lang.translate(translations, 'copy_1') }} {{ email }}.
     </p>
     <p class="font-light mb-6">

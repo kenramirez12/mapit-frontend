@@ -20,7 +20,7 @@
             <li
               v-for="(feature, n) in translations.features"
               :key="'feature_' + n"
-              class="checkbox-list__item mb-4 text-sm md:text-base">
+              class="checkbox-list__item mb-4 text-sm md:text-base font-light">
               <img src="~/assets/images/checkbox-icon.svg" class="checkbox-list__icon">
               {{ feature }}
             </li>

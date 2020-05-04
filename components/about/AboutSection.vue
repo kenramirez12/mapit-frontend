@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-wrap">
-    <div class="w-full md:w-7/12 md:pr-10 lg:pr-0 lg:w-6/12 font-light text-sm text-base lg:text-xl pt-6 lg:pt-12">
+    <div class="w-full md:w-7/12 md:pr-10 lg:pr-0 lg:w-6/12 font-light text-sm sm:text-base lg:text-xl pt-6 lg:pt-12">
       <p class="mb-6">{{ $lang.translate(translations, 'copy_1') }}</p>
       <p class="mb-6">{{ $lang.translate(translations, 'copy_2') }}</p>
     </div>

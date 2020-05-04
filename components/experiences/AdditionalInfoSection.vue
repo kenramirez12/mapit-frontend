@@ -10,7 +10,7 @@
             <div class="py-6">
               <img src="~/assets/images/map-marker-lg.svg" class="mb-3" alt="">
               <span class="text-base">{{ $lang.translate(pageTranslations, 'meeting_point') }}</span>
-              <span class="block text-lg md:text-2xl">{{ translations.meeting_place }}</span>
+              <span class="block text-lg md:text-2xl font-light">{{ translations.meeting_place }}</span>
             </div>
           </div>
         </div>
@@ -20,7 +20,7 @@
               <li
                 v-for="(additional, n) in translations.additional_info"
                 :key="'additional_' + n"
-                class="checkbox-list__item mb-4">
+                class="checkbox-list__item mb-4 font-light">
                 <img src="~/assets/images/checkbox-icon.svg" class="checkbox-list__icon">
                 {{ additional }}
               </li>
@@ -58,7 +58,7 @@
           <li
             v-for="(carry, n) in translations.carry"
             :key="'carry_' + n"
-            class="flex mb-3 text-sm sm:text-base">
+            class="flex mb-3 text-sm sm:text-base font-light">
             <img src="~/assets/images/dark-arrow-sm.svg" class="mr-5"> 
             {{ carry }}
           </li>

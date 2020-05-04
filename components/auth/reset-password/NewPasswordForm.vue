@@ -1,8 +1,8 @@
 <template>
   <div v-loading="isLoading">
-    <h1
-      class="text-5xl leading-tight font-light mb-8"
-      v-html="$lang.translate(translations, 'update_password')" />
+    <h1 class="text-2xl md:text-3xl lg:text-4xl leading-tight font-light mb-8 text-center">
+      {{ $lang.translate(translations, 'update_password') }}
+    </h1>
     <el-form
       @submit.native.prevent
       :model="resetData"

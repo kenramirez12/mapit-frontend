@@ -23,7 +23,7 @@
     </div>
     <div class="flex flex-wrap">
       <div class="w-full md:w-5/12 md:px-6 my-5 md:my-0">
-        <p class="text-xs sm:text-sm md:text-base font-light mb-4 md:mb-0">
+        <p class="text-sm md:text-base font-light mb-4 md:mb-0">
           {{ $lang.translate(translations, 'copy') }}
         </p>
       </div>

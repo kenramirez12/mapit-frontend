@@ -138,6 +138,9 @@ export default {
         case 'about':
           return this.$router.push(`/${langSlug}/about`)
           break;
+        case 'faqs':
+          return this.$router.push(`/${langSlug}/faqs`)
+          break;
         case 'es':
           return this.updateLang('es')
           break;

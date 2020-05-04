@@ -1,8 +1,8 @@
 <template>
   <div v-loading="isLoading">
-    <h1
-      class="text-5xl leading-tight font-light mb-8"
-      v-html="$lang.translate(translations, 'reset_password')" />
+    <h1 class="text-2xl md:text-3xl lg:text-4xl leading-tight font-light mb-8 text-center">
+      {{ $lang.translate(translations, 'reset_password') }}
+    </h1>
     <el-form
       @submit.native.prevent
       :model="resetData"
@@ -51,7 +51,7 @@ export default {
         es_ES: {
           email: 'Correo electrónico',
           valid_email: 'Ingrese un email válido',
-          reset_password: `Estrablecer<br>contraseña`,
+          reset_password: 'Restrablecer contraseña',
           reset: 'Restablecer',
           back_to_login: 'Volver a inicio de sesión',
           not_sent: 'No pudimos validar la información. Por favor inténtelo nuevamente.'
@@ -59,7 +59,7 @@ export default {
         en_EN: {
           email: 'Email',
           valid_email: 'Enter a valid email',
-          reset_password: `Reset<br>password`,
+          reset_password: 'Reset password',
           reset: 'Reset',
           back_to_login: 'Back to log in',
           not_sent: 'We couldn\'t validate your information.Please try again.'

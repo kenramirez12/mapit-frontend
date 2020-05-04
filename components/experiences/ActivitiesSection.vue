@@ -59,7 +59,7 @@
               <li
                 v-for="(consideration, n) in translations.considerations"
                 :key="'consideration_' + n"
-                class="checkbox-list__item mb-4 text-sm md:text-base">
+                class="checkbox-list__item mb-4 text-sm md:text-base font-light">
                 <img
                   src="~/assets/images/checkbox-icon.svg"
                   class="checkbox-list__icon"
