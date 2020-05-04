@@ -102,6 +102,9 @@ export default {
         this.$router.push({ query : value })
         let sanitizedFilters = this.sanitizeFilters(this.filters)
         this.retrieveExperiences(sanitizedFilters)
+
+        const experienceContainer = document.querySelector('.experiences-container').offsetTop
+        return window.scrollTo({ top: experienceContainer - 46, behavior: 'smooth' })
       }
     }
   },

@@ -106,6 +106,14 @@ export default {
       }
     }
   },
+  watch: {
+    filters: {
+      deep: true,
+      handler () {
+        this.showFilters = false
+      }
+    }
+  },
   methods: {
     ...mapMutations({
       setFilter: 'experiences/SET_FILTER'

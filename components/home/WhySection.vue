@@ -159,9 +159,13 @@ export default {
 
 <style lang="scss" scoped>
   .why-us-section {
-    height: 768px;
+    height: 600px;
     display: flex;
     align-items: center;
+    
+    @media screen and (min-width: 640px) {
+      height: 768px;
+    }
   }
   .why-swiper-button-prev,
   .why-swiper-button-next {

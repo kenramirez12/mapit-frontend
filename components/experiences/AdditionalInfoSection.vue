@@ -1,8 +1,8 @@
 <template>
-  <div id="additional-info-section" class="experience-container py-6 pb-super overflow-hidden">
+  <div id="additional-info-section" class="experience-container md:pt-6 pb-6 pb-super overflow-hidden">
     <div class="container mx-auto px-6 md:px-4 md:px-0">
       <div class="activities py-6 position-relative">
-        <h3 class="text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-light mb-6 pb-6">
+        <h3 class="text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-light md:mb-6 pb-6">
           {{ $lang.translate(pageTranslations, 'additional_info') }}
         </h3>
         <div class="flex flex-wrap">

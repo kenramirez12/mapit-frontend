@@ -1,13 +1,13 @@
 <template>
   <div id="activities-section" class="experience-container py-6 pb-super">
     <div class="container px-6 md:px-4 md:px-0 mx-auto">
-      <div class="activities py-6 position-relative">
+      <div class="activities pt-6 md:pb-6 position-relative">
         <h3 class="text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-light mb-6 md:pb-12 xl:pb-24">
           {{ $lang.translate(pageTranslations, 'activities') }}
         </h3>
         <div class="flex flex-wrap">
           <div class="w-full md:w-6/12">
-            <div class="flex flex-wrap pb-12">
+            <div class="flex flex-wrap md:pb-12">
               <div v-if="location" class="w-1/2 lg:w-auto lg:flex-1 pr-3 my-4">
                 <img
                   src="~/assets/images/features/map-icon.svg"
@@ -53,7 +53,7 @@
             </div>
           </div>
         </div>
-        <div class="flex flex-wrap py-6 my-6 .text-sm">
+        <div class="flex flex-wrap pt-6 md:pb-6 mt-6 md:mb-6">
           <div class="w-full md:w-5/12">
             <ul class="checkbox-list mb-12 md:mb-0">
               <li
@@ -139,12 +139,13 @@ export default {
 
 <style lang="scss" scoped>
   .activity-img {
-    box-shadow: 0px 0px 100px rgba(0, 0, 0, 0.33);
+    box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.15);
     width: calc(100% + 3rem);
     max-width: unset;
     margin-left: -1.5rem;
 
     @media screen and (min-width: 560px) {
+      box-shadow: 0px 0px 100px rgba(0, 0, 0, 0.33);
       width: 100%;
       margin-left: 0;
     }

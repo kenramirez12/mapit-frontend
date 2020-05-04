@@ -1,7 +1,7 @@
 <template>
   <div id="overview-section" class="container mx-auto px-6 md:px-4 md:pt-6 pb-super">
     <div class="overview pb-6 md:pt-6">
-      <div class="flex flex-wrap my-10 py-10">
+      <div class="flex flex-wrap mt-10 md:pb-10 pt-10 md:pb-10">
         <div class="w-full md:w-6/12 xl:w-5/12 pr-6">
           <p class="dark-gray text-xl md:text-2xl xl:text-3xl font-light">
             {{ $lang.apiTranslate(experience.translations, 'description') }}
@@ -39,7 +39,7 @@
               {{ $lang.apiTranslate(experience.translations, 'includes') }}
             </p>
           </div>
-          <div class="mt-16">
+          <div class="mt-12 md:mt-16">
             <div v-swiper:mySwiper="swiperOption" class="overview-slider__container">
               <div class="swiper-wrapper overview-slider">
                 <div
@@ -179,11 +179,12 @@ export default {
 .overview-slider {
   // box-shadow: 0px 0px 100px rgba(0, 0, 0, 0.33);
   &__container {
-    box-shadow: 0px 0px 100px rgba(0, 0, 0, 0.33);
+    box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.15);
     width: calc(100% + 3rem);
     margin-left: -1.5rem;
 
     @media screen and (min-width: 560px) {
+      box-shadow: 0px 0px 100px rgba(0, 0, 0, 0.33);
       width: 100%;
       margin-left: 0;
     }

@@ -152,7 +152,7 @@ export default {
         this.$log.error('tryRegister.error: ', e)
         let error = 'No pudimos procesar el registro, por favor inténtelo nuevamente.'
 
-        const errors = 'errors' in e.response.data ? e.response.data.errors : null
+        const errors = e.response && 'errors' in e.response.data ? e.response.data.errors : null
         if(errors) error = errors[Object.keys(errors)[0]][0]
 
         this.$message.error(error);
