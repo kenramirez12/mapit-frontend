@@ -1,6 +1,11 @@
 <template>
   <div id="why-us" class="why-us-section py-6">
-    <div class="container mx-auto my-6 py-6 px-6 sm:px-4">
+    <div
+      :class="{
+        'bg-primary py-12' : isMobile,
+        'py-6' : !isMobile
+      }"
+      class="container mx-auto my-6 px-6 sm:px-4">
       <h2 class="text-2xl md:text-4xl font-light text-center text-white mb-6 pb-6">
         {{ $lang.translate(translations, 'why_mapit') }}
       </h2>
@@ -56,6 +61,7 @@ export default {
   },
   data() {
     return {
+      isMobile: false,
       features: [
         {
           icon: 'why-01.svg',
@@ -86,22 +92,17 @@ export default {
   },
   created() {
     if(process.client) {
-      window.addEventListener('scroll', this.handleScroll)
+      if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+        this.isMobile = true
+      }
+      
+      if(this.isMobile) window.addEventListener('scroll', this.handleScroll)
     }
   },
   destroyed() {
     if(process.client) {
-      window.removeEventListener('scroll', this.handleScroll)
+      if(this.isMobile) window.removeEventListener('scroll', this.handleScroll)
     }
-  },
-  mounted() {
-    // if(currentScrollTop >= whySectionEnd) {
-      // document.body.style.backgroundColor = `rgba(${primary[0]}, ${primary[1]}, ${primary[2]})`
-      // console.log('ya deberia empezar a cambiarse')
-    // } else if(currentScrollTop >= (whySectionInit - currentWindowHeight/2)) {
-      // document.body.style.backgroundColor = 'rgba(255, 255 ,255)'
-      // console.log('se deberia haber pintado media pantalla atras')
-    // }
   },
   methods: {
     handleScroll() {
@@ -121,37 +122,9 @@ export default {
 
       if(scrollPosition >= changeInitStart && scrollPosition <= changeEndEnd) {
         document.body.classList.add('primary')
-        // return document.body.style.backgroundColor = 'rgba(55, 215, 215)'
       } else {
         document.body.classList.remove('primary')
-        // return document.body.style.backgroundColor = 'rgba(255, 255, 255)'
       }
-
-      // if(scrollPosition < changeInitStart || scrollPosition > changeEndEnd) {
-      //   console.log('primera validacion')
-      //   return document.body.style.backgroundColor = 'rgba(255, 255, 255)'
-      // }
-
-      // const white = { r: 255, g: 255, b: 255 }
-      // const primary = { r: 55, g: 215, b: 215 }
-
-      // const valuePerPixel = {
-      //   r: (white.r - primary.r) / windowPosStart,
-      //   g: (white.g - primary.g) / windowPosStart,
-      //   b: (white.b - primary.b) / windowPosStart
-      // }
-
-      // if(scrollPosition > changeInitStart) {
-      //   const difference = scrollPosition - changeInitStart
-      //   if(difference >= windowPosStart) return
-      //   // console.log('entramos difference', difference)
-      //   document.body.style.backgroundColor = `
-      //     rgba(
-      //       ${white.r - (valuePerPixel.r * difference)},
-      //       ${white.g - (valuePerPixel.g * difference)},
-      //       ${white.b - (valuePerPixel.b * difference)})
-      //     `
-      // }
     }
   }
 }
