@@ -62,7 +62,7 @@
           @click="$router.push(`/${$lang.current().slug}/about`)">
           <div class="responsive-navbar__icon">
             <img
-              :src="`/images/navbar/faqs-icon${showFaqsDropdown ? '-primary' : ''}.svg`">
+              :src="`/images/navbar/faqs-icon${$route.name === 'lang-about' ? '-primary' : ''}.svg`">
           </div>
           <span class="responsive-navbar__label">
             {{ $lang.translate(translations, 'about') }}
@@ -93,14 +93,14 @@ export default {
           home: 'Inicio',
           experiences: 'Experiencias',
           destinations: 'Destinos',
-          about: 'About',
+          about: 'Nosotros',
           login: 'Ingresar'
         },
         en_EN: {
           home: 'Home',
           experiences: 'Experiences',
           destinations: 'Destinations',
-          about: 'About',
+          about: 'About us',
           login: 'Log in'
         }
       }

@@ -1,7 +1,7 @@
 <template>
   <div class="overflow-hidden">
     <full-page ref="fullpage" :options="options" id="fullpage">
-      <div class="hidden lg:block section fp-auto-height">
+      <div class="section header-section fp-auto-height">
         <HeaderDialog />
         <AppHeader />
       </div>
@@ -11,7 +11,7 @@
       <div class="section">
         <TravelersSlider />
       </div>
-      <div class="hidden lg:block section fp-auto-height">
+      <div class="section footer-section fp-auto-height">
         <AppFooter />
       </div>
     </full-page>
@@ -94,6 +94,13 @@ export default {
   .fp-tableCell {    
     @media screen and (max-width: 1023px) {
       height: auto!important;
+    }
+  }
+
+  // .header-section,
+  .footer-section {
+    @media screen and (max-width: 1024px) {
+      display: none!important;
     }
   }
 </style>

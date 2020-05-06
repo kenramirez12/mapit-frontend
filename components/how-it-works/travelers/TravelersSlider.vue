@@ -174,7 +174,7 @@ export default {
     box-shadow: -10px 10px 60px rgba(0, 0, 0, 0.15);
     width: 100%;
 
-    @media screen and (min-width: 768px) {
+    @media screen and (min-width: 1024px) {
       box-shadow: -20px 60px 220px rgba(0, 0, 0, 0.33);
     }
   }
@@ -183,7 +183,7 @@ export default {
     width: 55px;
     height: 55px;
 
-    @media screen and (min-width: 1024) {
+    @media screen and (min-width: 1024px) {
       width: 65px;
       height: 65px;
     }

@@ -8,12 +8,13 @@
         <p class="w-full md:w-9/12 text-xl lg:text-2xl font-light my-6 leading-tight">
           {{ $lang.translate(translations, 'subtitle') }}
         </p>
+        <img src="/images/how-it-works/travelers/step-0.jpg" class="w-full image-shadow mt-3 mb-6 md:hidden">
         <p class="font-light md:pr-6 text-xs md:text-sm">
           {{ $lang.translate(translations, 'copy') }}
         </p>
       </div>
       <div class="w-full md:w-6/12 lg:w-5/12 ml-auto mt-8 lg:mt-0">
-        <img src="/images/how-it-works/travelers/step-0.jpg" class="w-full image-shadow">
+        <img src="/images/how-it-works/travelers/step-0.jpg" class="w-full image-shadow hidden md:block">
       </div>
     </div>
   </div>
@@ -48,10 +49,13 @@ export default {
     margin-left: -1.5rem;
 
     @media screen and (min-width: 640px) {
-      box-shadow: -20px 60px 220px rgba(0, 0, 0, 0.44);
       width: 100%;
       max-width: 100%;
       margin-left: 0;
+    }
+
+    @media screen and (min-width: 768px) {
+      box-shadow: -20px 60px 220px rgba(0, 0, 0, 0.44);
     }
   }
 

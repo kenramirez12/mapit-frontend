@@ -9,7 +9,7 @@
       {{ formattedTestimonialNumber }}
     </span>
     <div class="testimonial-item__content">
-      <span class="text-lg font-light leading-snug">
+      <span class="text-base md:text-lg font-light leading-snug">
         "{{ $lang.apiTranslate(testimonial.translations, 'comment') }}"
       </span>
       <div class="my-auto">
@@ -71,6 +71,11 @@ export default {
       } else {
         return this.testimonialNumber
       }
+    },
+    testimonialComment() {
+      const comment = this.$lang.apiTranslate(this.testimonial.translations, 'comment')
+      if(comment.length < 400) return comment
+      return comment.substr(1, 400) + '...'
     }
   }
 }

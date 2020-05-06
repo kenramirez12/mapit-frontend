@@ -338,7 +338,7 @@ export default {
       display: none!important;
 
       @media screen and (min-width: 768px) {
-        display: flex;
+        display: flex!important;
       }
     }
   }

@@ -135,7 +135,7 @@ export default {
 .swiper-button-next {
   right: 5%;
   @media screen and (min-width: 768px) {
-    left: 15%;
+    right: 15%;
   }
 }
 .swiper-pagination-bullet {
