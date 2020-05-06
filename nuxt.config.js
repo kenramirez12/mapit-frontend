@@ -38,7 +38,8 @@ export default {
   */
   css: [
     // 'element-ui/lib/theme-chalk/index.css',
-    '@/assets/scss/main.scss',
+    // '@/assets/scss/main.scss',
+    '@/assets/css/main.css',
     'swiper/dist/css/swiper.css',
     'tailwindcss/dist/base.css',
     'tailwindcss/dist/components.css',
