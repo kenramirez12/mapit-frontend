@@ -65,7 +65,7 @@ export default {
       isLoading: false,
       translations: {
         es_ES: {
-          update_password: `Actualizar<br>contraseña`,
+          update_password: `Actualizar contraseña`,
           update_btn: 'Actualizar contraseña',
           new_password: 'Nueva contraseña',
           new_password_confirmation: 'Confirme la nueva contraseña',
@@ -74,7 +74,7 @@ export default {
           password_updated: '¡Listo! tu contraseña ha sido actualizada'
         },
         en_EN: {
-          update_password: `Update<br>password`,
+          update_password: `Update password`,
           update_btn: 'Update password',
           new_password: 'New password',
           new_password_confirmation: 'Confirm new password',

@@ -87,6 +87,15 @@ export default {
       filters: 'experiences/filters',
       selectedSort: 'experiences/selectedSort'
     }),
+    currentLang() {
+      if(this.validLang) {
+        return this.$route.params.lang
+      } return 'en'
+    },
+    validLang() {
+      const allowedLangs = ['es', 'en']
+      return 'lang' in this.$route.params && allowedLangs.includes(this.$route.params.lang)
+    },
     currentPage: {
       get() {
         return this.filters.page
