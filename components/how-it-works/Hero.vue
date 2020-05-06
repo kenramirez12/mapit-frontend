@@ -3,19 +3,36 @@
     <div
       @click="$router.push(`/${$lang.current().slug}/how-it-works/travelers`)"
       class="hero hero__traveler">
-      <div class="hero__title">Para viajeros</div>
+      <div class="hero__title">
+        {{ $lang.translate(translations, 'for_travelers') }}
+      </div>
     </div>
     <div
       @click="$router.push(`/${$lang.current().slug}/how-it-works/host`)"
       class="hero hero__host">
-      <div class="hero__title">Para anfitriones</div>
+      <div class="hero__title">
+        {{ $lang.translate(translations, 'for_hosts') }}
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-
+  data() {
+    return {
+      translations: {
+        es_ES: {
+          for_travelers: 'Para viajeros',
+          for_hosts: 'Para anfitriones'
+        },
+        en_EN: {
+          for_travelers: 'For travelers',
+          for_hosts: 'For hosts'
+        }
+      }
+    }
+  }
 }
 </script>
 
