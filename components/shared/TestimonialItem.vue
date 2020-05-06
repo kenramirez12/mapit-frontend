@@ -10,7 +10,7 @@
     </span>
     <div class="testimonial-item__content">
       <span class="text-base md:text-lg font-light leading-snug">
-        "{{ $lang.apiTranslate(testimonial.translations, 'comment') }}"
+        "{{ testimonialComment }}"
       </span>
       <div class="my-auto">
         <a
