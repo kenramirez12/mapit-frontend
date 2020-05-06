@@ -143,9 +143,7 @@ export default {
       const data = this.loginData
 
       try {
-        console.log('antes del token')
         const token = await this.$recaptcha.execute('login')
-        console.log('dsp del token', token)
         data.token = token
 
         await this.$auth.loginWith('local', { data })
@@ -153,7 +151,6 @@ export default {
         this.setAuthDialogVisible(false)
         this.isLoading = false
       } catch(e) {
-        console.log(e)
         this.$log.error('tryLogin.error: ', e)
         this.isLoading = false
         this.$message.error(this.$lang.translate(this.translations, 'incorrect_data'));
