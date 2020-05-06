@@ -147,6 +147,12 @@ export default {
         data.token = token
 
         await this.$auth.loginWith('local', { data })
+        .then(resp => {
+          console.log('login', resp)
+        })
+        .catch(err => {
+          console.error('login.error', err)
+        })
         this.setAuthDialogVisible(false)
         this.isLoading = false
       } catch(e) {
