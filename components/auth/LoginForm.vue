@@ -143,16 +143,13 @@ export default {
       const data = this.loginData
 
       try {
+        console.log('antes del token')
         const token = await this.$recaptcha.execute('login')
+        console.log('dsp del token', token)
         data.token = token
 
         await this.$auth.loginWith('local', { data })
-        .then(resp => {
-          console.log('login', resp)
-        })
-        .catch(err => {
-          console.error('login.error', err)
-        })
+
         this.setAuthDialogVisible(false)
         this.isLoading = false
       } catch(e) {
