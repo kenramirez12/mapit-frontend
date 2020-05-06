@@ -96,12 +96,12 @@ export default {
         this.isMobile = true
       }
       
-      if(this.isMobile) window.addEventListener('scroll', this.handleScroll)
+      if(!this.isMobile) window.addEventListener('scroll', this.handleScroll)
     }
   },
   destroyed() {
     if(process.client) {
-      if(this.isMobile) window.removeEventListener('scroll', this.handleScroll)
+      if(!this.isMobile) window.removeEventListener('scroll', this.handleScroll)
     }
   },
   methods: {
