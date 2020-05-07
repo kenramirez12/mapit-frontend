@@ -261,6 +261,10 @@ body {
 
 .el-message {
   border-width: 0;
+
+  @media screen and (max-width: 410px) {
+    min-width: 100%;
+  }
 }
 
 .el-checkbox__input.is-checked + .el-checkbox__label {
@@ -482,12 +486,6 @@ body {
     @media screen and (min-width: 1270px) {
       margin-right: 0;
       max-width: calc(20rem*3);
-    }
-  }
-
-  &__sidebar {
-    @media screen and (max-width: 960px) {
-      display: none;
     }
   }
 }

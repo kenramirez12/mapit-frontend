@@ -1,6 +1,6 @@
 <template>
-  <div class="container pt-12 pb-4 px-4 mx-auto">
-    <h1 class="mb-6 text-2xl md:text-3xl font-light px-2 md:px-0">
+  <div class="container pt-12 pb-4 px-6 md:px-4 mx-auto">
+    <h1 class="mb-6 text-2xl md:text-3xl font-light md:px-0">
       {{ $lang.translate(translations, 'booking_history') }}
     </h1>
     <div class="pb-6">

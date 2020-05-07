@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="md:hidden">
-      <el-table :data="reserves ? reserves : [1, 2, 3, 4, 5]" @row-click="rowClicked" :show-header="false" class="w-full">
+      <el-table v-if="reserves && reserves.length > 0" :data="reserves ? reserves : [1, 2, 3, 4, 5]" @row-click="rowClicked" :show-header="false" class="w-full">
         <el-table-column>
           <template v-if="reserves" slot-scope="scope">
             <span class="reserve-title-responsive">
@@ -28,6 +28,9 @@
           </template>
         </el-table-column>
       </el-table>
+      <p v-if="reserves && reserves.length === 0" class="font-light">
+        {{ $lang.translate(translations, 'no_reserves_found') }}
+      </p>
     </div>
     <div class="hidden md:block">
       <el-table v-if="!reserves" :data="[1, 2, 3, 4, 5]" :show-header="false" class="w-full">

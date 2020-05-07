@@ -4,6 +4,7 @@
       <ResponsiveFilterBar />
     </div>
     <CategoriesHeaderSlider :translations="translations" />
+    <el-button @click="notificar">hola</el-button>
     <div class="container experiences-container py-6 px-4 my-6 mx-auto">
       <div class="flex">
         <FiltersSidebar class="experiences-container__sidebar" />
@@ -141,6 +142,13 @@ export default {
       setFilter: 'experiences/SET_FILTER',
       resetFilters: 'experiences/RESET_FILTERS'
     }),
+    notificar() {
+      this.$message({
+        dangerouslyUseHTMLString: true,
+        message: '<strong>This is <i>HTML</i> string</strong>',
+        duration: 90000
+      })
+    },
     sanitizeFilters(filters) {
       let sanitized = {
         category_id: filters.category,

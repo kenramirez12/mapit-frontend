@@ -8,11 +8,11 @@
     class="social-login-btn shadow-input mb-4">
     <template v-if="social === 'facebook'">
       <img src="~/assets/images/facebook-logo.svg" style="height:20px">
-      <span class="text-left">{{ $lang.translate(translations, 'continue_with') }} Facebook</span>
+      <span class="text-left pl-6 sm:pl-12 md:pl-0">{{ $lang.translate(translations, 'continue_with') }} Facebook</span>
     </template>
     <template v-else-if="social === 'google'">
       <img src="~/assets/images/google-logo.svg" style="height:20px">
-      <span class="text-left">{{ $lang.translate(translations, 'continue_with') }} Google</span>
+      <span class="text-left pl-6 sm:pl-12 md:pl-0">{{ $lang.translate(translations, 'continue_with') }} Google</span>
     </template>
     <span v-else />
   </button>

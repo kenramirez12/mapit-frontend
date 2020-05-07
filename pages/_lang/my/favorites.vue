@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col">
     <div class="container mx-auto pt-8 inline-block">
-      <div class="w-full flex items-center mb-4 md:mb-8 mt-6 px-4">
+      <div class="w-full flex items-center mb-4 md:mb-8 mt-6 px-6 md:px-4">
         <h3 class="text-2xl md:text-4xl font-light">
           {{ $lang.translate(translations, 'favorites') }}
         </h3>
@@ -15,7 +15,7 @@
     <div
       :class="{ 'mt-5' : favorites && favorites.length === 0 }"
       class="container mx-auto inline-block">
-      <div class="w-full flex items-center mb-4 md:mb-8 px-4">
+      <div class="w-full flex items-center mb-4 md:mb-8 px-6 md:px-4">
         <h3 class="text-2xl md:text-4xl font-light">
           {{ $lang.translate(translations, 'recommended') }}
         </h3>

@@ -139,8 +139,8 @@ export default {
       })
     },
     async tryLogin () {
-      this.isLoading = true
       const data = this.loginData
+      this.isLoading = true
 
       try {
         const token = await this.$recaptcha.execute('login')

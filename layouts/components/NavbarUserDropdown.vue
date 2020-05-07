@@ -45,7 +45,8 @@
     </el-dropdown>
     <template v-else>
       <div class="responsive-navbar__icon">
-        <img src="/images/navbar/account-icon.svg" alt="">
+        <img
+          :src="`/images/navbar/account-icon${$route.name === 'lang-login' ? '-primary' : ''}.svg`">
       </div>
       <span class="responsive-navbar__label">
         {{ $lang.translate(translations, 'login') }}
@@ -102,7 +103,8 @@ export default {
     }),
     handleClick() {
       if(!this.loggedIn) {
-        this.setAuthDialogVisible(true)
+        this.$router.push(`/${this.$lang.current().slug}/login`)
+        // this.setAuthDialogVisible(true)
       }
     },
     onCommandDropdown(command) {

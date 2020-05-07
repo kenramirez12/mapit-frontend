@@ -77,13 +77,17 @@
             </div>
           </div>
           <div class="flex flex-wrap font-light mb-6">
-            <div class="w-full md:w-1/2 mb-6 md:mb-0">
+            <div class="w-full">
               <span class="block">{{ $lang.translate(translations, 'meeting_point') }}</span>
               <span>{{ $lang.apiTranslate(reserve.experience.translations, 'meeting_place') }}</span>
             </div>
-            <div class="w-full md:w-1/2">
+            <div class="w-full md:w-1/2 mb-6 md:mb-0">
               <span class="block">{{ $lang.translate(translations, 'price') }}</span>
               <span>${{ reserve.payment.amount }}</span>
+            </div>
+            <div class="w-full md:w-1/2">
+              <span class="block">{{ $lang.translate(translations, 'social_points') }}</span>
+              <span>${{ reserve.social_points }}</span>
             </div>
           </div>
           <hr class="my-3">
@@ -134,6 +138,7 @@ export default {
           booking_code: 'Código de reserva',
           bring: '¿Qué llevar?',
           price: 'Precio final',
+          social_points: 'Puntos sociales',
           meeting_point: 'Punto de encuentro',
           language: 'Idioma',
           additionals: 'Servicios adicionales',
@@ -155,6 +160,7 @@ export default {
           booking_code: 'Booking code',
           bring: 'What to bring?',
           price: 'Price',
+          social_points: 'Social points',
           meeting_point: 'Meeting point',
           language: 'Language',
           additionals: 'Additional services',

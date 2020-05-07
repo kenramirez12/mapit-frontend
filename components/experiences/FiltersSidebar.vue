@@ -174,12 +174,21 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.experiences-sidebar {
-  width: 100%;
-  max-width: 280px;
+.experiences-container {
+  &__sidebar {
+    display: none;
+    width: 100%;
+    max-width: 220px;
+    margin-right: 10px;
 
-  @media screen and (min-width: 960px) {
-    max-width: 260px;
+    @media screen and (min-width: 768px) {
+      display: block;
+    }
+  
+    @media screen and (min-width: 960px) {
+      margin-right: 0;
+      max-width: 260px;
+    }
   }
 }
 </style>

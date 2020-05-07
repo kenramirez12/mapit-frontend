@@ -15,7 +15,12 @@
         <el-input v-model="registerData.email" type="email" class="shadow-input border-0" :placeholder="$lang.translate(translations, 'email')" />
       </el-form-item>
       <el-form-item prop="password">
-        <el-input v-model="registerData.password" type="password" class="shadow-input border-0" :placeholder="$lang.translate(translations, 'password')" />
+        <el-input
+          v-model="registerData.password"
+          @keypress.enter.native="onSubmit('registerForm')"
+          type="password"
+          class="shadow-input border-0"
+          :placeholder="$lang.translate(translations, 'password')" />
       </el-form-item>
       <el-button @click="onSubmit('registerForm')" class="shadow-primary w-full" type="primary">
         {{ $lang.translate(translations, 'register') }}
@@ -83,7 +88,8 @@ export default {
           required_lastname: 'Ingrese su apellido',
           valid_email: 'Ingrese un email válido',
           have_account: '¿Ya tienes una cuenta?',
-          sign_in: 'Iniciar sesión'
+          sign_in: 'Iniciar sesión',
+          register_error: 'No pudimos procesar el registro, por favor inténtelo nuevamente.'
         },
         'en_EN': {
           fullname: 'Nombre y Apellido',
@@ -94,7 +100,8 @@ export default {
           required_lastname: 'Enter your last name',
           valid_email: 'Enter a valid email',
           have_account: 'Already have an account?',
-          sign_in: 'Sign in'
+          sign_in: 'Sign in',
+          register_error: 'We could not create your account, please try again.'
         }
       },
       registerData: {
@@ -142,7 +149,10 @@ export default {
         const token = await this.$recaptcha.execute('login')
         data.token = token
 
-        await this.$axios.post('/register', data)
+        const resp = await this.$axios.post('/register', data)
+        // this.$message.success('')
+        const loginToken = await this.$recaptcha.execute('login')
+        data.token = loginToken
 
         await this.$auth.loginWith('local', { data })
         this.setAuthDialogVisible(false)
@@ -150,9 +160,9 @@ export default {
         this.isLoading = false
       } catch(e) {
         this.$log.error('tryRegister.error: ', e)
-        let error = 'No pudimos procesar el registro, por favor inténtelo nuevamente.'
+        let error = this.$translate(this.translations, 'register_error')
 
-        const errors = e.response && 'errors' in e.response.data ? e.response.data.errors : null
+        const errors = e && e.response && 'errors' in e.response.data ? e.response.data.errors : null
         if(errors) error = errors[Object.keys(errors)[0]][0]
 
         this.$message.error(error);
