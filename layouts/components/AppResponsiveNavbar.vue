@@ -2,38 +2,6 @@
   <div>
     <FaqsList :class="{ show : showFaqsDropdown }" />
     <div class="responsive-navbar">
-      <el-dropdown
-        trigger="click"
-        placement="top-start"
-        @visible-change="(value) => moreVisible = value"
-        @command="onCommandDropdown">
-        <div class="more-btn__container">
-          <el-button
-            icon="el-icon-more"
-            circle
-            :class="{ active: moreVisible }"
-            class="more-btn" />
-        </div>
-        <el-dropdown-menu
-          slot="dropdown"
-          class="user-dropdown py-0">
-          <el-dropdown-item command="blog">
-            Blog
-          </el-dropdown-item>
-          <el-dropdown-item command="faqs">
-            FAQs
-          </el-dropdown-item>
-          <template v-for="(lang, n) in langs">
-            <el-dropdown-item
-              v-if="$lang.current().iso_lang !== lang.iso_lang"
-              :key="'lang_' + n"
-              :command="lang.slug"
-              divided>
-              {{ lang.code }}
-            </el-dropdown-item>
-          </template>
-        </el-dropdown-menu>
-      </el-dropdown>
       <div class="responsive-navbar__list">
         <div
           @click="$router.push(`/${$lang.current().slug}`)"
@@ -70,6 +38,38 @@
         </div>
         <NavbarUserDropdown />
       </div>
+      <el-dropdown
+        trigger="click"
+        placement="top-end"
+        @visible-change="(value) => moreVisible = value"
+        @command="onCommandDropdown">
+        <div class="more-btn__container">
+          <el-button
+            icon="el-icon-more"
+            circle
+            :class="{ active: moreVisible }"
+            class="more-btn" />
+        </div>
+        <el-dropdown-menu
+          slot="dropdown"
+          class="user-dropdown py-0">
+          <el-dropdown-item command="blog">
+            Blog
+          </el-dropdown-item>
+          <el-dropdown-item command="faqs">
+            FAQs
+          </el-dropdown-item>
+          <template v-for="(lang, n) in langs">
+            <el-dropdown-item
+              v-if="$lang.current().iso_lang !== lang.iso_lang"
+              :key="'lang_' + n"
+              :command="lang.slug"
+              divided>
+              {{ lang.code }}
+            </el-dropdown-item>
+          </template>
+        </el-dropdown-menu>
+      </el-dropdown>
     </div>
   </div>
 </template>

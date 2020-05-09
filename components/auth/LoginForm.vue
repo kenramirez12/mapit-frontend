@@ -93,13 +93,13 @@ export default {
         'en_EN': {
           email: 'Email',
           password: 'Password',
-          login: 'Login',
+          login: 'Log in',
           forgot_password: 'Forgot Password?',
           valid_email: 'Enter a valid email',
           valid_password: 'Enter your password',
           incorrect_data: 'Email or password does not match.',
           havent_account: 'Don’t have an account?',
-          register: 'Sign up'
+          register: 'Register'
         }
       },
       loginData: {

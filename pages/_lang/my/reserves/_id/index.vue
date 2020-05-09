@@ -87,7 +87,7 @@
             </div>
             <div class="w-full md:w-1/2">
               <span class="block">{{ $lang.translate(translations, 'social_points') }}</span>
-              <span>${{ reserve.social_points }}</span>
+              <span>{{ reserve.social_points }}</span>
             </div>
           </div>
           <hr class="my-3">

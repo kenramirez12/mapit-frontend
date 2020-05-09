@@ -16,11 +16,11 @@
         :faq="faq" />
     </div>
     <div class="faqs-footer py-6 px-4 text-center">
-      <p class="font-bold text-sm">
+      <p class="font-medium text-sm">
         {{ $lang.translate(translations, 'not_found') }}
       </p>
       <el-button
-        @click="$router.push(`/${$lang.current().lang}/contact`)"
+        @click="$router.push(`/${$lang.current().slug}/contact`)"
         type="primary"
         plain
         class="mt-4">
@@ -91,7 +91,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
   .search-input {
     width: 100%;
     font-size: 1.2rem;

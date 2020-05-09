@@ -282,8 +282,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      getAvailableHours: 'reserves/getAvailableHours',
-      shouldDisableDate: 'reserves/shouldDisableDate'
+      getAvailableHours: 'reserves/getAvailableHours'
     }),
     ...mapMutations({
       setAuthDialogVisible: 'SET_AUTH_DIALOG_VISIBLE',
@@ -291,7 +290,9 @@ export default {
       updateWillCheckout: 'reserves/UPDATE_WILL_CHECKOUT'
     }),
     shouldDisableDate(time) {
-      if(time < new Date()) return true
+      let since = new Date()
+      since.setDate(since.getDate() + 2)
+      if(time < since) return true
       if(!this.availableDays.includes(time.getDay())) return true
 
       if(this.holidaysArray) {
@@ -325,6 +326,19 @@ export default {
 
       return true
     },
+    storageCheckoutData() {
+      if(process.client) {
+        const availableHours = JSON.stringify(this.$store.state.reserves.availableHours)
+        const checkoutStep = JSON.stringify(this.$store.state.reserves.checkoutStep)
+        const reserveExperience = JSON.stringify(this.$store.state.reserves.experience)
+        const reserveForm = JSON.stringify(this.$store.state.reserves.form)
+
+        localStorage.setItem('availableHours', availableHours)
+        localStorage.setItem('checkoutStep', checkoutStep)
+        localStorage.setItem('reserveExperience', reserveExperience)
+        localStorage.setItem('reserveForm', reserveForm)
+      }
+    },
     async formSubmit (formName) {
       if(this.validateForm()) {
         this.isLoading = true
@@ -333,6 +347,7 @@ export default {
           const resp = await this.getAvailableHours()        
   
           if(this.hasAvailableHours === true) {
+            this.storageCheckoutData()
             if(this.$auth.loggedIn) {
               this.isLoading = false
               return this.$router.push(`/${this.$lang.current().slug}/checkout`)

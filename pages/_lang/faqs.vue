@@ -14,13 +14,25 @@
         </div>
       </div>
       <div class="container mx-auto -px-3">
-        <div class="flex flex-wrap">
+        <div class="flex flex-wrap w-full">
           <div
             v-for="(faq, n) in filteredFaqs"
             :key="'faq_' + n"
             class="w-full md:w-1/2 px-3 mb-4">
             <FaqItem :faq="faq" class="h-full" />
           </div>
+        </div>
+        <div class="faqs-footer py-6 px-4 text-center">
+          <p class="font-medium text-sm md:text-base">
+            {{ $lang.translate(translations, 'not_found') }}
+          </p>
+          <el-button
+            @click="$router.push(`/${$lang.current().slug}/contact`)"
+            type="primary"
+            plain
+            class="mt-4">
+            {{ $lang.translate(translations, 'contact_us') }}
+          </el-button>
         </div>
       </div>
     </div>
@@ -49,10 +61,14 @@ export default {
       translations: {
         es_ES: {
           search: 'Buscar',
+          not_found: '¿No encuentras tu duda aqui? Escríbenos.',
+          contact_us: 'Contáctanos',
           updated_at: 'Última actualización 20/4/2020'
         },
         en_EN: {
           search: 'Search',
+          not_found: 'Can’t find your answer here? Contact us!',
+          contact_us: 'Contact us',
           updated_at: 'Last updated 04/20/2020'
         }
       },
@@ -141,36 +157,36 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .search-input {
-    width: 100%;
-    font-size: 1.2rem;
-    border-bottom: 2px solid #000;
-    line-height: 2;
-    transition: all 0.3s;
-    padding-right: 2rem;
+//   .search-input {
+//     width: 100%;
+//     font-size: 1.2rem;
+//     border-bottom: 2px solid #000;
+//     line-height: 2;
+//     transition: all 0.3s;
+//     padding-right: 2rem;
 
-    &:focus {
-      border-color: var(--primary);
+//     &:focus {
+//       border-color: var(--primary);
 
-      & + i {
-        color: var(--primary);
-      }
-    }
-  }
+//       & + i {
+//         color: var(--primary);
+//       }
+//     }
+//   }
 
-  .faqs-search {
-    position: relative;
-    height: 40px;
-    padding: 0 1rem;
-    margin-bottom: 1rem;
+//   .faqs-search {
+//     position: relative;
+//     height: 40px;
+//     padding: 0 1rem;
+//     margin-bottom: 1rem;
 
-    i {
-      position: absolute;
-      font-size: 1.5rem;
-      right: 1rem;
-      top: 50%;
-      transform: translateY(-50%);
-      transition: all 0.3s;
-    }
-  }
+//     i {
+//       position: absolute;
+//       font-size: 1.5rem;
+//       right: 1rem;
+//       top: 50%;
+//       transform: translateY(-50%);
+//       transition: all 0.3s;
+//     }
+//   }
 </style>

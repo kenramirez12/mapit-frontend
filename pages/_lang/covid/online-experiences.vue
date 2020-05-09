@@ -26,7 +26,8 @@ export default {
       translations: {
         es_ES: {
           updated_at: 'Manteniendo a las personas conectadas',
-          content: `<h4 class="text-lg underline mb-4">¡Estamos felices de presentarles nuestras experiencias en línea!</h4>
+          content: `
+          <h2 class="text-xl md:text-2xl lg:text-3xl leading-tight mb-6">¡Estamos felices de presentarles nuestras experiencias en línea!</h2>
           <p class="mb-8">Disfruta conociendo a personas de Perú y participando en experiencias únicas que te permitirán comprender mejor nuestra cultura, aprender cosas nuevas, y divertirte, desde la 
 comodidad de tu hogar.</p>
           <p class="mb-8">Desde clases de cocina, hasta conciertos de música y clases de yoga, hemos reunido en un 
@@ -35,7 +36,8 @@ un nuevo país, ¡incluso si no puedes viajar! </p>`
         },
         en_EN: {
           updated_at: 'Keeping people connected',
-          content: `<h4 class="mb-8 text-3xl">We are excited to introduce you our online experiences!</h4>
+          content: `
+          <h2 class="text-xl md:text-2xl lg:text-3xl leading-tight mb-6">We are excited to introduce you our online experiences!</h2>
           <p class="mb-8">Enjoy meeting locals from Peru and participating in one of a kind experiences where you will explore our culture, learn new things and have fun from the comfort of your home.</p>
           <p class="mb-8">From cooking classes to music concerts to yoga classes, we’ve gathered them in one place so you can connect with locals and discover a new country, without even travelling.</p>`
         }

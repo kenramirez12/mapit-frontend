@@ -40,18 +40,26 @@ export default {
   .hero {
     width: 100%;
     // height: 100%;
-    background-size: 100%;
+    background-size: cover;
     background-position: center;
     position: relative;
     cursor: pointer;
     transition: all 0.3s;
 
+    &__experiences {
+      background-position: 50% 60%;
+    }
+
     @media screen and (min-width: 768px) {
       width: 50%;
+
+      &__experiences {
+        background-position: center;
+      }
     }
 
     &:hover {
-      background-size: 105%;
+      // background-size: 105%;
       
       .hero__title {
         text-decoration: underline;

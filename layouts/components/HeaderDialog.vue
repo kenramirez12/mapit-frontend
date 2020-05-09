@@ -1,7 +1,7 @@
 <template>
   <el-alert
     :class="{
-      'hidden md:block' : $route.name === 'lang-experiences-id' ||
+      'hidden md:flex' : $route.name === 'lang-experiences-id' ||
       $route.name === 'lang-experiences' || 
       $route.name === 'lang-destinations'
     }"

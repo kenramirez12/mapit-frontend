@@ -257,16 +257,24 @@ export default {
       display: flex;
       flex-direction: column;
       background-color: #fff;
-      padding: .5rem 1.5rem 1rem;
+      padding: .5rem 1rem 1rem;
       height: calc(100% - 240px);
+
+      @media screen and (min-width: 640px) {
+        padding: .5rem 1.5rem 1rem;
+      }
     }
 
     &__sale-price {
       color: var(--red);
-      font-size: 1.5rem;
+      font-size: 1.4rem;
       font-weight: 300;
       line-height: 1.1em;
       margin-left: 1.5rem;
+
+      @media screen and (min-width: 768px) {
+        font-size: 1.5rem;
+      }
     }
   }
 

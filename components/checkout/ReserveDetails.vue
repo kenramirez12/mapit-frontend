@@ -70,7 +70,7 @@
             type="primary"
             size="small"
             :plain="reserveTime !== hour.start_time"
-            class="mx-1">
+            style="margin-right:.25rem;margin-left:.25rem!important;margin-bottom:.5rem">
             {{ hour.start_time }}
           </el-button>
         </div>
@@ -242,18 +242,51 @@ export default {
     }
   },
   mounted() {
-    if(!this.experience) {
-      this.$router.push(`/${this.$lang.current().slug}/experiences`)
+    if(process.client) {
+      this.retrieveFromStorage()
+      if(!this.experience) {
+        this.$router.push(`/${this.$lang.current().slug}/experiences`)
+      }
     }
   },
   methods: {
     ...mapMutations({
+      setExperience: 'reserves/SET_EXPERIENCE',
+      setAvailableHours: 'reserves/SET_AVAILABLE_HOURS',
       setReserveField: 'reserves/SET_RESERVE_FIELD',
       setCheckoutStep: 'reserves/SET_CHECKOUT_STEP'
     }),
     ...mapActions({
       getAvailableHours: 'reserves/getAvailableHours'
     }),
+    retrieveFromStorage() {
+      if(process.client) {
+        const availableHours = localStorage.getItem('availableHours')
+        const checkoutStep = localStorage.getItem('checkoutStep')
+        const reserveExperience = localStorage.getItem('reserveExperience')
+        const reserveForm = localStorage.getItem('reserveForm')
+
+        if(availableHours) {
+          this.setAvailableHours(JSON.parse(availableHours))
+        }
+        if(checkoutStep) {
+          this.setCheckoutStep(JSON.parse(checkoutStep))
+        }
+        if(reserveExperience) {
+          this.setExperience(JSON.parse(reserveExperience))
+        }
+        if(reserveForm) {
+          const formatted = JSON.parse(reserveForm)
+          Object.keys(formatted).forEach(prop => {
+            const formField = {
+              field: prop,
+              value: formatted[prop]
+            }
+            this.setReserveField(formField)
+          })
+        }
+      }
+    },
     shouldDisableDate(time) {
       if(time < new Date()) return true
       if(!this.availableDays.includes(time.getDay())) return true
@@ -282,6 +315,11 @@ export default {
         return this.$message.warning(this.$lang.translate(this.translations, 'time_required'))
       }
       this.setCheckoutStep(2)
+      const reserveDetails = document.querySelector('.checkout-container')
+      window.scrollTo({
+        top: reserveDetails ? reserveDetails.offsetTop : 55,
+        behavior: 'smooth'
+      })
     },
     async retrieveAvailableHours() {
       this.isLoading = true

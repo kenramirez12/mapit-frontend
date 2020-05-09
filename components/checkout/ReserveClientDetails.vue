@@ -260,11 +260,11 @@ export default {
       },
       phoneData: '',
       form: {
-        fullname: this.$auth.loggedIn ? this.$auth.$state.user.fullname : '',
-        email: this.$auth.loggedIn ? this.$auth.$state.user.email : '',
-        phone: this.$auth.loggedIn && this.$auth.$state.user.phone && this.$auth.$state.user.phone.constructor === Object && 'nationalNumber' in this.$auth.$state.user.phone ? this.$auth.$state.user.phone.nationalNumber : '',
+        fullname: '',
+        email: '',
+        phone: '',
         birthdate: '',
-        country: this.$auth.loggedIn && this.$auth.$state.user.country ? this.$auth.$state.user.country : '',
+        country: '',
         docNumber: '',
         Date: '',
         terms: '',
@@ -396,8 +396,12 @@ export default {
       if (!this.$auth.loggedIn) return this.$router.push(`/${this.$lang.current().slug}`)
 
       const userData = this.$auth.$state.user
-      this.setReserveField({ field: 'fullname', value: userData.fullname })
-      this.setReserveField({ field: 'phone', value: userData.phone })
+      this.form.fullname = userData.fullname
+      this.form.email = userData.email
+      this.form.phone = userData.phone && userData.phone.constructor === Object && 'nationalNumber' in userData.phone ? userData.nationalNumber : ''
+      this.form.country = userData.country ? userData.country : ''
+
+      this.setReserveField({ field: 'country', value: this.form.country })
     },
     handleSubmit(formName) {
       this.$refs[formName].validate((valid) => {

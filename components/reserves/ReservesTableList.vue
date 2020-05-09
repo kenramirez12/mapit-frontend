@@ -1,7 +1,11 @@
 <template>
   <div>
     <div class="md:hidden">
-      <el-table v-if="reserves && reserves.length > 0" :data="reserves ? reserves : [1, 2, 3, 4, 5]" @row-click="rowClicked" :show-header="false" class="w-full">
+      <el-table
+        v-if="reserves && reserves.length > 0" :data="reserves ? reserves : [1, 2, 3, 4, 5]"
+        @row-click="rowClicked"
+        :show-header="false"
+        class="w-full">
         <el-table-column>
           <template v-if="reserves" slot-scope="scope">
             <span class="reserve-title-responsive">
@@ -21,7 +25,7 @@
             height="12px" />
           </template>
         </el-table-column>
-        <el-table-column width="60" align="right">
+        <el-table-column width="45" align="right">
           <template v-if="reserves" slot-scope="scope">
             <img v-if="scope.row.status === 1" src="/images/warning-icon-sm.svg">
             <img v-else src="/images/success-icon-sm.svg" class="mr-4">
@@ -74,7 +78,7 @@
                 placement="top-start"
                 width="240"
                 trigger="hover"
-                content="Lorem ipsum dolor amet brooklyn commodo laborum laboris air plant in chartreuse ut nulla normcore">
+                :content="$lang.translate(translations, 'missing_info')">
                 <a
                   slot="reference"
                   href="#"
@@ -121,12 +125,14 @@ export default {
           details: 'VER DETALLE',
           pending_info: 'Información pendiente',
           completed_info: 'Información completa',
+          missing_info: 'Completa la información pendiente',
           no_reserves_found: 'Aún no haz reservado ninguna experiencia!'
         },
         'en_EN': {
           details: 'SEE DETAILS',
           pending_info: 'Pending information',
           completed_info: 'Information completed',
+          missing_info: 'Please complete the missing information',
           no_reserves_found: 'You haven’t booked any experiences yet!'
         }
       }

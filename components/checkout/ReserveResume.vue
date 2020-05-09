@@ -9,7 +9,7 @@
         size="mini"
         class="md:hidden"
         @click="showDetails = !showDetails"
-        :icon="showDetails ? 'el-icon-plus' : 'el-icon-minus'"
+        :icon="showDetails ? 'el-icon-minus' : 'el-icon-plus'"
         circle />
     </div>
 

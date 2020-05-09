@@ -85,7 +85,11 @@ export default {
 
   .swiper-slide {
     width:100%;
-    max-width: 17rem;
+    max-width: 16rem;
+
+    @media screen and (min-width: 640px) {
+      max-width: 17rem;
+    }
 
     @media screen and (min-width: 768px) {
       max-width: 19rem;

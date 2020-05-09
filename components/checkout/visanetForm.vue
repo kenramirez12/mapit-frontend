@@ -39,7 +39,7 @@ export default {
     visanet.setAttribute('data-amount', this.amount)
     visanet.setAttribute('data-cardholderemail', this.email)
     visanet.setAttribute('data-expirationminutes', '10')
-    visanet.setAttribute('data-timeouturl', '/timeout')
+    visanet.setAttribute('data-timeouturl', `${this.baseUrl}/${this.$lang.current().slug}/timeout`)
 
     document.getElementById('visanet-form').appendChild(visanet)
   }

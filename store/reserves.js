@@ -124,6 +124,13 @@ export const mutations = {
     state.form[data.field] = data.value
   },
   RESET_FORM(state) {
+    if(process.client) {
+      if(localStorage.getItem('availableHours')) localStorage.removeItem('availableHours')
+      if(localStorage.getItem('checkoutStep')) localStorage.removeItem('checkoutStep')
+      if(localStorage.getItem('reserveExperience')) localStorage.removeItem('reserveExperience')
+      if(localStorage.getItem('reserveForm')) localStorage.removeItem('reserveForm')
+    }
+
     state.experience = null
     state.availableHours = null
     state.willCheckout = false
@@ -133,6 +140,14 @@ export const mutations = {
     state.form.groupSize = ''
     state.form.time = ''
     state.form.extras = []
+    state.form.message = ''
+    state.form.fullname = ''
+    state.form.docNumber = ''
+    state.form.email = ''
+    state.form.birthdate = ''
+    state.form.country = ''
+    state.form.phone = ''
+    state.form.arrivalDate = ''
   },
   SET_AVAILABLE_HOURS(state, payload) {
     state.availableHours = payload

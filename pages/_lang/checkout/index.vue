@@ -18,7 +18,7 @@
       </li>
     </ul>
     <div class="container flex flex-wrap m-auto py-6">
-      <div class="w-full md:w-7/12 lg:w-2/3 order-2 md:order-1">
+      <div class="reserve-details-container w-full md:w-7/12 lg:w-2/3 order-2 md:order-1">
         <ReserveDetails v-if="currentStep === 1" />
         <ReserveClientDetails v-if="currentStep === 2" />
       </div>

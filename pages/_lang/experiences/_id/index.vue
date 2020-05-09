@@ -236,10 +236,6 @@ export default {
     }
   },
   methods: {
-    ...mapMutations({
-      resetReserveForm: 'reserves/RESET_FORM',
-      setExperience: 'reserves/SET_EXPERIENCE'
-    }),
     watchReserveAndNavbar () {
       const pageTop = window.window.pageYOffset
 
@@ -270,6 +266,7 @@ export default {
     },
     experienceContainerIsScrolled () {
       const experienceContainer = document.getElementById('experience-container')
+      if(!experienceContainer) return null
       const bounding = experienceContainer.getBoundingClientRect()
 
       return (bounding.height + bounding.y - window.innerHeight) <= 0
