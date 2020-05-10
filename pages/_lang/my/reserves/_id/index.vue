@@ -77,7 +77,7 @@
             </div>
           </div>
           <div class="flex flex-wrap font-light mb-6">
-            <div class="w-full">
+            <div class="w-full mb-6">
               <span class="block">{{ $lang.translate(translations, 'meeting_point') }}</span>
               <span>{{ $lang.apiTranslate(reserve.experience.translations, 'meeting_place') }}</span>
             </div>

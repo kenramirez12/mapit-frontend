@@ -270,7 +270,7 @@ export default {
         terms: '',
         amount: ''
       },
-      merchantId: process.env.visanetMerchantId,
+      merchantId: process.env.visanetEnv === 'dev' ? process.env.devMerchantId : process.env.prodMerchantId,
       apiUrl: process.env.API_URL,
       sessionKey: '',
       expirationTime: '',

@@ -17,6 +17,7 @@
               layout="prev, pager, next"
               :current-page.sync="currentPage"
               :page-count="lastPage"
+              :pager-count="4"
             />
           </div>
         </div>

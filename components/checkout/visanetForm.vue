@@ -21,13 +21,15 @@ export default {
   data() {
     return {
       apiUrl: process.env.apiUrl,
-      baseUrl: process.env.baseUrl
+      baseUrl: process.env.baseUrl,
+      visanetEnv: process.env.visanetEnv,
+      devVisanetForm: process.env.devVisanetForm,
+      prodVisanetForm: process.env.prodVisanetForm
     }
   },
   mounted() {
     const visanet = document.createElement('script')
-    visanet.src="https://static-content-qas.vnforapps.com/v2/js/checkout.js?qa=true"
-    // visanet.src="https://static-content.vnforapps.com/v2/js/checkout.js"
+    visanet.src = this.visanetEnv === 'dev' ? this.devVisanetForm : this.prodVisanetForm
     visanet.setAttribute('data-sessiontoken', this.sessionToken)
     visanet.setAttribute('data-channel', 'web')
     visanet.setAttribute('data-merchantid', this.merchantId)

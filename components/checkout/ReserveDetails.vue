@@ -288,7 +288,9 @@ export default {
       }
     },
     shouldDisableDate(time) {
-      if(time < new Date()) return true
+      let since = new Date()
+      since.setDate(since.getDate() + 2)
+      if(time < since) return true
       if(!this.availableDays.includes(time.getDay())) return true
 
       if(this.holidaysArray) {

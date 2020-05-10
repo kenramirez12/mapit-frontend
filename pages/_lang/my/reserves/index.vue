@@ -12,7 +12,8 @@
       <el-pagination
         layout="prev, pager, next"
         :current-page.sync="pagination.page"
-        :page-count="pagination.lastPage">
+        :page-count="pagination.lastPage"
+        :pager-count="4">
       </el-pagination>
     </div>
   </div>

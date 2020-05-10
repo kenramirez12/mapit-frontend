@@ -1,37 +1,38 @@
 <template>
   <div>
     <div class="md:hidden">
-      <el-table
-        v-if="reserves && reserves.length > 0" :data="reserves ? reserves : [1, 2, 3, 4, 5]"
-        @row-click="rowClicked"
-        :show-header="false"
-        class="w-full">
-        <el-table-column>
-          <template v-if="reserves" slot-scope="scope">
-            <span class="reserve-title-responsive">
-              {{ $lang.apiTranslate(scope.row.experience.translations, 'title') }}
-            </span>
-            <small>{{ scope.row.experience.destination.name }} - {{ scope.row.date }}</small>
-          </template>
-          <template v-else>
-            <PuSkeleton
-            :loading="true"
-            width="100%"
-            height="14px" />
-            <PuSkeleton
-            :loading="true"
-            width="50%"
-            class="block mt-2"
-            height="12px" />
-          </template>
-        </el-table-column>
-        <el-table-column width="45" align="right">
-          <template v-if="reserves" slot-scope="scope">
-            <img v-if="scope.row.status === 1" src="/images/warning-icon-sm.svg">
-            <img v-else src="/images/success-icon-sm.svg" class="mr-4">
-          </template>
-        </el-table-column>
-      </el-table>
+      <ul
+        v-if="!reserves || (reserves && reserves.length > 0)"
+        class="bg-red">
+        <li
+          v-for="(item, n) in (reserves ? reserves : [1, 2, 3, 4, 5])"
+          :key="'reserve_' + n"
+          class="border-b text-sm font-light py-2 pl-3 flex flex-wrap">
+          <div style="width:calc(100% - 45px)">
+            <template v-if="reserves">
+              <span class="reserve-title-responsive">
+                {{ $lang.apiTranslate(item.experience.translations, 'title') }}
+              </span>
+              <small>{{ item.experience.destination.name }} - {{ item.date }}</small>
+            </template>
+            <template v-else>
+              <PuSkeleton
+              :loading="true"
+              width="100%"
+              height="14px" />
+              <PuSkeleton
+              :loading="true"
+              width="50%"
+              class="block mt-2"
+              height="12px" />
+            </template>
+          </div>
+          <div v-if="reserves" class="flex" style="width:45px">
+          <img v-if="item.status === 1" src="/images/warning-icon-sm.svg" class="m-auto">
+          <img v-else src="/images/success-icon-sm.svg" class="m-auto">
+          </div>
+        </li>
+      </ul>
       <p v-if="reserves && reserves.length === 0" class="font-light">
         {{ $lang.translate(translations, 'no_reserves_found') }}
       </p>

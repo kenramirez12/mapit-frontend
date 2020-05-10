@@ -1,19 +1,19 @@
 <template>
-  <div class="steps">
+  <div class="linear-steps">
     <div
       v-for="(step, n) in steps"
       :key="'step_' + n"
-      class="step-item">
-      <div class="step-item__content">
-        <span class="step-item__number--responsive">{{ step.number }}</span>
-        <div class="step-item__image">
+      class="linear-step-item">
+      <div class="linear-step-item__content">
+        <span class="linear-step-item__number--responsive">{{ step.number }}</span>
+        <div class="linear-step-item__image">
           <img :src="`/images/covid/${step.image}`">
         </div>
-        <div class="step-item__description">
+        <div class="linear-step-item__description">
           <p class="font-light">{{ $lang.translate(step.translations, 'content') }}</p>
         </div>
       </div>
-      <div class="step-item__number">
+      <div class="linear-step-item__number">
         <span class="text-5xl font-light leading-none">{{ step.number }}</span>
       </div>
     </div>
@@ -32,7 +32,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .steps {
+  .linear-steps {
     position: relative;
     width: 100%;
     max-width: 260px;
@@ -58,7 +58,7 @@ export default {
     }
   }
 
-  .step-item {
+  .linear-step-item {
     display: flex;
     flex-wrap: wrap;
 

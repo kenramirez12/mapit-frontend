@@ -23,8 +23,8 @@ export default {
     return {
       translations: {
         es_ES: {
-          about: 'About the Coronavirus Outbreak',
-          online_experiences: 'Launching online experiences'
+          about: 'Acerca de la actualización del brote de coronavirus',
+          online_experiences: 'Introduciendo experiencias en línea'
         },
         en_EN: {
           about: 'About the Coronavirus Outbreak',

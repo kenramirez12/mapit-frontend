@@ -26,8 +26,12 @@ export default {
     baseUrl: process.env.BASE_URL,
     apiUrl: process.env.API_URL || 'http://127.0.0.1:8000/api',
     imageUrl: process.env.IMAGE_URL || 'http://127.0.0.1:8000',
-    visanetMerchantId: process.env.VISANET_MERCHANT_ID,
-    onlineId: process.env.ONLINE_ID
+    onlineId: process.env.ONLINE_ID,
+    visanetEnv: process.env.VISANET_ENV || 'dev',
+    devVisanetForm: process.env.DEV_VISANET_FORM,
+    devMerchantId: process.env.DEV_VISANET_MERCHANT_ID,
+    prodVisanetForm: process.env.PROD_VISANET_FORM,
+    prodMerchantId: process.env.PROD_VISANET_MERCHANT_ID
   },
   /*
   ** Customize the progress-bar color
