@@ -344,7 +344,8 @@ export default {
         this.isLoading = true
 
         try {
-          const resp = await this.getAvailableHours()        
+          const resp = await this.getAvailableHours()  
+          this.$log.debug(resp.response)      
   
           if(this.hasAvailableHours === true) {
             this.storageCheckoutData()
