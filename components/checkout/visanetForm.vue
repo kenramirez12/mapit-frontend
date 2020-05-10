@@ -49,10 +49,10 @@ export default {
     visanet.setAttribute('data-timeouturl', `${this.baseUrl}/${this.$lang.current().slug}/timeout`)
 
     document.getElementById('visanet-form').appendChild(visanet)
-    this.triggerClickVisanet()
+    this.tryClickVisanet()
   },
   methods: {
-    triggerClickVisanet() {
+    tryClickVisanet() {
       console.log('trying to trigger click')
       let btnAppear = false
       let btnClicked = false
@@ -62,16 +62,20 @@ export default {
           console.log('visanet btn found')
           if(btnAppear && !btnClicked) {
             console.log('ready to click')
+            this.triggerClickVisanet()
             btnClicked = true
-            setTimeout(() => {
-              console.log('clicked')
-              btn.click()
-            }, 1000);
           } else {
             btnAppear = true
           }
         }
       }, 500);
+    },
+    triggerClickVisanet() {
+      const btn = document.querySelector('.start-js-btn')
+      setTimeout(() => {
+        console.log('clicked')
+        btn.click()
+      }, 1000);
     }
   }
 }
