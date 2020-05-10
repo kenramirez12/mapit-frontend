@@ -225,7 +225,7 @@ export default {
           invalid_year: 'Debes ser mayor de 18 años',
           invalid_email: 'Ingrese un e-mail válido',
           invalid_number: 'Ingrese un número válido',
-          payment_window: 'La ventana de pago aparecerá en unos segundos...',
+          payment_window: 'Te re-direccionaremos al formulario de pago. Por favor, no cierre la ventana ni haga click en "Regresar"',
           reserve_failed: 'No pudimos procesar la reserva. Por favor inténtelo nuevamente.',
           wait: 'Espere unos segundos...'
         },
@@ -253,7 +253,7 @@ export default {
           invalid_year: 'Traveler must be over 18 years old',
           invalid_email: 'Enter a valid email',
           invalid_number: 'Enter a valid number',
-          payment_window: 'The payment window will appear in a few seconds...',
+          payment_window: 'We will redirect you to the payment form. Please, do not close the window or click on "Go Back"',
           reserve_failed: 'We were unable to process the booking. Please try again.',
           wait: 'Please wait a few seconds...'
         }
@@ -359,21 +359,6 @@ export default {
     ...mapMutations({
       setReserveField: 'reserves/SET_RESERVE_FIELD'
     }),
-    triggerClickVisanet() {
-      let btnAppear = false
-      let btnClicked = false
-      setInterval(() => {
-        const btn = document.querySelector('.start-js-btn')
-        if(btn) {
-          if(btnAppear && !btnClicked) {
-            btnClicked = true
-            btn.click()
-          } else {
-            btnAppear = true
-          }
-        }
-      }, 500);
-    },
     async createReserve(data) {
       try {
         const resp = await this.$axios.$post('/reserves/create', data)
@@ -382,7 +367,7 @@ export default {
         this.paymentId = resp.payment_uuid
         this.reserveId = resp.reserve_id + 300
         this.loadingMessage = this.$lang.translate(this.translations, 'payment_window')
-        this.triggerClickVisanet()
+        // this.triggerClickVisanet()
         // this.isLoading = false
       } catch (error) {
         this.isLoading = false

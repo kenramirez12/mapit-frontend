@@ -164,7 +164,7 @@ export default {
       padding: 2.5rem;
       padding-left: 3.5rem;
       color: #fff;
-      background-image: url('/images/auth-form-bg.jpg');
+      background-image: url('/images/auth-bg.jpg');
       background-position: center;
       background-size: cover;
     }

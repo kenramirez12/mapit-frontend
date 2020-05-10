@@ -43,12 +43,32 @@ export default {
     visanet.setAttribute('data-cardholdername', this.firstname)
     visanet.setAttribute('data-cardholderlastname', this.lastname)
     visanet.setAttribute('data-purchasenumber', this.purchaseNumber)
-    visanet.setAttribute('data-amount', this.amount)
+    visanet.setAttribute('data-amount', this.amount.toFixed(2))
     visanet.setAttribute('data-cardholderemail', this.email)
     visanet.setAttribute('data-expirationminutes', '10')
     visanet.setAttribute('data-timeouturl', `${this.baseUrl}/${this.$lang.current().slug}/timeout`)
 
     document.getElementById('visanet-form').appendChild(visanet)
+    this.triggerClickVisanet()
+  },
+  methods: {
+    triggerClickVisanet() {
+      let btnAppear = false
+      let btnClicked = false
+      setInterval(() => {
+        const btn = document.querySelector('.start-js-btn')
+        if(btn) {
+          if(btnAppear && !btnClicked) {
+            btnClicked = true
+            setTimeout(() => {
+              btn.click()
+            }, 500);
+          } else {
+            btnAppear = true
+          }
+        }
+      }, 500);
+    }
   }
 }
 </script>
