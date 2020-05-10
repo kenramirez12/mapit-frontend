@@ -53,14 +53,18 @@ export default {
   },
   methods: {
     triggerClickVisanet() {
+      console.log('trying to trigger click')
       let btnAppear = false
       let btnClicked = false
       setInterval(() => {
         const btn = document.querySelector('.start-js-btn')
         if(btn) {
+          console.log('visanet btn found')
           if(btnAppear && !btnClicked) {
+            console.log('ready to click')
             btnClicked = true
             setTimeout(() => {
+              console.log('clicked')
               btn.click()
             }, 1000);
           } else {
