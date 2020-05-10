@@ -62,7 +62,7 @@ export default {
             btnClicked = true
             setTimeout(() => {
               btn.click()
-            }, 500);
+            }, 1000);
           } else {
             btnAppear = true
           }
