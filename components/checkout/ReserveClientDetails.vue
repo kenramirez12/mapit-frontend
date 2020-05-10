@@ -362,7 +362,7 @@ export default {
     async createReserve(data) {
       try {
         const resp = await this.$axios.$post('/reserves/create', data)
-        console.log('createReserve', rep)
+        console.log('createReserve', resp)
         this.sessionKey = resp.payment_session.sessionKey
         this.expirationTime = resp.payment_session.expirationTime
         this.paymentId = resp.payment_uuid
