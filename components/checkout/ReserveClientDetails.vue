@@ -369,7 +369,7 @@ export default {
         this.reserveId = resp.reserve_id + 300
         this.loadingMessage = this.$lang.translate(this.translations, 'payment_window')
         // this.triggerClickVisanet()
-        this.isLoading = false
+        // this.isLoading = false
       } catch (error) {
         this.isLoading = false
         this.$message.error(this.$lang.translate(this.translations, 'reserve_failed'))

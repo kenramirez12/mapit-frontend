@@ -2,7 +2,8 @@
   <form
     id="visanet-form"
     :action="`${apiUrl}/payments/${paymentId}/callback`"
-    method="post" />
+    method="post"
+    style="display:none" />
 </template>
 
 <script>
@@ -48,7 +49,7 @@ export default {
     visanet.setAttribute('data-timeouturl', `${this.baseUrl}/${this.$lang.current().slug}/timeout`)
 
     document.getElementById('visanet-form').appendChild(visanet)
-    // this.tryClickVisanet()
+    this.tryClickVisanet()
   },
   methods: {
     tryClickVisanet() {
