@@ -34,11 +34,10 @@
           </div>
         </div>
       </div>
-      <!-- <div class="success-social py-6">
-        <strong class="success-social__points">+{{ reserve.social_points }}</strong>
-        <span class="success-social__label">Puntos sociales</span>
-      </div> -->
-      <el-button type="primary" class="px-6" @click="$router.push(`/${$lang.current().slug}/experiences`)">
+      <el-button
+        type="primary"
+        class="px-6"
+        @click="$router.push(`/${$lang.current().slug}/my/reserves/${reserve.code}`)">
         {{ $lang.translate(pageTranslations, 'gotit') }}
       </el-button>
     </div>

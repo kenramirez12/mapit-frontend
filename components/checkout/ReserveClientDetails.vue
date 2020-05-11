@@ -405,11 +405,11 @@ export default {
             fullname: this.form.fullname,
             docNumber: this.form.docNumber,
             country: this.form.country,
+            email: this.form.email,
             phone: this.phoneData,
             birthdate: this.form.birthdate,
             Date: this.form.Date,
             amount: this.$store.getters['reserves/totalPrice'],
-            email: reserveDetails.email,
             extras: reserveDetails.extras,
             message: reserveDetails.message
           }

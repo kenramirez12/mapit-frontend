@@ -17,7 +17,7 @@
           v-for="n in (reserve.group_size - 1)"
           :ref="`additional_traveler_${n}`"
           :key="'traveler_' + n"
-          :number="n"
+          :number="n+1"
           :attempts.sync="attempts"
           :default-country="reserve.details.traveler_country"
           @handle-validation="additionalTravelerValidation"

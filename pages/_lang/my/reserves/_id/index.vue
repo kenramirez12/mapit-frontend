@@ -238,7 +238,8 @@ export default {
           this.doc.addImage(logo, 'png', 10, 10);
 
           const img = canvas.toDataURL("image/png");
-          this.doc.text('Barranco bohemio: descubre el arte urbano y crea tu propio graffiti', 10, 35)
+          const experienceTitle = this.$lang.apiTranslate(this.reserve.experience.translations, 'title')
+          this.doc.text(experienceTitle, 10, 35)
           this.doc.addImage(img, 'JPEG', 10, 50, imageWidth, imageHeight);
           this.doc.save(`mapit_reserve_${this.reserve.code}.pdf`);        
       })

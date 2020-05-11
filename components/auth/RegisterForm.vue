@@ -92,10 +92,10 @@ export default {
           register_error: 'No pudimos procesar el registro, por favor inténtelo nuevamente.'
         },
         'en_EN': {
-          fullname: 'Nombre y Apellido',
+          fullname: 'Full name',
           email: 'Email',
           password: 'Password',
-          register: 'Register',
+          register: 'Sign up',
           required_field: 'Required field',
           required_lastname: 'Enter your last name',
           valid_email: 'Enter a valid email',

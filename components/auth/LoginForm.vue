@@ -99,7 +99,7 @@ export default {
           valid_password: 'Enter your password',
           incorrect_data: 'Email or password does not match.',
           havent_account: 'Don’t have an account?',
-          register: 'Register'
+          register: 'Sign up'
         }
       },
       loginData: {

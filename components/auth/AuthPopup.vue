@@ -49,8 +49,8 @@ export default {
         'en_EN': {
           hero_title: `Join Us!`,
           hero_copy: `Be part of the next<br>generation of travelers`,
-          login: 'Login',
-          register: 'Register'
+          login: 'Log in',
+          register: 'Sign up'
         }
       }
     }

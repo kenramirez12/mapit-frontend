@@ -7,7 +7,8 @@
         <li
           v-for="(item, n) in (reserves ? reserves : [1, 2, 3, 4, 5])"
           :key="'reserve_' + n"
-          class="border-b text-sm font-light py-2 pl-3 flex flex-wrap">
+          @click.prevent="$router.push(`/${$lang.current().slug}/my/reserves/${item.code}`)"
+          class="border-b text-sm font-light py-2 flex flex-wrap">
           <div style="width:calc(100% - 45px)">
             <template v-if="reserves">
               <span class="reserve-title-responsive">
