@@ -33,6 +33,7 @@ export default {
         reserve
       }
     } catch (error) {
+      this.$log.error('Error:', error)
       this.$log.error('Error:', error.response)
     }
   },

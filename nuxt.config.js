@@ -11,6 +11,7 @@ export default {
       { charset: 'utf-8' },
       { property: 'og:type', content: 'website' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { name: 'p:domain_verify', content: 'c85e80f46789127f58c9eef376ed8a5c' },
       { hid: 'image', name: 'image', content: process.env.BASE_URL + '/images/home/banner_2.jpg' },
       { hid: 'og:image', name: 'og:image', content: process.env.BASE_URL + '/images/home/banner_2.jpg' },
       { hid: 'og:image:type', name: 'og:image:type', content: 'image/jpg' },

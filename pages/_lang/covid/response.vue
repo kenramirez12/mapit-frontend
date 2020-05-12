@@ -28,7 +28,7 @@ export default {
           updated_at: 'Última actualización 12/05/2020',
           content: `
           <h2 class="text-xl md:text-2xl lg:text-3xl leading-tight mb-6">About the Coronavirus Outbreak</h2>
-          <p class="mb-8">Hasta el 12 de mayo, las fronteras de Perú estarán cerradas (fechas sujetas a prórroga). La mejor actualización sobre la propagación del Coronavirus en Perú es el Ministerio de Salud de Perú (@Minsa_Peru en Twitter). No se sabe cuándo se levantarán las restricciones de viaje, es por eso que en Map It hemos decidido pausar nuestras experiencias a partir del 16 de marzo, hasta nuevo aviso.</p>
+          <p class="mb-8">Hasta el 24 de mayo, las fronteras de Perú estarán cerradas (fechas sujetas a prórroga). La mejor actualización sobre la propagación del Coronavirus en Perú es el Ministerio de Salud de Perú (@Minsa_Peru en Twitter). No se sabe cuándo se levantarán las restricciones de viaje, es por eso que en Map It hemos decidido pausar nuestras experiencias a partir del 16 de marzo, hasta nuevo aviso.</p>
           <p class="mb-8">Sin embargo, una vez que se vuelvan a abrir las fronteras del país, se levanten las restricciones de viaje, y el panorama sea adecuado para el turismo, continuaremos ofreciendo nuestras experiencias. Estamos monitoreando de cerca la situación para determinar la fecha correspondiente. Además, seguimos trabajando arduamente para adaptar nuestras políticas, y así brindarle el mejor apoyo posible.</p>
           <p class="mb-8 text-xl md:text-2xl lg:text-3xl leading-tight">Con ese fin, hemos realizado las siguientes actualizaciones en nuestras políticas:</p>
           <p class="mb-8">1. Ofrecer reembolsos completos o la posibilidad de reprogramar todas las reservas afectadas por COVID-19 para viajar desde el 16 de marzo de 2020, hasta que se levanten las restricciones de prohibición de viaje, y se vuelvan a abrir las fronteras en su país de origen y en Perú.</p>
@@ -39,10 +39,10 @@ export default {
           <p class="mb-8">Si deseas tener una experiencia privada o realizar cualquier otro cambio, o hacer una cancelación, comunícate con info@mapit.pe</p>`
         },
         en_EN: {
-          updated_at: 'Last updated 12/05/2020',
+          updated_at: 'Last updated 24/05/2020',
           content: `
           <h2 class="text-xl md:text-2xl lg:text-3xl leading-tight mb-4">About the Coronavirus Outbreak</h2>
-          <p class="mb-8">Peru is on lockdown and has been closed until May 12th (dates subject to extend). The best update on the spread and numbers in Peru is the Ministry of Health of Peru (@Minsa_Peru on Twitter).  It is uncertain when travel restrictions will lift, that is why in Map It we have decided to pause experiences starting from March 16th until further notice.</p>
+          <p class="mb-8">Peru is on lockdown and has been closed until May 24th (dates subject to extend). The best update on the spread and numbers in Peru is the Ministry of Health of Peru (@Minsa_Peru on Twitter). It is uncertain when travel restrictions will lift, that is why in Map It we have decided to pause experiences starting from March 16th until further notice.</p>
           <p class="mb-8">However, once the country’s borders re opens, travel restrictions are lifted and the landscape is suitable for tourism, we will continue offering our experiences. We are closely monitoring the situation to determine when. Besides, we are working hard to adapt our policies to best support you.</p>
           <p class="mb-8 text-xl md:text-2xl lg:text-3xl leading-tight">To that end, we’ve made the following updates in our policies:</p>
           <p class="mb-8">1. Offer full refunds or the possibility to reschedule all COVID-19 impacted bookings to travel from March 16th , 2020 until travel ban restrictions are lifted and borders are reopened in your country of origin and Peru.</p>
