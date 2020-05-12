@@ -7,7 +7,7 @@
         <li
           v-for="(item, n) in (reserves ? reserves : [1, 2, 3, 4, 5])"
           :key="'reserve_' + n"
-          @click.prevent="$router.push(`/${$lang.current().slug}/my/reserves/${item.code}`)"
+          @click.prevent="$router.push(`/${$lang.current().slug}/my/bookings/${item.code}`)"
           class="border-b text-sm font-light py-2 flex flex-wrap">
           <div style="width:calc(100% - 45px)">
             <template v-if="reserves">
@@ -84,7 +84,7 @@
                 <a
                   slot="reference"
                   href="#"
-                  @click.prevent="$router.push(`/${$lang.current().slug}/my/reserves/${scope.row.code}/travelers-info`)"
+                  @click.prevent="$router.push(`/${$lang.current().slug}/my/bookings/${scope.row.code}/travelers-info`)"
                   class="link-underline link-underline--error">
                   <img src="/images/warning-icon-sm.svg" class="mr-4">
                   <span>{{ $lang.translate(translations, 'pending_info') }}</span>
@@ -101,7 +101,7 @@
               <a
                 class="link-underline"
                 href="#"
-                @click.prevent="$router.push(`/${$lang.current().slug}/my/reserves/${scope.row.code}`)"
+                @click.prevent="$router.push(`/${$lang.current().slug}/my/bookings/${scope.row.code}`)"
                 >
                 <span>{{ $lang.translate(translations, 'details') }}</span>
               </a>
@@ -145,9 +145,9 @@ export default {
       if(this.reserves) {
         if('status' in row) {
           if(row.status === 1) {
-            this.$router.push(`/${this.$lang.current().slug}/my/reserves/${row.code}/travelers-info`)
+            this.$router.push(`/${this.$lang.current().slug}/my/bookings/${row.code}/travelers-info`)
           } else if(row.status === 2) {
-            this.$router.push(`/${this.$lang.current().slug}/my/reserves/${row.code}`)
+            this.$router.push(`/${this.$lang.current().slug}/my/bookings/${row.code}`)
           }
         }
       }

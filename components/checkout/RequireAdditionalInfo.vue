@@ -12,7 +12,7 @@
       </p>
       <el-button
         type="primary"
-        @click="$router.push(`/${$lang.current().slug}/my/reserves/${$route.params.id}/travelers-info`)"
+        @click="$router.push(`/${$lang.current().slug}/my/bookings/${$route.params.id}/travelers-info`)"
         class="px-6 mt-6">
         {{ $lang.translate(pageTranslations, 'gotit') }}
       </el-button>

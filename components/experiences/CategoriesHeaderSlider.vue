@@ -128,11 +128,11 @@ export default {
       const mainHeader = document.querySelector('.header').clientHeight
       const pageHeader = document.querySelector('.page-header').clientHeight
 
-      this.isLoading = true
-      setTimeout(() => {
-        this.isLoading = false
-        return window.scrollTo({ top: mainHeader + pageHeader, behavior: 'smooth' })
-      }, 500)
+      this.isLoading = false
+      // setTimeout(() => {
+      //   this.isLoading = false
+      //   return window.scrollTo({ top: mainHeader + pageHeader, behavior: 'smooth' })
+      // }, 500)
     }
   },
 

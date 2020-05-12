@@ -159,11 +159,13 @@ export default {
 
         this.isLoading = false
       } catch(e) {
-        this.$log.error('tryRegister.error: ', e)
-        let error = this.$translate(this.translations, 'register_error')
+        this.$log.error('tryRegister.error: ', e, e.response)
+        let error = this.$lang.translate(this.translations, 'register_error')
 
-        const errors = e && e.response && 'errors' in e.response.data ? e.response.data.errors : null
-        if(errors) error = errors[Object.keys(errors)[0]][0]
+        const errors = e.response && ('errors' in e.response.data) ? e.response.data.errors : null
+        if(errors) {
+          error = errors[Object.keys(errors)[0]][0]
+        }
 
         this.$message.error(error);
         this.isLoading = false

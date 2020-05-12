@@ -214,7 +214,7 @@ export default {
   },
   mounted() {
     if(this.reserve && this.reserve.status === 1) {
-      return this.$router.push(`/${this.$lang.current().slug}/my/reserves/${this.reserve.code}/travelers-info`)
+      return this.$router.push(`/${this.$lang.current().slug}/my/bookings/${this.reserve.code}/travelers-info`)
     }
 
     if(process.client) {

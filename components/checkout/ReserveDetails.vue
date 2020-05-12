@@ -93,7 +93,7 @@
             :key="extra.id"
             :label="extra.id"
             class="checkout-lg w-full my-2">
-            {{ $lang.apiTranslate(extra.translations, 'title') }} (+ {{ extra.price }})
+            {{ $lang.apiTranslate(extra.translations, 'title') }} (+${{ extra.price }})
           </el-checkbox>
         </el-checkbox-group>
       </div>

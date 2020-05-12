@@ -5,7 +5,7 @@
         <el-button
           circle
           icon="el-icon-arrow-left"
-          @click="$router.push(`/${$lang.current().slug}/my/reserves`)" />
+          @click="$router.push(`/${$lang.current().slug}/my/bookings`)" />
       </div>
       <h1 id="reserve-title" class="text-white text-2xl md:text-3xl leading-tight">
         {{ $lang.apiTranslate(experience.translations, 'title') }}

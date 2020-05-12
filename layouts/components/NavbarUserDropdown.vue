@@ -25,7 +25,7 @@
         <el-dropdown-item command="profile">
           {{ this.$lang.translate(translations, 'profile') }}
         </el-dropdown-item>
-        <el-dropdown-item command="reserves">
+        <el-dropdown-item command="bookings">
           <el-badge :hidden="user.incomplete_reserves === 0" is-dot class="badge__item">
             {{ this.$lang.translate(translations, 'booking_history') }}
           </el-badge>

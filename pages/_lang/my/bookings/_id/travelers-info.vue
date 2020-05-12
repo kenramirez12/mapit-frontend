@@ -108,11 +108,11 @@ export default {
   },
   mounted() {
     if(!this.reserve || this.reserve.status === 0) {
-      return this.$router.push(`/${this.$lang.current().slug}/my/reserves`)
+      return this.$router.push(`/${this.$lang.current().slug}/my/bookings`)
     }
 
     if(this.reserve.status === 2) {
-      return this.$router.push(`/${this.$lang.current().slug}/my/reserves/${this.reserve.code}`)
+      return this.$router.push(`/${this.$lang.current().slug}/my/bookings/${this.reserve.code}`)
     }
   },
   methods: {
@@ -141,7 +141,7 @@ export default {
         await this.$auth.fetchUser()
         this.isLoading = false
         this.$message.success(this.$lang.translate(this.translations, 'reserve_confirmed'))
-        this.$router.push(`/${this.$lang.current().slug}/my/reserves/${this.reserve.code}`)
+        this.$router.push(`/${this.$lang.current().slug}/my/bookings/${this.reserve.code}`)
       } catch (error) {
         this.isLoading = false
         this.$message.error(this.$lang.translate(this.translations, 'reserve_error'))

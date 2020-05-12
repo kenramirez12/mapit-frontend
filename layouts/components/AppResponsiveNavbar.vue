@@ -141,6 +141,9 @@ export default {
         case 'faqs':
           return this.$router.push(`/${langSlug}/faqs`)
           break;
+        case 'blog':
+          return window.open('https://medium.com/map-it-blog', '_blank')
+          break;
         case 'es':
           return this.updateLang('es')
           break;

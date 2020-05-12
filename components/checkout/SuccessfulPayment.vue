@@ -37,7 +37,7 @@
       <el-button
         type="primary"
         class="px-6"
-        @click="$router.push(`/${$lang.current().slug}/my/reserves/${reserve.code}`)">
+        @click="$router.push(`/${$lang.current().slug}/my/bookings/${reserve.code}`)">
         {{ $lang.translate(pageTranslations, 'gotit') }}
       </el-button>
     </div>
