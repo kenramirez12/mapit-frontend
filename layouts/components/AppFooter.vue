@@ -168,13 +168,13 @@
           <hr>
         </div>
         <div class="w-full lg:pt-4">
-          <a class="inline-flex justify-around sm:justify-start w-full">
-          <div class="social-icon"><img src="~/assets/images/social/instagram.svg" alt="" width="50%"></div>
-          <div class="social-icon"><img src="~/assets/images/social/facebook.svg" alt=""></div>
-          <div class="social-icon"><img src="~/assets/images/social/linkedin.svg" alt=""></div>
-          <div class="social-icon"><img src="~/assets/images/social/tripadvisor.svg" alt=""></div>
-          <div class="social-icon"><img src="~/assets/images/social/pinterest.svg" alt="" ></div>
-          </a>
+          <div class="inline-flex justify-around sm:justify-start w-full">
+          <a href="http://instagram.com/experiencemapit" target="_blank" class="social-icon"><img src="~/assets/images/social/instagram.svg" alt="" width="50%"></a>
+          <a href="https://www.facebook.com/experiencemapit" target="_blank" class="social-icon"><img src="~/assets/images/social/facebook.svg" alt=""></a>
+          <a href="https://www.linkedin.com/company/mapitperu" target="_blank" class="social-icon"><img src="~/assets/images/social/linkedin.svg" alt=""></a>
+          <a href="https://www.tripadvisor.com/Attraction_Review-g294314-d16659696-Reviews-Map_It_Peru-Cusco_Cusco_Region.html" target="_blank" class="social-icon"><img src="~/assets/images/social/tripadvisor.svg" alt=""></a>
+          <a href="https://www.pinterest.com/experiencemapit/" target="_blank" class="social-icon"><img src="~/assets/images/social/pinterest.svg" alt="" ></a>
+          </div>
         </div>
       </div>
       <div class="w-full lg:w-2/12 px-3 lg:px-0 mt-6 lg:mt-0">

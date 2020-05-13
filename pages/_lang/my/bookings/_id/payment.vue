@@ -51,7 +51,9 @@ export default {
           denial_reason: 'Motivo de denegación',
           card_number: 'Número de tarjeta',
           amount: 'Monto',
-          api_error: 'Problemas técnicos en nuestra aplicación.'
+          api_error: 'Problemas técnicos en nuestra aplicación.',
+          error_title: 'Error de<br>compra',
+          error_copy: 'Whoops! Ocurrió un error en la compra y la transferencia no se pudo realizar. Por favor inténtelo nuevamente o contáctenos a <a href="mailto:info@mapit.pe" class="underline">info@mapit.pe</a>.'
         },
         'en_EN': {
           order_number: 'Order number',
@@ -59,7 +61,9 @@ export default {
           denial_reason: 'Reason of denial',
           card_number: 'Credit card number',
           amount: 'Amount',
-          api_error: 'Technical problems in our application.'
+          api_error: 'Technical problems in our application.',
+          error_title: 'Transaction<br>error',
+          error_copy: 'Whoops! An error occurred in the purchase and the payment could not be completed. Please try again or contact us at <a href="mailto:info@mapit.pe" class="underline">info@mapit.pe</a>.' 
         }
       }
     }

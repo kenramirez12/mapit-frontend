@@ -30,11 +30,11 @@ export default {
   mounted() {
     const visanet = document.createElement('script')
     visanet.src = this.visanetEnv === 'dev' ? this.devVisanetForm : this.prodVisanetForm
-    console.log('visanetEnv', visanet.src)
-    console.log('sessionToken', this.sessionToken)
-    console.log('MercantId', this.merchantId)
-    console.log('purchaseNumber', this.purchaseNumber)
-    console.log('amount', this.amount)
+    // console.log('visanetEnv', visanet.src)
+    // console.log('sessionToken', this.sessionToken)
+    // console.log('MercantId', this.merchantId)
+    // console.log('purchaseNumber', this.purchaseNumber)
+    // console.log('amount', this.amount)
     visanet.setAttribute('data-sessiontoken', this.sessionToken)
     visanet.setAttribute('data-channel', 'web')
     visanet.setAttribute('data-merchantid', this.merchantId)
@@ -53,15 +53,12 @@ export default {
   },
   methods: {
     tryClickVisanet() {
-      console.log('trying to trigger click')
       let btnAppear = false
       let btnClicked = false
       setInterval(() => {
         const btn = document.querySelector('.start-js-btn')
         if(btn) {
-          console.log('visanet btn found')
           if(btnAppear && !btnClicked) {
-            console.log('ready to click')
             this.triggerClickVisanet()
             btnClicked = true
           } else {
@@ -73,7 +70,6 @@ export default {
     triggerClickVisanet() {
       const btn = document.querySelector('.start-js-btn')
       setTimeout(() => {
-        console.log('clicked')
         btn.click()
       }, 1000);
     }

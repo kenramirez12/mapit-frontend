@@ -5,7 +5,7 @@
     <div class="success-card m-auto p-6">
       <img src="~/assets/images/include-icon.svg" class="mx-auto" width="70">
       <h3 class="success-card__title mt-6">
-        {{ $lang.translate(pageTranslations, 'succesfull') }}<br>
+        {{ $lang.translate(pageTranslations, 'succesful') }}<br>
         {{ $lang.translate(pageTranslations, 'purchase') }}
       </h3>
       <p class="success-card__copy my-5 mb-0">
@@ -61,7 +61,7 @@ export default {
     return {
       pageTranslations: {
         'es_ES': {
-          succesfull: 'Compra',
+          succesful: 'Compra',
           purchase: 'exitosa',
           copy: '¡Gracias por reservar tu experiencia con nosotros!',
           copy2: 'Dentro de las próximas 24 hrs te llegará un correo de confirmación con el código de reserva y los detalles de la experiencia.',
@@ -73,7 +73,7 @@ export default {
           amount: 'Monto'
         },
         'en_EN': {
-          succesfull: 'Succesfull',
+          succesful: 'Succesful',
           purchase: 'purchase',
           copy: 'Thank you for booking with us!',
           copy2: 'Within the next 24 hrs, you will receive a confirmation email with the reservation code and the details of the experience.',

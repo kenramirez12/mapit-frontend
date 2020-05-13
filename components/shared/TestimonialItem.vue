@@ -75,7 +75,7 @@ export default {
     testimonialComment() {
       const comment = this.$lang.apiTranslate(this.testimonial.translations, 'comment')
       if(comment.length < 400) return comment
-      return comment.substr(1, 400) + '...'
+      return comment.substr(0, 400) + '...'
     }
   }
 }

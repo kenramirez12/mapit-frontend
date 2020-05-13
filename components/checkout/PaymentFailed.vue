@@ -2,8 +2,8 @@
   <div class="success-container p-4">
     <div class="success-card m-auto p-6">
       <img src="/images/checkout-fail.svg" class="mx-auto" width="70">
-      <h3 class="success-card__title mt-6">Error de<br>compra</h3>
-      <p class="success-card__copy mt-5">¡ Dolor velit reprehenderit voluptate magna. Et quis aute ut elit. Consequat eiusmod pariatur sint voluptate laborum sunt cupidatat consectetur deserunt cillum sint fugiat.</p>
+      <h3 class="success-card__title mt-6" v-html="$lang.translate(translations, 'error_title')" />
+      <p class="success-card__copy mt-5" v-html="$lang.translate(translations, 'error_copy')" />
       <div class="py-6 font-light">
         <div v-if="!reserve.payment.details" class="w-full text-sm">
           {{ $lang.translate(translations, 'denial_reason') }}:<br>
