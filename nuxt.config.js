@@ -92,12 +92,6 @@ export default {
     '@nuxtjs/moment',
     ['@nuxtjs/google-analytics', {
       id: 'UA-165285494-1'
-    }],
-    ['nuxt-facebook-pixel-module', {
-      /* module options */
-      track: 'PageView',
-      pixelId: '911091462646878',
-      disabled: false
     }]
   ],
   /*
@@ -116,6 +110,12 @@ export default {
       showMethodName : true,
       separator: '|',
       showConsoleColors: false
+    }],
+    ['nuxt-facebook-pixel-module', {
+      /* module options */
+      track: 'PageView',
+      pixelId: '911091462646878',
+      disabled: false
     }]
   ],
   recaptcha: {
