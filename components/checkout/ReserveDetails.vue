@@ -244,9 +244,9 @@ export default {
   mounted() {
     if(process.client) {
       this.retrieveFromStorage()
-      if(!this.experience) {
-        this.$router.push(`/${this.$lang.current().slug}/experiences`)
-      }
+      // if(!this.experience) {
+        // this.$router.push(`/${this.$lang.current().slug}/experiences`)
+      // }
     }
   },
   methods: {
@@ -260,31 +260,29 @@ export default {
       getAvailableHours: 'reserves/getAvailableHours'
     }),
     retrieveFromStorage() {
-      if(process.client) {
-        const availableHours = localStorage.getItem('availableHours')
-        const checkoutStep = localStorage.getItem('checkoutStep')
-        const reserveExperience = localStorage.getItem('reserveExperience')
-        const reserveForm = localStorage.getItem('reserveForm')
+      const availableHours = localStorage.getItem('availableHours')
+      const checkoutStep = localStorage.getItem('checkoutStep')
+      const reserveExperience = localStorage.getItem('reserveExperience')
+      const reserveForm = localStorage.getItem('reserveForm')
 
-        if(availableHours) {
-          this.setAvailableHours(JSON.parse(availableHours))
-        }
-        if(checkoutStep) {
-          this.setCheckoutStep(JSON.parse(checkoutStep))
-        }
-        if(reserveExperience) {
-          this.setExperience(JSON.parse(reserveExperience))
-        }
-        if(reserveForm) {
-          const formatted = JSON.parse(reserveForm)
-          Object.keys(formatted).forEach(prop => {
-            const formField = {
-              field: prop,
-              value: formatted[prop]
-            }
-            this.setReserveField(formField)
-          })
-        }
+      if(availableHours) {
+        this.setAvailableHours(JSON.parse(availableHours))
+      }
+      if(checkoutStep) {
+        this.setCheckoutStep(JSON.parse(checkoutStep))
+      }
+      if(reserveExperience) {
+        this.setExperience(JSON.parse(reserveExperience))
+      }
+      if(reserveForm) {
+        const formatted = JSON.parse(reserveForm)
+        Object.keys(formatted).forEach(prop => {
+          const formField = {
+            field: prop,
+            value: formatted[prop]
+          }
+          this.setReserveField(formField)
+        })
       }
     },
     shouldDisableDate(time) {

@@ -76,9 +76,6 @@ export default {
           logout: { url: '/logout', method: 'post' },
           user: { url: '/user', method: 'get', propertyName: 'user' }
         },
-        // tokenRequired: true,
-        // tokenType: 'bearer'
-        // autoFetchUser: true
       },
       facebook: {
         client_id: '562460637810420',
@@ -95,6 +92,12 @@ export default {
     '@nuxtjs/moment',
     ['@nuxtjs/google-analytics', {
       id: 'UA-165285494-1'
+    }],
+    ['nuxt-facebook-pixel-module', {
+      /* module options */
+      track: 'PageView',
+      pixelId: '911091462646878',
+      disabled: false
     }]
   ],
   /*
