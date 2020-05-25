@@ -13,7 +13,7 @@
           <span class="font-light">
             {{ priceLabel }}
           </span>
-          <span class="block font-light text-xl lg:text-3xl leading-none">US$ {{ reservePrice }}</span>
+          <span class="block font-light text-xl lg:text-3xl leading-none">USD {{ reservePrice }}</span>
         </div>
         <div v-if="sticky" class="flex items-center ml-auto">
           <span class="text-sm">
@@ -344,9 +344,9 @@ export default {
         this.isLoading = true
 
         try {
-          const resp = await this.getAvailableHours()  
-          this.$log.debug(resp.response)      
-  
+          const resp = await this.getAvailableHours()
+          this.$log.debug(resp.response)
+
           if(this.hasAvailableHours === true) {
             this.storageCheckoutData()
             if(this.$auth.loggedIn) {

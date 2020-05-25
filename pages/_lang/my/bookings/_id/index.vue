@@ -108,7 +108,7 @@ import ReserveHeader from '@/components/reserves/ReserveHeader'
 
 export default {
   middleware: 'auth',
-  async asyncData({ app, params, store, error }) {  
+  async asyncData({ app, params, store, error }) {
     try {
       const resp = await app.$axios.$get('/reserves/' + params.id)
       const reserve = resp.reserve
@@ -203,7 +203,7 @@ export default {
     },
     reserveExtras() {
       if(!this.reserve.extras) return ''
-      
+
       const extras = []
       this.reserve.extras.forEach(item => {
         extras.push(this.$lang.apiTranslate(item.translations, 'title'))
@@ -239,9 +239,10 @@ export default {
 
           const img = canvas.toDataURL("image/png");
           const experienceTitle = this.$lang.apiTranslate(this.reserve.experience.translations, 'title')
+
           this.doc.text(experienceTitle, 10, 35)
           this.doc.addImage(img, 'JPEG', 10, 50, imageWidth, imageHeight);
-          this.doc.save(`mapit_reserve_${this.reserve.code}.pdf`);        
+          this.doc.save(`mapit_reserve_${this.reserve.code}.pdf`);
       })
       }
     }

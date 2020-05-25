@@ -86,6 +86,9 @@ export default {
         }
       }
     }
+  },
+  mounted() {
+    this.$fb.track('Purchase')
   }
 }
 </script>
