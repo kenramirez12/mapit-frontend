@@ -40,7 +40,7 @@
             <ul>
               <li class="mb-1">
                 <a
-                  :href="`/${$lang.current().slug}/faqs`" 
+                  :href="`/${$lang.current().slug}/faqs`"
                   @click.prevent="$router.push(`/${$lang.current().slug}/faqs`)">
                   FAQs
                 </a>
@@ -57,6 +57,13 @@
                   :href="`/${$lang.current().slug}/privacy-policy`"
                   @click.prevent="$router.push(`/${$lang.current().slug}/privacy-policy`)">
                   {{ $lang.translate(translations, 'policies') }}
+                </a>
+              </li>
+              <li class="mb-1">
+                <a
+                  :href="`/${$lang.current().slug}/claim-sheet`"
+                  @click.prevent="$router.push(`/${$lang.current().slug}/claim-sheet`)">
+                  {{ $lang.translate(translations, 'claim') }}
                 </a>
               </li>
             </ul>
@@ -209,6 +216,7 @@ export default {
           blog: 'Blog',
           terms: 'Términos y condiciones',
           policies: 'Políticas de Privacidad',
+          claim: 'Libro de reclamaciones',
           about: 'Nosotros',
           why_mapit: '¿Por qué MAP IT?',
           team: 'Nuestro equipo',
@@ -226,6 +234,7 @@ export default {
           blog: 'Blog',
           terms: 'Terms and Conditions',
           policies: 'Privacy Policy',
+          claim: 'Claim Sheet',
           about: 'About Us',
           why_mapit: 'Why MAP IT?',
           team: 'Our Team',
