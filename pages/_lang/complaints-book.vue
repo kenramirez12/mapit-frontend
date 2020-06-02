@@ -28,7 +28,7 @@ export default {
           copy: '¿Necesitas ayuda? Cuéntanos.'
         },
         en_EN: {
-          title: 'Claim sheet',
+          title: 'Complaints book',
           copy: 'Need help? Let us know'
         }
       }

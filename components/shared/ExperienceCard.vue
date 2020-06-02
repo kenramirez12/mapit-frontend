@@ -19,7 +19,7 @@
       <div class="flex items-center">
         <PuSkeleton :loading="loading" height="20px" style="width:100%;max-width:100px;white-space:nowrap">
           <div v-if="experience" style="font-size:13px">
-            {{ experience.destination.name }} 
+            {{ experience.destination.name }}
             <span class="text-gray-500 ml-3">{{ $lang.apiTranslate(experience.translations, 'duration') }}</span>
           </div>
         </PuSkeleton>
@@ -56,13 +56,13 @@
               v-if="experience"
               class="block font-light leading-none"
               :class="{'has-sale-price' : experience.on_sale === 1 }">
-              US$ {{ experience.min_price }}</span>
+              USD {{ experience.min_price }}</span>
           </PuSkeleton>
         </div>
         <div
           v-if="!loading && experience && experience.on_sale === 1"
           class="custom-card__sale-price">
-          US$ {{ salePrice }}
+          USD {{ salePrice }}
         </div>
       </div>
     </div>
@@ -175,7 +175,7 @@ export default {
       if(!this.$auth.loggedIn) {
         return this.setAuthDialogVisible(true)
       }
-      
+
       if(this.favorite) {
         this.removeFavorite(experienceId)
       } else {

@@ -61,8 +61,8 @@
               </li>
               <li class="mb-1">
                 <a
-                  :href="`/${$lang.current().slug}/claim-sheet`"
-                  @click.prevent="$router.push(`/${$lang.current().slug}/claim-sheet`)">
+                  :href="`/${$lang.current().slug}/complaints-book`"
+                  @click.prevent="$router.push(`/${$lang.current().slug}/complaints-book`)">
                   {{ $lang.translate(translations, 'claim') }}
                 </a>
               </li>
@@ -234,7 +234,7 @@ export default {
           blog: 'Blog',
           terms: 'Terms and Conditions',
           policies: 'Privacy Policy',
-          claim: 'Claim Sheet',
+          claim: 'Complaints book',
           about: 'About Us',
           why_mapit: 'Why MAP IT?',
           team: 'Our Team',
