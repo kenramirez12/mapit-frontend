@@ -207,8 +207,8 @@ export default {
     width: 100%;
     background-size: cover;
     background-position: center;
-    padding-top: 2rem;
-    padding-bottom: .5rem;
+    padding-top: 6rem;
+    padding-bottom: 5rem;
 
     @media screen and (min-width: 640px) {
       height: 450px;
@@ -230,7 +230,7 @@ export default {
       & > .el-form-item:first-child {
         flex: 2;
         margin-left: 10px;
-        
+
         & > .el-form-item__content {
           width: 100%;
         }
