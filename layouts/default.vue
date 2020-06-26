@@ -1,5 +1,5 @@
 <template>
-  <div 
+  <div
     v-loading="isLoading"
     :class="{ 'is-loading': isLoading }">
     <div>
@@ -17,7 +17,7 @@
       <AppFooter
         v-if="
         $route.name &&
-        $route.name !== 'lang-experiences-id' && 
+        $route.name !== 'lang-experiences-id' &&
         $route.name !== 'lang-how-it-works'" />
     </div>
   </div>
@@ -121,6 +121,7 @@ export default {
     }
   },
   mounted () {
+    this.$fb.track('Purchase')
     this.getCategories()
     this.getDestinations()
 
@@ -135,7 +136,7 @@ export default {
     }
 
     if (localStorage.getItem('loginRedirectPath')) { // Shouldn't arrieve here
-      const redirectTo = localStorage.getItem('loginRedirectPath') 
+      const redirectTo = localStorage.getItem('loginRedirectPath')
       localStorage.removeItem('loginRedirectPath')
       return this.$router.push(redirectTo)
     }
