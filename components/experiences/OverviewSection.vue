@@ -9,10 +9,22 @@
           <p
             v-if="'host' in experience && experience.host.constructor === Object"
             class="flex items-center my-6 py-6 font-light text-lg md:text-xl">
-            <img
-              v-if="'path' in experience.host.avatar"
-              class="wiser-avatar mr-3"
-              :src="$imagePath(experience.host.avatar.path)" />
+            <template v-if="'path' in experience.host.avatar">
+              <el-popover
+                v-if="experience.host.about"
+                placement="top-start"
+                width="200"
+                trigger="hover"
+                :content="experience.host.about">
+                <img
+                  class="wiser-avatar mr-3"
+                  :src="$imagePath(experience.host.avatar.path)" />
+              </el-popover>
+              <img
+                v-else
+                class="wiser-avatar mr-3"
+                :src="$imagePath(experience.host.avatar.path)" />
+            </template>
             <span>Wiser: {{ $lang.apiTranslate(experience.host.translations, 'fullname') }}</span>
           </p>
           <div v-else class="md:my-6 py-6" />
