@@ -10,16 +10,20 @@
             v-if="'host' in experience && experience.host.constructor === Object"
             class="flex items-center my-6 py-6 font-light text-lg md:text-xl">
             <template v-if="'path' in experience.host.avatar">
-              <el-popover
-                v-if="experience.host.about"
-                placement="top-start"
-                width="200"
-                trigger="hover"
-                :content="experience.host.about">
+              <template v-if="hostAbout">
+                <el-popover
+                  ref="popover"
+                  v-if="hostAbout"
+                  placement="top-start"
+                  width="260"
+                  trigger="hover">
+                  <div v-html="hostAbout" />
+                </el-popover>
                 <img
+                  v-popover:popover
                   class="wiser-avatar mr-3"
                   :src="$imagePath(experience.host.avatar.path)" />
-              </el-popover>
+              </template>
               <img
                 v-else
                 class="wiser-avatar mr-3"
@@ -118,6 +122,10 @@ export default {
       })
 
       return translations
+    },
+    hostAbout () {
+      if(!this.experience.host) return null
+      return this.$lang.apiTranslate(this.experience.host.translations, 'about').replace(/\n/g, "<br />")
     }
   }
 }
