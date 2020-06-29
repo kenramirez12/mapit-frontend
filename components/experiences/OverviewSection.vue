@@ -125,7 +125,11 @@ export default {
     },
     hostAbout () {
       if(!this.experience.host) return null
-      return this.$lang.apiTranslate(this.experience.host.translations, 'about').replace(/\n/g, "<br />")
+
+      const hostAbout = this.$lang.apiTranslate(this.experience.host.translations, 'about')
+      if(!hostAbout) return null
+
+      return hostAbout.replace(/\n/g, "<br />")
     }
   }
 }
