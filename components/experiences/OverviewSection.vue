@@ -19,17 +19,20 @@
                   trigger="hover">
                   <div v-html="hostAbout" />
                 </el-popover>
+                <div v-popover:popover class="flex items-center">
+                  <img
+                    class="wiser-avatar mr-3"
+                    :src="$imagePath(experience.host.avatar.path)" />
+                  <span>Wiser: {{ $lang.apiTranslate(experience.host.translations, 'fullname') }}</span>
+                </div>
+              </template>
+              <div v-else class="flex items-center">
                 <img
-                  v-popover:popover
                   class="wiser-avatar mr-3"
                   :src="$imagePath(experience.host.avatar.path)" />
-              </template>
-              <img
-                v-else
-                class="wiser-avatar mr-3"
-                :src="$imagePath(experience.host.avatar.path)" />
+                <span>Wiser: {{ $lang.apiTranslate(experience.host.translations, 'fullname') }}</span>
+              </div>
             </template>
-            <span>Wiser: {{ $lang.apiTranslate(experience.host.translations, 'fullname') }}</span>
           </p>
           <div v-else class="md:my-6 py-6" />
           <ul class="checkbox-list mb-10 md:mb-0">
