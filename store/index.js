@@ -360,7 +360,8 @@ export const state = () => ({
   faqs,
   countries,
   currentLangCode: 'ENG',
-  authDialogVisible: false
+  authDialogVisible: false,
+  subscribeModalVisible: true
 })
 
 export const getters = {
@@ -369,10 +370,16 @@ export const getters = {
   },
   authDialogVisible: (state) => {
     return state.authDialogVisible
+  },
+  subscribeModalVisible: (state) => {
+    return state.subscribeModalVisible
   }
 }
 
 export const mutations = {
+  SET_SUBSCRIBE_MODAL_VISIBLE(state, value) {
+    state.subscribeModalVisible = value
+  },
   SET_AUTH_DIALOG_VISIBLE(state, value) {
     state.authDialogVisible = value
   },

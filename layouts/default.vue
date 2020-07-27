@@ -3,6 +3,7 @@
     v-loading="isLoading"
     :class="{ 'is-loading': isLoading }">
     <div>
+      <SubscribeModal v-if="subscribeModalVisible" />
       <AuthPopup />
       <div
         :class="{
@@ -29,9 +30,11 @@ import HeaderDialog from '~/layouts/components/HeaderDialog'
 import AppHeader from '~/layouts/components/AppHeader'
 import AppFooter from '~/layouts/components/AppFooter'
 import AppResponsiveNavbar from '~/layouts/components/AppResponsiveNavbar'
+import SubscribeModal from '~/components/shared/SubscribeModal'
 
 export default {
   components: {
+    SubscribeModal,
     AuthPopup,
     HeaderDialog,
     AppHeader,
@@ -63,7 +66,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['authDialogVisible']),
+    ...mapGetters(['authDialogVisible', 'subscribeModalVisible']),
     currentLang() {
       if(this.validLang) {
         return this.$route.params.lang
