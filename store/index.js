@@ -361,7 +361,7 @@ export const state = () => ({
   countries,
   currentLangCode: 'ENG',
   authDialogVisible: false,
-  subscribeModalVisible: true
+  subscribeModalVisible: false
 })
 
 export const getters = {

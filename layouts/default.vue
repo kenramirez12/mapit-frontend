@@ -86,7 +86,8 @@ export default {
       setLang: 'SET_LANG_BY_SLUG',
       setExperience: 'reserves/SET_EXPERIENCE',
       setAvailableHours: 'reserves/SET_AVAILABLE_HOURS',
-      setReserveField: 'reserves/SET_RESERVE_FIELD'
+      setReserveField: 'reserves/SET_RESERVE_FIELD',
+      setSubscribeModalVisible: 'SET_SUBSCRIBE_MODAL_VISIBLE'
     }),
     setCheckoutData() {
       this.setExperience(JSON.parse(localStorage.getItem('currentExperience')))
@@ -127,6 +128,13 @@ export default {
     this.$fb.track('Purchase')
     this.getCategories()
     this.getDestinations()
+
+    /** Should i show the subscribe modal? */
+    setTimeout(() => {
+      if( !this.$cookies.get('hide-subscribe-modal') ) {
+        this.setSubscribeModalVisible(true)
+      }
+    }, 5000);
 
     /** Login */
     if('access_token' in this.$route.query) { // Just logged in

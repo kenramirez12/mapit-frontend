@@ -5,14 +5,21 @@
     <div class="subscribe-modal__container">
       <div
         v-if="!loading"
+        @click="closeSubscribeModal"
         class="subscribe-modal__close-btn">
         <img src="/images/x.svg">
       </div>
       <div class="subscribe-modal__content">
-        <h2 class="subscribe-modal__title">Get The Ultimate Bucket List to travel Peru! </h2>
+        <h2 class="subscribe-modal__title">
+          {{ $lang.translate(translations, 'title') }}
+        </h2>
         <img src="/images/modal-image.jpg" class="w-full">
-        <p class="subscribe-modal__copy my-4">Subscribe and receive our free copy of the top 50 activities you can't miss when visiting this beautiful country.</p>
-        <SubscribeForm />
+        <p class="subscribe-modal__copy my-4">
+          {{ $lang.translate(translations, 'copy') }}
+        </p>
+        <SubscribeForm
+          @updateLoading="updateLoading"
+          @closeSubscribeModal="closeSubscribeModal" />
       </div>
     </div>
   </div>
@@ -26,10 +33,32 @@ export default {
   components: {
     SubscribeForm
   },
+  data () {
+    return {
+      loading: false,
+      translations: {
+        'es_ES': {
+          title: '¡Obtén nuestra lista de imperdibles en Perú!',
+          copy: 'Suscríbete y recibe gratis nuestra lista (en inglés) de las 50 actividades que no puedes dejar de hacer cuando viajes a Perú.'
+        },
+        'en_EN': {
+          title: 'Get The Ultimate Bucket List to travel Peru!',
+          copy: 'Subscribe and receive our free copy of the top 50 activities you can\'t miss when visiting this beautiful country.'
+        }
+      }
+    }
+  },
   methods: {
     ...mapMutations({
       setSubscribeModalVisible: 'SET_SUBSCRIBE_MODAL_VISIBLE'
-    })
+    }),
+    updateLoading (value) {
+      this.loading = value
+    },
+    closeSubscribeModal () {
+      this.setSubscribeModalVisible(false)
+      this.$cookies.set('hide-subscribe-modal', 1, { maxAge: 60 * 60 * 24 * 7 * 52 })
+    }
   }
 }
 </script>
