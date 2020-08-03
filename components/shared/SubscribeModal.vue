@@ -13,7 +13,7 @@
         <h2 class="subscribe-modal__title">
           {{ $lang.translate(translations, 'title') }}
         </h2>
-        <img src="/images/modal-image.jpg" class="w-full">
+        <img src="/images/modal-img.png" class="w-full">
         <p class="subscribe-modal__copy my-4">
           {{ $lang.translate(translations, 'copy') }}
         </p>
