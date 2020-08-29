@@ -66,6 +66,13 @@
                   {{ $lang.translate(translations, 'claim') }}
                 </a>
               </li>
+              <li class="mb-1">
+                <a
+                  :href="`/${$lang.current().slug}/corporativo`"
+                  @click.prevent="$router.push(`/${$lang.current().slug}/corporativo`)">
+                  {{ $lang.translate(translations, 'business') }}
+                </a>
+              </li>
             </ul>
           </div>
           <div class="w-full px-3 my-4 lg:hidden">
@@ -225,7 +232,8 @@ export default {
           contact: 'Contáctanos',
           subscribe: 'Suscríbete a nuestro Blog',
           for_travelers: 'Para Viajeros',
-          for_hosts: 'Para Anfitriones'
+          for_hosts: 'Para Anfitriones',
+          business: 'Corporativo'
         },
         en_EN: {
           experiences: 'Experiences',
@@ -243,7 +251,8 @@ export default {
           contact: 'Contact Us',
           subscribe: 'Sign up for our blog:',
           for_travelers: 'For Travelers',
-          for_hosts: 'For Hosts'
+          for_hosts: 'For Hosts',
+          business: 'Corporativo'
         }
       }
     }
