@@ -252,7 +252,7 @@ export default {
           subscribe: 'Sign up for our blog:',
           for_travelers: 'For Travelers',
           for_hosts: 'For Hosts',
-          business: 'Corporativo'
+          business: 'Corporate'
         }
       }
     }

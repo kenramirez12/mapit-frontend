@@ -2,7 +2,7 @@
   <div>
     <PageHeader
       :translations="translations"
-      class="mt-10 md:mt-0"
+      class=""
       image="/images/banner-corporativo.jpg" />
     <div class="container mx-auto">
       <div class="flex flex-wrap justify-center pt-24">

@@ -130,11 +130,13 @@ export default {
     this.getDestinations()
 
     /** Should i show the subscribe modal? */
-    setTimeout(() => {
-      if( !this.$cookies.get('hide-subscribe-modal') ) {
-        this.setSubscribeModalVisible(true)
-      }
-    }, 5000);
+    if(this.$route.name !== 'lang-corporativo') {
+      setTimeout(() => {
+        if( !this.$cookies.get('hide-subscribe-modal') ) {
+          this.setSubscribeModalVisible(true)
+        }
+      }, 5000);
+    }
 
     /** Login */
     if('access_token' in this.$route.query) { // Just logged in
