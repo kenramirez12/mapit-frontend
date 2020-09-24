@@ -34,7 +34,7 @@
       :key="'reserve_' + this.$lang.current().slug"
       :class="{ 'mt-2 md:mt-6' : sticky }"
       class="reserve-form">
-      <div v-if="isOnline" class="w-1/2 pr-2">
+      <div class="w-1/2 pr-2">
         <el-form-item prop="date" class="w-full mb-3">
           <el-date-picker
             ref="reserveDate"
