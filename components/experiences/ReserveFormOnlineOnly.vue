@@ -48,7 +48,11 @@
           </el-date-picker>
         </el-form-item>
       </div>
-      <div class="w-1/2 pl-2">
+      <div
+        :class="{
+          'w-full' : !isOnline,
+          'w-1/2 pl-2' : isOnline
+        }">
         <el-form-item prop="quota" class="w-full mb-3">
           <el-select
             v-model="groupSize"
@@ -68,6 +72,22 @@
       </div>
       <div class="w-full mt-2">
         <el-button
+          v-if="!isOnline"
+          class="w-full submit-btn text-sm font-normal"
+          type="primary"
+            @click="$router.push({
+              path: `/${$lang.current().slug}/contact`,
+              query: {
+                type: 'reserve',
+                experience: $lang.apiTranslate(experience.translations, 'title'),
+                group_size: groupSize
+              }
+            })"
+        >
+          {{ $lang.translate(translations, 'book_now_pay_later') }}
+        </el-button>
+        <el-button
+          v-else
           class="w-full submit-btn text-sm font-normal"
           type="primary"
             @click="formSubmit('reserveForm')"
