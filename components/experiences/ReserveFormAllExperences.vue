@@ -34,7 +34,21 @@
       :key="'reserve_' + this.$lang.current().slug"
       :class="{ 'mt-2 md:mt-6' : sticky }"
       class="reserve-form">
-      <div class="w-full">
+      <div class="w-1/2 pr-2">
+        <el-form-item prop="date" class="w-full mb-3">
+          <el-date-picker
+            ref="reserveDate"
+            v-model="reserveDate"
+            value-format="yyyy-MM-dd"
+            :picker-options="datesOption"
+            class="border-0 input-shadow"
+            type="date"
+            :placeholder="$lang.translate(translations, 'date')"
+          >
+          </el-date-picker>
+        </el-form-item>
+      </div>
+      <div class="w-1/2 pl-2">
         <el-form-item prop="quota" class="w-full mb-3">
           <el-select
             v-model="groupSize"
@@ -56,16 +70,9 @@
         <el-button
           class="w-full submit-btn text-sm font-normal"
           type="primary"
-            @click="$router.push({
-              path: `/${$lang.current().slug}/contact`,
-              query: {
-                type: 'reserve',
-                experience: $lang.apiTranslate(experience.translations, 'title'),
-                group_size: groupSize
-              }
-            })"
+            @click="formSubmit('reserveForm')"
         >
-          {{ $lang.translate(translations, 'book_now_pay_later') }}
+          {{ $lang.translate(translations, 'book') }}
         </el-button>
       </div>
     </el-form>
