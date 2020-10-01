@@ -175,7 +175,7 @@
             <a href="mailto:info@mapit.pe" target="_blank" class="light-gray">info@mapit.pe</a>
           </li>
           <li class="mb-1">
-            <a href="tel:+51977319968" target="_blank" class="light-gray">(+51) 9773 19968</a>
+            <a href="tel:+51954640347" target="_blank" class="light-gray">(+51) 954 640 347</a>
           </li>
         </ul>
         <div class="w-full px-3 my-4 lg:hidden">
